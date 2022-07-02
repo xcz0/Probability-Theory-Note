@@ -1,0 +1,39 @@
+\documentclass[lang=cn,10pt,chinesefont=founder]{elegantbook}
+
+\title{概率论笔记}
+%\subtitle{}
+
+\author{肖程哲}
+%\institute{}
+\date{\today}
+%\version{}
+%\bioinfo{自定义}{信息}
+
+\extrainfo{苟日新，日日新，又日新}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\include{body/1.Probability_Space.tex}
+\include{body/2.Random_Varible.tex}
+\include{body/3.Characteristic.tex}
+\include{body/4.Distribution.tex}
+\include{body/5.Limitation.tex}
+
+\end{document}
