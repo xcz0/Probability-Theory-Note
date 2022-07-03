@@ -17,10 +17,22 @@
 \cover{cover.jpg}
 
 % 本文档命令
-\usepackage{array}
+\usepackage{array, fdsymbol, tikz}
 % 修改标题页的橙色带
 % \definecolor{customcolor}{RGB}{32,178,170}
 % \colorlet{coverlinecolor}{customcolor}
+
+\tikzset{
+box/.style ={
+rectangle, %矩形节点
+rounded corners =5pt, %圆角
+minimum width =50pt, %最小宽度
+minimum height =20pt, %最小高度
+inner sep=5pt, %文字和边框的距离
+draw=blue %边框颜色
+}
+}
+
 \begin{document}
 
 \maketitle
