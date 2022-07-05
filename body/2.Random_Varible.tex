@@ -18,15 +18,13 @@
 
 由于原像保持交、并、补等集合运算, 且$\mathscr{F}$是$\sigma$代数, 可将$\mathscr{F}_{\mathcal{X}}$扩张为合适的最小的$\sigma$代数, 即$\sigma(\mathscr{F}_{\mathcal{X}})$, 因此可测映射的定义不妨\underline{只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数}的情况.
 
-
-
 \begin{definition}[随机变量]
     为了表示因随机性而变动的量, 称\underline{可测映射}(measurable mapping)
     \[ X : (\Omega,\mathscr{F},\P) \to (\mathcal{X},\mathscr{F}_{\mathcal{X}}), \quad \omega\in\Omega \mapsto X(\omega)\in\mathcal{X} \]
     为\textbf{随机元}(random element), 也称\textbf{随机变量}(random variable). 其中$\mathscr{F}_{\mathcal{X}}$
 \end{definition}
 
-由于只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数的情况, 可将随机变量看作将原概率空间映射到新概率空间的方式. 新样本空间只由数值构成, 对应的概率测度等于原象的.
+由于只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数的情况, 可将随机变量看作将原概率空间映射到新概率空间的方式. 新样本空间由\underline{Borel点集}构成, 对应的概率测度等于原像的.
 
 \begin{remark}
     使用随机变量$X$时, 有两个可能的含义:
@@ -36,38 +34,66 @@
     \end{itemize}
 \end{remark}
 
+\begin{definition}[离散与连续随机变量]
+    当$\mathcal{X}$是 (至多可数的) 离散点集, $\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 则称其为\textbf{离散随机变量}(discrete random varible). 当随机变量$\mathcal{X} = \R^{n}$, 考虑$\mathscr{F}_{\mathcal{X}}$为$\left\{\prod_{i=1}^{n}(-\infty,x_{i}] : x_{1},\dots,x_{n}\in\R\right\}$生成的Borel代数(最小的$\sigma$代数), 则称其为\textbf{连续随机变量}(continuous random varible).
+\end{definition}
+
 \section{随机变量的分布}
 
-\begin{table}[]
+\begin{definition}
+    称随机元$X$诱导的\underline{概率测度}
+    \[ \P\{X\in\bullet\},\ \bullet\in\mathscr{F}_{\mathcal{X}} \]
+    为$X$的\textbf{概率分布}(distribution/law)
+\end{definition}
+\begin{remark}
+    对于随机变量, 他的取值是随机的, 但他的分布是固定的
+\end{remark}
+
+\begin{definition}[单变量分布函数]
+    一个函数$F : \R \to [0,1]$称为一个单变量分布函数，当其满足以下性质时：
+    \begin{description}
+        \item[单调性] $F(x_1)\le F(x_2) , \quad \forall x_1<x_2$
+        \item[右连续性] $\lim_{x \to x_0^+}F(x)=F(x_0)$
+        \item[有界性] $\lim_{n \to -\infty}F(x)=0, \quad \lim_{n \to \infty}F(x)=1$
+    \end{description}
+\end{definition}
+
+\begin{property}
+    $F(x)$最多只有可数个间断点
+\end{property}
+
+\begin{proposition}
+    对每个分布$Q: \mathscr{B}_1 \to [0,1]$都存在唯一一个分布函数$F_Q : \R \to [0,1]$使得$F_Q(x)=Q[(-\infty,x]], \quad \forall x \in \R$成立。
+\end{proposition}
+
+\begin{proposition}
+    对每个分布函数$F : \R \to [0,1]$都存在唯一一个分布$Q_F: \mathscr{B}_1 \to [0,1]$使得$Q_F[(-\infty,x]]=F(x), \quad \forall x \in \R$成立。
+\end{proposition}
+
+\begin{theorem}
+    分布函数可以唯一决定概率分布, 即:
+    \[ Q_{F_Q}=Q, \quad F_{Q_F}=F \]
+    把随机变量$X$服从分布函数$F(x)$简记作$X \thicksim F(x)$
+\end{theorem}
+
+\begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|cc|}
         \hline
-                                      & 离散                        & 连续                        \\ \hline
-        \multirow{3}{*}{一元随机变量} & 概率质量函数(pmf)           & 概率密度函数(pdf)           \\ \cline{2-3}
-                                      & 累积分布函数(cdf)           & 累积分布函数(cdf)           \\ \cline{2-3}
-                                      & mgf/chf                     & mgf/chf                     \\ \hline
-        \multirow{3}{*}{多元随机变量} & 联合概率质量函数(joint pmf) & 联合概率密度函数(joint pmf) \\ \cline{2-3}
-                                      & 联合累积分布函数(joint cdf) & 联合累积分布函数(joint cdf) \\ \cline{2-3}
-                                      & joint mgf/chf               & joint mgf/chf               \\ \hline
+                                      & \multicolumn{1}{c|}{离散}                                 & 连续                        \\ \hline
+        \multirow{3}{*}{一元随机变量} & \multicolumn{1}{c|}{概率质量函数(pmf)}                    & 概率密度函数(pdf)           \\ \cline{2-3}
+                                      & \multicolumn{2}{c|}{累积分布函数(cdf)}                                                  \\ \cline{2-3}
+                                      & \multicolumn{2}{c|}{矩母函数/特征函数(mgf/chf)}                                         \\ \hline
+        \multirow{3}{*}{多元随机变量} & \multicolumn{1}{c|}{联合概率质量函数(joint pmf)}          & 联合概率密度函数(joint pdf) \\ \cline{2-3}
+                                      & \multicolumn{2}{c|}{联合累积分布函数(joint cdf)}                                        \\ \cline{2-3}
+                                      & \multicolumn{2}{c|}{联合矩母函数/特征函数(joint mgf/chf)}                               \\ \hline
     \end{tabular}
 \end{table}
 
-\begin{definition}
-    随机元$X$的\textbf{分布}(distribution/law)是$X$诱导的\underline{概率测度}
-    $\P\{X\in\bullet\},\ \bullet\in\mathscr{F}_{\mathcal{X}}$.
-\end{definition}
-
-\begin{definition}[离散与连续随机变量]
-    假如一个随机变量仅取有限个或可列个值,则称其为\textbf{离散随机变量}(discrete random varible). 假如一个随机变量的可能取值充满数轴上的一个区间$ (a,b) $, 则称其为\textbf{连续随机变量}(continuous random varible), 其中$ a $可以是$ -\infty ,b $可以是$ +\infty $.
-\end{definition}
-
-\begin{remark}
-    可测性定义中的$B$常取作Borel点集
-\end{remark}
-
 \begin{definition}[累积分布函数]
-    对于随机变量$X$, 定义其\textbf{累积分布函数}(cumulative random varible)为:
-    \[ F(x)= \P(X \le  x), x \in \R \]
+    此时$X = (X_{1},\dots,X_{n})^{\top}$的分布由(累积)\textbf{分布函数}(cumulative distribution function, c.d.f.)
+    \[ F_{X}(x_{1},\dots,x_{n}) = \P\{X_{1}\leq x_{1},\dots, X_{n}\leq x_{n}\}, \quad x_{1},\dots,x_{n}\in\R. \]
+    唯一刻画. 把随机变量$X$服从分布函数$F(x)$简记作$X \thicksim F(x)$
 \end{definition}
 
 \begin{figure}[h]
@@ -76,30 +102,42 @@
 \end{figure}
 
 \begin{definition}[概率质量函数]
-    当且仅当函数$p(s)$满足下述条件时, 被称为\textbf{概率质量函数}(probability mass function, p.m.f.):
+    当且仅当函数$p(x)$满足下述条件时, 被称为\textbf{概率质量函数}(probability mass function, p.m.f.):
     \begin{itemize}
         \item $p(x)\ge 0$
         \item $\sum_{x \in \X}p(x)=1$
     \end{itemize}
-
-    当$\mathcal{X}$是(至多可数的)离散点集, 设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 此时$X$的分布由
-    \[ p_{X}(x) = \P\{X=x\} = \P(\{\omega\in\Omega:X(\omega)=x\}), \quad x\in\mathcal{X} \]
-    唯一刻画.
 \end{definition}
+
+当$X$是离散型随机变量, 设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 此时$X$的分布由
+\[ p_{X}(x) = \P\{X=x\} = \P(\{\omega\in\Omega:X(\omega)=x\}), \quad x\in\mathcal{X} \]
+唯一刻画. 其与分布函数间的关系为:
+\begin{itemize}
+    \item $F(x) = \sum_{t\le x}P(X=t)=\sum_{t\le x}p(t)$
+    \item $p(x)=P(X=x)=F(x)-F(x-)$
+\end{itemize}
+
+\begin{definition}[概率密度函数]
+    当且仅当函数$f(x)$满足下述条件时, 被称为\textbf{概率密度函数}(probability density function, p.d.f.):
+    \begin{itemize}
+        \item $f(x)\ge 0$
+        \item $\int_{-\infty}^{\infty}f(x)=1$
+    \end{itemize}
+\end{definition}
+
+当$X$是连续型随机变量, 且$F_{X} : \R^{n} \to [0,1]$可微(或者更一般地, \underline{绝对连续}), 此时$X$的分布由
+\[ f_{X} := \frac{\partial^{n} F_{X}}{\partial x_{1} \cdots \partial x_{n}} \]
+唯一刻画. 其与分布函数间的关系为:
+\begin{itemize}
+    \item $F(x) = \int_{-\infty}^x f(t)dt$
+    \item $f(x)=\frac{d}{dx}F(x)$
+\end{itemize}
 
 \begin{remark}
-    这是概率的哪个性质保证的?
+    即使对于$f(x)>0$的$x$, $P(X=x)=x\int_{x}^x f(t)dt=0$, 即连续型随机变量在实轴上任意一点的概率测度为零. 概率密度函数$f(x)$代表的是在此位置上单位长度的概率, 可能是一个很大的值.
 \end{remark}
 
-\begin{definition}
-    当$\mathcal{X} = \R^{n}$, 考虑$\mathscr{F}_{\mathcal{X}}$为$\left\{\prod_{i=1}^{n}(-\infty,x_{i}] : x_{1},\dots,x_{n}\in\R\right\}$生成的Borel代数(最小的$\sigma$代数), 此时$X = (X_{1},\dots,X_{n})^{\top}$的分布由(累积)\textbf{分布函数}(cumulative distribution function, c.d.f.)
-    \[ F_{X}(x_{1},\dots,x_{n}) = \P\{X_{1}\leq x_{1},\dots, X_{n}\leq x_{n}\}, \quad x_{1},\dots,x_{n}\in\R. \]
-    唯一刻画. 若$F_{X} : \R^{n} \to [0,1]$可微(或者更一般地, \emph{绝对连续}), 称
-    \[ f_{X} := \frac{\partial^{n} F_{X}}{\partial x_{1} \cdots \partial x_{n}} \]
-    为$X$的\textbf{概率密度函数}(probability density function, p.d.f.), 此时称$X$为\textbf{连续型随机向量}.
-\end{definition}
-
-\section{随机变量的条件分布}
+\section{多元随机变量}
 
 记$\sigma(X) := X^{-1}(\mathscr{F}_{\mathcal{X}}) := \{X^{-1}(B):B\in\mathscr{F}_{\mathcal{X}}\}$. 根据前面的定义, $X$可测当且仅当$\sigma(X) \subset \mathscr{F}$. 若随机元$X_{1} : (\Omega,\mathscr{F}) \to (\mathcal{X}_{1},\mathscr{F}_{\mathcal{X}_{1}})$与随机元$X_{2} : (\Omega,\mathscr{F}) \to (\mathcal{X}_{2},\mathscr{F}_{\mathcal{X}_{2}})$满足$\sigma(X_{1})\indep\sigma(X_{2})$, 则称$X_{1}$与$X_{2}$\textbf{独立}, 记为$X_{1} \indep X_{2}$.
 
