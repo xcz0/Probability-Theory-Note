@@ -38,19 +38,17 @@
 
 \section{随机变量的分布}
 
-% Please add the following required packages to your document preamble:
-% \usepackage{multirow}
 \begin{table}[]
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
-                                      & 离散          & 连续          \\ \hline
-        \multirow{3}{*}{一元随机变量} & pmf           & pdf           \\ \cline{2-3}
-                                      & cdf           & cdf           \\ \cline{2-3}
-                                      & mgf/chf       & mgf/chf       \\ \hline
-        \multirow{3}{*}{多元随机变量} & joint pmf     & joint pmf     \\ \cline{2-3}
-                                      & joint cdf     & joint cdf     \\ \cline{2-3}
-                                      & joint mgf/chf & joint mgf/chf \\ \hline
+                                      & 离散                        & 连续                        \\ \hline
+        \multirow{3}{*}{一元随机变量} & 概率质量函数(pmf)           & 概率密度函数(pdf)           \\ \cline{2-3}
+                                      & 累积分布函数(cdf)           & 累积分布函数(cdf)           \\ \cline{2-3}
+                                      & mgf/chf                     & mgf/chf                     \\ \hline
+        \multirow{3}{*}{多元随机变量} & 联合概率质量函数(joint pmf) & 联合概率密度函数(joint pmf) \\ \cline{2-3}
+                                      & 联合累积分布函数(joint cdf) & 联合累积分布函数(joint cdf) \\ \cline{2-3}
+                                      & joint mgf/chf               & joint mgf/chf               \\ \hline
     \end{tabular}
 \end{table}
 
@@ -78,7 +76,13 @@
 \end{figure}
 
 \begin{definition}[概率质量函数]
-    当$\mathcal{X}$是(至多可数的)离散点集, 设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 此时$X$的分布由\textbf{概率质量函数}(probability mass function, p.m.f.)
+    当且仅当函数$p(s)$满足下述条件时, 被称为\textbf{概率质量函数}(probability mass function, p.m.f.):
+    \begin{itemize}
+        \item $p(x)\ge 0$
+        \item $\sum_{x \in \X}p(x)=1$
+    \end{itemize}
+
+    当$\mathcal{X}$是(至多可数的)离散点集, 设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 此时$X$的分布由
     \[ p_{X}(x) = \P\{X=x\} = \P(\{\omega\in\Omega:X(\omega)=x\}), \quad x\in\mathcal{X} \]
     唯一刻画.
 \end{definition}
