@@ -35,7 +35,7 @@ inner sep=5pt, %文字和边框的距离
 draw=blue %边框颜色
 }
 }
-\usepackage{subfiles}
+\includeonly{body/2.Random_Varible.tex}
 \begin{document}
 
 \maketitle
@@ -45,14 +45,14 @@ draw=blue %边框颜色
 
 \mainmatter
 
-\subfile{chap01/Probability_Space}
-\subfile{chap02/Random_Varible.tex}
-\subfile{chap03/Characteristic.tex}
-\subfile{chap04/Distribution.tex}
-\subfile{chap05/Limitation.tex}
+\include{body/1.Probability_Space}
+\include{body/2.Random_Varible.tex}
+\include{body/3.Characteristic.tex}
+\include{body/4.Distribution.tex}
+\include{body/5.Limitation.tex}
 
 \appendix
 
-\subfile{appendix/Appendix.tex}
+\include{appendix/Appendix.tex}
 
 \end{document}
