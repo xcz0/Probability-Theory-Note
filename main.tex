@@ -17,10 +17,13 @@
 \cover{cover.jpg}
 
 % 本文档命令
-\usepackage{array, fdsymbol, tikz}
+\usepackage{array, fdsymbol, tikz, multirow}
 % 修改标题页的橙色带
 % \definecolor{customcolor}{RGB}{32,178,170}
 % \colorlet{coverlinecolor}{customcolor}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\indep}{\Vbar}
 
 \tikzset{
 box/.style ={
@@ -32,7 +35,7 @@ inner sep=5pt, %文字和边框的距离
 draw=blue %边框颜色
 }
 }
-
+\usepackage{subfiles}
 \begin{document}
 
 \maketitle
@@ -42,10 +45,14 @@ draw=blue %边框颜色
 
 \mainmatter
 
-\include{body/1.Probability_Space.tex}
-\include{body/2.Random_Varible.tex}
-\include{body/3.Characteristic.tex}
-\include{body/4.Distribution.tex}
-\include{body/5.Limitation.tex}
+\subfile{chap01/Probability_Space}
+\subfile{chap02/Random_Varible.tex}
+\subfile{chap03/Characteristic.tex}
+\subfile{chap04/Distribution.tex}
+\subfile{chap05/Limitation.tex}
+
+\appendix
+
+\subfile{appendix/Appendix.tex}
 
 \end{document}
