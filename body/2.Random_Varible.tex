@@ -139,18 +139,140 @@
 
 \section{多元随机变量}
 
-记$\sigma(X) := X^{-1}(\mathscr{F}_{\mathcal{X}}) := \{X^{-1}(B):B\in\mathscr{F}_{\mathcal{X}}\}$. 根据前面的定义, $X$可测当且仅当$\sigma(X) \subset \mathscr{F}$. 若随机元$X_{1} : (\Omega,\mathscr{F}) \to (\mathcal{X}_{1},\mathscr{F}_{\mathcal{X}_{1}})$与随机元$X_{2} : (\Omega,\mathscr{F}) \to (\mathcal{X}_{2},\mathscr{F}_{\mathcal{X}_{2}})$满足$\sigma(X_{1})\indep\sigma(X_{2})$, 则称$X_{1}$与$X_{2}$\textbf{独立}, 记为$X_{1} \indep X_{2}$.
+\begin{definition}[随机向量]
+    若随机变量$X_1(\omega), X_2(\omega),\cdots , X_n(\omega)$定义在\underline{同一概率空间}$(\Omega,\mathscr{F},\P)$上, 则称
+    \[ X(\omega) = (X_1(\omega), X_2(\omega),\cdots , X_n(\omega)) \]
+    构成一个n维\textbf{随机向量}，亦称n维随机变量.
+\end{definition}
 
-\emph{注}: 对任意\emph{可测}映射$g_{1},g_{2}$成立$X_{1} \indep X_{2} \implies g_{1}(X_{1}) \indep g_{2}(X_{2})$. 事实上, $\sigma(g(X)) \subset \sigma(X)$.
+\begin{proposition}
+    若$B_n$为$\R^n$上任一博雷尔点集，有
+    \[ \{ X(\omega) \in B_n \} \in \mathscr{F} \]
+\end{proposition}
 
-当$X_{1}$和$X_{2}$都是实值随机向量时, $X_{1} \indep X_{2}$当且仅当(\emph{思考}: $\sigma(X^{-1}(\bullet)) = X^{-1}(\sigma(\bullet)), \ \bullet\subset\mathscr{F}_{\mathcal{X}}$?)
-\[ F_{X_{1},X_{2}}(x_{1},x_{2}) = F_{X_{1}}(x_{1})F_{X_{2}}(x_{2}), \ \forall x_{1},x_{2}. \]
-对于连续型随机向量, 刻画独立性只需要
-\[ f_{X_{1},X_{2}}(x_{1},x_{2}) = f_{X_{1}}(x_{1})f_{X_{2}}(x_{2}), \ \forall x_{1},x_{2}. \]
+\begin{definition}
+    称n元函数
+    \[ F(x_1,x_2, \cdots , X_n)=\P \{ X_1(\omega)<x_1, X_2(\omega)<x_2,\cdots , X_n(\omega)<x_n \} \]
+    为随机向量$X(\omega)$的\textbf{联合分布函数}(joint cdf).
+\end{definition}
 
-设随机向量$X$和$Y$有\emph{联合}(joint)概率密度函数$f_{X,Y}$, 可以证明$X$有概率密度函数
-\[ f_{X}(\cdot) = \int f_{X,Y}(\cdot,y) \,\d{y}, \] 称为$(X,Y)$中$X$的\emph{边际}(margin)概率密度函数. \textbf{$Y$条件于$X=x$的概率密度函数}$f_{Y|X}(\cdot|x)$满足
-\[ f_{X,Y}(x,\cdot) = f_{Y|X}(\cdot|x)f_{X}(x). \]
+当$n=2$时，有
+\begin{equation}\label{equ:2dim_Prob}
+\P((a_1,b_1)\le X < (a_2,b_2))=F(b_1,b_2)-F(a_1,b_2)-F(b_1,a_2)+F(a_1,a_2)
+\end{equation}
+
+\begin{property}
+    多元分布函数的一些性质:
+    \begin{enumerate}
+        \item 单调性：关千每个变元是单调不减函数；
+        \item \begin{align*}
+                  F(x_1,x_2, \cdots, -\infty, \cdots, X_n)=0 \\
+                  F(+\infty,+\infty, \cdots, , +\infty)=1
+              \end{align*}
+        \item 关于每个变元右连续．
+        \item 在二元场合，还应该有：对任意$ a_1 <b,,a_2<b_2$ ，都有
+              \[ F(b_1,b_2)-F(a_1,b_2)-F(b_1,a_2)+F(a_1,a_2)\ge 0   \]
+    \end{enumerate}
+\end{property}
+
+为保证\ref{equ:2dim_Prob}式中的概率的非负性，性质4是必须的，而且由性质4可以推出单调性，但存在着反例说明，由单调性并不能保证性质4的成立(见习题 12) ．这是多元场合与一元场合的不同之处．
+
+\subsection{边际分布}
+
+\begin{definition}
+    对于多维随机变量$X$, 只考虑其中一个分量的分布时, 称其为$X$的\textbf{边际分布或边缘分布}. 对于分量$X_i$, 其\textbf{边缘分布函数}(marginal cdf)为:
+    \[ F_{X_i}(x_i) = \P\{ X_i \le x_i \} = F(\infty,\cdots , x_i ,\cdots ,\infty)\] 
+\end{definition}
+
+
+
+\subsection{独立}
+
+\begin{definition}[独立随机变量]
+    若随机变量$X(\omega) = (X_1(\omega), X_2(\omega),\cdots , X_n(\omega))$联合分布函数可分解成各分量边缘分布函数的乘积, 即:
+    \[ F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) , \quad \forall x_1,x_2,\cdots ,x_n \in \R \] 
+    则称随机变量$X$各分量相互\textbf{独立}
+\end{definition}
+
+\begin{remark}
+    对于一般的多元随机变量, 其各分量边缘分布不足以描述联合分布的情况. 但若其各分量独立则可以.
+\end{remark}
+
+\begin{theorem}
+    对于连续情况:
+    \begin{align*}
+        &F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+        \Leftrightarrow & f(x_1,x_2,\cdots ,x_n) = f_{X_1}(x_1)f_{X_2}(x_2)\cdots f_{X_n}(x_n)
+    \end{align*}
+    对于离散情况:
+    \begin{align*}
+        &F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+        \Leftrightarrow & p(x_1,x_2,\cdots ,x_n) = p_{X_1}(x_1)p_{X_2}(x_2)\cdots p_{X_n}(x_n)
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}
+    若随机变量$X,Y$独立, 则其变换$Z=g(X), W=h(Y)$也独立.
+
+    泛化情况:若随机向量$\{X\}_n$各分类独立, 则其变换$\{Y\}_n=g(\{X\}_n)$各分类也独立.
+\end{theorem}
+
+\subsection{条件分布}
+
+\begin{definition}
+	对一切使 $P\left(Y=y_{j}\right)=p_{ \cdot j}=\sum_{i=1}^{+\infty} p_{i j}>0$ 的 $y_j$, 称
+	\begin{equation}\label{eq:3.5.1}
+		p_{i | j}=P\left(X=x_{i} | Y=y_{j}\right)=\frac{P\left(X=x_{i}, Y=y_{j}\right)}{P\left(Y=y_{j}\right)}
+		=\frac{p_{i j}}{p_{\cdot j}}, \quad i=1,2, \ldots
+	\end{equation}
+	为给定 $Y=y_j$ 条件下 $X$ 的条件分布列. 若$p_X(x)=0$, 则定义其为0.
+\end{definition}
+
+设二维连续随机变量 $(X,Y)$ 的联合密度函数为 $p(x,y)$, 边际密度函数为 $p_X(x),p_Y(y)$.
+
+在离散随机变量场合, 其条件分布函数为 $P(X\leq x|Y=y)$. 但是, 因为连续随机变量取某个值的概率为零, 即 $P(Y=y)=0$, 所以无法用条件概率直接计算 $P(X\leq x|Y=y)$, 一个很自然的想法是: 将 $P(X\leq x|Y=y)$ 看成是 $h\to 0$ 时 $P(X\leq x|y\leq Y\leq y+h)$ 的极限, 即
+\begin{align*}
+	P(X \leq  x | Y=y) & =\lim _{h \to 0} P(X \leq  x | y \leq  Y \leq  y+h)                                                          \\
+	                   & =\lim _{h \to 0} \frac{P(X \leq  x, y \leq  Y \leq  y+h)}{P(y \leq  Y \leq  y+h)}                            \\
+	                   & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \int_{y}^{y+h} p(u, v) dv du}{\int_{y}^{y+h} p_{Y}(v) dv} \\
+	                   & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \left\{ \frac{1}{h} \int_{y}^{y+h} p(u, v) dv \right\} du}
+	{\frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv}.
+\end{align*}
+当 $p_Y(y),p(x,y)$ 在 $y$ 处连续时, 由积分中值定理可得
+\begin{align*}
+	 & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv=p_{Y}(y), \\
+	 & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
+\end{align*}
+所以
+\[
+	P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du.
+\]
+至此, 我们可以定义连续随机变量的条件分布如下.
+
+\begin{definition}
+	对一切使 $p_Y(y)>0$ 的 $y$, 给定 $Y=y$ 条件下 $X$ 的\textbf{条件分布函数}\index{T!条件分布函数}和
+	\textbf{条件密度函数}\index{T!条件密度函数}分别为
+	\begin{align}
+		 & F(x | y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du,  \\
+		 & p(x | y)=\frac{p(x, y)}{p_{Y}(y)}.
+	\end{align}
+	同理对一切使 $p_Y(y)>0$ 的 $x$, 给定 $X=x$ 条件下 $Y$ 的条件分布函数和条件密度函数分别为
+	\begin{align}
+		 & F(y | x)=\int_{-\infty}^{y} \frac{p(x, v)}{p_{X}(x)} dv  \\
+		 & p(y | x)=\frac{p(x, y)}{p_{X}(x)}.
+	\end{align}
+\end{definition}
+
+\begin{remark}
+    对于每一个\underline{固定的$x$}, $p_{Y|X}(y|x)$是一个关于$y$的概率质量函数; $f_{Y|X}(y|x)$是一个关于$y$的概率密度函数
+\end{remark}
+
+与概率三定理的对应:
+\begin{description}
+    \item[乘法法则] $p_{XY}(x,y)=p_{Y|X}(y|x)p_{X}(x), \quad f_{XY}(x,y)=f_{Y|X}(y|x)f_{X}(x)$
+    \item[全概率公式] $p_{Y}(y)=\sum_{x}p_{Y|X}(y|x)p_{X}(x), \quad f_{Y}(y)=\int^{+\infty}_{-\infty}f_{Y|X}(y|x)f_{X}(x)dx$
+    \item[Bayes原理]  $p_{X|Y}(x|y)=\frac{p_{Y|X}(y|x)p_{X}(x)}{\sum_{x}p_{Y|X}(y|x)p_{X}(x)}, \quad f_{X|Y}(x|y)=\frac{f_{Y|X}(y|x)f_{X}(x)}{\int^{+\infty}_{-\infty}f_{Y|X}(y|x)f_{X}(x)dx}$
+\end{description}
 
 \section{随机变量的函数}
 
