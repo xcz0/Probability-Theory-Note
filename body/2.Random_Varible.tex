@@ -158,7 +158,7 @@
 
 当$n=2$时，有
 \begin{equation}\label{equ:2dim_Prob}
-\P((a_1,b_1)\le X < (a_2,b_2))=F(b_1,b_2)-F(a_1,b_2)-F(b_1,a_2)+F(a_1,a_2)
+    \P((a_1,b_1)\le X < (a_2,b_2))=F(b_1,b_2)-F(a_1,b_2)-F(b_1,a_2)+F(a_1,a_2)
 \end{equation}
 
 \begin{property}
@@ -181,7 +181,7 @@
 
 \begin{definition}
     对于多维随机变量$X$, 只考虑其中一个分量的分布时, 称其为$X$的\textbf{边际分布或边缘分布}. 对于分量$X_i$, 其\textbf{边缘分布函数}(marginal cdf)为:
-    \[ F_{X_i}(x_i) = \P\{ X_i \le x_i \} = F(\infty,\cdots , x_i ,\cdots ,\infty)\] 
+    \[ F_{X_i}(x_i) = \P\{ X_i \le x_i \} = F(\infty,\cdots , x_i ,\cdots ,\infty)\]
 \end{definition}
 
 
@@ -190,7 +190,7 @@
 
 \begin{definition}[独立随机变量]
     若随机变量$X(\omega) = (X_1(\omega), X_2(\omega),\cdots , X_n(\omega))$联合分布函数可分解成各分量边缘分布函数的乘积, 即:
-    \[ F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) , \quad \forall x_1,x_2,\cdots ,x_n \in \R \] 
+    \[ F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) , \quad \forall x_1,x_2,\cdots ,x_n \in \R \]
     则称随机变量$X$各分量相互\textbf{独立}
 \end{definition}
 
@@ -201,12 +201,12 @@
 \begin{theorem}
     对于连续情况:
     \begin{align*}
-        &F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
         \Leftrightarrow & f(x_1,x_2,\cdots ,x_n) = f_{X_1}(x_1)f_{X_2}(x_2)\cdots f_{X_n}(x_n)
     \end{align*}
     对于离散情况:
     \begin{align*}
-        &F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
         \Leftrightarrow & p(x_1,x_2,\cdots ,x_n) = p_{X_1}(x_1)p_{X_2}(x_2)\cdots p_{X_n}(x_n)
     \end{align*}
 \end{theorem}
@@ -220,47 +220,47 @@
 \subsection{条件分布}
 
 \begin{definition}
-	对一切使 $P\left(Y=y_{j}\right)=p_{ \cdot j}=\sum_{i=1}^{+\infty} p_{i j}>0$ 的 $y_j$, 称
-	\begin{equation}\label{eq:3.5.1}
-		p_{i | j}=P\left(X=x_{i} | Y=y_{j}\right)=\frac{P\left(X=x_{i}, Y=y_{j}\right)}{P\left(Y=y_{j}\right)}
-		=\frac{p_{i j}}{p_{\cdot j}}, \quad i=1,2, \ldots
-	\end{equation}
-	为给定 $Y=y_j$ 条件下 $X$ 的条件分布列. 若$p_X(x)=0$, 则定义其为0.
+    对一切使 $P\left(Y=y_{j}\right)=p_{ \cdot j}=\sum_{i=1}^{+\infty} p_{i j}>0$ 的 $y_j$, 称
+    \begin{equation}\label{eq:3.5.1}
+        p_{i | j}=P\left(X=x_{i} | Y=y_{j}\right)=\frac{P\left(X=x_{i}, Y=y_{j}\right)}{P\left(Y=y_{j}\right)}
+        =\frac{p_{i j}}{p_{\cdot j}}, \quad i=1,2, \ldots
+    \end{equation}
+    为给定 $Y=y_j$ 条件下 $X$ 的条件分布列. 若$p_X(x)=0$, 则定义其为0.
 \end{definition}
 
 设二维连续随机变量 $(X,Y)$ 的联合密度函数为 $p(x,y)$, 边际密度函数为 $p_X(x),p_Y(y)$.
 
 在离散随机变量场合, 其条件分布函数为 $P(X\leq x|Y=y)$. 但是, 因为连续随机变量取某个值的概率为零, 即 $P(Y=y)=0$, 所以无法用条件概率直接计算 $P(X\leq x|Y=y)$, 一个很自然的想法是: 将 $P(X\leq x|Y=y)$ 看成是 $h\to 0$ 时 $P(X\leq x|y\leq Y\leq y+h)$ 的极限, 即
 \begin{align*}
-	P(X \leq  x | Y=y) & =\lim _{h \to 0} P(X \leq  x | y \leq  Y \leq  y+h)                                                          \\
-	                   & =\lim _{h \to 0} \frac{P(X \leq  x, y \leq  Y \leq  y+h)}{P(y \leq  Y \leq  y+h)}                            \\
-	                   & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \int_{y}^{y+h} p(u, v) dv du}{\int_{y}^{y+h} p_{Y}(v) dv} \\
-	                   & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \left\{ \frac{1}{h} \int_{y}^{y+h} p(u, v) dv \right\} du}
-	{\frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv}.
+    P(X \leq  x | Y=y) & =\lim _{h \to 0} P(X \leq  x | y \leq  Y \leq  y+h)                                                  \\
+                       & =\lim _{h \to 0} \frac{P(X \leq  x, y \leq  Y \leq  y+h)}{P(y \leq  Y \leq  y+h)}                    \\
+                       & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \int_{y}^{y+h} p(u, v) dv du}{\int_{y}^{y+h} p_{Y}(v) dv}  \\
+                       & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \left\{ \frac{1}{h} \int_{y}^{y+h} p(u, v) dv \right\} du}
+    {\frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv}.
 \end{align*}
 当 $p_Y(y),p(x,y)$ 在 $y$ 处连续时, 由积分中值定理可得
 \begin{align*}
-	 & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv=p_{Y}(y), \\
-	 & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
+     & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv=p_{Y}(y), \\
+     & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
 \end{align*}
 所以
 \[
-	P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du.
+    P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du.
 \]
 至此, 我们可以定义连续随机变量的条件分布如下.
 
 \begin{definition}
-	对一切使 $p_Y(y)>0$ 的 $y$, 给定 $Y=y$ 条件下 $X$ 的\textbf{条件分布函数}\index{T!条件分布函数}和
-	\textbf{条件密度函数}\index{T!条件密度函数}分别为
-	\begin{align}
-		 & F(x | y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du,  \\
-		 & p(x | y)=\frac{p(x, y)}{p_{Y}(y)}.
-	\end{align}
-	同理对一切使 $p_Y(y)>0$ 的 $x$, 给定 $X=x$ 条件下 $Y$ 的条件分布函数和条件密度函数分别为
-	\begin{align}
-		 & F(y | x)=\int_{-\infty}^{y} \frac{p(x, v)}{p_{X}(x)} dv  \\
-		 & p(y | x)=\frac{p(x, y)}{p_{X}(x)}.
-	\end{align}
+    对一切使 $p_Y(y)>0$ 的 $y$, 给定 $Y=y$ 条件下 $X$ 的\textbf{条件分布函数}\index{T!条件分布函数}和
+    \textbf{条件密度函数}\index{T!条件密度函数}分别为
+    \begin{align}
+         & F(x | y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du, \\
+         & p(x | y)=\frac{p(x, y)}{p_{Y}(y)}.
+    \end{align}
+    同理对一切使 $p_Y(y)>0$ 的 $x$, 给定 $X=x$ 条件下 $Y$ 的条件分布函数和条件密度函数分别为
+    \begin{align}
+         & F(y | x)=\int_{-\infty}^{y} \frac{p(x, v)}{p_{X}(x)} dv \\
+         & p(y | x)=\frac{p(x, y)}{p_{X}(x)}.
+    \end{align}
 \end{definition}
 
 \begin{remark}
@@ -276,20 +276,233 @@
 
 \section{随机变量的函数}
 
-在统计学中，常需要转化原始数据以获取其中信息, 由此引出了研究随机变量的函数的需要. 以下是获取随机变量的函数的分布的方法:
+在统计学中，常需要转化原始数据以获取其中信息, 由此引出了研究随机变量的函数的需要.
 
-\subsection{事件法}
-
-\begin{theorem}
+\begin{theorem}[事件法]
     设$Y=g(X)$是随机向量$X=(X_1,X_2,\cdots ,X_n)$的函数, 则$Y$的分布由$X$的分布通过下式决定:
-    \[ \P\{Y \in B\} = \P\{X \in A\}, \quad A=\{ \omega |g(\omega)\in B\} \] 
+    \[ \P\{Y \in B\} = \P\{X \in A\}, \quad A=\{ \omega |g(\omega)\in B\} \]
 \end{theorem}
 
 此法是其他方法的基础, 但使用不便, 常用于离散随机变量.
 
-\begin{example}
-    
+\begin{example}\label{exp:sum_of_pmf}
+    已知随机变量$X,Y$的联合概率质量函数为$p(x,y)$, 求$Z=X+Y$的分布
+    \[ p_Z=P(Z=z)=P(X+Y=z)=\sum_{x=-\infty}^{\infty}p(x, z-x) \]
+
+    若$X,Y$独立,则$p_Z(z)=\sum_{-\infty}^{\infty}p_X(x)p_Y(z-x)dx$, 为$p_X$与$p_Y$的卷积
 \end{example}
 
 \subsection{分布函数法}
 
+通过下式获取随机变量的函数的分布:
+\[ F_Y(y)=\begin{cases}
+        \int_{A_y}f_X(x)dx \\
+        \sum_{x \in A_y}p_X(x)
+    \end{cases} , \quad A_y=\{ x|g(x)\le y \}
+\]
+
+对每一个变换分别运用上式则可得到向量函数的分布.
+
+\begin{example}
+    已知随机变量$X$的概率密度函数$f_X(x)$与分布函数$F_X(x)$, 求$Y=X^2$的分布
+    \[ F_Y(y)=P(Y\le y)=P(-\sqrt{y}<X\le \sqrt{y})+P(X=\sqrt{y}=F_X(\sqrt{y})-F_X(-\sqrt{y}))+0 \quad y\ge 0\]
+
+    \begin{align*}
+        f_Y(y) =\frac{d}{dy}F_Y(y) & =\frac{d}{dy}F_X(\sqrt{y}) -\frac{d}{dy}F_X(\sqrt{y})                 \\
+                                   & =f_X(\sqrt{y})\frac{1}{2\sqrt{y}} -f_X(-\sqrt{y})\frac{-1}{2\sqrt{y}} \\
+                                   & =\frac{1}{2\sqrt{y}}(f_X(\sqrt{y})+f_X(-\sqrt{y}))
+    \end{align*}
+
+\end{example}
+
+\begin{example}\label{exp:sum_of_pdf}
+    已知随机变量$X,Y$的联合概率密度函数$f(x,y)$, 求$Z=X+Y$的分布
+    \[ F_Y(y)=P(Y\le y)=P(-\sqrt{y}<X\le \sqrt{y})+P(X=\sqrt{y}=F_X(\sqrt{y})-F_X(-\sqrt{y}))+0 \quad y\ge 0\]
+
+    \begin{align*}
+        F_Z(z) & =P(Z\le z)=P(X+Y\le z)                                               \\
+               & =\iint _{x+y\leqslant z}f(x,y)dxdy                                   \\
+               & =\int_{-\infty}^{+\infty}\int_{-\infty}^{z-x}f(x,y)dxdy              \\
+               & =\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(x,v-x)dxdv, \quad y= v-x
+    \end{align*}
+
+    \[ f_Z(z)=\frac{d}{dz}F_Z(z)=\int_{-\infty}^{\infty}f(x,z-x)dx \]
+
+    若$X,Y$独立,则$f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx$, 为$f_X$与$f_Y$的卷积, 与\ref{exp:sum_of_pmf}类似
+\end{example}
+
+\begin{example}
+    已知随机变量$X,Y$的联合概率密度函数$f(x,y)$, 求$Z=\frac{Y}{X}$的分布
+    \[ Q_{z}=\{(x, y): y / x \leq z\}=\{(x, y): x<0, y \geq z x\} \cup\{(x, y): x>0, y \leq z x\} \]
+    \begin{align*}
+        F_{Z}(z) & =\iint_{Q_{z}} f(x, y) d x d y=\int_{-\infty}^{0} \int_{x z}^{\infty}+\int_{0}^{\infty} \int_{-\infty}^{x z} f(x, y) d y d x \\
+                 & =\int_{-\infty}^{0} \int_{z}^{-\infty}+\int_{0}^{\infty} \int_{-\infty}^{z} x f(x, x v) d v d x \quad(\text{set} y=x v)      \\
+                 & =\int_{-\infty}^{0} \int_{-\infty}^{z}(-x) f(x, x v) d v d x+\int_{0}^{\infty} \int_{-\infty}^{z} x f(x, xv) dvdx            \\
+                 & =\int_{-\infty}^{z} \int_{-\infty}^{\infty}|x| f(x, xv) dxdv
+    \end{align*}
+
+    \[ f_Z(z)=\frac{d}{dz}F_Z(z)=\int_{-\infty}^{\infty}|x|f(x,xz)dx \]
+\end{example}
+
+\subsection{Copula}\label{subsec:Copula}
+\begin{definition}
+    设\underline{连续型}实值随机变量$X$有分布函数$F$, 易见$F$在$\overline{\R}=[-\infty,+\infty]$上从$0$递增到$1$. 定义相应的\textbf{分位数函数}(quantile function)为
+    \[ F^{-1}(p) := \inf\{x\in\R:F(x)\ge p\}, \quad p \in [0,1]. \]
+\end{definition}
+\begin{remark}
+    当$F$严格递增时, 这与一般的反函数定义相同.
+\end{remark}
+
+\begin{theorem}
+    设\underline{连续型}实值随机变量$X$有分布函数$F$, 则$F(X) \sim \mathrm{Uniform}([0,1])$
+\end{theorem}
+
+\begin{proof}
+    \[ \P\{F(X)\le p\} = \P\{X\le F^{-1}(p)\} = F(F^{-1}(p)) =p, \quad \forall p \in [0,1]. \]
+\end{proof}
+
+\begin{theorem}
+    设\underline{连续型}实值随机变量$X$有分布函数$F$, 且设$U\sim\mathrm{Uniform}([0,1]) $， 则$ F^{-1}(U) \overset{d}{=} X$, 其中$\overset{d}{=}$表示分布相同(equal in distribution).
+\end{theorem}
+
+\begin{theorem}[Sklar定理]
+    考虑多个\underline{连续型}实值随机变量$X_{1},\dots,X_{k}$, 记$X_{i}$的分布函数为$F_{i}$. 我们称$(F_{1}(X_{1}),\dots,F_{k}(X_{k}))$的分布函数$C : [0,1]^{k} \to [0,1]$为相应的\textbf{Copula}, 适合
+    \[ C(F_{1}(x_{1}),\dots,F_{k}(x_{k})) = \P\{X_{1}\le x_{1},\dots,X_{k}\le x_{k}\}, \quad \forall x_{1},\dots,x_{k} \]
+    这个结果称为\textbf{Sklar定理}
+\end{theorem}
+
+
+这个结果, 在金融统计中有颇多应用. 稍作诠释的话, Copula提取了变量间的\emph{相关性}, 通过粘合\emph{边际}能够恰好地表示\emph{总体}.
+人们可以构造各种各样的Copula, 对真实世界进行建模.
+
+\subsection{概率密度函数法}
+
+\begin{theorem}
+    设连续随机变量$X$的概率密度函数为$f_X(x)$. 令$Y=g(X)$, 其中$g$为可微函数, 且严格单调, 则当$y=g(x)$有定义时:
+    \[ f_Y(y)=f_X(g^{-1}(y))\left| \frac{dg^{-1}(y)}{dy} \right|  \]
+    否则为$0$
+
+    若$g$为分段单调函数, 则\underline{分段}计算上是结果, 再进行相加
+\end{theorem}
+
+\begin{theorem}
+    设连续随机向量$\mathbf{X}$的概率密度函数为$f_\mathbf{X}(\mathbf{x})$. 令$\mathbf{Y}=\mathbf{g}(\mathbf{X})$, 其中$\mathbf{g}$为双射, 定义其逆函数为:
+    \[ \mathbf{x}=\mathbf{g}^{-1}(\mathbf{y})=\mathbf{w}(\mathbf{y}) \]
+    若$\mathbf{w}$存在连续偏导数, 则当$\mathbf{Y}=\mathbf{g}(\mathbf{X})$有定义时:
+    \[ f_\mathbf{Y}(\mathbf{y})=f_\mathbf{X}(\mathbf{g}^{-1}(\mathbf{y}))\left| \frac{\partial \mathbf{w}}{\partial \mathbf{y}} \right|  \]
+    否则为$0$
+\end{theorem}
+
+\begin{remark}
+    若$\mathbf{Y}$的维数$k$小于$\mathbf{X}$的维数$n$, 可增补$n-k$维的函数$\mathbf{Z}=\mathbf{h}(\mathbf{X})$, 使得$(\mathbf{Y},\mathbf{Z})$满足条件, 再通过积分获取$\mathbf{Y}$的概率密度函数.
+\end{remark}
+
+\begin{example}
+    已知随机变量$X_1,X_2$的联合概率密度函数$f(x_1,x_2)$, 求$Y_1=\frac{X_2}{X_1}$的分布
+
+    令$Y_{2}=X_{1}$, 则:
+    \begin{align*}
+        x_{1} & =y_{2}\equiv w_{1}(y_{1}, y_{2})       \\
+        x_{2} & =y_{1} y_{2}\equiv w_{2}(y_{1}, y_{2})
+    \end{align*}
+    \[ \frac{\partial w_{1}}{\partial y_{1}}=0, \frac{\partial w_{1}}{\partial y_{2}}=1, \frac{\partial w_{2}}{\partial y_{1}}=y_{2}, \frac{\partial w_{2}}{\partial y_{2}}=y_{1}\]
+    \[ J=\left|\begin{array}{cc}0 & 1 \\ y_{2} & y_{1}\end{array}\right|=-y_{2}\]
+    所以:
+    \[ f_{Y_1 Y_2}(y_1, y_2)=f_{X_1 X_2}(y_{2}, y_{1} y_{2})\left|y_2\right| \]
+    \[ f_{Y_1}(y_1)=\int_{-\infty}^{\infty} f_{Y_{1} Y_{2}}\left(y_{1}, y_{2}\right) d y_{2}=\int_{-\infty}^{\infty} f_{X_{1} X_{2}}\left(y_{2}, y_{1} y_{2}\right)\left|y_{2}\right| d y_{2} \]
+\end{example}
+
+\subsection{矩母函数法}
+
+\subsection{次序统计量}
+
+\begin{definition}
+    设$X_1,X_2,\dotsc,X_n$为随机变量, 将其按大小排序后记为$X_{(1)}\le X_{(2)} \le  \cdots \le X_{(n)}$, 则将$x_{(i)}$称为该样本的第$i$个\textbf{次序统计量}. 其中
+    \begin{itemize}
+        \item \textbf{最小次序统计量}定义为:$X_{(1)}=\min\{x_1,\dotsc,x_n\}$
+        \item \textbf{最大次序统计量}定义为:$X_{(n)}=\max\{x_1,\dotsc,x_n\}$
+        \item \textbf{极差}定义为:$R=X_{(n)}-X_{(1)}$
+        \item 第$i$个\textbf{间差}定义为:$S_i=X_{(i)}-X_{(i-1)}$
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    虽然$X_1,X_2,\dotsc,X_n$独立, 但其次序统计量一般不独立
+\end{remark}
+
+\begin{example}
+    若$X_1,X_2,\dotsc,X_n$独立同分布, 求$X_{(1)}$与$X_{(n)}$的分布
+
+    \begin{align*}
+        F_{X_{(n)}}(x) & =P(X_{(n)} \leq x)=P(X_{1} \leq x, \ldots, X_{n} \leq x) \\
+                       & =P(X_{1} \leq x) \cdots P(X_{n} \leq x)                  \\
+                       & =[F(x)]^{n}                                              \\
+        f_{X_{(n)}}(x) & = \frac{d}{dx}F_{X_{(n)}}(x)                             \\
+                       & =nf(x)[F(x)]^{n-1}
+    \end{align*}
+
+    \begin{align*}
+        1-F_{X_{(1)}}(x) & =P(X_{(1)}>x)=P(X_{1}>x, \ldots, X_{n}>x) \\
+                         & =P(X_{1}>x)\cdots P(X_{n}>x)              \\
+                         & =[1-F(x)]^{n}                             \\
+        f_{X_{(1)}}(x)   & = \frac{d}{dx}F_{X_{(1)}}(x)              \\
+                         & =nf(x)[1-F(x)]^{n-1}
+    \end{align*}
+\end{example}
+
+\begin{theorem}
+    第$i$个\textbf{次序统计量}的概率密度函数为:
+    \[ f_{X_{(k)}} = C(n;1,k-1,n-k)f(x)[F(x)]^{k-1}[1-F(x)]^{n-k}  \]
+\end{theorem}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[semithick]
+        \draw(-4,0)--(4,0);\coordinate(a)at(-1,0);\node[below=2pt]at(a){$x$};
+        \coordinate(b)at(1,0);\node[below]at(b){$x+\Delta x$};
+        \draw[out=100,in=0](a)to(-3.4,1);
+        \draw[out=70,in=110](a)to(b);
+        \node at(0,0.75){$1$};\node at(-2.7,0.5){$k-1$};
+        \draw[out=60,in=190](b)to(3.7,1.1);
+        \node at(2.6,0.5){$n-k$};
+    \end{tikzpicture}
+    \caption{$X_{(k)}$取值的示意图}
+\end{figure}
+
+\begin{theorem}
+    次序统计量$(x_{(i)},x_{(j)})(i<j)$的联合分布密度函数为
+    \begin{align*}
+        p_{ij}(y,z)=\frac{n!}{(i-1)!(j-i-1)!(n-j)!}[F(y)]^{i-1}[F(z)-F(y)]^{j-i-1} &   \\
+        \cdot[1-F(z)]^{n-j}p(y)p(z),\quad y\leq z                                  & ,
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+对正$\Delta y,\Delta z$以及$y<z$,事件``$x_{(i)}\in(y,y+\Delta y],x_{(j)}\in(z,z+\Delta z]$''可以表示为``容量为$n$的样本$x_1,\dotsc,x_n$中有$i-1$个观测值小于等于$y$,一个落入区间$(y,y+\Delta y],j-i-1$个落入区间$(y+\Delta y,z]$,一个落入区间$(z,z+\Delta z]$,而余下$n-j$个大于$z+\Delta z$''(见图~\ref{fig:5.3.6} ).
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[semithick]
+        \draw(-6,0)--(6,0);
+        \coordinate(a) at(-3,0);\coordinate(b)at(-1.5,0);
+        \coordinate(c)at(1.5,0);\coordinate(d)at(3,0);
+        \node[below=2pt]at(a){$y$};\node[below]at(b){$y+\Delta y$};
+        \node[below=2pt]at(c){$z$};\node[below]at(d){$z+\Delta z$};
+        \draw[out=100,in=0](a)to(-5.4,1);
+        \draw[out=70,in=110](a)to(b);\draw[out=70,in=110](c)to(d);
+        \node at(-2.25,0.75){$1$};\node at(-4.7,0.5){$i-1$};
+        \draw[out=60,in=190](d)to(5.7,1.1);
+        \node at(4.6,0.5){$n-j$};\node at(0,0.5){$j-i-1$};
+        \draw[out=80,in=100](b)to(c);
+        \node at(2.25,0.75){$1$};
+    \end{tikzpicture}
+    \caption{$x_{(i)}$与$x_{(j)}$取值的示意图}\label{fig:5.3.6}
+\end{figure}
+\end{proof}
+\begin{example}
+    若$X_1,X_2,\dotsc,X_n$独立同分布, 求$R=X_{(n)}-X_{(1)}$的分布
+
+    \[ f_{X_{(1)}X_{(n)}}(s,t)=n(n-1)f(s)f(t)[F(t)-F(s)]^{n-2}\mathbb{I}(s\le t) \]
+
+    \[ f_R(r)=\mathbb{I}(r>0)\int_{-\infty}^{\infty}f_{X_{(1)}X_{(n)}}(s,s+r)ds \]
+
+\end{example}
