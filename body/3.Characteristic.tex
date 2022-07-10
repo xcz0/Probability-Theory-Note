@@ -1,6 +1,31 @@
 \chapter{随机变量的数值特征}
 
-\section{期望与方差}
+\section{期望值}
+
+\begin{definition}
+    对于实值随机变量$X : (\Omega,\mathscr{F},\P) \to (\R,\mathscr{B}_{\R})$和(可测)函数$g : \R \to \R$, 称
+    \[ \E[g(X)] = \int_{\Omega} g(X(\omega))\,\d\P(\omega) = \int_{\R} g(x) \,\d F_{X}(x) \]
+    为$g(X)$的\textbf{均值}(mean)或\textbf{期望}(expectation). 期望算子$\E$是一个线性泛函, 仅适用于\underline{可积}的随机变量.
+\end{definition}
+
+一个重要结果是, 若$g(X) \ge 0$, 则$\E[g(X)] = 0 \implies g(X) \overset{\as}{=} 0$, 即$\P\{g(X)=0\} = 1$. 其证明可通过\textbf{Markov不等式}
+\[ \P\{g(X)\ge\e\} \le \E[g(X)]/\e, \quad \forall \e > 0 \]
+完成, 其中需要用到概率的\emph{连续性}, 即$\lim\limits_{n\to\infty}A_{n} = A \implies \lim\limits_{n\to\infty}\P(A_{n}) = \P(A)$.
+
+刻画$X$的变动程度的量是其\textbf{方差}(variance)
+\[ \Var(X) = \E[|X-\E{X}|^{2}] = \E[X^{2}] - (\E{X})^{2}. \]
+考虑\textbf{均方误差}(mean squared error)
+\[ \MSE(X;\theta) = \E[|X-\theta|^{2}], \quad \theta\in\R, \]
+通过\textbf{方差偏差分解}(variance-bias decomposition)
+\[ \MSE(X;\theta) = \Var(X) + |\E{X}-\theta|^{2} \]
+可以说明$\theta\mapsto\MSE(X;\theta)$在$\E{X}$处取到最小值$\Var(X)$.
+\emph{投影}(projection)和\emph{正交分解}的思想在各种内积空间中应用广泛, 这里是$\E = \proj{}{\R}$, 概率论中关于子事件域$\mathscr{G}$ (随机元$X$, resp.)的\emph{条件期望}几何直观是$\proj{}{\mathscr{G}}$ ($\proj{}{\sigma(X)}$, resp.), 线性模型$\mathbf{y} = \mathbf{X}\bm{\beta} + \bm{\e}$中\emph{拟合值}为$\hat{\mathbf{y}} = \proj{\mathbf{y}}{\operatorname{Col}(\mathbf{X})}$.
+
+预处理随机变量有两个常用变换:
+\begin{itemize}
+    \item \textbf{中心化}(centralization) $X \mapsto X-\E{X}$;
+    \item \textbf{标准化}(standardization) $X \mapsto \dfrac{X-\E{X}}{\sqrt{\Var(X)}}$.
+\end{itemize}
 
 \section{矩母函数与特征函数}
 
