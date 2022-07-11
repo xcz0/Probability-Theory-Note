@@ -3,23 +3,65 @@
 \section{期望值}
 
 \begin{definition}
-    对于实值随机变量$X : (\Omega,\mathscr{F},\P) \to (\R,\mathscr{B}_{\R})$和(可测)函数$g : \R \to \R$, 称
+    对于实值随机向量$X : (\Omega,\mathscr{F},\P) \to (\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$, 称
     \[ \E[g(X)] = \int_{\Omega} g(X(\omega))\,\d\P(\omega) = \int_{\R} g(x) \,\d F_{X}(x) \]
-    为$g(X)$的\textbf{均值}(mean)或\textbf{期望}(expectation). 期望算子$\E$是一个线性泛函, 仅适用于\underline{可积}的随机变量.
+    为$g(X)$的\textbf{期望}(expectation).
 \end{definition}
+
+\begin{remark}
+    当$F_{X}(x)$在$x_0$出连续可导时, $\d F_{X}(x_0)=f_{X}(x_0)\d x$; 当$x_0$为其间断点时时, $\d F_{X}(x_0)=p_{X}(x_0)\delta(x_0)\d x$
+\end{remark}
+
+期望算子$\E$是一个线性泛函, 仅适用于\underline{可积}的随机变量.
+
+\begin{definition}
+    \begin{enumerate}
+        \item 当$g(x)=x$时, $\E[g(x)]=\E[X]$称作$X$的\textbf{均值}(mean), 记为$\mu_{X}$
+        \item 当$g(x)=(x-\mu_{X})^{2}$时, $\E[g(x)]=\E[(X-\E[X])^{2}]$称作$X$的\textbf{方差}(variance), 记为$\sigma^2_{X}$. 其平方根称作$X$的\textbf{标准差}(standard deviation), 记为$\sigma_{X}$
+        \item 当$g(x,y)=(x-\mu_{X})(y-\mu_{Y})$时, $\E[g(X,Y)]=\E[(X-\E[X])(Y-\E[Y])]$称作$X$与$Y$的\textbf{协方差}(covariance), 记为$\Cov(X,Y)$或$\sigma_{XY}$.
+        \item 定义$X$与$Y$的\textbf{相关系数}(correlation coefficient)为:$\sigma_{XY}/(\sigma_{X}\sigma_{Y})$, 记为$\Cor(X,Y)$或$\rho_{XY}$. 若$\rho_{XY}=0$, 则称$X$与$Y$不相关
+    \end{enumerate}
+\end{definition}
+
+\subsection{均值}
+
+\begin{remark}
+    \begin{itemize}
+        \item 随机变量的均值可看作其加权平均, 权重为其pdf或pmf, 也即其质心. 从大数定律(\ref{chap:limitation})的角度看, 也可解释为其长期均值.
+        \item 方差为随机变量距其均值的均方偏差, 刻画了$X$的变动程度
+        \item 随机变量的均值与标准差的单位和其本身的相同, 方差的为其平方
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}
+    均值为随机变量的线性映射, 即:
+    \[ \E(a+\sum_{i=1}^n b_i X_i)=a+\sum_{i=1}^n b_i\E( X_i) \]
+\end{theorem}
+
+\begin{theorem}[]
+    若$X,Y$独立,则
+    \begin{gather*}
+        \E(XY)=\E(X)\E(Y)
+        \E(g(X)h(Y))=\E(g(X))\E(h(Y))
+    \end{gather*}
+\end{theorem}
+
+\begin{remark}
+    由于$\E(X/Y)= \E(X)\E(\frac{1}{Y})$, 而$\E(\frac{1}{Y}) \neq \frac{1}{\E(Y)}$, 所以$\E(X/Y)\neq \E(X)/\E(Y)$
+\end{remark}
+
+\begin{theorem}
+    若$g$为\underline{下凸(convex)函数}, 则$\E[g(X)] \ge g[\E(X)]$; 若$g$为\underline{上凸(concave)函数}, 则$\E[g(X)] \le  g[\E(X)]$;
+\end{theorem}
+
+\begin{figure}
+    \centering
+    \includegraphics{image/trans_mean.png}
+\end{figure}
 
 一个重要结果是, 若$g(X) \ge 0$, 则$\E[g(X)] = 0 \implies g(X) \overset{\as}{=} 0$, 即$\P\{g(X)=0\} = 1$. 其证明可通过\textbf{Markov不等式}
 \[ \P\{g(X)\ge\e\} \le \E[g(X)]/\e, \quad \forall \e > 0 \]
 完成, 其中需要用到概率的\emph{连续性}, 即$\lim\limits_{n\to\infty}A_{n} = A \implies \lim\limits_{n\to\infty}\P(A_{n}) = \P(A)$.
-
-刻画$X$的变动程度的量是其\textbf{方差}(variance)
-\[ \Var(X) = \E[|X-\E{X}|^{2}] = \E[X^{2}] - (\E{X})^{2}. \]
-考虑\textbf{均方误差}(mean squared error)
-\[ \MSE(X;\theta) = \E[|X-\theta|^{2}], \quad \theta\in\R, \]
-通过\textbf{方差偏差分解}(variance-bias decomposition)
-\[ \MSE(X;\theta) = \Var(X) + |\E{X}-\theta|^{2} \]
-可以说明$\theta\mapsto\MSE(X;\theta)$在$\E{X}$处取到最小值$\Var(X)$.
-\emph{投影}(projection)和\emph{正交分解}的思想在各种内积空间中应用广泛, 这里是$\E = \proj{}{\R}$, 概率论中关于子事件域$\mathscr{G}$ (随机元$X$, resp.)的\emph{条件期望}几何直观是$\proj{}{\mathscr{G}}$ ($\proj{}{\sigma(X)}$, resp.), 线性模型$\mathbf{y} = \mathbf{X}\bm{\beta} + \bm{\e}$中\emph{拟合值}为$\hat{\mathbf{y}} = \proj{\mathbf{y}}{\operatorname{Col}(\mathbf{X})}$.
 
 预处理随机变量有两个常用变换:
 \begin{itemize}
@@ -27,6 +69,87 @@
     \item \textbf{标准化}(standardization) $X \mapsto \dfrac{X-\E{X}}{\sqrt{\Var(X)}}$.
 \end{itemize}
 
+\subsection{方差}
+
+\begin{theorem}
+    $\sigma^2_X=\operatorname{Var}(X)=\E[(X-\mu_X)^2]=E(X^2)-\mu_X$
+\end{theorem}
+
+\begin{theorem}
+    \[ \operatorname{Var}(a+bX)=b^2\operatorname{Var}(X) \]
+\end{theorem}
+
+\begin{theorem}
+    \[ \operatorname{Var}(a+\sum_{i=1}^n b_i X_i)=\sum_{i=1}^n b_i^2 \operatorname{Var}(X_i)+\mathbf{b}^{\mathrm{T}} \Sigma \mathbf{b}\]
+    其中$\Sigma$为协方差矩阵, $\Sigma_{i,j}=\operatorname{Cov}(X_i,X_j)$
+\end{theorem}
+
+\begin{theorem}
+    若$X_1,\cdots ,X_n$相互独立, 则:
+    \[ \operatorname{Var}(\sum_{i=1}^n X_i)=\sum_{i=1}^n\operatorname{Var}( X_i) \]
+\end{theorem}
+
+考虑\textbf{均方误差}(mean squared error)
+\[ \MSE(X;\theta) = \E[|X-\theta|^{2}], \quad \theta\in\R, \]
+通过\textbf{方差偏差分解}(variance-bias decomposition)
+\[ \MSE(X;\theta) = \Var(X) + |\E{X}-\theta|^{2} \]
+可以说明$\theta\mapsto\MSE(X;\theta)$在$\E{X}$处取到最小值$\Var(X)$.
+
+\emph{投影}(projection)和\emph{正交分解}的思想在各种内积空间中应用广泛, 这里是$\E = \proj{}{\R}$, 概率论中关于子事件域$\mathscr{G}$ (随机元$X$, resp.)的\emph{条件期望}几何直观是$\proj{}{\mathscr{G}}$ ($\proj{}{\sigma(X)}$, resp.), 线性模型$\mathbf{y} = \mathbf{X}\bm{\beta} + \bm{\e}$中\emph{拟合值}为$\hat{\mathbf{y}} = \proj{\mathbf{y}}{\operatorname{Col}(\mathbf{X})}$.
+
+\begin{theorem}[Chebyshev不等式]
+    设随机变量$X$的均值与方差分别为:$\mu, \sigma^2$, 则:
+    \[ \P(\left| X-\mu \right| >t)\le \frac{\sigma^{2}}{t^{2}} \]
+\end{theorem}
+
+\begin{proof}
+    设$f(x)$为$X$的概率密度函数, 令$R=\left\{ x:|x-\mu|>t \right\} $
+    \begin{align*}
+        \P(|x-\mu|>t) &= \int_R 1 \cdot  f(x)\d x \le \int_R \frac{(x-\mu)^2}{t^{2}}f(x) \d x \\
+        & \le \int_{-\infty}^{\infty}\frac{(x-\mu)^2}{t^{2}}f(x) \d x\\
+        & = \frac{\sigma^{2}}{t^{2}}
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    若令$t=k\sigma$, 则$\P(\left| X-\mu \right| >k\sigma)\le \frac{1}{k^{2}}$, 即标准差可代表随机变量偏离均值的概率单位距离.
+\end{remark}
+
+\begin{corollary}
+    \[ \operatorname{Var}(X)=0 \implies P(X=\mu)=1 \]
+\end{corollary}
+
+\subsection{协方差}
+
+协方差代表了$X$与$Y$之间的联合变化倾向, 或者说他们间的相关程度, 但其间\underline{未必有}因果关系. 
+
+\begin{theorem}
+    \[ \operatorname{Cov} (X,Y)=\E[(X-\mu_X)(Y-\mu_Y)]=\E(XY)-\mu_Y \mu_Y \]
+\end{theorem}
+
+\begin{theorem}
+    \[ \operatorname{Cov}(a+\sum_{i=1}^n b_i X_i,c+\sum_{j=1}^m d_j Y_j) = \sum_{i=1}^n\sum_{j=1}^m b_i d_j \operatorname{Cov}(X_i,Y_i) = \mathbf{b}^{\mathrm{T}}\Sigma \mathbf{d}\]
+\end{theorem}
+
+\begin{theorem}
+    独立是不相关的\textbf{充分条件}, 但不是必要条件
+\end{theorem}
+
+\begin{theorem}
+    $-1\le \rho_{XY} \le 1$, 当且仅当$X$与$Y$间为线性关系时取等号
+\end{theorem}
+
+\begin{proof}
+    %TODO
+\end{proof}
+
+\begin{theorem}
+    平移与缩放随机变量都不影响其协方差, 即:
+    \[ \left| \operatorname{Cov}(a+ b X,c +d Y) \right| = \left| Cor(X,Y) \right|  \]
+\end{theorem}
+
 \section{矩母函数与特征函数}
+
+
 
 \section{熵与信息}

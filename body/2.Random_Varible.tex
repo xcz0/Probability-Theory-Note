@@ -184,8 +184,6 @@
     \[ F_{X_i}(x_i) = \P\{ X_i \le x_i \} = F(\infty,\cdots , x_i ,\cdots ,\infty)\]
 \end{definition}
 
-
-
 \subsection{独立}
 
 \begin{definition}[独立随机变量]
@@ -209,12 +207,6 @@
                         & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
         \Leftrightarrow & p(x_1,x_2,\cdots ,x_n) = p_{X_1}(x_1)p_{X_2}(x_2)\cdots p_{X_n}(x_n)
     \end{align*}
-\end{theorem}
-
-\begin{theorem}
-    若随机变量$X,Y$独立, 则其变换$Z=g(X), W=h(Y)$也独立.
-
-    泛化情况:若随机向量$\{X\}_n$各分类独立, 则其变换$\{Y\}_n=g(\{X\}_n)$各分类也独立.
 \end{theorem}
 
 \subsection{条件分布}
@@ -244,9 +236,7 @@
      & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
 \end{align*}
 所以
-\[
-    P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du.
-\]
+\[ P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du \]
 至此, 我们可以定义连续随机变量的条件分布如下.
 
 \begin{definition}
@@ -278,19 +268,37 @@
 
 在统计学中，常需要转化原始数据以获取其中信息, 由此引出了研究随机变量的函数的需要.
 
+\begin{definition}[可测函数]
+    设$y =g(x)$是$\R$到$\R$上的一个映照，若对于一切$\R$中的Borel点集$B_1$均有
+    \[\left\{ x:g(x) \in B_1 \right\} \in \mathcal{B}_1 \]
+    其中$\mathcal{B}_1$为$\R$上Borel $\sigma$域，则称$g(x)$是一元博雷尔函数, 也称为一元\textbf{可测函数}
+\end{definition}
+
 \begin{theorem}[事件法]
     设$Y=g(X)$是随机向量$X=(X_1,X_2,\cdots ,X_n)$的函数, 则$Y$的分布由$X$的分布通过下式决定:
-    \[ \P\{Y \in B\} = \P\{X \in A\}, \quad A=\{ \omega |g(\omega)\in B\} \]
+    \[ \P\{Y \in B\} = \P\{X \in A\}, \quad A=\{ \omega |g(X(\omega))\in B\} \]
 \end{theorem}
 
 此法是其他方法的基础, 但使用不便, 常用于离散随机变量.
 
 \begin{example}\label{exp:sum_of_pmf}
     已知随机变量$X,Y$的联合概率质量函数为$p(x,y)$, 求$Z=X+Y$的分布
-    \[ p_Z=P(Z=z)=P(X+Y=z)=\sum_{x=-\infty}^{\infty}p(x, z-x) \]
-
-    若$X,Y$独立,则$p_Z(z)=\sum_{-\infty}^{\infty}p_X(x)p_Y(z-x)dx$, 为$p_X$与$p_Y$的卷积
 \end{example}
+
+\begin{solution}
+    \[ p_Z=P(Z=z)=P(X+Y=z)=\sum_{x=-\infty}^{\infty}p(x, z-x) \]
+    若$X,Y$独立,则$p_Z(z)=\sum_{-\infty}^{\infty}p_X(x)p_Y(z-x)dx$, 为$p_X$与$p_Y$的卷积
+\end{solution}
+
+\begin{theorem}[]
+    若随机变量$X,Y$独立, 则其变换$Z=g(X), W=h(Y)$也独立.
+
+    泛化情况:若随机向量$\{X\}_n$各分类独立, 则其变换$\{Y\}_n=g(\{X\}_n)$各分类也独立.
+\end{theorem}
+
+\begin{proof}
+    %TODO: 待补
+\end{proof}
 
 \subsection{分布函数法}
 
@@ -305,6 +313,9 @@
 
 \begin{example}
     已知随机变量$X$的概率密度函数$f_X(x)$与分布函数$F_X(x)$, 求$Y=X^2$的分布
+\end{example}
+
+\begin{solution}
     \[ F_Y(y)=P(Y\le y)=P(-\sqrt{y}<X\le \sqrt{y})+P(X=\sqrt{y}=F_X(\sqrt{y})-F_X(-\sqrt{y}))+0 \quad y\ge 0\]
 
     \begin{align*}
@@ -312,11 +323,13 @@
                                    & =f_X(\sqrt{y})\frac{1}{2\sqrt{y}} -f_X(-\sqrt{y})\frac{-1}{2\sqrt{y}} \\
                                    & =\frac{1}{2\sqrt{y}}(f_X(\sqrt{y})+f_X(-\sqrt{y}))
     \end{align*}
-
-\end{example}
+\end{solution}
 
 \begin{example}\label{exp:sum_of_pdf}
     已知随机变量$X,Y$的联合概率密度函数$f(x,y)$, 求$Z=X+Y$的分布
+\end{example}
+
+\begin{solution}
     \[ F_Y(y)=P(Y\le y)=P(-\sqrt{y}<X\le \sqrt{y})+P(X=\sqrt{y}=F_X(\sqrt{y})-F_X(-\sqrt{y}))+0 \quad y\ge 0\]
 
     \begin{align*}
@@ -329,10 +342,13 @@
     \[ f_Z(z)=\frac{d}{dz}F_Z(z)=\int_{-\infty}^{\infty}f(x,z-x)dx \]
 
     若$X,Y$独立,则$f_Z(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx$, 为$f_X$与$f_Y$的卷积, 与\ref{exp:sum_of_pmf}类似
-\end{example}
+\end{solution}
 
 \begin{example}
     已知随机变量$X,Y$的联合概率密度函数$f(x,y)$, 求$Z=\frac{Y}{X}$的分布
+\end{example}
+
+\begin{solution}
     \[ Q_{z}=\{(x, y): y / x \leq z\}=\{(x, y): x<0, y \geq z x\} \cup\{(x, y): x>0, y \leq z x\} \]
     \begin{align*}
         F_{Z}(z) & =\iint_{Q_{z}} f(x, y) d x d y=\int_{-\infty}^{0} \int_{x z}^{\infty}+\int_{0}^{\infty} \int_{-\infty}^{x z} f(x, y) d y d x \\
@@ -342,7 +358,7 @@
     \end{align*}
 
     \[ f_Z(z)=\frac{d}{dz}F_Z(z)=\int_{-\infty}^{\infty}|x|f(x,xz)dx \]
-\end{example}
+\end{solution}
 
 \subsection{Copula}\label{subsec:Copula}
 \begin{definition}
@@ -399,7 +415,9 @@
 
 \begin{example}
     已知随机变量$X_1,X_2$的联合概率密度函数$f(x_1,x_2)$, 求$Y_1=\frac{X_2}{X_1}$的分布
+\end{example}
 
+\begin{solution}
     令$Y_{2}=X_{1}$, 则:
     \begin{align*}
         x_{1} & =y_{2}\equiv w_{1}(y_{1}, y_{2})       \\
@@ -410,7 +428,14 @@
     所以:
     \[ f_{Y_1 Y_2}(y_1, y_2)=f_{X_1 X_2}(y_{2}, y_{1} y_{2})\left|y_2\right| \]
     \[ f_{Y_1}(y_1)=\int_{-\infty}^{\infty} f_{Y_{1} Y_{2}}\left(y_{1}, y_{2}\right) d y_{2}=\int_{-\infty}^{\infty} f_{X_{1} X_{2}}\left(y_{2}, y_{1} y_{2}\right)\left|y_{2}\right| d y_{2} \]
-\end{example}
+\end{solution}
+
+\begin{proposition}
+    若随机向量$\mathbf{X}=(X_1,\cdots ,X_n)$各分类相互独立, 则其各分量的函数$\mathbf{Y}=(g_1(X_1),\cdots ,g_n(X_n))$也相互独立
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
 
 \subsection{矩母函数法}
 
@@ -432,7 +457,9 @@
 
 \begin{example}
     若$X_1,X_2,\dotsc,X_n$独立同分布, 求$X_{(1)}$与$X_{(n)}$的分布
+\end{example}
 
+\begin{solution}
     \begin{align*}
         F_{X_{(n)}}(x) & =P(X_{(n)} \leq x)=P(X_{1} \leq x, \ldots, X_{n} \leq x) \\
                        & =P(X_{1} \leq x) \cdots P(X_{n} \leq x)                  \\
@@ -448,7 +475,7 @@
         f_{X_{(1)}}(x)   & = \frac{d}{dx}F_{X_{(1)}}(x)              \\
                          & =nf(x)[1-F(x)]^{n-1}
     \end{align*}
-\end{example}
+\end{solution}
 
 \begin{theorem}
     第$i$个\textbf{次序统计量}的概率密度函数为:
@@ -478,31 +505,33 @@
 \end{theorem}
 
 \begin{proof}
-对正$\Delta y,\Delta z$以及$y<z$,事件``$x_{(i)}\in(y,y+\Delta y],x_{(j)}\in(z,z+\Delta z]$''可以表示为``容量为$n$的样本$x_1,\dotsc,x_n$中有$i-1$个观测值小于等于$y$,一个落入区间$(y,y+\Delta y],j-i-1$个落入区间$(y+\Delta y,z]$,一个落入区间$(z,z+\Delta z]$,而余下$n-j$个大于$z+\Delta z$''(见图~\ref{fig:5.3.6} ).
-\begin{figure}[!ht]
-    \centering
-    \begin{tikzpicture}[semithick]
-        \draw(-6,0)--(6,0);
-        \coordinate(a) at(-3,0);\coordinate(b)at(-1.5,0);
-        \coordinate(c)at(1.5,0);\coordinate(d)at(3,0);
-        \node[below=2pt]at(a){$y$};\node[below]at(b){$y+\Delta y$};
-        \node[below=2pt]at(c){$z$};\node[below]at(d){$z+\Delta z$};
-        \draw[out=100,in=0](a)to(-5.4,1);
-        \draw[out=70,in=110](a)to(b);\draw[out=70,in=110](c)to(d);
-        \node at(-2.25,0.75){$1$};\node at(-4.7,0.5){$i-1$};
-        \draw[out=60,in=190](d)to(5.7,1.1);
-        \node at(4.6,0.5){$n-j$};\node at(0,0.5){$j-i-1$};
-        \draw[out=80,in=100](b)to(c);
-        \node at(2.25,0.75){$1$};
-    \end{tikzpicture}
-    \caption{$x_{(i)}$与$x_{(j)}$取值的示意图}\label{fig:5.3.6}
-\end{figure}
+    对正$\Delta y,\Delta z$以及$y<z$,事件``$x_{(i)}\in(y,y+\Delta y],x_{(j)}\in(z,z+\Delta z]$''可以表示为``容量为$n$的样本$x_1,\dotsc,x_n$中有$i-1$个观测值小于等于$y$,一个落入区间$(y,y+\Delta y],j-i-1$个落入区间$(y+\Delta y,z]$,一个落入区间$(z,z+\Delta z]$,而余下$n-j$个大于$z+\Delta z$''(见图~\ref{fig:5.3.6} ).
+    \begin{figure}[!ht]
+        \centering
+        \begin{tikzpicture}[semithick]
+            \draw(-6,0)--(6,0);
+            \coordinate(a) at(-3,0);\coordinate(b)at(-1.5,0);
+            \coordinate(c)at(1.5,0);\coordinate(d)at(3,0);
+            \node[below=2pt]at(a){$y$};\node[below]at(b){$y+\Delta y$};
+            \node[below=2pt]at(c){$z$};\node[below]at(d){$z+\Delta z$};
+            \draw[out=100,in=0](a)to(-5.4,1);
+            \draw[out=70,in=110](a)to(b);\draw[out=70,in=110](c)to(d);
+            \node at(-2.25,0.75){$1$};\node at(-4.7,0.5){$i-1$};
+            \draw[out=60,in=190](d)to(5.7,1.1);
+            \node at(4.6,0.5){$n-j$};\node at(0,0.5){$j-i-1$};
+            \draw[out=80,in=100](b)to(c);
+            \node at(2.25,0.75){$1$};
+        \end{tikzpicture}
+        \caption{$x_{(i)}$与$x_{(j)}$取值的示意图}\label{fig:5.3.6}
+    \end{figure}
 \end{proof}
 \begin{example}
     若$X_1,X_2,\dotsc,X_n$独立同分布, 求$R=X_{(n)}-X_{(1)}$的分布
+\end{example}
 
+\begin{solution}
     \[ f_{X_{(1)}X_{(n)}}(s,t)=n(n-1)f(s)f(t)[F(t)-F(s)]^{n-2}\mathbb{I}(s\le t) \]
 
     \[ f_R(r)=\mathbb{I}(r>0)\int_{-\infty}^{\infty}f_{X_{(1)}X_{(n)}}(s,s+r)ds \]
 
-\end{example}
+\end{solution}
