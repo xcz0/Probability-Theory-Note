@@ -1,6 +1,6 @@
 \chapter{随机变量的数值特征}
 
-\section{期望值}
+\section{期望}
 
 \begin{definition}
     对于实值随机向量$X : (\Omega,\mathscr{F},\P) \to (\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$, 称
@@ -105,9 +105,9 @@
 \begin{proof}
     设$f(x)$为$X$的概率密度函数, 令$R=\left\{ x:|x-\mu|>t \right\} $
     \begin{align*}
-        \P(|x-\mu|>t) &= \int_R 1 \cdot  f(x)\d x \le \int_R \frac{(x-\mu)^2}{t^{2}}f(x) \d x \\
-        & \le \int_{-\infty}^{\infty}\frac{(x-\mu)^2}{t^{2}}f(x) \d x\\
-        & = \frac{\sigma^{2}}{t^{2}}
+        \P(|x-\mu|>t) & = \int_R 1 \cdot  f(x)\d x \le \int_R \frac{(x-\mu)^2}{t^{2}}f(x) \d x \\
+                      & \le \int_{-\infty}^{\infty}\frac{(x-\mu)^2}{t^{2}}f(x) \d x            \\
+                      & = \frac{\sigma^{2}}{t^{2}}
     \end{align*}
 \end{proof}
 
@@ -121,7 +121,7 @@
 
 \subsection{协方差}
 
-协方差代表了$X$与$Y$之间的联合变化倾向, 或者说他们间的相关程度, 但其间\underline{未必有}因果关系. 
+协方差代表了$X$与$Y$之间的联合变化倾向, 或者说他们间的相关程度, 但其间\underline{未必有}因果关系.
 
 \begin{theorem}
     \[ \operatorname{Cov} (X,Y)=\E[(X-\mu_X)(Y-\mu_Y)]=\E(XY)-\mu_Y \mu_Y \]
@@ -150,6 +150,134 @@
 
 \section{矩母函数与特征函数}
 
+\subsection{矩}
 
+\begin{definition}
+    对于随机变量$X$, 定义其$k$阶\textbf{矩}(moment)为$E(X^k)$, 记为$\mu_k$; 定义其$k$阶\textbf{中心矩}(central moment)为$E((X-\mu_X)^k)$, 记为$\upsilon_k$;
+\end{definition}
+
+易知矩与中心矩间存在以下关系:
+\begin{align*}
+    \upsilon_k & =\sum_{i=0}^k \binom{k}{i} \mu_i (-\mu_X)^{n-i}     \\
+    \mu_k      & =\sum_{i=0}^k \binom{k}{i} \upsilon_i (\mu_X)^{n-i}
+\end{align*}
+
+特别的有:
+\begin{align*}
+    E(X)                  & =\mu_1                                                         \\
+    \operatorname{Var}(X) & =\upsilon_2=\mu_1^2-2\mu_1 \cdot \mu_1 + \mu_2 = \mu_2-\mu_1^2
+\end{align*}
+
+\subsection{矩母函数}
+
+\begin{definition}
+    对于随机变量$X$, 若下式期望存在：
+    \[ M_X(t) = \E(e^{tX}) \]
+    则称其为\textbf{矩母函数}(moment generating function, mgf)。
+\end{definition}
+
+\begin{remark}
+    此表达式等价于对概率质量函数或密度函数作Laplace变换, 当$t$取某些特定值时, 可能不存在. (若$t=0$则永远存在)
+\end{remark}
+
+\begin{theorem}
+    若当$t$属于一个包含零点的开区间时, 矩母函数一直存在, 则其唯一对应一个概率分布.
+\end{theorem}
+
+\begin{theorem}
+    若当$t$属于一个包含零点的开区间时, 矩母函数一直存在, 则:
+    \[ M_X^{(k)}(0) = E(X^k) \]
+\end{theorem}
+
+\begin{remark}
+    由此可方便地计算各阶矩, 故称其为矩母函数. 反过来, 若已知各阶矩, 通过Tayler展开式$M_X(t)=\sum_{k=0}^{\infty}\frac{M_X^{(k)}(0)}{k!}t^k$还原矩母函数, 进而得出概率分布.
+\end{remark}
+
+\begin{proposition}
+    若$a,b$为常数, 则
+    \[ M_{a+b X}(t) = e^{a t}M_X(b t) \]
+\end{proposition}
+
+\begin{theorem}
+    若$X,Y$独立,则
+    \[ M_{X+Y}(t) = M_X(t) M_Y(t) \]
+
+    泛化情况: 若$X_1,\cdots, X_n$相互独立,则
+    \[ M_{X_1+\cdots+ X_n} = \prod_{i=1}^n M_{X_i}(t)\]
+\end{theorem}
+
+\subsection{联合特征函数}
+
+\begin{definition}
+    对于随机变量$X_1,\cdots, X_n$, 若下式期望存在：
+    \[ M_{X_1\cdots X_n}(t_1,\cdots ,t_n) = \E(e^{t_1 X_1+\cdots + t_n X_n}) \]
+    则称其为\textbf{联合矩母函数}(joint moment generating function, joint mgf)。
+\end{definition}
+
+\begin{remark}
+    此处为\underline{多元}函数
+\end{remark}
+
+\begin{proposition}
+    \[ M_{X_i}(t_i) = M_{X_1\cdots X_n}(0,\cdots ,t_i,\cdots ,0) \]
+\end{proposition}
+
+\begin{theorem}
+    当且仅当:
+    \[ M_{X_1\cdots X_n}(t_1,\cdots ,t_n) = \prod_{i=1}^n M_{X_i}(t_i) \]
+    时, $X_1,\cdots, X_n$相互独立
+\end{theorem}
+
+\begin{remark}
+    与\underline{累计函数、密度函数、质量函数}的情况类似，变量相互独立等价于联合函数可拆分为边缘函数的乘积
+\end{remark}
+
+\begin{theorem}
+    \[ \frac{\partial^{r_1+\cdots +r_n} }{\partial t_1^{r_1} \cdots  \partial t_n^{r_n}} M_{X_1\cdots X_n}(t_1,\cdots ,t_n) = E(X_1^{r_1} \cdots X_n^{r_n}) \]
+\end{theorem}
+
+\subsection{特征函数}
+
+由于有时矩母函数可能不存在，为避免此缺陷，构造出与之特性类似的特征函数。
+
+\begin{definition}
+    对于随机变量$X$, 定义其\textbf{特征函数}(characat function, chf)为：
+    \[ \phi_X(t) = \E(e^{itX}) = \E(\cos (tX)) + i\E(\sin (tX))\]
+
+    对于随机变量$X_1,\cdots, X_n$, 定义其\textbf{联合特征函数}(joint characat function, joint chf)为：
+    \[ \phi_{X_1\cdots X_n}(t_1,\cdots ,t_n) = \E(e^{i (t_1 X_1+\cdots + t_n X_n)}) \]
+\end{definition}
+
+\begin{remark}
+    此表达式等价于对概率质量函数或密度函数作Fourier变换
+\end{remark}
+
+\begin{proposition}
+    随机变量的特征函数总是存在
+\end{proposition}
+
+\begin{proposition}
+    若矩母函数存在，则其与特征函数之间满足关系：
+    \[ \phi_X(t) = M_X(it) \]
+\end{proposition}
+
+\begin{theorem}
+    特征函数可通过以下逆变换得到分布：
+    \begin{description}
+        \item[离散] $p_{X}(x)=\lim _{T \rightarrow \infty} \int_{-T}^{T} e^{-i t x} \phi_{X}(t) d t$
+        \item[连续] $f_{X}(x)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \phi_{X}(t) d t$
+    \end{description}
+\end{theorem}
+
+\section{条件期望}
+
+\begin{definition}
+    条件分布(定义\ref{def:cond_dist})的数学期望（若存在）称为\textbf{条件期望}, 其定义如下:
+    \begin{align*}
+        E(Y | X=x) & =\begin{cases} \sum_{j} y_{j} P\left(Y=y_{j} | X=x\right), & (X,Y)\text{ 为二维离散随机变量}; \\
+              \int_{-\infty}^{+\infty} y p(y | x) d y,  & (X,Y)\text{ 为二维离散随机变量}.
+                      \end{cases}
+    \end{align*}
+\end{definition}
 
 \section{熵与信息}
