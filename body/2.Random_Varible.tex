@@ -184,39 +184,12 @@
     \[ F_{X_i}(x_i) = \P\{ X_i \le x_i \} = F(\infty,\cdots , x_i ,\cdots ,\infty)\]
 \end{definition}
 
-\subsection{独立}
-
-\begin{definition}[独立随机变量]
-    若随机变量$X(\omega) = (X_1(\omega), X_2(\omega),\cdots , X_n(\omega))$联合分布函数可分解成各分量边缘分布函数的乘积, 即:
-    \[ F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) , \quad \forall x_1,x_2,\cdots ,x_n \in \R \]
-    则称随机变量$X$各分量相互\textbf{独立}
-\end{definition}
-
-\begin{remark}
-    对于一般的多元随机变量, 其各分量边缘分布不足以描述联合分布的情况. 但若其各分量独立则可以.
-\end{remark}
-
-\begin{theorem}
-    对于连续情况:
-    \begin{align*}
-                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
-        \Leftrightarrow & f(x_1,x_2,\cdots ,x_n) = f_{X_1}(x_1)f_{X_2}(x_2)\cdots f_{X_n}(x_n)
-    \end{align*}
-    对于离散情况:
-    \begin{align*}
-                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
-        \Leftrightarrow & p(x_1,x_2,\cdots ,x_n) = p_{X_1}(x_1)p_{X_2}(x_2)\cdots p_{X_n}(x_n)
-    \end{align*}
-\end{theorem}
-
 \subsection{条件分布}
 
 \begin{definition}\label{def:cond_dist}
     对一切使 $P\left(Y=y_{j}\right)=p_{ \cdot j}=\sum_{i=1}^{+\infty} p_{i j}>0$ 的 $y_j$, 称
-    \begin{equation}\label{eq:3.5.1}
-        p_{i | j}=P\left(X=x_{i} | Y=y_{j}\right)=\frac{P\left(X=x_{i}, Y=y_{j}\right)}{P\left(Y=y_{j}\right)}
-        =\frac{p_{i j}}{p_{\cdot j}}, \quad i=1,2, \ldots
-    \end{equation}
+    \[ p_{i | j}=P\left(X=x_{i} | Y=y_{j}\right)=\frac{P\left(X=x_{i}, Y=y_{j}\right)}{P\left(Y=y_{j}\right)}
+        =\frac{p_{i j}}{p_{\cdot j}}, \quad i=1,2, \ldots \]
     为给定 $Y=y_j$ 条件下 $X$ 的条件分布列. 若$p_X(x)=0$, 则定义其为0.
 \end{definition}
 
@@ -242,15 +215,15 @@
 \begin{definition}
     对一切使 $p_Y(y)>0$ 的 $y$, 给定 $Y=y$ 条件下 $X$ 的\textbf{条件分布函数}\index{T!条件分布函数}和
     \textbf{条件密度函数}\index{T!条件密度函数}分别为
-    \begin{align}
+    \begin{align*}
          & F(x | y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du, \\
          & p(x | y)=\frac{p(x, y)}{p_{Y}(y)}.
-    \end{align}
+    \end{align*}
     同理对一切使 $p_Y(y)>0$ 的 $x$, 给定 $X=x$ 条件下 $Y$ 的条件分布函数和条件密度函数分别为
-    \begin{align}
+    \begin{align*}
          & F(y | x)=\int_{-\infty}^{y} \frac{p(x, v)}{p_{X}(x)} dv \\
          & p(y | x)=\frac{p(x, y)}{p_{X}(x)}.
-    \end{align}
+    \end{align*}
 \end{definition}
 
 \begin{remark}
@@ -263,6 +236,33 @@
     \item[全概率公式] $p_{Y}(y)=\sum_{x}p_{Y|X}(y|x)p_{X}(x), \quad f_{Y}(y)=\int^{+\infty}_{-\infty}f_{Y|X}(y|x)f_{X}(x)dx$
     \item[Bayes原理]  $p_{X|Y}(x|y)=\frac{p_{Y|X}(y|x)p_{X}(x)}{\sum_{x}p_{Y|X}(y|x)p_{X}(x)}, \quad f_{X|Y}(x|y)=\frac{f_{Y|X}(y|x)f_{X}(x)}{\int^{+\infty}_{-\infty}f_{Y|X}(y|x)f_{X}(x)dx}$
 \end{description}
+
+\subsection{独立}
+
+\begin{definition}[独立随机变量]
+    若随机变量$X(\omega) = (X_1(\omega), X_2(\omega),\cdots , X_n(\omega))$联合分布函数可分解成各分量边缘分布函数的乘积, 即:
+    \[ F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) , \quad \forall x_1,x_2,\cdots ,x_n \in \R \]
+    则称随机变量$X$各分量相互\textbf{独立}
+\end{definition}
+
+\begin{remark}
+    对于一般的多元随机变量, 其各分量边缘分布不足以描述联合分布的情况. 但若其各分量独立则可以.
+\end{remark}
+
+\begin{theorem}\label{thm:indep_cmf}
+    对于连续情况:
+    \begin{align*}
+                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+        \Leftrightarrow & f(x_1,x_2,\cdots ,x_n) = f_{X_1}(x_1)f_{X_2}(x_2)\cdots f_{X_n}(x_n)
+    \end{align*}
+    对于离散情况:
+    \begin{align*}
+                        & F(x_1,x_2,\cdots ,x_n) = F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n) \\
+        \Leftrightarrow & p(x_1,x_2,\cdots ,x_n) = p_{X_1}(x_1)p_{X_2}(x_2)\cdots p_{X_n}(x_n)
+    \end{align*}
+\end{theorem}
+
+
 
 \section{随机变量的函数}
 
@@ -434,7 +434,7 @@
     若随机向量$\mathbf{X}=(X_1,\cdots ,X_n)$各分类相互独立, 则其各分量的函数$\mathbf{Y}=(g_1(X_1),\cdots ,g_n(X_n))$也相互独立
 \end{proposition}
 \begin{proof}
-    
+
 \end{proof}
 
 \subsection{矩母函数法}

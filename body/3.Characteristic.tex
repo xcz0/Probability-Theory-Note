@@ -148,6 +148,85 @@
     \[ \left| \operatorname{Cov}(a+ b X,c +d Y) \right| = \left| Cor(X,Y) \right|  \]
 \end{theorem}
 
+\section{条件期望}
+
+\begin{definition}
+    若$h(Y)$在给定$X=x$下的条件分布(定义\ref{def:cond_dist})的数学期望存在，则定义其为\textbf{条件期望}如下:
+    \[ E(h(Y)|X=x) =\begin{cases}
+            \sum_{y} h(y) p_{Y|X}(y|x),                    & \text{离散情况} \\
+            \int_{-\infty}^{+\infty} h(y) f_{Y|X}(y|x) d y & \text{连续情况}
+        \end{cases}\]
+\end{definition}
+
+\begin{remark}
+    条件期望$\E_{Y|X}(Y|x)$是关于给定变量$x$的函数，不随对应变量$Y$本身变动，但其单位与对应变量$Y$相同，可看作一条在$(X,Y)$平面的曲线。
+\end{remark}
+
+\begin{theorem}
+    若随机变量$X,Y$独立，则:
+    \[ \E_{Y|x}(Y|x)=\E_{Y}(Y) \]
+\end{theorem}
+
+\begin{proof}
+    由\label{thm:indep_cmf}可知，若随机变量$X,Y$独立，则
+    \begin{align*}
+        p_{Y|X}(y|x)&=p_{Y}(y) \\
+        f_{Y|X}(y|x)&=f_{Y}(y)
+    \end{align*}
+    所以$\E_{Y|x}(Y|x)=\E_{Y}(Y)$
+\end{proof}
+
+由直观感受亦可知：若$X,Y$独立，则$X$不通过任何与$Y$相关的信息，其条件期望亦当与原期望相同。
+
+\begin{note}
+    令$g(x)=\E(h(Y)|X=x)$，则$g(X)$是随机变量$X$的变换，也是随机变量，记为$\E(h(Y)|X)$
+\end{note}
+
+\begin{theorem}[重期望公式]
+    \[ \E_X[\E_{Y|X}(h(Y)|X)] = \E_{Y}[h(Y)] \]
+\end{theorem}
+
+\begin{proof}
+    %TODO
+\end{proof}
+
+\begin{theorem}
+    联合期望公式：
+    \[ E_{X,Y}=E_X E_{Y|X} = E_Y E_{X|Y} \]
+    泛化情况：
+    \[ E_{X,Y}[h(X,Y)]=E_X E_{Y|X}[h(X,Y)|X] = E_Y E_{X|Y}[h(X,Y)|Y] \]
+\end{theorem}
+
+\begin{theorem}[重方差公式]\label{thm:var_dec}
+    随机变量$Y$的方差可作如下分解：
+    \[ \operatorname{Var}_Y(Y)=\operatorname{Var}_X[E_{Y|X}(Y|X)] + E_X[\operatorname{Var}_{Y|X}(Y|X)] \]
+\end{theorem}
+
+\begin{figure*}
+    \centering
+    \includegraphics{image/var_dec.png}
+\end{figure*}
+
+\begin{corollary}
+    \[ \operatorname{Var}_Y(Y) \ge E_X[\operatorname{Var}_{Y|X}(Y|X)] \]
+    当且仅当$E_{Y|X}(Y|X)=E_Y(Y)$时取等号
+\end{corollary}
+
+\begin{figure*}
+    \centering
+    \includegraphics{image/var_dec2.png}
+\end{figure*}
+
+\begin{corollary}
+    \[ \operatorname{Var}_Y(Y) \ge \operatorname{Var}_X[E_{Y|X}(Y|X)] \]
+    当且仅当$\operatorname{Var}_{Y|X}(Y|X)=0$，即$\E_{Y|X}(Y|X)=Y$时取等号
+\end{corollary}
+
+\begin{figure*}
+    \centering
+    \includegraphics{image/var_dec3.png}
+\end{figure*}
+
 \section{矩母函数与特征函数}
 
 \subsection{矩}
@@ -269,15 +348,6 @@
     \end{description}
 \end{theorem}
 
-\section{条件期望}
 
-\begin{definition}
-    条件分布(定义\ref{def:cond_dist})的数学期望（若存在）称为\textbf{条件期望}, 其定义如下:
-    \begin{align*}
-        E(Y | X=x) & =\begin{cases} \sum_{j} y_{j} P\left(Y=y_{j} | X=x\right), & (X,Y)\text{ 为二维离散随机变量}; \\
-              \int_{-\infty}^{+\infty} y p(y | x) d y,  & (X,Y)\text{ 为二维离散随机变量}.
-                      \end{cases}
-    \end{align*}
-\end{definition}
 
 \section{熵与信息}
