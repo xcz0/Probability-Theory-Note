@@ -168,7 +168,7 @@
 \end{theorem}
 
 \begin{proof}
-    由\label{thm:indep_cmf}可知，若随机变量$X,Y$独立，则
+    由\ref{thm:indep_cmf}可知，若随机变量$X,Y$独立，则
     \begin{align*}
         p_{Y|X}(y|x)&=p_{Y}(y) \\
         f_{Y|X}(y|x)&=f_{Y}(y)
@@ -277,7 +277,7 @@
     \[ M_{a+b X}(t) = e^{a t}M_X(b t) \]
 \end{proposition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:mgf_sum}
     若$X,Y$独立,则
     \[ M_{X+Y}(t) = M_X(t) M_Y(t) \]
 
@@ -347,6 +347,13 @@
         \item[连续] $f_{X}(x)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \phi_{X}(t) d t$
     \end{description}
 \end{theorem}
+
+\section{估计与预测}
+
+\subsection{$\delta$法}
+
+\subsection{预测}
+
 
 
 

@@ -1,4 +1,4 @@
-\newcommand{\ucite}[1]{\textsuperscript{\cite{#1}}}	
+\newcommand{\ucite}[1]{\textsuperscript{\cite{#1}}}
 % 参考文献引用：上标用 \ucite{ }, 文中用 \cite{ }
 \newcommand{\red}[1]{{\color{red}#1}}
 
@@ -38,12 +38,21 @@
 \newcommand{\N}{\mathcal{N}}				% normal, not natural numbers XD
 
 \tikzset{
-box/.style ={
-rectangle, %矩形节点F
-rounded corners =5pt, %圆角
-minimum width =50pt, %最小宽度
-minimum height =20pt, %最小高度
-inner sep=5pt, %文字和边框的距离
-draw=blue %边框颜色
+	box/.style ={
+			rectangle, %矩形节点F
+			rounded corners =5pt, %圆角
+			minimum width =50pt, %最小宽度
+			minimum height =20pt, %最小高度
+			inner sep=5pt, %文字和边框的距离
+			draw=blue %边框颜色
+		}
 }
+
+\setlist[description]{
+	labelindent = 4em,
+	labelwidth = 6em,
+	leftmargin = 10em,
+	labelsep = 1.5em,
+	parsep = 0.75em,
+	topsep = 0.75em,
 }
