@@ -161,7 +161,7 @@ Bernouli分布的特征：
 
 \begin{proposition}
     离散分布中有且只有几何分布具备无记忆性：
-    \[ P\left\{ X=s+t|X>t \right\} =P\left\{ X=s \right\} \]
+    \[ P\left\{ X=s+t|X>t \right\} =P\left\{ X=s \right\} ,\quad \forall s>0,t>0\]
 \end{proposition}
 
 \begin{proof}
@@ -318,9 +318,55 @@ Poisson分布的特征：
     %TODO 
 \end{proof}
 
+\begin{lemma}\label{lem:Cauchy_lemma}
+    若$f(x)$是连续函数（或单调函数），且对一切$x,y$（或一切$x,y\ge 0$）成立：
+    \[ f(x)f(y)=f(x+y) \]
+    则$f(x)$为\textbf{指数函数}。
+\end{lemma}
+
+\begin{proof}
+    \begin{align*}
+        \because   & f(1)=[f(\frac{1}{n})]^n                           \\
+        \text{且}  & a=f(1)=[f(\frac{1}{2})]^2\ge 0                    \\
+        \therefore & f(\frac{1}{n})=a^{\frac{1}{n}}                    \\
+        \therefore & f(\frac{m}{n})=[f(\frac{1}{n})]^m=a^{\frac{m}{n}}
+    \end{align*}
+    即此命题对一切有理数成立。又实数具有连续性，故此命题对一切实数成立。
+\end{proof}
+
 \begin{definition}[泊松过程]
-    %TODO 
+    若某一随机过程满足以下特征，则称其为\textbf{泊松过程}：
+    \begin{description}
+        \item[平稳性] 随机事件$A$在$[t_0, t_0 + t)$中的发生次数数只与时间间隔长度$t$有关而与时间起点$t_0$无关。以$P_k(t)$记在长度为$t$的时间区间中发生$K$次事件$A$的概率。
+        \item[独立增量性] 在$[t_0, t_0 + t)$中发生$K$次事件$A$的概率与时刻$t_0$以前发生的事件独立。
+        \item[普通性] 在充分小的时间间隔中，最多发生一次事件$A$。即，若记$\psi(t)=\sum_{k=2}^{\infty}P_k(t)=1-P_0(t)-P_1(t)$，则有$\lim_{t \to 0}\psi(t)/t=0$
+    \end{description}
 \end{definition}
+
+对$\Delta t>O$，考虑$[O,t+\Delta t)$中发生$K$次事件$A$的概率$P_k(t+\Delta t)$，由独立增量性及全概率公式可得：
+\[ P_k(t+\Delta t)=P_k(t)P_0(\Delta r) + P_{k-1}P_1(\Delta t)+ \cdots +P_0(t)P_k(\Delta t) ,k\ge 0\]
+（对$n\ge 1$ ，假定$P_{-n}(t)=0$）
+
+特别地
+\[ P_0(t+\Delta t)=P_0(t)P_0(\Delta t) \]
+由引理\ref{lem:Cauchy_lemma}知
+\[ P_0(t)=a^{t}, a\ge 0 \]
+若$a=O$，则$P_0(t) \equiv 0$，说明在不管怎么短的时间间隔内事件$A$都发生，因此在有限时间间隔中将发生无穷多个次事件$A$，这种情形不在我们的考虑之列。此外，因$P_0(t)$是概率，故应有$a\ge 1$，而当$a=1$时，$P_0(t) \equiv 1$，表明事件$A$永不发生，也不是我们感兴趣的情形，所以应有 $0<a<1$，从而存在$\lambda>0$，使
+\[ P_0(t)=e^{-\lambda t} \]
+因此当$\Delta t \to 0$时，有
+\begin{align*}
+    P_{0}(\Delta t)                                & =\ee^{-\lambda \Delta t}=1-\lambda \Delta t+o(\Delta t)                  \\
+    P_{1}(\Delta t)                                & =1-P_{0}(\Delta t)-\psi(\Delta t)=\lambda \Delta t+o(\Delta t)           \\
+    \sum_{l=2}^{\infty} P_{k-l}(t) P_{l}(\Delta t) & \leqslant \sum_{l=2}^{\infty} P_{l}(\Delta t)=\psi(\Delta t)=o(\Delta t) \\
+\end{align*}
+所以：
+\[ P_k(t+\Delta t)=P_k(t)(1-\lambda \Delta t) + P_{k-1}\lambda \Delta t+ o(\Delta t) ,k\ge 1\]
+因此：
+\[ P'_k(t)= \frac{P_k(t+\Delta t)-P_k(t)}{\Delta t} = \lambda[P_{k-1}-P_k(t)] \]
+
+由于$P_0(t)=\ee^{-\lambda t}$，故有$P'_1(t)=\lambda[\ee^{-\lambda t}-P_1(t)]$，可解得$P_0(t)=\lambda t \ee^{-\lambda t}$，依次可递推可解得：
+\[ P_k(t)=\frac{(\lambda t)^k}{k!}\ee^{-\lambda t}, k \in \mathbb{N}\]
+正是参数为$\lambda t$的泊松分布。
 
 \subsection{超几何分布}
 
@@ -355,11 +401,361 @@ Poisson分布的特征：
 
 \subsection{均匀分布}
 
+\begin{definition}
+    若随机变量$X$在$[a,b]$中任一区域的概率与其测度成正比，则称$X$服从区间$(a,b)$上的\textbf{均匀分布}(Uniform distribution)，记作$X\sim U(a,b)$。
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[密度函数$p(x)$]{
+        \begin{tikzpicture}[semithick,>=stealth,samples=100,scale=2.5]
+            \draw[->](0,0)node[below left]{$O$}--(1.7,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.2)node[right]{$p(x)$};
+            \draw[thick](0.3,0.6)--(1.3,0.6);\node[left]at(0,0.6){$\frac1{b-a}$};
+            \draw[dashed](0.3,0.6)--(0.3,0)node[below]{$a$}
+            (1.3,0.6)--(1.3,0)node[below]{$b$};
+        \end{tikzpicture}
+    }
+    \subfloat[分布函数$F(x)$]{
+        \begin{tikzpicture}[semithick,>=stealth,samples=100,scale=2.5]
+            \draw[->](0,0)node[below left]{$O$}--(1.7,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.2)node[right]{$F(x)$};
+            \draw[thick](0.3,0)node[below]{$a$}--(1.2,0.9)--(1.7,0.9);
+            \draw(1.2,0)node[below]{$b$}--(1.2,0.03);
+            \draw(0,0.9)node[left]{$1$}--(0.03,0.9);
+        \end{tikzpicture}
+    }
+    \caption{$(a,b)$上的均匀分布}\label{fig:2.5.3}
+\end{figure}
+
+均匀分布的特征：
+\begin{description}
+    \item[参数] $a<b , \quad a,b \in \mathbb{R} $
+    \item[概率质量函数] $p(x)=\begin{cases}
+                \frac1{b-a}, & a < x < b   \\
+                0            & \text{其他}
+            \end{cases}$
+    \item[分布函数]  $ F(x) = \begin{cases}
+                0,               & x < a ;      \\
+                \frac{x-a}{b-a}, & a \le x < b; \\
+                1,               & x \ge b.
+            \end{cases}$
+    \item[矩母函数] $M(t)=\frac{e^{bt}-e^{at}}{t(b-a)} , \quad t \in \mathbb{R}$
+    \item[均值] $\mu=\frac{a+b}{2}$
+    \item[方差] $\sigma^2=\frac{(b-a)^2}{12}$
+\end{description}
+
+\begin{remark}
+    常利用$U(0,1)$生成特定分布的伪随机数（参见定理\ref{thm:pseudo_random_generation}）
+\end{remark}
+
 \subsection{指数分布}
 
-\subsection{Gamma分布}
+\begin{definition}
+    若随机变量X的密度函数（见图 \ref{fig2.5.4}）为
+    \[ p(x) = \begin{cases}
+            \lambda e^{-\lambda x}, & x \ge 0; \\
+            0,                      & x < 0,
+        \end{cases} \]
+    则称$X$服从\textbf{指数分布}，记作$X\sim Exp(\lambda)$，其中参数$\lambda>0$. 指数分布的分布函数为
+    \[ F(x) = \begin{cases}
+            1 - e^{-\lambda x}, & x \ge 0; \\
+            0,                  & x < 0.
+        \end{cases}\]
+\end{definition}
 
-\subsection{Beta分布}
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[semithick,>=stealth,samples=100]
+        \draw[->](0,0)node[below left]{$O$}--(4,0)node[below]{$x$};
+        \draw[->](0,0)--(0,3.6)node[right]{$p(x)$};
+        \foreach \x in{1,2,3}
+        \draw(\x,0)node[below]{$\x$}--(\x,0.08)(0,\x)node[left]{$\x$}--(0.08,\x);
+        \draw[domain=0:3.6]plot(\x,{e^(-\x)});
+        \draw[domain=0:3.6](0,0.5)node[left]{$0.5$}--plot(\x,{0.5*e^(-0.5*\x)});
+        \draw[domain=0:3.6]plot(\x,{3*e^(-3*\x)});
+        \node[inner sep=0pt](a)at(1,2){$\lambda=3$};
+        \node[inner sep=0pt](b)at(1.5,1){$\lambda=1$};
+        \node[inner sep=0pt](c)at(3,0.6){$\lambda=0.5$};
+        \draw[->](a)--(0.2,{3*e^(-3*0.2)});
+        \draw[->](b)--(0.85,{e^(-0.85)});
+        \draw[->](c)--(2.6,{0.5*e^(-0.5*2.6)});
+    \end{tikzpicture}
+    \caption{参数为$\lambda$的指数分布密度函数}\label{fig2.5.4}
+\end{figure}
+
+指数分布的特征：
+\begin{description}
+    \item[矩母函数] $M(t)=\frac{\lambda}{\lambda-t} , \quad t < \lambda$
+    \item[均值] $\mu=\frac{1}{\lambda}$
+    \item[方差] $\sigma^2=\frac{1}{\lambda^{2}}$
+    \item[实例] 物品使用寿命，等待时间
+\end{description}
+
+\begin{remark}
+    有其均值可看出，对于等待时间模型，$\frac{1}{\lambda}$代表平均等待时间，即（时间/次）；$\lambda$代表平均发生频率，即（次/时间）。
+\end{remark}
+
+\begin{theorem}[指数分布的无记忆性]
+    连续分布中有且只有指数分布具备无记忆性：
+    \[ P(X > s + t| X > s) = P( X > t) ,\quad \forall s>0,t>0\]
+\end{theorem}
+
+\begin{proof}
+    %TODO 李p138
+\end{proof}
+
+\begin{proposition}
+    如果某设备在任何长为$t$的时间$[0,t]$内发生故障的次数$N9t)$服从参数为$\lambda t$的泊松分布，则相继两次故障之间的时间间隔$T$服从参数为$\lambda$的指数分布.
+\end{proposition}
+
+\begin{proof}
+    设$N(t)\sim P(\lambda t)$，即
+    \[
+        P\big( N(t) = k \big) = \frac{(\lambda t)^k}{k!} e^{-\lambda t},\quad k=0,1,\cdots.
+    \]
+
+    注意到两次故障之间的时间间隔$T$是非负随机变量，且事件$\{T\ge t\}$说明此设备在$[0,t]$内没有发生故障，即$\{T\ge t\}=\{N(t)=0\}$，由此我们得
+
+    当$t<0$时，有$F_T(t)=P(T\le t)=0$；
+
+    当$t\ge0$时，有
+    \[
+        F_T(t) = P(T\le t) = 1 - P(T>t) = 1 -P\big( N(t)=0 \big) = 1 - e^{-\lambda t},
+    \]
+    所以$T\sim Exp(\lambda)$，相继两次故障之间的时间间隔$T$服从参数为$\lambda$的指数分布.
+\end{proof}
+
+\subsection{$\Gamma$分布}
+
+\begin{definition}
+    若随机变量$X$的密度函数为
+    \[ p(x) = \begin{cases}
+            \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}
+            \ee^{-\lambda x}, & x\ge 0 ; \\
+            0,                & x < 0,
+        \end{cases} \]
+    则称$X$服从\textbf{伽玛分布}，记作$X\sim \Gamma(\alpha,\lambda)$，其中$\alpha>0$为形状参数，$\lambda>0$为尺度参数.
+\end{definition}
+
+
+
+图 \ref{fig2.5.5} 给出若于条$\lambda$固定、$\alpha$不同的伽玛密度函数曲线，从图中可以看出：
+
+\begin{itemize}
+    \item $0<\alpha<1$时，$p(x)$是严格下降函数，且在$x=0$处有奇异点；
+    \item $\alpha=1$时，$p(x)$是严格下降函数，且在$x=0$处$p(0)=\lambda$；
+    \item $1<\alpha\le2$，$p(x)$是单峰函数，向上凸、后下凸；
+    \item $2<\alpha$时，$p(x)$是单峰函数，先下凸、中间上凸、后下凸. 且$\alpha$越大，$p(x)$越近似于正态分布.
+\end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,yscale=2,xscale=0.9]
+            \draw[->](0,0)node[below left]{$O$}--(4.4,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.7)node[right]{$p(x)$};
+            \draw[thick,domain=0.12:2.6]plot(\x,{e^(-\x)/sqrt(\x)/1.77});
+            \draw[thick,domain=0:3]plot(\x,{e^(-\x)});
+            \draw[thick,domain=0:4]plot(\x,{2.5*(\x)*e^(-\x)});
+            \node[inner sep=0pt](a)at(2,0.45){$\alpha=1$};
+            \node[inner sep=0pt](b)at(1,1.2){$\alpha<1$};
+            \node[inner sep=0pt](c)at(3,0.8){$\alpha>1$};
+            \draw[->](a)--(2,{e^(-2)});
+            \draw[->](b)--(0.2,{e^(-0.2)/sqrt(0.2)/1.77});
+            \draw[->](c)--(3,{2.5*(3)*e^(-3)});
+            \node[below]at(1,0){\phantom{$\frac{\alpha-1}\lambda$}};
+        \end{tikzpicture}
+    }
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,yscale=2,xscale=0.9]
+            \draw[->](0,0)node[below left]{$O$}--(4.4,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.7)node[right]{$p(x)$};
+            \draw[thick,domain=0:4]plot(\x,{2.5*(\x)*e^(-\x)});
+            \draw[dashed](1,{2.5*e^(-1)})--(1,0)node[below]{$\frac{\alpha-1}\lambda$};
+            \node at(2.3,1){$1<\alpha\leq2$};
+        \end{tikzpicture}
+    }
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,yscale=2,xscale=0.7]
+            \draw[->](0,0)node[below left]{$O$}--(7,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.7)node[right]{$p(x)$};
+            \draw[thick,domain=0:6]plot(\x,{2.5*(\x)^2*e^(-\x)});
+            \draw[dashed](2,{1.5*2^2*e^(-1.5)})--(2,0)node[below]{$\frac{\alpha-1}\lambda$};
+        \end{tikzpicture}
+    }
+    \caption{$\lambda$固定、不同$\alpha$的伽玛密度曲线}\label{fig2.5.5}
+\end{figure}
+
+Gamma分布的特征：
+\begin{description}
+    \item[矩母函数] $M(t)=(\frac{\lambda}{\lambda-t})^{\alpha} , \quad t<\lambda$
+    \item[均值] $\mu=\frac{\alpha}{\lambda}$
+    \item[方差] $\sigma^2=\frac{\alpha}{\lambda^{2}}$
+\end{description}
+
+Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
+\begin{itemize}
+    \item $\Gamma(1)=1$
+    \item $\Gamma(\frac{1}{2})=\sqrt{\pi}$
+    \item $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$
+    \item $\Gamma(n)=(n-1)!,\quad n \in \mathbb{Z}$
+    \item $\Gamma(\frac{\alpha}{2})=\frac{\sqrt{\pi}(\alpha-1)!}{2^{\alpha-1}(\frac{\alpha-1}{2})!}, \quad \alpha=2k+1,k \in \mathbb{N}$
+\end{itemize}
+
+\begin{proposition}
+    $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=E(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim E(\lambda)$，则$Y=X_1+\cdots+X_k  \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \operatorname{i.i.d.} \sim \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
+\end{proposition}
+
+\begin{proof}
+    \begin{align*}
+        M_Y(t)    & =\prod_{i=1}^k M_{X_i}(t_i)=\prod_{i=1}^k \frac{\lambda}{\lambda-t}=(\frac{\lambda}{\lambda-t})^{k}                                       \\
+        M_{Y'}(t) & =\prod_{i=1}^k M_{X_i'}(t_i)=\prod_{i=1}^k (\frac{\lambda}{\lambda-t})^{\alpha_i}=(\frac{\lambda}{\lambda-t})^{\alpha_1+\cdots +\alpha_k}
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    若令随机变量$X \sim \Gamma(\alpha,\lambda)$，则$cX \sim \Gamma(\alpha,\frac{\lambda}{c}), \quad c>0$
+\end{proposition}
+
+\begin{proof}
+    \[ M_{c X}(t) = M_X(c t) =(\frac{\lambda}{\lambda-c t})^{\alpha}=(\frac{\frac{\lambda}{c}}{\frac{\lambda}{c}-t})^{\alpha}\]
+\end{proof}
+
+\begin{proposition}
+    若令随机变量$X \sim \Gamma(\alpha,\lambda)$，则$\mu_k=\frac{\Gamma(\alpha+k)}{\lambda^{k}\Gamma(\alpha)}, \quad 0<k$，且则$\mu_{-k}=\frac{\lambda^{k}\Gamma(\alpha-k)}{\Gamma(\alpha)}, \quad 0<k<\alpha$
+\end{proposition}
+
+\begin{proof}
+    \begin{align*}
+        \mu_k=M_X^{(k)}(0)     & =\frac{1}{\lambda^{k}}\alpha(\alpha+1)\cdots(\alpha+k-1) =\frac{\Gamma(\alpha+k)}{\lambda^{k}\Gamma(\alpha)} \\
+        \mu_{-k}=M_X^{(-k)}(0) & =\lambda^{k}\frac{1}{\alpha-1}\cdots\frac{1}{\alpha-k} =\frac{\lambda^{k}\Gamma(\alpha-k)}{\Gamma(\alpha)}
+    \end{align*}
+\end{proof}
+
+\subsection{$\beta$分布}
+
+\begin{definition}
+    称以下函数
+    \[ \beta(a,b) = \int_0^1 x^{a-1}(1-x)^{b-1}\dd x \]
+    为\textbf{贝塔函数}，其中参数$a>0,b>0$.
+\end{definition}
+
+\begin{proposition}
+    贝塔函数具有如下性质：
+    \begin{itemize}
+        \item $\beta(a,b)=\beta(b,a)$
+        \item $\beta(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    在贝塔函数的积分中令$y=1-x$，即得
+    \[ \beta(a,b) = \int_1^0(1-y)^{a-1}y^{b-1}(-\dd y) = \int_0^1 (1-y)^{a-1}y^{b-1}\dd y = \beta(b,a) \]
+    由伽玛函数的定义知
+    \[ \Gamma(a) \Gamma(b) = \int_0^{+\infty}\int_0^{+\infty}x^{a-1}y^{b-1}  \ee^{-(x+y)} \dd x \dd y \]
+    作变量变换$x=uv,y=u(1-v)$，其雅可比行列式$J=-u$，故
+    \begin{align*}
+        \Gamma(a)\Gamma(b) & = \int_0^{+\infty}\int_0^1(uv)^{a-1}[u(1-v)]^{b-1}
+        \ee^{-u}u \dd u \dd v                                                                    \\
+                           & = \int_0^{+\infty}u^{a+b-1}\ee^{-u} \int_0^1v^{a-1}(1-v)^{b-1}\dd v
+        = \Gamma(a+b)                                                                            \\beta(a,b),
+    \end{align*}
+\end{proof}
+
+\begin{definition}
+    若随机变量$X$的密度函数为
+\[ p(x) = \begin{cases}
+        \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}
+        x^{a-1}(1-x)^{b-1}, & 0 < x < 1;   \\
+        0,                  & \text{其他},
+    \end{cases} \]
+则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是形状参数. 
+\end{definition}
+
+\begin{figure}
+    \centering
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,scale=2.3]
+            \draw[->](0,0)node[below left]{$O$}--(1.25,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.5)node[right]{$p(x)$};
+            \draw[thick,domain=0:1] plot(\x,{5*(\x)*(1-\x)^2});
+            \draw[thick,domain=0.12:0.88] plot(\x,{(\x)^(-1/2)*(1-\x)^(-1/2)-1.7});
+            \draw[dashed](1,0)--(1,1.5);
+            \node[inner sep=0pt](a)at(0.35,1.2){\scalebox{1.2}{$a<1\atop b<1$}};
+            \node[inner sep=0pt](b)at(0.65,1){\scalebox{1.2}{$a<1\atop b>1$}};
+            \draw[->](a)--(0.2,{(0.2)^(-1/2)*(1-0.2)^(-1/2)-1.7});
+            \draw[->](b)--(0.45,{5*(0.45)*(1-0.45)^2});
+            \draw[dashed](1/3,0)node[below]{$x_1$}--(1/3,{5*(1/3)*(1-1/3)^2});
+            \draw[dashed](0.5,0)node[below]{$x_2$}--(0.5,{(0.5)^(-1/2)*(1-0.5)^(-1/2)-1.7});
+        \end{tikzpicture}
+    }
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,scale=2.3]
+            \draw[->](0,0)node[below left]{$O$}--(1.25,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.5)node[right]{$p(x)$};
+            \draw[thick,domain=0:1] plot(\x,{1.4*(1-\x)^2});
+            \draw[thick,domain=0:1] plot(\x,{1.4*(\x)^2});
+            \node[inner sep=0pt](a)at(0.35,1.2){\scalebox{1.2}{$a<1\atop b\geq1$}};
+            \node[inner sep=0pt](b)at(0.65,1.2){\scalebox{1.2}{$a\geq1\atop b>1$}};
+            \draw[->](a)--(0.2,{1.4*(0.8)^2});
+            \draw[->](b)--(0.8,{1.4*0.8^2});
+            \draw[dashed](1,0)--(1,1.5);
+        \end{tikzpicture}
+    }
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,scale=2.3]
+            \draw[->](0,0)node[below left]{$O$}--(1.25,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.5)node[right]{$p(x)$};
+            \draw[thick,domain=0:1] plot(\x,{1*(1-\x)^(1/2)});
+            \draw[thick,domain=0:1] plot(\x,{1*(\x)^(1/2)});
+            \node[inner sep=0pt](a)at(0.35,1.2){\scalebox{1.2}{$a=1\atop b>1$}};
+            \node[inner sep=0pt](b)at(0.65,1.2){\scalebox{1.2}{$a>1\atop b=1$}};
+            \draw[->](a)--(0.2,{1*(0.8)^(1/2)});
+            \draw[->](b)--(0.8,{1*0.8^(1/2)});
+            \draw[dashed](1,0)--(1,1.5);
+        \end{tikzpicture}
+    }
+    \subfloat{
+        \begin{tikzpicture}[semithick,>=stealth,samples=150,scale=2.3]
+            \draw[->](0,0)node[below left]{$O$}--(1.25,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.5)node[right]{$p(x)$};
+            \draw[thick](0,0.7)--(1,0.7);
+            \draw[dashed](1,0)node[below]{$1$}--(1,0.7);
+            \node[inner sep=0pt](a)at(0.6,1){\scalebox{1.2}{$a=1\atop b=1$}};
+            \draw[->](a)--(0.3,0.7);
+        \end{tikzpicture}
+    }
+    \caption{贝塔密度函数曲线}\label{fig2.5.6}
+\end{figure}
+
+从图 \ref{fig2.5.6} 可以看出：
+\begin{itemize}
+    \item $a<1,b<1$时，$p(x)$是下凸的单峰函数.
+    \item $a>1,b>1$时，$p(x)$是上凸的单峰函数.
+    \item $a<10,b\ge1$时，$p(x)$是下凸的单调减函数.
+    \item $a\ge1,b<1$时，$p(x)$是下凸的单调增函数.
+    \item $a=1,b=1$时，$p(x)$是常函数，且$Be(1,1)=U(0,1)$.
+\end{itemize}
+
+Beta分布的特征：
+\begin{description}
+    \item[矩母函数] $M(t)=1+\sum_{k=1}^{\infty}(\prod_{r=0}^{k-1} \frac{a+r}{a+b+r})\frac{t^k}{k!}, \quad t<\lambda$
+    \item[均值] $\mu=\frac{a}{a+b}$
+    \item[方差] $\sigma^2=\frac{ab}{(a+b+1)(a+b)^{2}}$
+\end{description}
+
+\begin{remark}
+    \[ \beta(1,1)=U(0,1) \]
+\end{remark}
+
+\begin{proposition}
+    令独立随机变量$X_1 \sim \Gamma(\alpha_1,\lambda),X_2 \sim  \Gamma(\alpha_2,\lambda)$，则$\frac{X_1}{X_1+X_2} \sim \beta(\alpha_1,\alpha_2)$
+\end{proposition}
+
+\begin{proof}
+    %TODO 李P182习题38
+\end{proof}
 
 \section{正态分布及其导出分布}
 
