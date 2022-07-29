@@ -21,7 +21,7 @@
     \item[实例] 丢一个均匀的骰子
 \end{description}
 
-\subsection{Bernouli分布}
+\subsection{伯努利分布}
 
 \begin{definition}[Bernouli分布]
     若随机变量只能取0或1，并且对应的概率分别为$1-p$与$p$，则称其遵循\textbf{Bernouli分布}(Bernouli distribution)（也称0-1分布），记为$X \sim B(p)$。
@@ -188,7 +188,7 @@ Bernouli分布的特征：
             \end{cases}$
     \item[矩母函数] $M(t)=\frac{p^r e^{rt}}{(1-(1-p)e^t)^r}, t<-\ln (1-p)$，求解方法有：
         \begin{itemize}
-            \item \underline{独立变量}之和的矩母函数等于各变量矩母函数之积（参见定理\ref{thm:mgf_sum,prop:sum_of_geo}）
+            \item \underline{独立变量}之和的矩母函数等于各变量矩母函数之积（参见定理\ref{thm:mgf_sum}）
             \item 定义凑一法
             \item 利用公式$\sum_{x=0}^{\infty}\binom{n+x-1}{x}t^x=\frac{1}{(1-t)^n},-1<t<1$
         \end{itemize}
@@ -256,7 +256,7 @@ Bernouli分布的特征：
     多项分布是二项分布的泛化。
 \end{remark}
 
-\subsection{Poisson分布}
+\subsection{泊松分布}
 
 \begin{theorem}[Poisson逼近]\label{thm:Poisson_theorem}
     \[ \lim_{n p_n \to \lambda} \binom{n}{k} p_n^{k} (1-p_n)^{n-k} = \frac{\lambda^{k}}{k !}e^{-\lambda} \]
@@ -526,7 +526,7 @@ Poisson分布的特征：
     所以$T\sim Exp(\lambda)$，相继两次故障之间的时间间隔$T$服从参数为$\lambda$的指数分布.
 \end{proof}
 
-\subsection{$\Gamma$分布}
+\subsection{伽马分布}
 
 \begin{definition}
     若随机变量$X$的密度函数为
@@ -603,7 +603,7 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
     \item $\Gamma(\frac{\alpha}{2})=\frac{\sqrt{\pi}(\alpha-1)!}{2^{\alpha-1}(\frac{\alpha-1}{2})!}, \quad \alpha=2k+1,k \in \mathbb{N}$
 \end{itemize}
 
-\begin{proposition}
+\begin{proposition}\label{prop:sum_of_Gamma}
     $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=E(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim E(\lambda)$，则$Y=X_1+\cdots+X_k  \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \operatorname{i.i.d.} \sim \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
 \end{proposition}
 
@@ -633,7 +633,13 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
     \end{align*}
 \end{proof}
 
-\subsection{$\beta$分布}
+
+
+\begin{proposition}
+    %TODO 指数分布、伽马分布与泊松分布间的联系
+\end{proposition}
+
+\subsection{贝塔分布}
 
 \begin{definition}
     称以下函数
@@ -665,12 +671,12 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
 
 \begin{definition}
     若随机变量$X$的密度函数为
-\[ p(x) = \begin{cases}
-        \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}
-        x^{a-1}(1-x)^{b-1}, & 0 < x < 1;   \\
-        0,                  & \text{其他},
-    \end{cases} \]
-则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是形状参数. 
+    \[ p(x) = \begin{cases}
+            \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}
+            x^{a-1}(1-x)^{b-1}, & 0 < x < 1;   \\
+            0,                  & \text{其他},
+        \end{cases} \]
+    则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是形状参数.
 \end{definition}
 
 \begin{figure}
@@ -761,15 +767,330 @@ Beta分布的特征：
 
 \subsection{正态分布}
 
+\begin{definition}
+    若随机变量$X$的密度函数为
+    \begin{equation}\label{eq2.5.1}
+        p(x) = \frac1{\sqrt{2\pi}\sigma} \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},x \in \mathbb{R}
+    \end{equation}
+    则称$X$服从\textbf{正态分布}(Normal distribution)，称$X$为\textbf{正态变量}，记作$X\sim N(\mu,\sigma^2)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
+\end{definition}
+
+正态分布的密度函数$p(x)$的图形如图 \ref{fig2.5.1}(a)所示，是一条钟形曲线，左右关于$\mu$对称，衰减速度由$\sigma$决定，$\mu\pm\sigma$是该曲线的拐点.
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[密度函数$p(x)$]{
+        \begin{tikzpicture}[semithick,yscale=2,>=stealth]
+            \draw[->](-2.7,0)--(0,0)node[below=1pt]{$\mu$}--(2.7,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.4)node[right]{$p(x)$};
+            \draw[samples=100,domain=-2.5:2.5,thick]plot(\x,{e^(-(\x)^2)+0.04});
+            \draw[dashed](-0.8,{e^(-0.64)+0.04})--(-0.8,0)node[below]{$\mu-\sigma$}
+            (0.8,{e^(-0.64)+0.04})--(0.8,0)node[below]{$\mu+\sigma$};
+            \draw(0.8,{e^(-0.64)+0.04})--(-0.8,{e^(-0.64)+0.04});
+        \end{tikzpicture}
+    }\hspace{1.5cm}
+    \subfloat[分布函数$F(x)$]{
+        \begin{tikzpicture}[semithick,yscale=2,>=stealth]
+            \draw[->](-2.7,0)--(0,0)node[below=1pt]{$\mu$}--(2.7,0)node[below]{$x$};
+            \draw[->](0,0)--(0,1.4)node[right]{$F(x)$};
+            \draw[samples=100,domain=-2.5:2.5,thick]plot(\x,{(atan(\x))/135+0.55});
+            \draw[dashed](-2.5,1.1)--(2.5,1.1);
+        \end{tikzpicture}
+    }
+    \caption{正态分布}\label{fig2.5.1}
+\end{figure}
+
+正态分布的特征：
+\begin{description}
+    \item[矩母函数] $M(t)=\exp (\mu t + \frac{\sigma^2 t^2}{2}), \quad t \in \mathbb{R}$
+    \item[均值] $\mu=\mu$
+    \item[方差] $\sigma^2=\sigma^2$
+\end{description}
+
+\begin{proposition}
+    若随机变量$X \sim N(\mu, \sigma^2)$，则其线性变换$a,b \in \mathbb{R},aX + b \sim N(a \mu + b,a^2 \sigma^2)$。特别的，常对正态随机变量作标准化：$\frac{X-\mu}{\sigma} \sim N(0,1)$
+\end{proposition}
+
+\begin{proof}
+    \[ M_{aX + b}(t)=e^{bt}M_X(a t)=\exp (bt + a \mu t+\frac{a^2 \sigma^2 t^2}{2}) \]
+\end{proof}
+
+\begin{proposition}
+    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim N(\mu_i,\sigma_i^2)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i^2)$
+\end{proposition}
+
+\begin{proof}
+    \[ M_{X_1+\cdots+ X_n} = \prod_{i=1}^n M_{X_i}(t)=\exp (\sum_{i=1}^k\mu_i t + \sum_{i=1}^k \frac{\sigma_i^2 t^2}{2}) \]
+\end{proof}
+
+\begin{corollary}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\bar{X}=(X_1+\cdots +X_k)/k \sim N(\mu,\frac{\sigma^2}{k})$
+\end{corollary}
+
+\begin{theorem}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d} \sim N(\mu,\sigma^2)$，并且定义其样本均值为$\bar{X_n}=\frac{1}{n}\sum_{i=1}^n X_i$，其样本方差为$S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X_n})^2$，则有以下关系：
+    \begin{enumerate}
+        \item $\bar{X_n} \sim N(\mu,\frac{\sigma^2}{n})$，即$\sqrt{n}(\bar{X_n}-\mu)/\sigma \sim N(0,1)$
+        \item 随机变量$\bar{X_n}$与随机向量$(X_1-\bar{X_n},\cdots ,X_n-\bar{X_n})$独立
+        \item $\bar{X_n},S_n^2$独立
+        \item $\frac{(n-1)S_n^2}{\sigma} \sim \chi_n$
+        \item $\frac{\sqrt{n}(\bar{X_n}-\mu)}{S_n} \sim t_{n-1}$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
 \subsection{卡方分布}
 
-\subsection{t分布}
+\begin{definition}
+    设$Z_1,\dotsc,Z_n$独立同分布于标准正态分布$N(0,1)$，则$X=Z_1^2+\dotsc+Z_n^2$的分布称为\textbf{$n$自由度}的\textbf{卡方分布}(Chi-square distribution)，记为$X \sim \chi^2_n$.
+\end{definition}
+
+卡方分布的特征：
+\begin{description}
+    \item[参数] $n \in \mathbb{N}_+$
+    \item[概率密度函数] $p(x)=\begin{cases}
+                \frac{(1/2)^{\frac n2}}{\Gamma(n/2)}y^{\frac n2-1}\ee^{-\frac y2} & y>0         \\
+                0                                                                 & \text{其他}
+            \end{cases}$
+    \item[矩母函数] $M(t)=(\frac{1}{1-2t})^{\frac{n}{2}}$
+    \item[均值] $\mu=n$
+    \item[方差] $\sigma^2=2n$
+    \item[实例]
+\end{description}
+
+该密度函数的图像是一个只取非负值的偏态分布,见图~\ref{fig:5.4.1}。
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[>=stealth,semithick,xscale=0.45,yscale=30,samples=500]
+        \draw[->](0,0)node[below left]{$O$}--(22,0);
+        \foreach\x in{2,4,...,20}\draw(\x,0.002)--(\x,0)node[below]{\x};
+        \draw[->](0,0)--(0,0.2);
+        \foreach\x in{0.02,0.04,0.06,0.08,0.1,0.12,0.14,0.16,0.18}\draw(0,\x)node[left]{\x}--(0.12,\x);
+        \draw[thick,domain=0:20]plot(\x,{(\x)*e^(-(\x)/2)/4});
+        \draw(3.2,0.16)--(12,0.16)node[right=-2pt]{$n=4$};
+        \draw[thick,dashed,domain=0:20]plot(\x,{(\x)^2*e^(-(\x)/2)/16});
+        \draw[very thick,domain=0:8]plot(\x,{0.1*e^(-(\x-8)^2/14)});
+        \draw[very thick,domain=8:20]plot(\x,{0.1*e^(-(\x-8)^2/40)});
+        \draw(5.62,0.12)--(12,0.12)node[right=-2pt]{$n=6$};
+        \draw(11.8,0.07)--(16,0.07)node[right=-2pt]{$n=10$};
+    \end{tikzpicture}
+    \caption{$\chi^2(n)$分布的密度函数}\label{fig:5.4.1}
+\end{figure}
+
+\begin{proposition}
+    若 $X\sim N(0,1)$，则$X^2\sim Ga(1/2,1/2),Y \sim Ga(n/2,1/2)=\chi^2(n)$
+\end{proposition}
+
+\begin{proof}
+    %TODO \ref{prop:sum_of_Gamma}
+\end{proof}
+
+\begin{corollary}
+    若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim \chi^2_{n_i}$，则$Y=X_1+\cdots+X_k  \sim \chi^2_{n_1+\cdots +n_k}$。
+\end{corollary}
 
 \subsection{F分布}
 
-\subsection{Cauchy分布}
+\begin{definition}{}{}
+    设独立随机变量$X_1\sim\chi^2(m),X_2\sim\chi^2(n)$，则称$F=\frac{X_1/m}{X_2/n}$的分布是自由度为$m$与$n$的\textbf{F分布}，记为$F\sim F(m,n)$,其中$m$称为\underline{分子自由度}，$n$称为\underline{分母自由度}。
+\end{definition}
+
+F分布的特征：
+\begin{description}
+    \item[参数] $m,n \in \mathbb{N}_+$
+    \item[概率密度函数]
+        \[ f(x)=\frac{\Gamma \left( \frac{m+n}{2} \right) }{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right)}\left( \frac{m}{n} \right) ^{\frac{m}{2}}x^{\frac{m}{2}-1}\left( 1+\frac{m}{n}x \right) ^{-\frac{m+n}{2}} \]
+    \item[矩母函数] 不存在
+    \item[均值] $\mu=\frac{n}{n-2}$
+    \item[方差] $\sigma^2=\frac{2n^2(m+n-2)}{m(n-2)^2(n-4)}$
+    \item[实例]
+\end{description}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[xscale=1.5,yscale=5,>=stealth,domain=0:4,samples=500]
+        \draw[->](0,0)node[below left]{$O$}--(4.5,0);\draw[->](0,0)--(0,0.9);
+        \foreach \x in{0.5,1,...,4}\draw(\x,0.01)--(\x,0)node[below]{$\x$};
+        \foreach \x in{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8}\draw(0.05,\x)--(0,\x)node[left]{$\x$};
+        \draw[dashed]plot (\x,{12*(\x)/(1+4*(\x))^(5/2)});
+        \draw plot (\x,{6*(\x)/(1+\x)^4});
+        \draw[thick,dashed]plot (\x,{4.8*(\x)/(1+0.4*(\x))^7});
+        \draw[thick,domain=0.05:4]plot (\x,{4*(\x)/(1+0.04*\x)^52+0.02});
+        \draw[thick](2.5,.8)--(2.8,.8)node[right=-2pt]{$F(4,4000)$};
+        \draw[thick,dashed](2.5,.72)--(2.8,.72)node[right=-2pt]{$F(4,10)$};
+        \draw(2.5,.64)--(2.8,.64)node[right=-2pt]{$F(4,4)$};
+        \draw[dashed](2.5,.56)--(2.8,.56)node[right=-2pt]{$F(4,1)$};
+    \end{tikzpicture}
+    \caption{$F$分布的密度函数，是一个只取非负值的偏态分布}\label{fig:5.4.2}
+\end{figure}
+
+\begin{proposition}
+    $F$分布的密度函数为
+\end{proposition}
+
+\begin{proof}
+    首先我们导出$Z=\frac{X_1}{X_2}$的密度函数,若记$p_1(x)$和$p_2(x)$分别为$\chi^2(m)$和$\chi^2(n)$的密度函数,根据独立随机变量商的分布的密度函数公式\ref{equ:quotient_of_variable}。$Z$的密度函数为
+    \begin{align*}
+        p_Z(z) & =\int_0^{=\infty}x_2p_1(zx_2)p_2(x_2)\dd x_2                                                                                                                                       \\
+               & =\frac{z^{\frac{m}{2}-1}}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right) 2^{\frac{m+n}{2}}}\int_0^{+\infty}x_2^{\frac{m+n}2-1}\ee^{-\frac{x_2}2(1+z)}\dd x_2.
+    \end{align*}
+    运用变换$u=\frac{x_2}2(1+z)$,可得
+    \[p_Z(z)=\frac{z^{\frac{m}{2}-1}\left( 1+z \right) ^{\frac{m+n}{2}}}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right)}\int_0^{+\infty}u^{\frac{m+n}2-1}\ee^{-u}\dd u.\]
+    最后的定积分为伽马函数$\Gamma\left(\frac{m+n}2\right)$,从而
+    \[
+        p_Z\left( z \right) =\frac{\Gamma \left( \frac{m+n}{2} \right)}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right)}z^{\frac{m}{2}-1}\left( 1+z \right) ^{-\frac{m+n}{2}},\quad z>0.
+    \]
+    第二步,我们导出$F=\frac nm Z$的密度函数,对$y>0$,有
+    \begin{align*}
+        p_F\left( y \right) & =p_Z\left( \frac{m}{n}y \right) \cdot \frac{m}{n}                                                                                                                                                                            \\
+                            & =\frac{\Gamma \left( \frac{m+n}{2} \right)}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right)}\left( \frac{m}{n}y \right) ^{\frac{m}{2}-1}\left( 1+\frac{m}{n}y \right) ^{-\frac{m+n}{2}}\cdot \frac{m}{n} \\
+                            & =\frac{\Gamma \left( \frac{m+n}{2} \right) \left( \frac{m}{n} \right) ^{\frac{m}{2}}}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right)}y^{\frac{m}{2}-1}\left( 1+\frac{m}{n}y \right) ^{-\frac{m+n}{2}}.
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    由$F$分布的构造知,若$F\sim F(m,n)$,则有$1/F\sim F(n,m)$
+\end{remark}
+
+\subsection{t分布}
+
+\begin{definition}
+    设随机变量$Z \sim N(0,1)$与$U \sim\chi^2_n$独立，则称$t=\frac{Z}{\sqrt{U/n}}$的分布为自由度为$n$的\textbf{t分布},记为$t \sim t_n$.
+\end{definition}
+
+$t$分布的密度函数的图像是一个关于纵轴对称的分布(图~\ref{fig:5.4.3} ),与标准正态分布的密度函数形状类似,只是峰比标准正态分布低一些,尾部的概率比标准正态分布的大一些.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[xscale=0.6,yscale=13,>=stealth,domain=-6:6,samples=500]
+        \draw[->](-6,0)--(7,0);\draw[->](-6,0)--(-6,0.45);
+        \foreach \x in{-6,-4,...,6}\draw(\x,0.005)--(\x,0)node[below]{$\x$};
+        \foreach \x in{0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4}\draw(-5.88,\x)--(-6,\x)node[left]{$\x$};
+        \draw[thick]plot(\x,{0.396*e^(-(\x)^2/2)+0.004});
+        \draw plot(\x,{0.375*(1+(\x)^2/4)^(-5/2)});
+        \draw[thick](3,0.35)--(4,0.35)node[right=-2pt]{$N(0,1)$};
+        \draw(3,0.32)--(4,0.32)node[right=-2pt]{$t(4)$};
+    \end{tikzpicture}
+    \caption{$t$分布与$N(0,1)$的密度函数，t分布尾更重}\label{fig:5.4.3}
+\end{figure}
+
+t分布的特征：
+\begin{description}
+    \item[参数] $n \in \mathbb{N}_+$
+    \item[概率密度函数] $p(x)=\frac{\Gamma \left( \frac{n+1}{2} \right)}{\sqrt{n\pi}\Gamma \left( \frac{n}{2} \right)}\left( 1+\frac{y^2}{n} \right) ^{-\frac{n+1}{2}}$
+    \item[矩母函数] 不存在
+    \item[均值] $\mu=0, n>1$
+    \item[方差] $\sigma^2=\frac{n}{n-2}, n>2$
+    \item[实例]
+\end{description}
+
+\begin{remark}
+    \begin{itemize}
+        \item 自由度$n=1$的t分布就是标准柯西分布，它的均值不存在;
+        \item 自由度$n\to \infty$时，$t_n$趋近于$N(0,1)$
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}
+    t分布的密度函数为
+\end{proposition}
+
+\begin{proof}
+    由标准正态密度函数的对称性知, $X_1$与$-X_1$有相同分布,从而$t$与$-t$有相同分布.这意味着: 对任意实数$y$有
+    \[P(0<t<y)=P(-y<-t<y)=P(-y<-t<0).\]
+
+    于是
+    \[P(0<t<y)=\frac12P(t^2<y^2).\]
+
+    由$F$变量构造可知, $t^2=\frac{X_1^2}{X_2^2/n}\sim F(1,n)$,将上式两边关于$y$求导可微$t$分布的密度函数为
+    \begin{align*}
+        p_t(y) & =yp_F(y^2)=\frac{\Gamma \left( \frac{1+n}{2} \right) \left( \frac{1}{n} \right) ^{\frac{1}{n}}}{\Gamma \left( \frac{1}{2} \right) \Gamma \left( \frac{n}{2} \right)}\left( y^2 \right) ^{\frac{1}{2}-1}\left( 1+\frac{1}{n}y^2 \right) ^{-\frac{1+n}{2}}y \\
+               & =\frac{\Gamma \left( \frac{n+1}{2} \right)}{\sqrt{n\pi}\Gamma \left( \frac{n}{2} \right)}\left( 1+\frac{y^2}{n} \right) ^{-\frac{n+1}{2}},\quad -\infty<y<+\infty.
+    \end{align*}
+\end{proof}
+
+\subsection{柯西分布}
+
+\begin{definition}
+    若随机变量$X$的密度函数为
+    \[ f(x) = \frac{\sigma}{\pi} \frac1{\sigma^2+(x-\mu)^2} ,x \in \mathbb{R} \]
+    则称$X$服从\textbf{柯西分布}(Cauchy distribution)，记作$X\sim C(\mu,\sigma)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
+\end{definition}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[xscale=0.6,yscale=13,>=stealth,domain=-6:6,samples=500]
+        \draw[->](-6,0)--(7,0);\draw[->](-6,0)--(-6,0.45);
+        \foreach \x in{-6,-4,...,6}\draw(\x,0.005)--(\x,0)node[below]{$\x$};
+        \foreach \x in{0,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4}\draw(-5.88,\x)--(-6,\x)node[left]{$\x$};
+        \draw[thick]plot(\x,{0.396*e^(-(\x)^2/2)+0.004});
+        \draw plot(\x,{0.375*(1+(\x)^2/4)^(-5/2)});
+        \draw[thick](3,0.35)--(4,0.35)node[right=-2pt]{$N(0,1)$};
+        \draw(3,0.32)--(4,0.32)node[right=-2pt]{$t(4)$};
+    \end{tikzpicture}
+    \caption{$t$分布与$N(0,1)$的密度函数}
+\end{figure}
+
+柯西分布的特征：
+\begin{description}
+    \item[累积函数] $F(x)=\frac{1}{2}+\frac{1}{\pi} \arctan(\mu +\sigma x)$
+    \item[矩母函数] 除$t=0$外不存在
+    \item[特征函数] $\phi_X(t)=\exp (i \mu t - \sigma |t|)$
+    \item[均值] 不存在
+    \item[方差] 不存在
+\end{description}
+
+\begin{remark}
+    此类因极端值概率密度较高而导致均值、方差不存在的分布称为重尾分布。
+\end{remark}
+
+\begin{figure*}
+    \centering
+    \includegraphics{image/Cauchy_dist.png}
+\end{figure*}
+
+\begin{proposition}
+    $C(0,1)=t_1$
+\end{proposition}
+
+\begin{proposition}
+    若随机变量$X,Y \operatorname{i.i.d.} \sim N(0,1)$，则$\frac{X}{Y} \sim C(0,1)$
+\end{proposition}
+
+\begin{proof}
+    %TODO
+\end{proof}
+
+\begin{proposition}
+    若随机变量$X \sim C(\mu, \sigma)$，则其线性变换$a,b \in \mathbb{R},aX + b \sim C(a \mu + b,|a| \sigma)$。
+\end{proposition}
+
+\begin{proof}
+    \[ \phi_{aX + b}(t)=e^{ibt}\phi_X(a t)=\exp (ibt + ia\mu t-\sigma|a t|) \]
+\end{proof}
+
+\begin{proposition}
+    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim C(\mu_i,\sigma_i)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i)$
+\end{proposition}
+
+\begin{proof}
+    \[ \phi_{X_1+\cdots+ X_n} = \prod_{i=1}^n \phi_{X_i}(t)=\exp (it\sum_{i=1}^k\mu_i - |t|\sum_{i=1}^k \sigma_i) \]
+\end{proof}
+
+\begin{corollary}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\bar{X}=(X_1+\cdots +X_k)/k \sim C(\mu,\sigma)$
+\end{corollary}
+
+\begin{remark}
+    此处的$\sigma$不代表方差，所以不遵守$\operatorname{Var}(\bar{X})=\frac{\sigma^2}{k}$的关系。
+\end{remark}
 
 \section{各分布间关系}
+
+\begin{figure*}[hp]
+    \centering\includegraphics[width=0.95\textwidth]{image/relationship.png}
+\end{figure*}
 
 \begin{figure*}[hp]
     \centering\includegraphics[width=0.95\textwidth]{image/Relationships_among_some_of_univariate_probability_distributions.jpg}
