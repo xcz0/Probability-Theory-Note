@@ -87,7 +87,7 @@
     随机向量依分布收敛是指\underline{联合}分布函数收敛。
 \end{remark}
 
-\begin{theorem}[Slutsky定理]
+\begin{theorem}[Slutsky定理]\label{thm:Slutsky}
     若$X_n \xrightarrow{d} X, Y_n \xrightarrow{P} a$，其中$a$是常数，则：
     \begin{itemize}
         \item $Y_n X_n \xrightarrow{d} a X$
@@ -170,8 +170,20 @@
 
 \begin{example}[样本方差]
     设随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.}$，并且均值和方差分别为$\mu,\sigma$。令：
-    \[ S_n^2=\frac{1}{n}\sum_{i=1}^n(X_i-\overline{X_n}) \]
-    由于$g(x)=x^2$是连续函数，所以$\overline{X_n}^2 \xrightarrow{\P} \mu^2$。
+    \[ S_n^2=\frac{1}{n}\sum_{i=1}^n(X_i-\overline{X_n}) = (\frac{1}{n}\sum_{i=1}^nX_i^2)-\overline{X_n}^2 +\]
+    由于$g(x)=x^2$是连续函数，所以$\overline{X_n}^2 \xrightarrow{\P} \mu^2$。由于$X_1^2,\cdots X_n^2 \operatorname{i.i.d.}$，且$E(X_i^2)=\sigma^2+\mu^2$，所以$\overline{X_n^2} \xrightarrow{\P} \mu^2+\sigma^2$。因此：
+    \[ S_n^2 \xrightarrow{\P}\mu^2+\sigma^2-\mu^2= \sigma^2 \]
+\end{example}
+
+\begin{example}
+    若$X_n \sim t_n$，则$X_n \xrightarrow{d} N(0,1)$。
+    令$Z \sim N(0,1),U_1,\cdots ,U_n \sim \chi^2_1$相互独立，则$\frac{Z}{\sqrt{(U_1+\cdots+U_n)/n}} \sim t_n$。由于$E(U_i)=1$，所以$\overline{U_n} \xrightarrow{\P} 1$，所以$\sqrt{\overline{U_n}} \xrightarrow{\P} 1$，所以$t_n=\frac{Z}{\sqrt{\overline{U_n}}} \xrightarrow{d} N(0,1)$（定理\ref{thm:Slutsky}）。
+\end{example}
+
+\begin{example}
+    若$X_n \sim F_{m,n}$，则$mX_n \xrightarrow{d} \chi^2_m$。
+    令$U \sim \chi^2_m,V_1,\cdots ,V_n \sim \chi^2_1$相互独立，则$\frac{U/m}{(V_1+\cdots+V_n)/n} \sim F_{m,n}$。由于$E(V_i)=1$，所以$\overline{V_n} \xrightarrow{\P} 1$，所以$mF_{m,n}=\frac{U}{\overline{V_n}} \xrightarrow{d} \chi^2_m$（定理\ref{thm:Slutsky}）。
 \end{example}
 
 \section{中央极限定理}
+
