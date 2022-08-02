@@ -71,9 +71,9 @@
     则称 $ \{ F_n (x) \} $ \textbf{弱收敛}于 $ F (x) $, 记作    $F_n (x) \xrightarrow{W}{\to} F (x)$；也称 $ \{ X_n \} $ 按\textbf{分布收敛}于$X$，记作$X_n \xrightarrow{d}{\to} X$
 \end{definition}
 
-\begin{theorem}
+\begin{proposition}
     依分布收敛是依概率收敛的\underline{必要条件}，但\underline{不是充分条件}。但若依概率收敛到一个\underline{常数随机变量}，则也可推出依分布收敛。
-\end{theorem}
+\end{proposition}
 
 \begin{theorem}[连续映射定理]
     设$g: \mathbb{R}^k \mapsto \mathbb{R}$为\underline{连续}函数，则随机向量序列通过次映射后收敛情况与原先相同：
@@ -114,7 +114,7 @@
     %TODO
 \end{proof}
 
-\begin{theorem}[连续性定理]
+\begin{theorem}[连续性定理]\label{thm:continuity}
     设$F_n(x)$是一个累计函数序列，并且分别对应矩母函数$M_n(t)$；$F(x)$是一个累计函数，并且对应矩母函数$M(t)$。那么，
     \[ \forall t \in U(0,\delta) ,s.t. \lim_{n \to \infty}M_n(t) = M(t)\]
     是在$F(x)$的所有连续点上$F_n(x) \xrightarrow{M} F(x)$的充要条件。
@@ -168,14 +168,14 @@
     为计算积分$I(f)=\int_0^1 f(x)\mathrm{d}x$，生成随机数$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim U(0,1)$，并且计算$\hat{I}(f)=\overline{Y_n}, Y_i=f(X_n) $。由于$X_1,\cdots ,X_n \operatorname{i.i.d.}$，所以$Y_1,\cdots ,Y_n \operatorname{i.i.d.}$；并且$E(Y_i)=E(f(X_i))=\int_0^1 f(x)\cdot 1\mathrm{d}x=I(f)$，所以$\hat{I}(f)\xrightarrow{\P} E(Y_i)=I(f)$
 \end{example}
 
-\begin{example}[样本方差]
+\begin{example}[样本方差]\label{ex:sample_var}
     设随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.}$，并且均值和方差分别为$\mu,\sigma$。令：
     \[ S_n^2=\frac{1}{n}\sum_{i=1}^n(X_i-\overline{X_n}) = (\frac{1}{n}\sum_{i=1}^nX_i^2)-\overline{X_n}^2 +\]
     由于$g(x)=x^2$是连续函数，所以$\overline{X_n}^2 \xrightarrow{\P} \mu^2$。由于$X_1^2,\cdots X_n^2 \operatorname{i.i.d.}$，且$E(X_i^2)=\sigma^2+\mu^2$，所以$\overline{X_n^2} \xrightarrow{\P} \mu^2+\sigma^2$。因此：
     \[ S_n^2 \xrightarrow{\P}\mu^2+\sigma^2-\mu^2= \sigma^2 \]
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:t_disc_to_normal}
     若$X_n \sim t_n$，则$X_n \xrightarrow{d} N(0,1)$。
     令$Z \sim N(0,1),U_1,\cdots ,U_n \sim \chi^2_1$相互独立，则$\frac{Z}{\sqrt{(U_1+\cdots+U_n)/n}} \sim t_n$。由于$E(U_i)=1$，所以$\overline{U_n} \xrightarrow{\P} 1$，所以$\sqrt{\overline{U_n}} \xrightarrow{\P} 1$，所以$t_n=\frac{Z}{\sqrt{\overline{U_n}}} \xrightarrow{d} N(0,1)$（定理\ref{thm:Slutsky}）。
 \end{example}
@@ -187,3 +187,46 @@
 
 \section{中央极限定理}
 
+\begin{theorem}[中央极限定理]\label{thm:central_limit}
+    设随机变量$X_1,\cdots ,X_n,\operatorname{i.i.d.}$，且$E(X_i)=\mu,\operatorname{Var}(X_i)=\sigma^2$，令
+    \[ \overline{X_n} = \frac{1}{n}\sum_{i=1}^n X_i, T_n=\sum_{i=1}^n X_i\]
+    则：
+    \[ \lim_{n \to \infty}P(\frac{T_n-n \mu}{\sigma\sqrt{n}}\le x)=\lim_{n \to \infty}P(\frac{\sqrt{n}(\overline{X_n}-\mu)}{\sigma}\le x) =\Phi(x)\]
+    其中$\Phi(x)$是$N(0,1)$的累积函数，即：
+    \[ \frac{T_n-n \mu}{\sigma\sqrt{n}}=\frac{\sqrt{n}(\overline{X_n}-\mu)}{\sigma} \xrightarrow{d} N(0,1)\]
+\end{theorem}
+
+\begin{proof}
+    令$W_i=\frac{X_i-\mu}{\sigma}$，则$E(W_i)=0,\operatorname{Var}(W_i)=1$。再令$Z_n=\frac{T_n-n \mu}{\sigma\sqrt{n}}=\frac{1}{\sqrt{n}}\sum_{i=1}^n W_i$。则
+    \begin{align*}
+        M_{Z_n}(t) &= \left[ M_{W}(\frac{t}{\sqrt{n}}) \right]^n \\
+        &= \left[ M_{W}(0)+M_{W}'(0)\frac{t}{\sqrt{n}}+\frac{M_{W}''(0)}{2}(\frac{t}{\sqrt{n}})^2 +o(\frac{1}{n}) \right]^n \\
+        &= \left[ 1 + \frac{t^2}{2n}+ o(\frac{1}{n}) \right]^n\\
+        & \to e^{\frac{t^2}{2}}
+    \end{align*}
+    根据定理\ref{thm:continuity}，$Z_n \xrightarrow{d} N(0,1)$。
+\end{proof}
+\begin{remark}
+    若矩母函数不存在，可替换为特征函数。
+\end{remark}
+
+\begin{example}[二项分布近似为正态分布]
+    若随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim B(1,p)$, 则$T_n \sim B(n,p)$. 其中$E(T_n)=nE_(X_i)=np, \operatorname{Var}(T_n)=n\operatorname{Var}(X_i)=np(1-p)$. 根据中央极限定理有:
+    \[ \frac{T_n - np}{\sqrt{np(1-p)}} \xrightarrow{d} N(0,1) \]
+    即当n很大时, $B(n,p)$可用$N(np,np(1-p))$近似.
+\end{example}
+\begin{remark}
+    其他与二项分布一样, 可以通过独立同分布的随机变量相加得到的分布,也可在一定条件下近似为正态分布. 例如Gamma分布(可通过指数分布相加得到), 泊松分布(泊松分布相加), 负二项分布(几何分布相加), 参见图\ref{fig:relationship_among_univariate_distributions}
+\end{remark}
+\begin{remark}
+    由定理\ref{thm:Poisson_theorem}可知, 当$B(n,p)$中$n$很大$p$很小时, 二项分布可近似为泊松分布; 而泊松分布$\lambda$很大时, 又可近似为正态分布.
+\end{remark}
+
+\begin{example}[测量误差估计]
+    假设每次测量结果为独立同分布的随机变量$X_1,\cdots ,X_n$, 其均值与方差分别为$\mu,\sigma^2$. 由中央极限定理可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{\sigma} \xrightarrow{d} N(0,1)$. 由例\ref{ex:sample_var}可知$S_n^2 \xrightarrow{\P} \sigma^2$, 即$\frac{\sigma}{S_n} \xrightarrow{\P} 1$(定理\ref{thm:Slutsky}). 所以:
+    \[ \frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n}=\frac{\sqrt{n}(\overline{X_n}-\mu)}{\sigma}\frac{\sigma}{S_n} \xrightarrow{d} N(0,1)\cdot 1=N(0,1) \]
+    即可以通过分布$N(0,\frac{S_n^2}{n})$估计测量误差$\overline{X_n}-\mu$
+\end{example}
+\begin{remark}
+    由定理\ref{thm:normal_sample_mean_variance}可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$. 但由例\ref{ex:t_disc_to_normal}可知, $n\to \infty$时, $t$分布收敛于正态分布, 所以不冲突.
+\end{remark}

@@ -16,8 +16,8 @@
                 0           & \text{其他}
             \end{cases}$
     \item[矩母函数] $M(t)=\frac{\sum_{i=1}^m e^{a_i t}}{m}$
-    \item[均值] $\mu=\frac{\sum_{i=1}^m a_i }{m}=\bar{a}$
-    \item[方差] $\sigma^2=\frac{\sum_{i=1}^m (a_i-\bar{a})^2 }{m}$
+    \item[均值] $\mu=\frac{\sum_{i=1}^m a_i }{m}=\overline{a}$
+    \item[方差] $\sigma^2=\frac{\sum_{i=1}^m (a_i-\overline{a})^2 }{m}$
     \item[实例] 丢一个均匀的骰子
 \end{description}
 
@@ -824,21 +824,21 @@ Beta分布的特征：
 \end{proof}
 
 \begin{corollary}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\bar{X}=(X_1+\cdots +X_k)/k \sim N(\mu,\frac{\sigma^2}{k})$
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_k)/k \sim N(\mu,\frac{\sigma^2}{k})$
 \end{corollary}
 
-\begin{theorem}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d} \sim N(\mu,\sigma^2)$，并且定义其样本均值为$\bar{X_n}=\frac{1}{n}\sum_{i=1}^n X_i$，其样本方差为$S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X_n})^2$，则有以下关系：
+\begin{theorem}\label{thm:normal_sample_mean_variance}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d} \sim N(\mu,\sigma^2)$，并且定义其样本均值为$\overline{X_n}=\frac{1}{n}\sum_{i=1}^n X_i$，其样本方差为$S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\overline{X_n})^2$，则有以下关系：
     \begin{enumerate}
-        \item $\bar{X_n} \sim N(\mu,\frac{\sigma^2}{n})$，即$\sqrt{n}(\bar{X_n}-\mu)/\sigma \sim N(0,1)$
-        \item 随机变量$\bar{X_n}$与随机向量$(X_1-\bar{X_n},\cdots ,X_n-\bar{X_n})$独立
-        \item $\bar{X_n},S_n^2$独立
+        \item $\overline{X_n} \sim N(\mu,\frac{\sigma^2}{n})$，即$\sqrt{n}(\overline{X_n}-\mu)/\sigma \sim N(0,1)$
+        \item 随机变量$\overline{X_n}$与随机向量$(X_1-\overline{X_n},\cdots ,X_n-\overline{X_n})$独立
+        \item $\overline{X_n},S_n^2$独立
         \item $\frac{(n-1)S_n^2}{\sigma} \sim \chi_n$
-        \item $\frac{\sqrt{n}(\bar{X_n}-\mu)}{S_n} \sim t_{n-1}$
+        \item $\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    
+    %TODO
 \end{proof}
 
 \subsection{卡方分布}
@@ -1079,11 +1079,11 @@ t分布的特征：
 \end{proof}
 
 \begin{corollary}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\bar{X}=(X_1+\cdots +X_k)/k \sim C(\mu,\sigma)$
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_k)/k \sim C(\mu,\sigma)$
 \end{corollary}
 
 \begin{remark}
-    此处的$\sigma$不代表方差，所以不遵守$\operatorname{Var}(\bar{X})=\frac{\sigma^2}{k}$的关系。
+    此处的$\sigma$不代表方差，所以不遵守$\operatorname{Var}(\overline{X})=\frac{\sigma^2}{k}$的关系。
 \end{remark}
 
 \section{各分布间关系}
@@ -1094,4 +1094,5 @@ t分布的特征：
 
 \begin{figure*}[hp]
     \centering\includegraphics[width=0.95\textwidth]{image/Relationships_among_some_of_univariate_probability_distributions.jpg}
+    \label{fig:relationship_among_univariate_distributions}
 \end{figure*}
