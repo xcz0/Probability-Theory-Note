@@ -1,15 +1,15 @@
-\chapter{概率基础}
+\chapter{概率基础}\label{chap:probability_space}
 
-\begin{introduction}
-    \item 事件
-    \item 古典概型与几何概率
+\begin{introduction}[考试重点]
+    \item 概率空间的定义
+    \item 古典概型与几何概型
     \item 条件概率与独立
-    \item 乘法法则
-    \item 全概率公式
-    \item Bayes法则
+    \item 伯努利试验
 \end{introduction}
 
 \section{概率空间}
+
+\subsection{随机事件}
 
 \begin{definition}[样本空间]
     随机试验可能出现的结果称为\textbf{样本点}(sample point)，用$\omega$表示。样本的全体构成\textbf{样本空间}(sample space)，用$\Omega$表示。
@@ -38,6 +38,21 @@
               \end{gather}
     \end{description}
 \end{property}
+
+\begin{example}
+    设 $A$、$B$、$C$ 是某个随机现象的三个事件,
+    则
+    \begin{enumerate}
+        \item 事件“$A$ 与 $B$ 发生,
+              $C$ 不发生”可表示为: $AB\overline{C}$.
+        \item 事件“$A$、$B$、$C$ 中至少有一个发生”可表示为: $A \cup B \cup C$.
+        \item 事件“$A$、$B$、$C$ 中至少有两个发生”可表示为: $AB \cup AC \cup BC$.
+        \item 事件“$A$、$B$、$C$ 中恰好有两个发生”可表示为: $AB\overline{C} \cup A\overline{B}C \cup \overline{A}BC$.
+        \item 事件“$A$、$B$、$C$ 同时发生”可表示为: $ABC$.
+        \item 事件“$A$、$B$、$C$ 都不发生”可表示为: $\overline{A}\overline{B}\overline{C}$.
+        \item 事件“$A$、$B$、$C$ 不全发生”可表示为: $\overline{A} \cup \overline{B} \cup \overline{C}$.
+    \end{enumerate}
+\end{example}
 
 为方便概率的定义，并不把$\Omega$的一切子集作为事件，应避免不可测集的出现。
 
@@ -96,6 +111,8 @@
     我们称$(\Omega,\mathscr{F},P)$为一个\textbf{概率空间}(probability space)
 \end{definition}
 
+\subsection{概率的性质}
+
 \begin{property}
     概率的性质:
     \begin{itemize}
@@ -129,6 +146,95 @@
 
 故若令$S_n = \sum_{i=1}^n A_n$, 则可列可加性条件等价于有限可加性加下连续.
 
+\begin{example}
+    口袋中有编号为 1, 2, \dots, $n$ 的 $n$ 个球,
+    从中有放回地任取 $m$ 次,
+    求取出的 $m$ 个球的最大号码为 $k$ 的概率.
+\end{example}
+
+\begin{solution}
+    记事件 $A_k$ 为“取出的 $m$ 个球的最大号码为 $k$”.
+    如果直接考虑事件 $A_k$,
+    则比较复杂,
+    因为“最大号码为 $k$”可以包括取到1次 $k$、取到2次 $k$、\dots、取到 $m$ 次$k$.
+
+    为此我们记事件 $B_i$ 为“取出的 $m$ 个球的最大号码小于等于 $i$”, $i=1$, $2$, $\dotsc$, $n$.
+    则 $B$ 发生只需每次从 $1$, $2$, $\dotsc$, $i$ 号球中取球即可.
+    所以由古典概率知
+    \[
+        P(B_i) = \frac{i^m}{n^m}, \quad i = 1, 2, \dotsc, n.
+    \]
+    又因为 $A_k = B_k - B_{k-1}$,
+    且 $B_{k-1} \subset B_k$,
+    由性质~\label{property1.3.4} 得
+    \begin{align*}
+        P(A_k) & = P(B_k - B_{k-1}) = P(B_k) - P(B_{k-1})                 \\
+               & = \frac{k^m - (k - 1)^m}{n^m}, \quad k = 1,2, \dotsc, n.
+    \end{align*}
+
+    譬如,
+    $n = 6$, $m = 3$,
+    可算得
+    \[
+        P(A_4) = \frac{4^3 - 3^3}{6^3} = \frac{37}{216} = 0.1713.
+    \]
+    其他的 $P(A_k)$ 也都可算出,
+    现列表如下:
+
+
+
+    这相当于掷三颗骰子,
+    最大点数为6的概率是0.4213,
+    而由
+    \[
+        P(k \le 3) = 0.0046 + 0.0324 + 0.0880 = 0.1250.
+    \]
+    说明:
+    掷三颗骰子,
+    最大点数不超过3的概率仅为0.1250.
+\end{solution}
+
+一般而言,
+求“至少有一个……”的概率时,
+用对立事件公式去求较为方便.
+但下面例~\ref{exam1.3.6} 的配对问题却不能用对立事件去求解,
+而一定要将事件“至少有个……”表示成事件的并,
+然后用一般事件的加法公式去求解.
+
+\begin{example}[配对问题]\label{exam1.3.6}
+    在一个有 $n$ 个人参加的晚会上,
+    每个人带了一件礼物,
+    且假定各人带的礼物都不相同.
+    晚会期间各人从放在一起的 $n$ 件礼物中随机抽取一件,
+    问至少有一个人自己抽到自己礼物的概率是多少?
+\end{example}
+
+\begin{solution}
+    以 $A_i$ 记事件“第 $i$ 个人自己抽到自己的礼物”,
+    $i=1,\dotsc,n$.
+    所求概率为 $P(A_1 \cup A_2 \cup \dotsb \cup A_n)$.
+    因为
+    \begin{align*}
+         & P(A_1) = P(A_2) = \dotsb = P(A_n) =\frac{1}{n},                                              \\
+         & P(A_1 A_2) = P(A_1 A_3) = \dotsb = P(A_{n-1} A_n) = \frac{1}{n (n-1)},                       \\
+         & P(A_1 A_2 A_3) = P(A_1 A_2 A_4) = \dotsb = P(A_{n-2} A_{n-1} A_n) = \frac{1}{n (n-1) (n-2)}, \\
+         & \ldots                                                                                       \\
+         & P(A_1 A_2 \dotsb A_n) = \frac{1}{n!}.
+    \end{align*}
+    所以由概率的加法公式 \eqref{eq1.3.6} 得
+    \[
+        P(A_1 \cup A_2 \cup \dotsb \cup A_n) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4!} + \dotsb + (-1)^{n-1} \frac{1}{n!}.
+    \]
+    譬如,
+    当 $n=5$ 时,
+    此概率为 \num{0.6333};
+    当 $n \ge 10$ 时,
+    此概率近似为 $1 - e^{-1} = 0.6321$.
+    这表明:
+    即使参加晚会的人很多 (譬如 100 人以上),
+    事件“至少有一个人自己抽到自己礼物”也不是必然事件.
+\end{solution}
+
 \section{古典概型与几何概型}
 
 \subsection{古典概型}
@@ -148,11 +254,320 @@
     事实上，古典概型的大部分问题都能形象化地用摸球模型来描述以后我们经常研究摸球模型，意义即在于此．
 \end{note}
 
+\begin{example}[生日问题]
+    $n$ 个人的生日全不相同的概率 $p_n$ 是多少?
+\end{example}
+
+\begin{solution}
+    把 $n$ 个人看成是 $n$ 个球,
+    将一年 365 天看成是 $N=365$ 个盒子,
+    则“$n$ 个人的生日全不相同”就相当于“恰好有 $n (n \le N)$ 个盒子各有一球”,
+    所以 $n$ 个人的生日全不相同的概率为
+    \begin{equation}
+        P_n = \frac{365!}{365^n (365 - n)!}
+        = \biggl(1 - \frac{1}{365}\biggr) \biggl(1 - \frac{2}{365}\biggr)
+        \dotsb \biggl(1 - \frac{n - 1}{365}\biggr).
+        \label{eq1.2.10}
+    \end{equation}
+
+    上式看似简单，
+    但其具体计算是繁琐的，
+    对此可用以下方法作近似计算：
+
+    \begin{enumerate}
+        \item 当$n$较小时,
+              \eqref{eq1.2.10} 右边中各因子的第二项之间的乘积 $\frac{i}{365} \times \frac{j}{365}$ 都可以忽略,
+              于是有近似公式
+              \begin{equation}
+                  p_n \approx 1 - \frac{1 + 2 + \dotsb + (n - 1)}{365}
+                  = 1 - \frac{n (n - 1)}{730}.
+                  \label{eq1.2.11}
+              \end{equation}
+
+        \item 当 $n$ 较大时,
+              因为对小的正数 $x$,
+              有 $\ln (1-x) \approx -x$,
+              所以由 \eqref{eq1.2.10} 得
+              \begin{equation}
+                  \ln p_n \approx \frac{1 + 2 + \dotsb + (n - 1)}{365}
+                  = -\frac{n (n - 1)}{730}.
+                  \label{eq1.2.12}
+              \end{equation}
+    \end{enumerate}
+
+    例如当 $n = 10$ 时,
+    由 \eqref{eq1.2.12} 给出的近似值为 \num{0.8840},
+    而糟确值为 $p_n = 0.8831\dots$;
+    $n = 30$ 时,
+    近似值为 \num{0.3037},
+    精确值为 $p_n = 0.2937$.
+
+    这个数值结果是令人吃惊的,
+    因为许多人会认为:
+    一年365天,
+    30个人的生日全不相同的可能性是较大的,
+    至少会大于 1/2.
+    甚至有人会认为:
+    100个人的生日全不相同的可能性也是较大的.
+    对一些不同的 $n$ 值,
+    表~\ref{tab1.2.7} 列出用 \eqref{eq1.2.12} 近似公式计算出的 $p$ 值.
+
+
+
+    表中最后一行是对立事件“$n$ 个人中至少有两个人生日相同”的概率 $1 - p_n$.
+    当 $n = 60$ 时,
+    $1 - p_n = 0.9922$ 表明在60个人的群体中至少有两个人生日相同的概率超过 99\%,
+    这是出乎人们预料的.
+\end{solution}
+
 \subsection{几何概型}
 
-\subsubsection{Buffon投针}
+\begin{example}[会商问题]
+    甲乙两人约定在下午6时到7时之间在某处会面,
+    并约定先到者应等候另一个人 \SI{20}{\minute},
+    过时即可离去.
+    求两人能会面的概率.
+\end{example}
 
-\subsubsection{Bertrand奇论}
+\begin{solution}
+    以 $x$ 和 $y$ 分别表示甲、乙两人到达约会地点的时间 (以 \si{\minute} 为单位),
+    在平面上建立 $xOy$ 直角坐标系 (见图~\ref{fig1.2.3}).
+
+    \begin{figure}[!ht]
+        \centering
+        \begin{tikzpicture}[thick,>=stealth]
+            \draw[->] (-0.5,0) -- (0,0) node[below left]{$O$} -- (1,0) node[below]{20}
+            -- (3,0)node[below]{60} -- (3.5,0)node[below]{$x$};
+            \draw [->] (0,-0.5) -- (0,1) node[left]{20}
+            -- (0,3) node[left]{60}
+            -- (0,3.5) node[right] {$y$};
+            \filldraw[pattern=vertical lines]
+            (0,0) -- (1,0) -- (3,2) -- (3,3) --
+            (2,3) -- (0,1) -- cycle;
+            \draw (3,0) -- (3,2) (0,3) -- (2,3);
+        \end{tikzpicture}
+        \caption{会面问题中的 $\Omega$ 与 $A$.}
+        \label{fig1.2.3}
+    \end{figure}
+
+    因为甲、乙都是在 0 至 \SI{60}{\minute} 内等可能地到达,
+    所以由等可能性知这是一个几何概率问题.
+    $(x, y)$ 的所有可能取值是边长为 60 的正方形,
+    其面积为 $S_\Omega = 60^2$.
+    而事件 $A =$“两人能够会面”相当于:
+    \[
+        | x - y | \le 20,
+    \]
+    即图中的阴影部分,
+    其面积为 $S_A = 60^2 - 40^2$,
+    由 \eqref{eq1.2.13} 式知
+    \[
+        P (A) = \frac{S_A}{S_\Omega} = \frac{60^2 - 40^2}{60^2} = 0.5556.
+    \]
+    结果表明:
+    按此规则约会,
+    两人能会面的概率不超过 0.6.
+    若把约定时间改为在下午6时到6时30分,
+    其他不变,
+    则两人能会面的概率提高到 \num{0.8889}.
+\end{solution}
+
+\begin{example}[蒲丰投针问题]
+    平面上画有间隔为 $d (d > 0)$ 的等距平行线,
+    向平面任意投掷一枚长为 $l (l<d)$ 的针,
+    求针与任一平行线相交的概率.
+\end{example}
+
+\begin{solution}
+    以 $x$ 表示针的中点与最近一条平行线的距离,
+    又以 $\varphi$ 表示针与此直线间的交角,
+    见图~\ref{fig1.2.4}.
+    易知样本空间 $\Omega$ 满足
+    \[
+        0 \le x \le d/2, \quad 0 \le \varphi \le \pi,
+    \]
+    由这两式可以确定 $x - \varphi$ 平面上的一个矩形 $\Omega$,
+    这就是样本空间,
+    其面积为 $S_\Omega = d\pi/2$.
+    这时为了针与平行线相交 (记为事件 $A$),
+    其充要条件是
+    \[
+        x \le \frac{l}{2} \sin \varphi.
+    \]
+    由这个不等式表示的区域是图~\ref{fig1.2.5} 中的阴影部分.
+
+    由于针是向平面任意投掷的,
+    所以由等可能性知这是一个几何概率问题.
+    由此得
+    \[
+        P (A) = \frac{S_A}{S_\Omega}
+        = \frac{\int_0^\pi \frac{l}{2} \sin \varphi \, \mathrm{d} \varphi}{\frac{d}{2} \pi}
+        = \frac{2l}{d\pi}.
+    \]
+
+    如果 $l$, $d$ 为已知,
+    则以 $\pi$ 的值代入上式即可计算得 $P(A)$ 之值.
+    反之,
+    如果已知 $P(A)$ 的值,
+    则也可以利用上式去求 $\pi$,
+    而关于 $P(A)$ 的值,
+    可用从试验中获得的频率去近似它:
+    即投针 $N$ 次,
+    其中针与平行线相交 $n$ 次,
+    则频率 $n/N$ 可作为 $P(A)$ 的估计值,
+    于是由
+    \[
+        \frac{n}{N} \approx P (A) = \frac{2l}{d\pi},
+    \]
+    可得
+    \[
+        \pi \approx \frac{2lN}{dn}.
+    \]
+
+    历史上有一些学者曾亲自做过这个试验,
+    下表记录了他们的试验结果.
+
+    
+
+    这是一个颇为奇妙的方法:
+    只要设计一个随机试验,
+    使一个事件的概率与某个未知数有关,
+    然后通过重复试验,
+    以频率估计概率,
+    即可求得未知数的近似解.
+    一般来说，
+    试验次数越多，
+    则求得的近似解就越精确。
+    随着电子计算机的出现，
+    入们便可利用计算机来大量重复地模拟所设计的随机试验。
+    这种方法得到了迅速的发展和广泛的应用。
+    入们称这种方法为\textbf{随机模拟法},
+    也称为\textbf{蒙特卡罗 (Montecarlo) 法}.
+\end{solution}
+
+\begin{figure}
+    \centering
+    \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \begin{tikzpicture}[thick,>=stealth,scale=1.2]
+            \draw (-0.3,1) -- (4,1) (-0.3,-1)--(4,-1)
+            node[below]{\phantom{$O$}};
+            \draw[<->] (0,1) -- (0,-1)node[midway,fill=white]{$d$};
+            \draw (2,1) -- +(45:0.3) --+ (-135:1.7);
+            \draw (1.8,1) arc (180:225:0.2);
+            \draw (1.51,1) --node[left]{$x$} ++(0,-0.49);
+            \node at (1.7,0.85){$\varphi$};
+        \end{tikzpicture}
+        \caption{蒲丰投针问题}.
+        \label{fig1.2.4}
+    \end{minipage}%
+    \begin{minipage}[b]{0.5\linewidth}
+        \centering
+        \begin{tikzpicture}[thick,>=stealth]
+            \draw[->](-0.3,0) -- (0,0)node[below]{$O$}
+            -- (pi,0)node[below]{$\pi$} -- (4.2,0) node[below]{$\varphi$};
+            \draw[->](0,0) -- (0,2.2)node[left]{$d/2$}
+            -- (0,3) node[right]{$x$};
+            \draw (0,2.2)--(pi,2.2)node[above right]{$\Omega$} -- (pi,0);
+            \filldraw[pattern=north east lines]
+            (0,0)-- plot[domain=0:pi,samples=100](\x,{1.3*sin(\x r)}) -- (pi,0)--cycle;
+            \node at (1.57,1.6){$\frac l2\sin\varphi$};
+        \end{tikzpicture}
+        \caption{蒲丰投针问题中的 $\Omega$ 和 $A$}.
+        \label{fig1.2.5}
+    \end{minipage}
+\end{figure}
+
+\begin{example}
+    在长度为 $a$ 的线段内任取两点将其分为三段,
+    求它们可以构成一个三角形的概率.
+\end{example}
+
+\begin{solution}
+    由于是将线段任意分成三段,
+    所以由等可能性知这是一个几何概率问题.
+    分别用 $x$, $y$ 和 $a - x - y$ 表示线段被分成的三段长度,
+    见图~\ref{fig1.2.6}.
+    则显然应该有
+    \[
+        0 < x < a; \quad 0 < y < a; \quad 0 < a - (x + y) < a.
+    \]
+    第三个式子等价于:
+    $0 < x + y < a$.
+    所以样本空间为 (见图~\ref{fig1.2.7})
+    \[
+        \Omega = \{(x, y): 0 < x < a, 0 < y < a, 0 < x + y < a\}.
+    \]
+    $\Omega$ 的面积为
+    \[
+        S _\Omega = \frac{a^2}{2}.
+    \]
+
+    又根据构成三角形的条件:
+    三角形中任意两边之和大于第三边,
+    得事件 $A$ 所含样本点 $(x,y)$ 必须满足:
+    \begin{align*}
+         & 0 < a - (x + y) < x + y, \\
+         & 0 < x < y + (a - x - y), \\
+         & 0 < y < x + (a - x - y).
+    \end{align*}
+    整理得
+    \[
+        \frac{a}{2} < x + y < a;\quad 0 < x < \frac{a}{2}; \quad 0 < y < \frac{a}{2}.
+    \]
+    所以事件 $A$ 可用图~\ref{fig1.2.8} 中的阴影部分表示.
+    事件 $A$ 的面积为
+    \[ S _A = \frac{a^2}{8}. \]
+    由此得
+    \[P (A) = \frac{1}{4}. \]
+\end{solution}
+
+\begin{figure}
+    \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \begin{tikzpicture}[thick,>=stealth,xscale=1.2]
+            \draw (0,0) -- (4,0);
+            \draw [densely dashed,yshift=-0.5cm](0,0) -- (4,0) node[midway,fill=white]{$a$};
+            \foreach \x in {0,1,2.4,4}
+            \draw(\x,-0.1) -- (\x,0.1);
+            \draw[yshift=-0.5cm](0,-0.1)--(0,0.1)
+            (4,-0.1)--(4,0.1);
+            \draw (0.5,0.2)node{$x$} (1.7,0.2)node{$y$}
+            (3.2,0.2)node{$a-x-y$};
+        \end{tikzpicture}
+        \caption{长度为 $a$ 的线段分成三段.}
+        \label{fig1.2.6}
+    \end{minipage}
+    \begin{minipage}[b]{0.45\linewidth}
+        \centering
+        \begin{tikzpicture}[thick,>=stealth,scale=2.6]
+            \draw[->] (-0.2,0) --(1,0)node[below]{$a$}-- (1.5,0)node[below]{$x$};
+            \draw[->] (0,-0.2) --(0,0)node[below left]{$O$}
+            --(0,1)node[left]{$a$} -- (0,1.2)node[left]{$y$};
+            \filldraw[pattern=horizontal lines] (0,0)--(1,0)
+            --(0,1)--cycle;
+        \end{tikzpicture}
+        \caption{线段分成三段的样本空间 $\Omega$.}
+        \label{fig1.2.7}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[thick,>=stealth,scale=2.6]
+        \draw[->] (-0.2,0) --(1,0)node[below]{$a$}-- (1.5,0)node[below]{$x$};
+        \draw[->] (0,-0.2) --(0,0)node[below left]{$O$}
+        --(0,1)node[left]{$a$}--(0,1.2)node[left]{$y$};
+        \draw (0,1) -- (1,0);
+        \filldraw[pattern=horizontal lines]
+        (0.5,0)node[below]{$1/2$} -- (0.5,0.5)
+        --(0,0.5)node[left]{$1/2$} -- cycle;
+    \end{tikzpicture}
+    \caption{构成三角形的条件}
+    \label{fig1.2.8}
+\end{figure}
+
+\subsection{Bertrand奇论}
 
 \section{条件概率}
 
@@ -168,6 +583,99 @@
     泛化后有:
     \[ P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_{1})P(A_2|A_1)P(A_3|A_1\cap A_2) \cdots  \]
 \end{theorem}
+
+\begin{example}[罐子模型]\label{exam1.4.4}
+    设罐中有 $b$ 个黑球、$r$ 个红球,
+    每次随机取出一个球,
+    取出后将原球放回,
+    还加进 $c$ 个同色球和 $d$ 个异色球.
+    记 $B_i$ 为“第 $i$ 次取出的是黑球”,
+    $R_j$ 为“第 $j$ 次取出的是红球”.
+
+    若连续从罐中取出三个球,
+    其中有两个红球、一个黑球.
+    则由乘法公式我们可得
+    \begin{align*}
+        P(B_1 R_2 R_3)
+         & = P(B_1) P(R_2 | B_1) P(R_3 | B_1 R_2)                       \\
+         & = \frac{b}{b+r} \frac{r+d}{b+r+c+d} \frac{r+d+c}{b+r+2c+2d}, \\
+        P(R_1 B_2 R_3)
+         & = P(R_1) P(B_2 | R_1) P(R_3 | R_1 B_2)                       \\
+         & = \frac{r}{b+r} \frac{b+d}{b+r+c+d} \frac{r+d+c}{b+r+2c+2d}, \\
+        P(R_1 R_2 B_3)
+         & = P(R_1) P(R_2 | R_1) P(B_3 | R_1 R_2)                       \\
+         & = \frac{r}{b+r} \frac{r+c}{b+r+c+d} \frac{b+2d}{b+r+2c+2d}.
+    \end{align*}
+    以上概率与黑球在第几次被抽取有关.
+\end{example}
+
+罐子模型也称为波利亚 (Polya) 模型,
+这个模型可以有各种变化,
+具体见下:
+
+\begin{enumerate}
+    \item 当 $c=-1$, $d=0$ 时,
+          即为\textbf{不返回抽样}.
+          此时前次抽取结果会影响后次抽取结果.
+          但只要抽取的黑球与红球个数确定,
+          则概率不依赖其抽出球的次序,
+          都是一样的.
+          此例中有
+          \begin{align*}
+              P(B_1 R_2 R_3) & = P(R_1 B_2 R_3) = P(R_1 R_2 B_3)        \\
+                             & = \frac{br(r-1)}{(b+r) (b+r-1) (b+r-2)}.
+          \end{align*}
+          例~\ref{exam1.4.3} 可以归结为此种情况.
+
+    \item 当 $c=0$, $d=0$ 时,
+          即为\textbf{返回抽样}.
+          此时前次抽取结果不会影响后次抽取结果.
+          故上述三个概率相等,
+          且都等于
+          \[
+              P(B_1 R_2 R_3) = P(R_1 B_2 R_3) = P(R_1 R_2 B_3) = \frac{br^2}{(b+r)^3}.
+          \]
+
+    \item 当 $c>0, d=0$ 时,
+          称为\textbf{传染病模型}.
+          此时,
+          每次取出球后会增加下一次取到同色球的概率,
+          或换句话说,
+          每次发现一个传染病患者,
+          以后都会增加再传染的概率.
+          与前面两个一样,
+          以上三个概率都相等,
+          且都等于
+          \begin{align*}
+              P(B_1 R_2 R_3) & = P(R_1 B_2 R_3) = P(R_1 R_2 B_3)       \\
+                             & = \frac{br(r+c)}{(b+r)(b+r+c)(b+r+2c)}.
+          \end{align*}
+          从以上可以看出:
+          在罐子模型中只要 $d=0$,
+          则以上三个概率都相等.
+          即只要抽取的黑球与红球个数确定,
+          则概率不依赖其抽出球的次序,
+          都是一样的.
+          但当 $d>0$ 时,
+          就不同了.
+
+    \item 当 $c=0, d>0$ 时,
+          称为\textbf{安全模型}.
+          此模型可解释为:
+          每当事故发生了 (红球被取出),
+          安全工作就抓紧一些,
+          下次再发生事故的概率就会减少;
+          而当事故没有发生时 (黑球被取出),
+          安全工作就放松一些,
+          下次再发生事故的概率就会增大.
+          在这种场合,
+          上述三个概率分别为
+          \begin{align*}
+               & P(B_1 R_2 R_3) = \frac{b}{b+r} \frac{r+d}{b+r+d} \frac{r+d}{b+r+2d}, \\
+               & P(R_1 B_2 R_3) = \frac{r}{b+r} \frac{b+d}{b+r+d} \frac{r+d}{b+r+2d}, \\
+               & P(R_1 R_2 B_3) = \frac{r}{b+r} \frac{r}{b+r+d} \frac{b+2d}{b+r+2d}.
+          \end{align*}
+\end{enumerate}
 
 \begin{theorem}[全概率公式]
     设 $B_1, B_2, \dotsc, B_n$ 为样本空间 $\Omega$ 的一个分割, 且互不相容, 即$\bigcup _{i=1} ^n B_i = \Omega, B_i B_j= \emptyset for i \neq j $
@@ -190,6 +698,89 @@
         P (B_i | A) = \frac{P(B_i) P(A|B_i)}{\sum_{j=1}^n P(B_j) P(A|B_j)}
     \end{equation}
 \end{theorem}
+
+\begin{example}
+    某地区居民的肝癌发病率为 \num{0.0004},
+    现用甲胎蛋白法进行普查.
+    医学研究表明,
+    化验结果是存有错误的.
+    已知患有肝癌的人其化验结果 \SI{99}{\percent} 呈阳性 (有病),
+    而没患肝癌的人其化验结果 \SI{99.9}{\percent} 呈阴性 (无病).
+    现某人的检查结果呈阳性,
+    问他真的患肝癌的概率是多少?
+\end{example}
+
+\begin{solution}
+    记 $B$ 为事件“被检查者患有肝癌”,
+    $A$ 为事件“检查结果呈阳性”.
+    由题设知
+    \begin{gather*}
+        P(B) = 0.0004, \quad P(\overline{B}) = 0.996,\\
+        P(A|B) = 0.99, \quad P(A|\overline{B}) = 0.001.
+    \end{gather*}
+
+    我们现在的目的是求 $P(B|A)$.
+    由贝叶斯公式得
+    \begin{align*}
+        P(B|A) & = \frac{P(B) P(A|B)}{P(B) P(A|B) + P(\overline{B}) P(A|\overline{B})} \\
+               & = \frac{0.0004 \times 0.99}{0.0004 \times 0.99 + 0.9996 \times 0.001} \\
+               & = 0.284.
+    \end{align*}
+    这表明,
+    在检查结果呈阳性的人中,
+    真患肝癌的人不到 \SI{30}{\percent},
+    这个结果可能会使人吃惊,
+    但仔细分析一下就可以理解了.
+    因为肝癌发病率很低,
+    在 \num{10000} 个人中,
+    约有 4 人,
+    而约有 \num{9996} 个人不惠肝癌.
+    对 \num{10000} 个人用甲胎蛋白法进行检查,
+    按其错检的概率可知,
+    \num{9996} 个不患肝癌者中约有 $9996 \times 0.001 \cong 9.994$ 个呈阳性.
+    另外 4 个真患肝癌者的检查报告中约有 $4 \times 0.99 \cong 3.96 $ 个呈阳性.
+    仅从 \num{13.956} 个呈阳性者中看,
+    真患肝癌的 3.96 人约占 \SI{28.4}{\percent}.
+\end{solution}
+
+\begin{example}
+    伊索寓言“孩子与狼”讲的是一个小孩每天到山上放羊，山里有狼出没.第一天，他在山上喊：“狼来了！狼来了！”，山下的村民闻声便去打狼，可到山上，发现狼没有来；第二天仍是如此；第三天，狼真的来了，可无论小孩怎么喊叫，也没有人来救他，因为前二次他说了谎，人们不再相信他了.
+\end{example}
+
+现在用贝叶斯公式来分析此寓言中村民对这个小孩的可信程度是如何下降的.
+
+首先记事件$A$为“小孩说谎”，记事件$B$为“小孩可信”.不妨设村民过去对这个小孩的印象为
+\begin{equation}\label{eq1.4.7}
+    P(B) = 0.8,\quad P(\bar B) = 0.2.
+\end{equation}
+
+我们现在用贝叶斯公式来求$P(B|A)$，亦即这个小孩说了一次谎后，村民对他可信程度的改变.
+
+在贝叶斯公式中我们要用到概率$P(A|B)$和$P(A|\bar B)$，这两个概率的含义是：前者为“可信”$(B)$的孩子“说谎”$(A)$的可能性，后者为“不可信”$(\bar B)$的孩子“说谎”$(A)$的可能性.在此不妨设
+\[
+    P(A|B) = 0.1,\quad P(A|\bar B) = 0.5.
+\]
+
+第一次村民上山打狼，发现狼没有来，即小孩说了谎$(A)$.村民根据这个信息，对这个小孩的可信程度改变为（用贝叶斯公式）
+\begin{align*}
+    P(B|A) & = \frac{P(B)P(A|B)}{P(B)P(A|B) + P(\bar B)P(A|\bar B) }     \\
+           & = \frac{0.8\times0.1}{0.8\times0.1 + 0.2\times0.5} = 0.444.
+\end{align*}
+
+这表明村民上了一次当后，对这个小孩的可信程度由原来的0.8调整为
+0.444，也就是 \eqref{eq1.4.7} 调整为
+\begin{equation}\label{eq1.4.8}
+    P(B) = 0.444,\quad P(\bar B) = 0.556.
+\end{equation}
+在此基础上，我们再一次用贝叶斯公式来计算$P(B|A)$，亦即这个小孩第二次说谎后，村民对他的可信程度改变为
+\[
+    P(B|A) = \frac{0.444\times0.1}{0.444\times0.1 + 0.556\times0.5} = 0.138.
+\]
+
+这表明村民们经过两次上当，对这个小孩的可信程度已经从0.8下降到了
+0.138，如此低的可信度，村民听到第三次呼叫时怎么再会上山打狼呢?
+
+\section{独立性}
 
 \begin{definition}[事件的独立性]
     如果$A,B\in\mathscr{F}$满足
@@ -228,3 +819,145 @@
 \end{definition}
 
 测度论告诉我们一个重要结果: 如果$\mathscr{G}$对交集运算封闭, 那么成立$\mathscr{G}\Vbar\mathscr{H} \implies \sigma(\mathscr{G}) \Vbar \mathscr{H}$
+
+\begin{example}
+    有两名选手比赛射击，轮流对同一目标进行射击，甲命中目标的概率为$\alpha$，乙命中目标的概率为$\beta$.甲先射，谁先命中谁得胜.问甲、乙两人获胜的概率各为多少?
+\end{example}
+\begin{solution}
+    记事件$A_i$为“第i次射击命中目标”，$i=1,2$，因为甲先射，所以事件“甲获胜”可以表示为
+    \[
+        A_1 \cup \bar A_1\bar A_2 A_3 \cup \bar A_1\bar A_2
+        \bar A_3\bar A_4A_5\cup\cdots,
+    \]
+    又因为各次射击是独立的，所以得
+    \begin{align*}
+        P(\,\text{甲获胜}\,) & = \alpha + (1-\alpha)(1-\beta)\alpha + (1-\alpha)^2(1-\beta)^2\alpha + \cdots \\
+                             & = \alpha\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i                           \\
+                             & = \frac{\alpha}{1-(1-\alpha)(1-\beta)}.
+    \end{align*}
+    同理可得
+    \begin{align*}
+        P(\,\text{乙获胜}\,) & = P (\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)      \\
+                             & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
+                             & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
+                             & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
+    \end{align*}
+\end{solution}
+
+此题在等比级数求和时，应该有条件：公比$|(1-\alpha)(1-\beta)|M1$. 这一点不难从题目的实际意义中得到. 因为对本题而言，$\alpha,\beta$取值为零或1均是无意义的.
+
+\begin{example}
+    系统由多个元件组成，且所有元件都独立地工作.设每个元件正常工作的概率都为$p=0.9$，试求以下系统正常工作的概率.
+    \begin{enumerate}[label=(\arabic*)]
+        \item 串联系统$S_1$：\begin{tikzpicture}[baseline=(a.base),thick]
+                  \draw (0,0) -- (4,0);
+                  \node(a)[minimum width=1cm,minimum height=0.4cm,draw,fill=white] at (1,0){1};
+                  \node[minimum width=1cm,minimum height=0.4cm,draw,fill=white] at (3,0){2};
+              \end{tikzpicture}.
+        \item 并联系统$S_2$：\begin{tikzpicture}[baseline=(a.base),thick,
+                      every node/.style =
+                          { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
+                  \node[draw = white](a) at (2,0) {};
+                  \draw (0,0) -- (1,0)  (3,0) -- (4,0)
+                  (1.5,-0.4) -- (1,-0.4) -- (1,0.4) -- (1.5,0.4)
+                  (2.5,-0.4) -- (3,-0.4) -- (3,0.4) -- (2.5,0.4);
+                  \node at (2,-0.4) {1} ;
+                  \node at (2,0.4) {2} ;
+              \end{tikzpicture}.
+        \item 5个元件组成的桥式系统$S_3$：\begin{tikzpicture}[baseline=(a.base),thick,
+                      every node/.style =
+                          { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
+                  \node[draw = white] (a) at (0,0) {};
+                  \draw (0,0) -- (1,0) (3,-0.6) -- (3,0.6) (5,0) -- (6,0)
+                  (1,0.6) -- (1,-0.6) -- (5,-0.6) -- (5,0.6) -- cycle;
+                  \node at (2,-0.6) {4};
+                  \node at (2,0.6) {1};
+                  \node at (3,0) {3};
+                  \node at (4,0.6) {2};
+                  \node at (4,-0.6) {5};
+              \end{tikzpicture}.
+    \end{enumerate}
+\end{example}
+
+\begin{solution}
+    设$S_i=$“第$i$个系统正常工作”，$A_i=$“第$i$个元件正常工作”.
+
+    \begin{itemize}[(1)]
+        \item 对申联系统而言，“系统正常工作”相当于“所有元件正常工作”，即$S_1=A_1A_2$，所以
+        \[
+            P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81.
+        \]
+
+        这也可看出：两个正常工作概率为0.9的元件组成的串联系统，其系统正常工作的概率下降为0.81.
+
+        \item 对并联系统而言，“系统正常工作”相当于“至少一个元件正常工作”，即$S_2=A_1\cup A_2$，所以
+        \begin{align*}
+            P(S_2) & P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2) \\
+                   & = p + p - p^2 = 0.99.
+        \end{align*}
+        或
+        \begin{align*}
+            P(S_2) & = 1 - P(\bar S_2) = 1 - P(\bar{A_1\cup A_2}) = 1 - P(\bar A_1\cap \bar A_2) \\
+                   & = 1 - P(\bar A_1)P(\bar A_2) = 1 - (1-p)^2 = 0.99.
+        \end{align*}
+        这也可看出：两个正常工作概率为0.9的元件组成的并联系统，其系统正常工作的概率提高至0.99.
+
+        \item 在桥式系统中，第3个元件是关键，我们先用全概率公式得
+        \[
+            P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3).
+        \]
+        因为在“第3个元件正常工作”的条件下，系统成为先并后串系统（见图 \ref{fig1.5.1}）. 所以
+        \begin{align*}
+            P(S_3|A_3) & = P\big( ( A_1\cup A_4 )
+            (A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
+                       & = [ 1 - (1-p)^2 ]^2 = 0.9801.
+        \end{align*}
+
+        又因为在“第3个元件不正常工作”的条件下，系统成为先串后并系统（见图 \ref{fig1.5.2}）.
+    \end{itemize}
+    \begin{figure}[!ht]
+        \centering
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \begin{tikzpicture}[baseline=(a.base),thick,
+                    every node/.style =
+                        { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
+                \node[draw = white] (a) at (0,0) {};
+                \draw (0,0) -- (1,0) (2.9,0) -- (3.1,0)
+                (5,0) -- (6,0) (2.9,-0.6) -- (2.9,0.6)
+                (3.1,-0.6) -- (3.1,0.6)
+                (1,0.6) -- (1,-0.6)(2.9,-0.6) (3.1,-0.6)-- (5,-0.6) -- (5,0.6) -- (3.1,0.6) (2.9,0.6) -- cycle;
+                \draw (1,0.6) -- (2.9,0.6) (1,-0.6) -- (2.9,-0.6);
+                \node at (2,-0.6) {4};
+                \node at (2,0.6) {1};
+                \node at (4,0.6) {2};
+                \node at (4,-0.6) {5};
+            \end{tikzpicture}
+            \caption{先并后串系统\label{fig1.5.1}}
+        \end{minipage}%
+        \begin{minipage}{0.48\linewidth}
+            \centering
+            \begin{tikzpicture}[baseline=(a.base),thick,
+                    every node/.style =
+                        { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
+                \node[draw = white] (a) at (0,0) {};
+                \draw (0,0) -- (1,0)  (5,0) -- (6,0)
+                (1,0.6) -- (1,-0.6) -- (5,-0.6) -- (5,0.6) -- cycle;
+                \node at (2,-0.6) {4};
+                \node at (2,0.6) {1};
+                \node at (4,0.6) {2};
+                \node at (4,-0.6) {5};
+            \end{tikzpicture}
+            \caption{先串后并系统\label{fig1.5.2}}
+        \end{minipage}
+    \end{figure}
+    所以
+    \[
+        P(S_3|\bar A_3) = P(A_1A_2|\cup A_4A_5) = 1 - (1-p^2)^2 = 0.9639.
+    \]
+    最后我们得
+    \begin{align*}
+        P(S_3) & = p [ 1-(1-p)^2 ]^2 + (1-p)[ 1-(1-p^2)^2 ]       \\
+               & = 0.9\times 0.9801 + 0.1 \times 0.9639 = 0.9785.
+    \end{align*}
+\end{solution}

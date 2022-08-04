@@ -1,5 +1,9 @@
 \chapter{随机变量的数值特征}
-
+\begin{introduction}[考试重点]
+    \item 重期望公式
+    \item 重方差公式
+    \item 切比雪夫不等式
+\end{introduction}
 \section{期望}
 
 \begin{definition}
@@ -148,7 +152,7 @@
     \[ \left| \operatorname{Cov}(a+ b X,c +d Y) \right| = \left| Cor(X,Y) \right|  \]
 \end{theorem}
 
-\section{条件期望}
+\subsection{条件期望}
 
 \begin{definition}
     若$h(Y)$在给定$X=x$下的条件分布(定义\ref{def:cond_dist})的数学期望存在，则定义其为\textbf{条件期望}如下:
@@ -269,7 +273,7 @@
 \end{theorem}
 
 \begin{remark}
-    由此可方便地计算各阶矩, 故称其为矩母函数. 反过来, 若已知各阶矩, 通过Tayler展开式$M_X(t)=\sum_{k=0}^{\infty}\frac{M_X^{(k)}(0)}{k!}t^k$还原矩母函数, 进而得出概率分布.
+    借此可方便地计算各阶矩, 故称为矩母函数. 反过来, 若已知各阶矩, 通过Tayler展开$M_X(t)=\sum_{k=0}^{\infty}\frac{M_X^{(k)}(0)}{k!}t^k$可还原矩母函数, 进而得出概率分布.
 \end{remark}
 
 \begin{proposition}
@@ -350,11 +354,11 @@
 
 \section{估计与预测}
 
-\subsection{$\delta$法}
+\subsection{delta法}
 
 \subsection{预测}
 
-
-
-
 \section{熵与信息}
+
+\section{其他特征}
+
