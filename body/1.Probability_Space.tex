@@ -12,64 +12,79 @@
 \subsection{随机事件}
 
 \begin{definition}[样本空间]
-    随机试验可能出现的结果称为\textbf{样本点}(sample point)，用$\omega$表示。样本的全体构成\textbf{样本空间}(sample space)，用$\Omega$表示。
+    随机试验可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$。样本的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。若样本点有至多可数个，则称为\textbf{离散样本空间}，若不可数，则称为\textbf{连续样本空间}。
 \end{definition}
 
 \begin{definition}[事件的古典定义]
-    样本点$\omega$的集合称为\textbf{事件}(event)。
+    样本点$\omega$的集合称为（随机）\textbf{事件}(event)。
 \end{definition}
 
-我们关心的随机现象被抽象为集合, 逻辑运算(且, 或, 非, etc.)对应成集合论运算(交, 并, 补, etc.)。
-
-\begin{property}
-    集合的运算性质:
-    \begin{description}
-        \item [交换律] $A \cup B = B \cup A, \quad AB = BA$
-        \item [结合律] $(A \cup B) \cup C = A \cup (B \cup C), (AB)C = A(BC)$
-        \item [分配律]
-              \begin{gather}
-                  (A \cup B) \cup C = A \cup (B \cup C),\\
-                  (A \cap B) \cup C = (A \cup C) \cap (B \cup C).
-              \end{gather}
-        \item [对偶律(De Morgan's laws)]
-              \begin{gather}
-                  \text{事件并的对立等于对立的交:} \quad \overline{A \cup B} = \overline{A} \cap \overline{B},\\
-                  \text{事件交的对立等于对立的并:} \quad \overline{A \cap B} = \overline{A} \cup \overline{B}.
-              \end{gather}
-    \end{description}
-\end{property}
+随机现象被抽象为集合。事件间的包含、相等、互不相容关系，对应成集合间的包含、相等、不相交；逻辑运算（且、或、非等）对应成集合论运算（交、并、补等）。
 
 \begin{example}
-    设 $A$、$B$、$C$ 是某个随机现象的三个事件,
-    则
-    \begin{enumerate}
-        \item 事件“$A$ 与 $B$ 发生,
-              $C$ 不发生”可表示为: $AB\overline{C}$.
+    设 $A$、$B$、$C$ 是某个随机现象的三个事件, 则
+    \begin{itemize}
+        \item 事件“$A$ 与 $B$ 发生, $C$ 不发生”可表示为: $AB\overline{C}$.
         \item 事件“$A$、$B$、$C$ 中至少有一个发生”可表示为: $A \cup B \cup C$.
         \item 事件“$A$、$B$、$C$ 中至少有两个发生”可表示为: $AB \cup AC \cup BC$.
         \item 事件“$A$、$B$、$C$ 中恰好有两个发生”可表示为: $AB\overline{C} \cup A\overline{B}C \cup \overline{A}BC$.
         \item 事件“$A$、$B$、$C$ 同时发生”可表示为: $ABC$.
-        \item 事件“$A$、$B$、$C$ 都不发生”可表示为: $\overline{A}\overline{B}\overline{C}$.
+        \item 事件“$A$、$B$、$C$ 都不发生”可表示为: $\overline{A} \cap \overline{B} \cap \overline{C}$.
         \item 事件“$A$、$B$、$C$ 不全发生”可表示为: $\overline{A} \cup \overline{B} \cup \overline{C}$.
-    \end{enumerate}
+    \end{itemize}
 \end{example}
 
-为方便概率的定义，并不把$\Omega$的一切子集作为事件，应避免不可测集的出现。
+\begin{property}
+    集合的运算性质：
+    \begin{itemize}
+        \item 交换律
+              \begin{equation}\label{eq:commutativity_set}
+                  A \cup B = B \cup A, \quad AB = BA
+              \end{equation}
+        \item 结合律
+              \begin{equation}
+                  (A \cup B) \cup C = A \cup (B \cup C), \quad (AB)C = A(BC)\label{eq:associative_law_set}
+              \end{equation}
+        \item 分配律
+              \begin{gather}
+                  (A \cup B) \cup C = A \cup (B \cup C),\label{eq:distributive_law_set1}\\
+                  (A \cap B) \cup C = (A \cup C) \cap (B \cup C).\label{eq:distributive_law_set2}
+              \end{gather}
+        \item 对偶律 （De Morgan公式）
+              \begin{gather}
+                  \overline{A \cup B} = \overline{A} \cap \overline{B},\label{eq:DeMorgan_law_set1}\\
+                  \overline{A \cap B} = \overline{A} \cup \overline{B}.\label{eq:DeMorgan_law_set2}
+              \end{gather}
+    \end{itemize}
+\end{property}
+
+
+\begin{remark}
+    并与补是集合中最基本的运算：
+    \begin{itemize}
+        \item 交的运算可通过并与对立来实现 （对偶律）.
+        \item 差的运算可通过对立与交来实现 （$A - B = A\overline{B}$）.
+    \end{itemize}
+\end{remark}
+
+\subsection{概率空间}
+
+为方便概率的定义，避免不可测集的出现，并不把$\Omega$的一切子集作为事件。
 
 \begin{definition}[事件域]
-    事件构成的全体称为\textbf{事件域}$\mathscr{F}$，是$\Omega$的子集族(collection of subsets)，应满足\underline{\,$\sigma$代数}的要求：
+    事件构成的全体称为\textbf{事件域}$\mathscr{F}$，是$\Omega$的子集族(collection of subsets)，应满足\underline{$\sigma$代数}的要求：
     \begin{itemize}
-        \item $\emptyset \in \mathscr{F}$, 无事发生;
-        \item $A\in\mathscr{F} \implies A^{\complement}\in\mathscr{F}$, 即$\mathscr{F}$对补集运算(逻辑上的非)封闭;
-        \item $A_{1},\dots,A_{n},\ldots \in \mathscr{F} \implies \bigcap_{n=1}^{\infty}A_{n} \in \mathscr{F}$, 即$\mathscr{F}$对可数交运算(逻辑上的可数多个且)封闭.
+        \item $\emptyset \in \mathscr{F}$，代表无事发生;
+        \item $A\in\mathscr{F} \implies A^{\complement}\in\mathscr{F}$，即$\mathscr{F}$对补集运算(逻辑上的非)封闭;
+        \item $A_{1},\dots,A_{n},\ldots \in \mathscr{F} \implies \bigcup_{n=1}^{\infty}A_{n} \in \mathscr{F}$，即$\mathscr{F}$对可数并运算封闭。
     \end{itemize}
 \end{definition}
 
-\begin{note}
+\begin{remark}
     可数性是为了在数学上能够恰当地处理\underline{无穷}的概念, 术语中的$\sigma$指的就是\underline{可数并}。由对偶原理可得$\sigma$域同时对可数并运算封闭. 即$\sigma$域对逆, 并, 交, 差的可数次运算封闭.
-\end{note}
+\end{remark}
 
-事件域根据问题的不同要求适当选取, 在概率定义没有困难时, 应尽量选大, 通常以$\Omega$的一切子集作为事件域. 当$\Omega$给定后,若某些子集必须作为事件处理, 能否找到包含他们的$\sigma$域?
+事件域根据问题的不同要求适当选取。在概率定义没有困难时，应尽量取得大，通常以$\Omega$的一切子集作为事件域。当$\Omega$给定后，若某些子集必须作为事件处理，能否找到包含他们的$\sigma$域？
 
 \begin{proposition}
     若给定$\Omega$的一个非空集族$\mathscr{G}$, 必存在$\Omega$上唯一的$\sigma$域$\mathfrak{m}(\mathscr{G})$, 满足下列性质:
@@ -102,13 +117,14 @@
 因此$\mathscr{B}_1$包含一切开区间, 闭区间, 单个实数, 可列个实数, 以及他们经可列次逆, 并, 交, 差运算的集合.
 
 \begin{definition}[概率空间]
-    定义在\underline{事件域}(非样本空间)上的集合函数$P : \mathscr{F} \to \mathbb{R}$称为\textbf{概率}的条件是:
+    设$\Omega$为一个样本空间，$\mathscr{F}$为定义于其上的一个事件域。定义在\underline{事件域}(非样本空间)上的集合函数$P : \mathscr{F} \to \mathbb{R}$称为\textbf{概率}的条件是:
     \begin{description}
-        \item[非负性] $P(A)\ge 0 , \forall A \in \mathscr{F}$
-        \item[规范性] $P(\Omega) = 1$; (如果没有这条就是一般的{\color{lightgray}有限}\emph{测度})
-        \item[可列可加性] 若$A_{1},\dots,A_{n},\ldots \in \mathscr{F}$两两不交, 即$A_{i}\cap A_{j} = \emptyset, \ \forall i\neq j$, 则$P(\bigcup_{n=1}^{\infty}A_{n}) = \sum_{n=1}^{\infty}P(A_{n})$.
+        \item[非负性] $\P(A)\ge 0 , \forall A \in \mathscr{F}$
+        \item[规范性] $\P(\Omega) = 1$; (如果没有这条就是一般的\underline{有限测度})
+        \item[可列可加性] 若$A_{1},\dots,A_{n},\ldots \in \mathscr{F}$两两不交, 即$A_{i}\cap A_{j} = \emptyset, \ \forall i\neq j$, 则
+        \[ \P(\bigcup_{n=1}^{\infty}A_{n}) = \sum_{n=1}^{\infty}\P(A_{n}) \]
     \end{description}
-    我们称$(\Omega,\mathscr{F},P)$为一个\textbf{概率空间}(probability space)
+    并称$(\Omega,\mathscr{F},\P)$为一个\textbf{概率空间}(probability space)
 \end{definition}
 
 \subsection{概率的性质}
@@ -427,7 +443,7 @@
     历史上有一些学者曾亲自做过这个试验,
     下表记录了他们的试验结果.
 
-    
+
 
     这是一个颇为奇妙的方法:
     只要设计一个随机试验,
@@ -884,36 +900,36 @@
 
     \begin{itemize}[(1)]
         \item 对申联系统而言，“系统正常工作”相当于“所有元件正常工作”，即$S_1=A_1A_2$，所以
-        \[
-            P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81.
-        \]
+              \[
+                  P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81.
+              \]
 
-        这也可看出：两个正常工作概率为0.9的元件组成的串联系统，其系统正常工作的概率下降为0.81.
+              这也可看出：两个正常工作概率为0.9的元件组成的串联系统，其系统正常工作的概率下降为0.81.
 
         \item 对并联系统而言，“系统正常工作”相当于“至少一个元件正常工作”，即$S_2=A_1\cup A_2$，所以
-        \begin{align*}
-            P(S_2) & P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2) \\
-                   & = p + p - p^2 = 0.99.
-        \end{align*}
-        或
-        \begin{align*}
-            P(S_2) & = 1 - P(\bar S_2) = 1 - P(\bar{A_1\cup A_2}) = 1 - P(\bar A_1\cap \bar A_2) \\
-                   & = 1 - P(\bar A_1)P(\bar A_2) = 1 - (1-p)^2 = 0.99.
-        \end{align*}
-        这也可看出：两个正常工作概率为0.9的元件组成的并联系统，其系统正常工作的概率提高至0.99.
+              \begin{align*}
+                  P(S_2) & P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2) \\
+                         & = p + p - p^2 = 0.99.
+              \end{align*}
+              或
+              \begin{align*}
+                  P(S_2) & = 1 - P(\bar S_2) = 1 - P(\bar{A_1\cup A_2}) = 1 - P(\bar A_1\cap \bar A_2) \\
+                         & = 1 - P(\bar A_1)P(\bar A_2) = 1 - (1-p)^2 = 0.99.
+              \end{align*}
+              这也可看出：两个正常工作概率为0.9的元件组成的并联系统，其系统正常工作的概率提高至0.99.
 
         \item 在桥式系统中，第3个元件是关键，我们先用全概率公式得
-        \[
-            P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3).
-        \]
-        因为在“第3个元件正常工作”的条件下，系统成为先并后串系统（见图 \ref{fig1.5.1}）. 所以
-        \begin{align*}
-            P(S_3|A_3) & = P\big( ( A_1\cup A_4 )
-            (A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
-                       & = [ 1 - (1-p)^2 ]^2 = 0.9801.
-        \end{align*}
+              \[
+                  P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3).
+              \]
+              因为在“第3个元件正常工作”的条件下，系统成为先并后串系统（见图 \ref{fig1.5.1}）. 所以
+              \begin{align*}
+                  P(S_3|A_3) & = P\big( ( A_1\cup A_4 )
+                  (A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
+                             & = [ 1 - (1-p)^2 ]^2 = 0.9801.
+              \end{align*}
 
-        又因为在“第3个元件不正常工作”的条件下，系统成为先串后并系统（见图 \ref{fig1.5.2}）.
+              又因为在“第3个元件不正常工作”的条件下，系统成为先串后并系统（见图 \ref{fig1.5.2}）.
     \end{itemize}
     \begin{figure}[!ht]
         \centering
