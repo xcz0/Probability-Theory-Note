@@ -122,7 +122,7 @@
         \item[非负性] $\P(A)\ge 0 , \forall A \in \mathscr{F}$
         \item[规范性] $\P(\Omega) = 1$; (如果没有这条就是一般的\underline{有限测度})
         \item[可列可加性] 若$A_{1},\dots,A_{n},\ldots \in \mathscr{F}$两两不交, 即$A_{i}\cap A_{j} = \emptyset, \ \forall i\neq j$, 则
-        \[ \P(\bigcup_{n=1}^{\infty}A_{n}) = \sum_{n=1}^{\infty}\P(A_{n}) \]
+            \[ \P(\bigcup_{n=1}^{\infty}A_{n}) = \sum_{n=1}^{\infty}\P(A_{n}) \]
     \end{description}
     并称$(\Omega,\mathscr{F},\P)$为一个\textbf{概率空间}(probability space)
 \end{definition}
@@ -267,76 +267,31 @@
 \end{definition}
 
 \begin{note}
-    事实上，古典概型的大部分问题都能形象化地用摸球模型来描述以后我们经常研究摸球模型，意义即在于此．
+    古典概型的大部分问题都能形象化地用摸球模型来描述。以后我们经常研究摸球模型，意义即在于此。
 \end{note}
 
 \begin{example}[生日问题]
-    $n$ 个人的生日全不相同的概率 $p_n$ 是多少?
+    $n$个人的生日全不相同的概率$p_n$是多少？
 \end{example}
-
 \begin{solution}
-    把 $n$ 个人看成是 $n$ 个球,
-    将一年 365 天看成是 $N=365$ 个盒子,
-    则“$n$ 个人的生日全不相同”就相当于“恰好有 $n (n \le N)$ 个盒子各有一球”,
-    所以 $n$ 个人的生日全不相同的概率为
-    \begin{equation}
-        P_n = \frac{365!}{365^n (365 - n)!}
-        = \biggl(1 - \frac{1}{365}\biggr) \biggl(1 - \frac{2}{365}\biggr)
-        \dotsb \biggl(1 - \frac{n - 1}{365}\biggr).
-        \label{eq1.2.10}
-    \end{equation}
-
-    上式看似简单，
-    但其具体计算是繁琐的，
-    对此可用以下方法作近似计算：
-
+    把$n$个人看成是$n$个球，将一年365天看成是$N=365$个盒子，则“$n$个人的生日全不相同”就相当于“恰好有$n (n \le N)$个盒子各有一球”，所以$n$个人的生日全不相同的概率为：
+    \[ P_n = \frac{365!}{365^n (365 - n)!} = \biggl(1 - \frac{1}{365}\biggr) \biggl(1 - \frac{2}{365}\biggr) \dotsb \biggl(1 - \frac{n - 1}{365}\biggr) \]
+    上式可用以下方法作近似计算：
     \begin{enumerate}
-        \item 当$n$较小时,
-              \eqref{eq1.2.10} 右边中各因子的第二项之间的乘积 $\frac{i}{365} \times \frac{j}{365}$ 都可以忽略,
-              于是有近似公式
-              \begin{equation}
-                  p_n \approx 1 - \frac{1 + 2 + \dotsb + (n - 1)}{365}
-                  = 1 - \frac{n (n - 1)}{730}.
-                  \label{eq1.2.11}
-              \end{equation}
-
-        \item 当 $n$ 较大时,
-              因为对小的正数 $x$,
-              有 $\ln (1-x) \approx -x$,
-              所以由 \eqref{eq1.2.10} 得
-              \begin{equation}
-                  \ln p_n \approx \frac{1 + 2 + \dotsb + (n - 1)}{365}
-                  = -\frac{n (n - 1)}{730}.
-                  \label{eq1.2.12}
-              \end{equation}
+        \item 当$n$较小时，原式右边中各因子的第二项之间的乘积$\frac{i}{365} \times \frac{j}{365}$都可以忽略，于是有近似公式
+              \[ p_n \approx 1 - \frac{1 + 2 + \dotsb + (n - 1)}{365}  = 1 - \frac{n (n - 1)}{730}\]
+        \item 当 $n$ 较大时，因为对小的正数$x$有$\ln (1-x) \approx -x$，所以由原式得
+              \[ \ln p_n \approx \frac{1 + 2 + \dotsb + (n - 1)}{365} = -\frac{n (n - 1)}{730}\]
     \end{enumerate}
-
-    例如当 $n = 10$ 时,
-    由 \eqref{eq1.2.12} 给出的近似值为 \num{0.8840},
-    而糟确值为 $p_n = 0.8831\dots$;
-    $n = 30$ 时,
-    近似值为 \num{0.3037},
-    精确值为 $p_n = 0.2937$.
-
-    这个数值结果是令人吃惊的,
-    因为许多人会认为:
-    一年365天,
-    30个人的生日全不相同的可能性是较大的,
-    至少会大于 1/2.
-    甚至有人会认为:
-    100个人的生日全不相同的可能性也是较大的.
-    对一些不同的 $n$ 值,
-    表~\ref{tab1.2.7} 列出用 \eqref{eq1.2.12} 近似公式计算出的 $p$ 值.
-
-
-
-    表中最后一行是对立事件“$n$ 个人中至少有两个人生日相同”的概率 $1 - p_n$.
-    当 $n = 60$ 时,
-    $1 - p_n = 0.9922$ 表明在60个人的群体中至少有两个人生日相同的概率超过 99\%,
-    这是出乎人们预料的.
 \end{solution}
 
 \subsection{几何概型}
+
+古典概型的基本思想:
+\begin{description}
+    \item[有限个样本点] 所涉及的随机现象只有有限个样本点，且这些事件两两互不相容的；
+    \item[等可能性] 每个样本点发生的可能性相等。
+\end{description}
 
 \begin{example}[会商问题]
     甲乙两人约定在下午6时到7时之间在某处会面,
