@@ -261,7 +261,7 @@
     \item[等可能性] 每个样本点发生的可能性相等
 \end{description}
 
-\begin{definition}
+\begin{definition}[古典概型]
     若事件 $A$ 含有 $k$ 个样本点, 则事件 $A$ 的概率为
     \[  P (A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} = \frac{k}{n} \]
 \end{definition}
@@ -287,60 +287,38 @@
 
 \subsection{几何概型}
 
-古典概型的基本思想:
+几何概型的基本思想:
 \begin{description}
-    \item[有限个样本点] 所涉及的随机现象只有有限个样本点，且这些事件两两互不相容的；
-    \item[等可能性] 每个样本点发生的可能性相等。
+    \item[不可数样本点] 如果一个随机现象的样本空间$\Omega$充满某个区域，其测度(长度、面积或体积等)大小可用$S_\Omega$表示;
+    \item[测度等可能性] 任意一点落在测度相同的子区域内是等可能的。
 \end{description}
 
+\begin{definition}[几何概型]
+    若将“在区域$\Omega$中随机地取一点，而该点落在区域$g$中”记为事件$A_g$，则其概率定义为
+    \[ \P(A_g) = \frac{S_g}{S_\Omega}\]
+\end{definition}
+
 \begin{example}[会商问题]
-    甲乙两人约定在下午6时到7时之间在某处会面,
-    并约定先到者应等候另一个人 \SI{20}{\minute},
-    过时即可离去.
-    求两人能会面的概率.
+    甲乙两人约定在下午6时到7时之间在某处会面，并约定先到者应等候另一个人\SI{20}{\minute}，过时即可离去。求两人能会面的概率。
 \end{example}
-
 \begin{solution}
-    以 $x$ 和 $y$ 分别表示甲、乙两人到达约会地点的时间 (以 \si{\minute} 为单位),
-    在平面上建立 $xOy$ 直角坐标系 (见图~\ref{fig1.2.3}).
-
+    以$x$和$y$分别表示甲、乙两人到达约会地点的时间 (以 \si{\minute} 为单位)，在平面上建立 $xOy$ 直角坐标系 (见图\ref{fig:meeting_problem}).
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[thick,>=stealth]
-            \draw[->] (-0.5,0) -- (0,0) node[below left]{$O$} -- (1,0) node[below]{20}
-            -- (3,0)node[below]{60} -- (3.5,0)node[below]{$x$};
-            \draw [->] (0,-0.5) -- (0,1) node[left]{20}
-            -- (0,3) node[left]{60}
-            -- (0,3.5) node[right] {$y$};
+            \draw[->] (-0.5,0) -- (0,0) node[below left]{$O$} -- (1,0) node[below]{20} -- (3,0)node[below]{60} -- (3.5,0)node[below]{$x$};
+            \draw [->] (0,-0.5) -- (0,1) node[left]{20} -- (0,3) node[left]{60} -- (0,3.5) node[right] {$y$};
             \filldraw[pattern=vertical lines]
-            (0,0) -- (1,0) -- (3,2) -- (3,3) --
-            (2,3) -- (0,1) -- cycle;
+            (0,0) -- (1,0) -- (3,2) -- (3,3) -- (2,3) -- (0,1) -- cycle;
             \draw (3,0) -- (3,2) (0,3) -- (2,3);
         \end{tikzpicture}
         \caption{会面问题中的 $\Omega$ 与 $A$.}
-        \label{fig1.2.3}
+        \label{fig:meeting_problem}
     \end{figure}
-
-    因为甲、乙都是在 0 至 \SI{60}{\minute} 内等可能地到达,
-    所以由等可能性知这是一个几何概率问题.
-    $(x, y)$ 的所有可能取值是边长为 60 的正方形,
-    其面积为 $S_\Omega = 60^2$.
-    而事件 $A =$“两人能够会面”相当于:
-    \[
-        | x - y | \le 20,
-    \]
-    即图中的阴影部分,
-    其面积为 $S_A = 60^2 - 40^2$,
-    由 \eqref{eq1.2.13} 式知
-    \[
-        P (A) = \frac{S_A}{S_\Omega} = \frac{60^2 - 40^2}{60^2} = 0.5556.
-    \]
-    结果表明:
-    按此规则约会,
-    两人能会面的概率不超过 0.6.
-    若把约定时间改为在下午6时到6时30分,
-    其他不变,
-    则两人能会面的概率提高到 \num{0.8889}.
+    因为甲、乙都是在 0 至 \SI{60}{\minute} 内等可能地到达，所以由等可能性知这是一个几何概率问题。$(x, y)$ 的所有可能取值是边长为 60 的正方形，其面积为 $S_\Omega = 60^2$。而事件 $A =$“两人能够会面”相当于:
+    \[ \abs(x - y) \le 20 \]
+    即图中的阴影部分，其面积为 $S_A = 60^2 - 40^2$，由 \eqref{eq1.2.13} 式知
+    \[ P (A) = \frac{S_A}{S_\Omega} = \frac{60^2 - 40^2}{60^2} = 0.5556 \]
 \end{solution}
 
 \begin{example}[蒲丰投针问题]
@@ -348,7 +326,6 @@
     向平面任意投掷一枚长为 $l (l<d)$ 的针,
     求针与任一平行线相交的概率.
 \end{example}
-
 \begin{solution}
     以 $x$ 表示针的中点与最近一条平行线的距离,
     又以 $\varphi$ 表示针与此直线间的交角,
@@ -394,26 +371,6 @@
     \[
         \pi \approx \frac{2lN}{dn}.
     \]
-
-    历史上有一些学者曾亲自做过这个试验,
-    下表记录了他们的试验结果.
-
-
-
-    这是一个颇为奇妙的方法:
-    只要设计一个随机试验,
-    使一个事件的概率与某个未知数有关,
-    然后通过重复试验,
-    以频率估计概率,
-    即可求得未知数的近似解.
-    一般来说，
-    试验次数越多，
-    则求得的近似解就越精确。
-    随着电子计算机的出现，
-    入们便可利用计算机来大量重复地模拟所设计的随机试验。
-    这种方法得到了迅速的发展和广泛的应用。
-    入们称这种方法为\textbf{随机模拟法},
-    也称为\textbf{蒙特卡罗 (Montecarlo) 法}.
 \end{solution}
 
 \begin{figure}
@@ -431,7 +388,7 @@
         \end{tikzpicture}
         \caption{蒲丰投针问题}.
         \label{fig1.2.4}
-    \end{minipage}%
+    \end{minipage}
     \begin{minipage}[b]{0.5\linewidth}
         \centering
         \begin{tikzpicture}[thick,>=stealth]
@@ -450,8 +407,7 @@
 \end{figure}
 
 \begin{example}
-    在长度为 $a$ 的线段内任取两点将其分为三段,
-    求它们可以构成一个三角形的概率.
+    在长度为 $a$ 的线段内任取两点将其分为三段，求它们可以构成一个三角形的概率。
 \end{example}
 
 \begin{solution}
@@ -483,18 +439,15 @@
          & 0 < y < x + (a - x - y).
     \end{align*}
     整理得
-    \[
-        \frac{a}{2} < x + y < a;\quad 0 < x < \frac{a}{2}; \quad 0 < y < \frac{a}{2}.
-    \]
-    所以事件 $A$ 可用图~\ref{fig1.2.8} 中的阴影部分表示.
-    事件 $A$ 的面积为
+    \[ \frac{a}{2} < x + y < a;\quad 0 < x < \frac{a}{2}; \quad 0 < y < \frac{a}{2} \]
+    所以事件 $A$ 可用图~\ref{fig1.2.8} 中的阴影部分表示。事件 $A$ 的面积为
     \[ S _A = \frac{a^2}{8}. \]
     由此得
     \[P (A) = \frac{1}{4}. \]
 \end{solution}
 
 \begin{figure}
-    \begin{minipage}[b]{0.45\linewidth}
+    \begin{minipage}[b]{0.3\linewidth}
         \centering
         \begin{tikzpicture}[thick,>=stealth,xscale=1.2]
             \draw (0,0) -- (4,0);
@@ -509,7 +462,7 @@
         \caption{长度为 $a$ 的线段分成三段.}
         \label{fig1.2.6}
     \end{minipage}
-    \begin{minipage}[b]{0.45\linewidth}
+    \begin{minipage}[b]{0.3\linewidth}
         \centering
         \begin{tikzpicture}[thick,>=stealth,scale=2.6]
             \draw[->] (-0.2,0) --(1,0)node[below]{$a$}-- (1.5,0)node[below]{$x$};
@@ -518,27 +471,43 @@
             \filldraw[pattern=horizontal lines] (0,0)--(1,0)
             --(0,1)--cycle;
         \end{tikzpicture}
-        \caption{线段分成三段的样本空间 $\Omega$.}
+        \caption{线段分成三段的样本空间}
         \label{fig1.2.7}
+    \end{minipage}
+    \begin{minipage}[b]{0.3\linewidth}
+        \centering
+        \begin{tikzpicture}[thick,>=stealth,scale=2.6]
+            \draw[->] (-0.2,0) --(1,0)node[below]{$a$}-- (1.5,0)node[below]{$x$};
+            \draw[->] (0,-0.2) --(0,0)node[below left]{$O$}
+            --(0,1)node[left]{$a$}--(0,1.2)node[left]{$y$};
+            \draw (0,1) -- (1,0);
+            \filldraw[pattern=horizontal lines]
+            (0.5,0)node[below]{$1/2$} -- (0.5,0.5)
+            --(0,0.5)node[left]{$1/2$} -- cycle;
+        \end{tikzpicture}
+        \caption{构成三角形的条件}
+        \label{fig1.2.8}
     \end{minipage}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[thick,>=stealth,scale=2.6]
-        \draw[->] (-0.2,0) --(1,0)node[below]{$a$}-- (1.5,0)node[below]{$x$};
-        \draw[->] (0,-0.2) --(0,0)node[below left]{$O$}
-        --(0,1)node[left]{$a$}--(0,1.2)node[left]{$y$};
-        \draw (0,1) -- (1,0);
-        \filldraw[pattern=horizontal lines]
-        (0.5,0)node[below]{$1/2$} -- (0.5,0.5)
-        --(0,0.5)node[left]{$1/2$} -- cycle;
-    \end{tikzpicture}
-    \caption{构成三角形的条件}
-    \label{fig1.2.8}
-\end{figure}
-
 \subsection{Bertrand奇论}
+
+在一圆内任取一条弦，问其长度超过该圆内接等边三角形的边长的概率是多少？这是一个几何概率问题，它有三种解法，具体如下：
+\begin{enumerate}
+    \item 由于对称性，可只考察某指定方向的弦。作一条直径垂直于这个方向。显然，只有交直径于1/4与3/4之间的弦才能超过正三角形的边长（见图），如此，所求概率为 1/2。
+    \item 由于对称性，可让弦的一端点固定，让另一端点在圆周上作随机移动。若在固定端点作一切线，则与此切线夹角在60°与120°之间的弦才能超过正三角形的边长（见图），如此，所求概率为1/3。
+    \item 圆内弦的位置被其中点唯一确定。在圆内作一同心圆，其半径仅为大圆半径的一半，则大圆内弦的中点落在小圆内，此弦长才能超过正三角形的边长（见图），如此，所求概率为1/4。
+\end{enumerate}
+
+同一问题有三种不同答案，究其原因在圆内“取弦”时规定尚不够具体，不同的“等可能性假定”导致了不同的样本空间。具体如下：其中
+“均匀分布”应理解为“等可能取点”。
+\begin{enumerate}
+    \item 解法一中假定弦的中点在直径上均匀分布，直径上的点组成样本空间
+    \item 解法二中假定弦的另 一 活动端点在圆周上均匀分布，圆周上的点组成样本空间
+    \item 解法三中假定弦的中点在大圆内均匀分布，大圆内的点组成样本空间
+\end{enumerate}
+
+可见，上述三个答案是针对三个不同样本空间引起的，它们都是正确的，贝特朗奇论引起人们注意，在定义概率时要事先明确指出样本空间是什么．
 
 \section{条件概率}
 
@@ -932,3 +901,16 @@
                & = 0.9\times 0.9801 + 0.1 \times 0.9639 = 0.9785.
     \end{align*}
 \end{solution}
+
+\begin{problemset}[错题记录]
+    \item （茆1.2.4）从一副52张的扑克牌中任取4张，求下列事件的概率:
+    \begin{enumerate}
+      \item 全是黑桃;
+      \item 同花;
+      \item 没有两张同一花色;
+      \item 同色.
+    \end{enumerate}
+    \item （茆1.2.5）考虑一元二次方程$x^2+Bx+C=O$，其中$B,C$分别是将一颗骰子接连掷两次先后出现的点数，求该方程有实根的概率和有重根的概率
+    \item （茆1.2.10）从$n$个数$1, 2, \cdots, n$中任取2个，问其中一个小于$k (1 < k < n)$，另一个大于$k$的概率是多少？
+    
+\end{problemset}
