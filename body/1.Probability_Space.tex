@@ -109,9 +109,9 @@
 
 若$x,y$为任意实数,由于:
 \begin{align*}
-    \{x\}  & =  \bigcap_{n=1}^{\infty}\left[x, x+\frac{1}{n}\right) \\
-    (x, y) & =  [x, y)-\{x\}                                        \\
-    [x, y] & =  [x, y)+\{y\}                                        \\
+    \{x\}  & =  \bigcap_{n=1}^{\infty}\left[x, x+\frac1{n}\right) \\
+    (x, y) & =  [x, y)-\{x\}                                      \\
+    [x, y] & =  [x, y)+\{y\}                                      \\
     (x, y] & =  [x, y)+\{y\}-\{x\}
 \end{align*}
 因此$\mathscr{B}_1$包含一切开区间, 闭区间, 单个实数, 可列个实数, 以及他们经可列次逆, 并, 交, 差运算的集合.
@@ -132,124 +132,122 @@
 \begin{property}
     概率的性质:
     \begin{itemize}
-        \item $P(\Omega)=1$;
+        \item $P(\emptyset)=0$;
         \item $P(A^{\complement})=1-P(A)$;
         \item 若$A \subseteq B $ 则 $P(A)\le P(B)$;
     \end{itemize}
 \end{property}
 
-\begin{corollary}[加法公式]
-    基础形式:
-    \[ P(A \cup B) = P(A) + P(B) - P(AB) \]
-    一般形式:
-    \begin{align*}
-         & P\left(A_{1} \cup A_{2} \cup \cdots \cup A_{n}\right) =  \sum_{i=1, \cdots, n} P\left(A_{i}\right)-\sum_{\substack{i<j \\
-        i, j=1, \cdots, n}} P\left(A_{i} A_{j}\right)                                                                             \\
-         & +\sum_{\substack{i<j<k                                                                                                 \\i, j, k=1, \cdots, n}} P\left(A_{i} A_{j} A_{k}\right)-\cdots+(-1)^{n-1} P\left(A_{1} A_{2} \cdots A_{n}\right)
-    \end{align*}
-    特别地, 若事件出现个数相同时概率相等,则可简化为:
-    \[ P\left(A_{1} \cup A_{2} \cup \cdots \cup A_{n}\right)=n P_{1} - \binom{n}{2} P_{2} + \binom{n}{3} P_{3}- \cdots+(-1)^{n-1} P_{n} \]
-\end{corollary}
-
-显然,可列可加性可以推出有限可加性. 但是一般来讲，由有限可加性并不能推出可列可加性. 设$A_i \in \mathscr{F}, i=1,2,\cdots $且两两互不相容, 若希望由有限可加性推出可列可加性,则需要下式成立:
-\[ \lim_{n \to \infty}P(\sum_{i=1}^n A_i) =P(\lim_{n \to \infty}\sum_{i=1}^{n} A_i) \]
-
-\begin{definition}
-    对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中任何一个单调不减的集序列$\{ S_n \}$(即$ S_n \in \mathscr{F}, S_n \subseteq  S_{n+1} $)均满足:
-    \[ \lim_{n \to \infty}P(S_n) =P(\lim_{n \to \infty} S_n) \]
-    则称它是\textbf{下连续的}.
-\end{definition}
-
-故若令$S_n = \sum_{i=1}^n A_n$, 则可列可加性条件等价于有限可加性加下连续.
-
 \begin{example}
-    口袋中有编号为 1, 2, \dots, $n$ 的 $n$ 个球,
-    从中有放回地任取 $m$ 次,
-    求取出的 $m$ 个球的最大号码为 $k$ 的概率.
+    口袋中有编号为$1, 2, \cdots, n$的$n$个球，从中有放回地任取$m$次，求取出的$m$个球的最大号码为$k$的概率。
 \end{example}
-
 \begin{solution}
-    记事件 $A_k$ 为“取出的 $m$ 个球的最大号码为 $k$”.
-    如果直接考虑事件 $A_k$,
-    则比较复杂,
-    因为“最大号码为 $k$”可以包括取到1次 $k$、取到2次 $k$、\dots、取到 $m$ 次$k$.
-
-    为此我们记事件 $B_i$ 为“取出的 $m$ 个球的最大号码小于等于 $i$”, $i=1$, $2$, $\dotsc$, $n$.
-    则 $B$ 发生只需每次从 $1$, $2$, $\dotsc$, $i$ 号球中取球即可.
-    所以由古典概率知
-    \[
-        P(B_i) = \frac{i^m}{n^m}, \quad i = 1, 2, \dotsc, n.
-    \]
-    又因为 $A_k = B_k - B_{k-1}$,
-    且 $B_{k-1} \subset B_k$,
-    由性质~\label{property1.3.4} 得
+    记事件$A_k$为“取出的$m$个球的最大号码为$k$”。如果直接考虑事件$A_k$，则比较复杂，因为“最大号码为$k$”可以包括取到1次 $k$、取到2次$k$、\dots、取到$m$次$k$。为此我们记事件$B_i$为“取出的$m$个球的最大号码小于等于$i$”。则$B_i$发生只需每次从$1,2,\cdots ,i$号球中取球即可。由题可知
+    \[  P(B_i) = \frac{i^m}{n^m}, \quad i = 1, 2, \dotsc, n. \]
+    又因为$A_k = B_k - B_{k-1}$，且 $B_{k-1} \subset B_k$，所以
     \begin{align*}
         P(A_k) & = P(B_k - B_{k-1}) = P(B_k) - P(B_{k-1})                 \\
                & = \frac{k^m - (k - 1)^m}{n^m}, \quad k = 1,2, \dotsc, n.
     \end{align*}
-
-    譬如,
-    $n = 6$, $m = 3$,
-    可算得
-    \[
-        P(A_4) = \frac{4^3 - 3^3}{6^3} = \frac{37}{216} = 0.1713.
-    \]
-    其他的 $P(A_k)$ 也都可算出,
-    现列表如下:
-
-
-
-    这相当于掷三颗骰子,
-    最大点数为6的概率是0.4213,
-    而由
-    \[
-        P(k \le 3) = 0.0046 + 0.0324 + 0.0880 = 0.1250.
-    \]
-    说明:
-    掷三颗骰子,
-    最大点数不超过3的概率仅为0.1250.
 \end{solution}
 
-一般而言,
-求“至少有一个……”的概率时,
-用对立事件公式去求较为方便.
-但下面例~\ref{exam1.3.6} 的配对问题却不能用对立事件去求解,
-而一定要将事件“至少有个……”表示成事件的并,
-然后用一般事件的加法公式去求解.
+\begin{proposition}[加法公式]\label{pro:addition_law}
+    基础形式:
+    \[ P(A \cup B) = P(A) + P(B) - P(AB) \]
+    一般形式:
+    \begin{align*}
+        P\biggl(\bigcup_{i=1}^n A_i \biggr)= & \sum_{i=1}^n P (A_i) - \sum_{1\le i < j < \le n}P(A_i A_j)+                             \\
+                                             & \sum_{1 \le i < j < k \le n} P(A_i A_j A_k)+ \dotsb + (-1)^{n-1} P(A_1 A_2 \dotsb A_n). \\
+    \end{align*}
+    特别地，若事件出现个数相同时概率相等，则可简化为:
+    \[ P\biggl( \bigcup_{i=1}^n A_i \biggr)=n P_{1} - \binom{n}{2} P_{2} + \binom{n}{3} P_{3}- \cdots+(-1)^{n-1} P_{n} \]
+\end{proposition}
 
-\begin{example}[配对问题]\label{exam1.3.6}
-    在一个有 $n$ 个人参加的晚会上,
-    每个人带了一件礼物,
-    且假定各人带的礼物都不相同.
-    晚会期间各人从放在一起的 $n$ 件礼物中随机抽取一件,
-    问至少有一个人自己抽到自己礼物的概率是多少?
+\begin{corollary}
+    对任意$n$个事件$A_1,\cdots ,A_n$有
+    \[ P \biggl( \bigcup_{i=1}^n A_i \biggr) \le \sum _{i=1} ^n P (A_i). \]
+\end{corollary}
+
+\begin{example}[配对问题]\label{exam:pairing}
+    在一个有$n$个人参加的晚会上，每个人带了一件礼物，且假定各人带的礼物都不相同。晚会期间各人从放在一起的$n$件礼物中随机抽取一件，问至少有一个人自己抽到自己礼物的概率是多少？
 \end{example}
 
 \begin{solution}
-    以 $A_i$ 记事件“第 $i$ 个人自己抽到自己的礼物”,
-    $i=1,\dotsc,n$.
-    所求概率为 $P(A_1 \cup A_2 \cup \dotsb \cup A_n)$.
-    因为
+    以$A_i$记事件“第$i$个人自己抽到自己的礼物”，则所求概率为$P(A_1 \cup A_2 \cup \dotsb \cup A_n)$。因为
     \begin{align*}
-         & P(A_1) = P(A_2) = \dotsb = P(A_n) =\frac{1}{n},                                              \\
-         & P(A_1 A_2) = P(A_1 A_3) = \dotsb = P(A_{n-1} A_n) = \frac{1}{n (n-1)},                       \\
-         & P(A_1 A_2 A_3) = P(A_1 A_2 A_4) = \dotsb = P(A_{n-2} A_{n-1} A_n) = \frac{1}{n (n-1) (n-2)}, \\
-         & \ldots                                                                                       \\
-         & P(A_1 A_2 \dotsb A_n) = \frac{1}{n!}.
+         & P(A_1) = P(A_2) = \dotsb = P(A_n) =\frac1{n}                                              \\
+         & P(A_1 A_2) = P(A_1 A_3) = \dotsb = P(A_{n-1} A_n) = \frac1{n (n-1)}                       \\
+         & P(A_1 A_2 A_3) = P(A_1 A_2 A_4) = \dotsb = P(A_{n-2} A_{n-1} A_n) = \frac1{n (n-1) (n-2)} \\
+         & \ldots                                                                                    \\
+         & P(A_1 A_2 \dotsb A_n) = \frac1{n!}
     \end{align*}
-    所以由概率的加法公式 \eqref{eq1.3.6} 得
-    \[
-        P(A_1 \cup A_2 \cup \dotsb \cup A_n) = 1 - \frac{1}{2!} + \frac{1}{3!} - \frac{1}{4!} + \dotsb + (-1)^{n-1} \frac{1}{n!}.
-    \]
-    譬如,
-    当 $n=5$ 时,
-    此概率为 \num{0.6333};
-    当 $n \ge 10$ 时,
-    此概率近似为 $1 - e^{-1} = 0.6321$.
-    这表明:
-    即使参加晚会的人很多 (譬如 100 人以上),
-    事件“至少有一个人自己抽到自己礼物”也不是必然事件.
+    再由概率的加法公式\ref{pro:addition_law}得
+    \[ P(A_1 \cup A_2 \cup \dotsb \cup A_n) = 1 - \frac1{2!} + \frac1{3!} - \frac1{4!} + \dotsb + (-1)^{n-1} \frac1{n!} \]
 \end{solution}
+
+显然，可列可加性可以推出有限可加性。但是一般而言，由有限可加性不能推出可列可加性。设$A_i \in \mathscr{F}, i=1,2,\cdots $且两两互不相容，则由概率的有限可加性只能推出下式成立：
+\[ P\biggl( \bigcup _{i=1} ^n A_i \biggr)=\sum_{i=1}^n P(A_i) \]
+这个等式的左边对任意$n$都不超过$1$，因此右边的正项级数收敛。这样应有
+\[ \lim_{n \to \infty}P\biggl(\bigcup_{i=1}^n A_i \biggr) =\lim_{n \to \infty}\sum_{i=1}^n P(A_i)=\sum_{i=1}^{\infty} P(A_i) \]
+即若希望由有限可加性推出可列可加性，则需要下式成立:
+\[ P(\sum_{i=1}^{\infty} A_i)=\sum_{i=1}^{\infty} P(A_i)=\lim_{n \to \infty}P(\sum_{i=1}^n A_i) \]
+可写为：
+\[ P(\lim_{n \to \infty}\sum_{i=1}^{n} A_i)=\lim_{n \to \infty}P(\sum_{i=1}^n A_i) \]
+
+若记
+\[ S_n=\sum_{i=1}^n A_i \]
+则$S_n \in \mathscr{F}$而且$S_n \subseteq S_{n+1}$, 即$\{ S_n \}$是$\mathscr{F}$中一个单调不减的集序列，这时将上式改写改写为：
+\[ P(\lim_{n \to \infty}S_n)=\lim_{n \to \infty}P(S_n) \]
+
+\begin{definition}[下连续]
+    对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不减}的集序列$\{ S_n \}$均满足:
+    \[ \lim_{n \to \infty}P(S_n) =P(\lim_{n \to \infty} S_n) \]
+    则称它是\textbf{下连续}的.
+\end{definition}
+
+\begin{theorem}
+    若$P$是$\mathscr{F}$上满足$P(\Omega)=1$的非负集合函数，则它具有可列可加性的充要条件为:
+    \begin{itemize}
+        \item 它是有限可加的；
+        \item 它是下连续的．
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    由上述推导可知其充分性。对于其必要性，有限可加也是易知的。设$\{S_n\}$是 $\mathscr{F}$中一个单调不减的事件序列，即
+    \[ \bigcup _{i=1} ^{+\infty} S_i = \lim_{n \to +\infty} S_n \]
+    若定义$S_0 = \emptyset$，则
+    \[ \bigcup_{i=1}^{+\infty} S_i = \bigcup_{i=1}^{+\infty} (S_i - S_{i-1}) \]
+    由于$S_{i-1} \subset S_i$，显然诸$(S_i-S_{i-1})$两两不相容，再由可列可加性得
+    \[ P\biggl( \bigcup_{i=1}^{+\infty} S_i \biggr) = \sum_{i=1}^{+\infty} P(S_i - S_{i-1}) = \lim_{n \to +\infty} \sum_{i=1}^n P (S_i - S_{i-1}) \]
+    由有限可加性得
+    \[ \sum_{i=1}^n P(S_i - S_{i-1}) = P \biggl( \bigcup_{i=1}^n (S_i - S_{i-1}) \biggr) = P(S_n) \]
+    所以
+    \[ P(\lim_{n \to +\infty} S_n) = \lim_{n \to +\infty} P(S_n) \]
+    这就证得了$P$的下连续性.
+\end{proof}
+
+同理定义上连续
+\begin{definition}[上连续]
+    对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不增}的集序列$\{ B_n \}$均满足:
+    \[ \lim_{n \to \infty}P(B_n) =P(\lim_{n \to \infty} B_n) \]
+    则称它是\textbf{上连续}的.
+\end{definition}
+
+\begin{theorem}
+    概率是上连续的
+\end{theorem}
+\begin{proof}
+    设$\{ B_n \}$是单调不增的事件序列，则$\{ \overline{B_n} \}$为单调不减的事件序列，由概率的下连续性得
+    \begin{align*}
+        1 - \lim_{n \to +\infty} P(B_n)
+         & = \lim_{n \to +\infty} [1 - P(B_n)] = \lim_{n \to +\infty} P (\overline{B_n})                                         \\
+         & = P \biggl( \bigcup_{n=1}^{+\infty} \overline{B_n} \biggr) = P \biggl( \overline{\bigcap _{n=1} ^{+\infty} B_n} \biggr) \\
+         & = 1 - P \biggl( \bigcap_{n=1}^{+\infty} B_n \biggr).
+    \end{align*}
+    由于$\{ B_n \}$单调不增，所以
+    \[ \lim_{n \to +\infty} P(B_n) = P \biggl( \bigcap_{n=1}^{+\infty} B_n \biggr) = P \biggl(\lim_{n \to +\infty} B_n \biggr) \]
+\end{proof}
+
 
 \section{古典概型与几何概型}
 
@@ -275,7 +273,7 @@
 \end{example}
 \begin{solution}
     把$n$个人看成是$n$个球，将一年365天看成是$N=365$个盒子，则“$n$个人的生日全不相同”就相当于“恰好有$n (n \le N)$个盒子各有一球”，所以$n$个人的生日全不相同的概率为：
-    \[ P_n = \frac{365!}{365^n (365 - n)!} = \biggl(1 - \frac{1}{365}\biggr) \biggl(1 - \frac{2}{365}\biggr) \dotsb \biggl(1 - \frac{n - 1}{365}\biggr) \]
+    \[ P_n = \frac{365!}{365^n (365 - n)!} = \biggl(1 - \frac1{365}\biggr) \biggl(1 - \frac{2}{365}\biggr) \dotsb \biggl(1 - \frac{n - 1}{365}\biggr) \]
     上式可用以下方法作近似计算：
     \begin{enumerate}
         \item 当$n$较小时，原式右边中各因子的第二项之间的乘积$\frac{i}{365} \times \frac{j}{365}$都可以忽略，于是有近似公式
@@ -443,7 +441,7 @@
     所以事件 $A$ 可用图~\ref{fig1.2.8} 中的阴影部分表示。事件 $A$ 的面积为
     \[ S _A = \frac{a^2}{8}. \]
     由此得
-    \[P (A) = \frac{1}{4}. \]
+    \[P (A) = \frac1{4}. \]
 \end{solution}
 
 \begin{figure}
@@ -827,9 +825,7 @@
               \[
                   P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81.
               \]
-
               这也可看出：两个正常工作概率为0.9的元件组成的串联系统，其系统正常工作的概率下降为0.81.
-
         \item 对并联系统而言，“系统正常工作”相当于“至少一个元件正常工作”，即$S_2=A_1\cup A_2$，所以
               \begin{align*}
                   P(S_2) & P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2) \\
@@ -841,7 +837,6 @@
                          & = 1 - P(\bar A_1)P(\bar A_2) = 1 - (1-p)^2 = 0.99.
               \end{align*}
               这也可看出：两个正常工作概率为0.9的元件组成的并联系统，其系统正常工作的概率提高至0.99.
-
         \item 在桥式系统中，第3个元件是关键，我们先用全概率公式得
               \[
                   P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3).
@@ -852,7 +847,6 @@
                   (A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
                              & = [ 1 - (1-p)^2 ]^2 = 0.9801.
               \end{align*}
-
               又因为在“第3个元件不正常工作”的条件下，系统成为先串后并系统（见图 \ref{fig1.5.2}）.
     \end{itemize}
     \begin{figure}[!ht]
@@ -905,12 +899,17 @@
 \begin{problemset}[错题记录]
     \item （茆1.2.4）从一副52张的扑克牌中任取4张，求下列事件的概率:
     \begin{enumerate}
-      \item 全是黑桃;
-      \item 同花;
-      \item 没有两张同一花色;
-      \item 同色.
+        \item 全是黑桃;
+        \item 同花;
+        \item 没有两张同一花色;
+        \item 同色.
     \end{enumerate}
     \item （茆1.2.5）考虑一元二次方程$x^2+Bx+C=O$，其中$B,C$分别是将一颗骰子接连掷两次先后出现的点数，求该方程有实根的概率和有重根的概率
     \item （茆1.2.10）从$n$个数$1, 2, \cdots, n$中任取2个，问其中一个小于$k (1 < k < n)$，另一个大于$k$的概率是多少？
-    
+    \item （茆1.2.13）把10本书任意地放在书架上，求其中指定的三本书放在一起的概率.
+    \item （茆1.2.19）$n$个男孩，$m$个女孩($m \le n + 1$)随机地排成一排，试求任意两个女孩都不相邻的概率.
+    \item （茆1.2.20）将3个球随机地放入4个杯子中去，求杯子中球的最大个数分别为1, 2, 3的概率各为多少？
+    \item （茆1.2.22）将 $n$ 个完全相同的球 (这时也称球是不可辨的) 随机地放入 $N$ 个盒子中，试求恰好有 $m$ 个空盒的概率
+    \item （茆1.2.23）在区间 $(0,1)$ 中随机地取两个数，求事件“两数之和小于7/5”的概率.
+    \item
 \end{problemset}
