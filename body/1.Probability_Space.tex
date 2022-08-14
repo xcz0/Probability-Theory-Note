@@ -22,15 +22,15 @@
 随机现象被抽象为集合。事件间的包含、相等、互不相容关系，对应成集合间的包含、相等、不相交；逻辑运算（且、或、非等）对应成集合论运算（交、并、补等）。
 
 \begin{example}
-    设 $A$、$B$、$C$ 是某个随机现象的三个事件, 则
+    设$A$、$B$、$C$是某个随机现象的三个事件, 则
     \begin{itemize}
-        \item 事件“$A$ 与 $B$ 发生, $C$ 不发生”可表示为: $AB\overline{C}$.
-        \item 事件“$A$、$B$、$C$ 中至少有一个发生”可表示为: $A \cup B \cup C$.
-        \item 事件“$A$、$B$、$C$ 中至少有两个发生”可表示为: $AB \cup AC \cup BC$.
-        \item 事件“$A$、$B$、$C$ 中恰好有两个发生”可表示为: $AB\overline{C} \cup A\overline{B}C \cup \overline{A}BC$.
-        \item 事件“$A$、$B$、$C$ 同时发生”可表示为: $ABC$.
-        \item 事件“$A$、$B$、$C$ 都不发生”可表示为: $\overline{A} \cap \overline{B} \cap \overline{C}$.
-        \item 事件“$A$、$B$、$C$ 不全发生”可表示为: $\overline{A} \cup \overline{B} \cup \overline{C}$.
+        \item 事件“$A$与$B$发生,$C$不发生”可表示为:$AB\overline{C}$.
+        \item 事件“$A$、$B$、$C$中至少有一个发生”可表示为:$A \cup B \cup C$.
+        \item 事件“$A$、$B$、$C$中至少有两个发生”可表示为:$AB \cup AC \cup BC$.
+        \item 事件“$A$、$B$、$C$中恰好有两个发生”可表示为:$AB\overline{C} \cup A\overline{B}C \cup \overline{A}BC$.
+        \item 事件“$A$、$B$、$C$同时发生”可表示为:$ABC$.
+        \item 事件“$A$、$B$、$C$都不发生”可表示为:$\overline{A} \cap \overline{B} \cap \overline{C}$.
+        \item 事件“$A$、$B$、$C$不全发生”可表示为:$\overline{A} \cup \overline{B} \cup \overline{C}$.
     \end{itemize}
 \end{example}
 
@@ -43,12 +43,12 @@
               \end{equation}
         \item 结合律
               \begin{equation}
-                  (A \cup B) \cup C = A \cup (B \cup C), \quad (AB)C = A(BC)\label{eq:associative_law_set}
+                  (A \cup B) \cup C = A \cup(B \cup C), \quad (AB)C = A(BC)\label{eq:associative_law_set}
               \end{equation}
         \item 分配律
               \begin{gather}
-                  (A \cup B) \cup C = A \cup (B \cup C),\label{eq:distributive_law_set1}\\
-                  (A \cap B) \cup C = (A \cup C) \cap (B \cup C).\label{eq:distributive_law_set2}
+                  (A \cup B) \cup C = A \cup(B \cup C),\label{eq:distributive_law_set1}\\
+                  (A \cap B) \cup C = (A \cup C) \cap(B \cup C).\label{eq:distributive_law_set2}
               \end{gather}
         \item 对偶律 （De Morgan公式）
               \begin{gather}
@@ -74,9 +74,9 @@
 \begin{definition}[事件域]
     事件构成的全体称为\textbf{事件域}$\mathscr{F}$，是$\Omega$的子集族(collection of subsets)，应满足\underline{$\sigma$代数}的要求：
     \begin{itemize}
-        \item $\emptyset \in \mathscr{F}$，代表无事发生;
-        \item $A\in\mathscr{F} \implies A^{\complement}\in\mathscr{F}$，即$\mathscr{F}$对补集运算(逻辑上的非)封闭;
-        \item $A_{1},\dots,A_{n},\ldots \in \mathscr{F} \implies \bigcup_{n=1}^{\infty}A_{n} \in \mathscr{F}$，即$\mathscr{F}$对可数并运算封闭。
+        \item$\emptyset \in \mathscr{F}$，代表无事发生;
+        \item$A\in\mathscr{F} \implies A^{\complement}\in\mathscr{F}$，即$\mathscr{F}$对补集运算(逻辑上的非)封闭;
+        \item$A_{1},\dots,A_{n},\ldots \in \mathscr{F} \implies \bigcup_{n=1}^{\infty}A_{n} \in \mathscr{F}$，即$\mathscr{F}$对可数并运算封闭。
     \end{itemize}
 \end{definition}
 
@@ -119,8 +119,8 @@
 \begin{definition}[概率空间]
     设$\Omega$为一个样本空间，$\mathscr{F}$为定义于其上的一个事件域。定义在\underline{事件域}(非样本空间)上的集合函数$P : \mathscr{F} \to \mathbb{R}$称为\textbf{概率}的条件是:
     \begin{description}
-        \item[非负性] $\P(A)\ge 0 , \forall A \in \mathscr{F}$
-        \item[规范性] $\P(\Omega) = 1$; (如果没有这条就是一般的\underline{有限测度})
+        \item[非负性]$\P(A)\ge 0 , \forall A \in \mathscr{F}$
+        \item[规范性]$\P(\Omega) = 1$; (如果没有这条就是一般的\underline{有限测度})
         \item[可列可加性] 若$A_{1},\dots,A_{n},\ldots \in \mathscr{F}$两两不交, 即$A_{i}\cap A_{j} = \emptyset, \ \forall i\neq j$, 则
             \[ \P(\bigcup_{n=1}^{\infty}A_{n}) = \sum_{n=1}^{\infty}\P(A_{n}) \]
     \end{description}
@@ -132,9 +132,9 @@
 \begin{property}
     概率的性质:
     \begin{itemize}
-        \item $P(\emptyset)=0$;
-        \item $P(A^{\complement})=1-P(A)$;
-        \item 若$A \subseteq B $ 则 $P(A)\le P(B)$;
+        \item$P(\emptyset)=0$;
+        \item$P(A^{\complement})=1-P(A)$;
+        \item 若$A \subseteq B$则$P(A)\le P(B)$;
     \end{itemize}
 \end{property}
 
@@ -142,12 +142,27 @@
     口袋中有编号为$1, 2, \cdots, n$的$n$个球，从中有放回地任取$m$次，求取出的$m$个球的最大号码为$k$的概率。
 \end{example}
 \begin{solution}
-    记事件$A_k$为“取出的$m$个球的最大号码为$k$”。如果直接考虑事件$A_k$，则比较复杂，因为“最大号码为$k$”可以包括取到1次 $k$、取到2次$k$、\dots、取到$m$次$k$。为此我们记事件$B_i$为“取出的$m$个球的最大号码小于等于$i$”。则$B_i$发生只需每次从$1,2,\cdots ,i$号球中取球即可。由题可知
+    记事件$A_k$为“取出的$m$个球的最大号码为$k$”。如果直接考虑事件$A_k$，则比较复杂，因为“最大号码为$k$”可以包括取到1次$k$、取到2次$k$、\dots、取到$m$次$k$。为此我们记事件$B_i$为“取出的$m$个球的最大号码小于等于$i$”。则$B_i$发生只需每次从$1,2,\cdots ,i$号球中取球即可。由题可知
     \[  P(B_i) = \frac{i^m}{n^m}, \quad i = 1, 2, \dotsc, n. \]
-    又因为$A_k = B_k - B_{k-1}$，且 $B_{k-1} \subset B_k$，所以
+    又因为$A_k = B_k - B_{k-1}$，且$B_{k-1} \subset B_k$，所以
     \begin{align*}
         P(A_k) & = P(B_k - B_{k-1}) = P(B_k) - P(B_{k-1})                 \\
                & = \frac{k^m - (k - 1)^m}{n^m}, \quad k = 1,2, \dotsc, n.
+    \end{align*}
+\end{solution}
+
+\begin{example}
+    \[ \lvert P(AB) - P(A)P(B) \rvert \le \frac1{4} \]
+\end{example}
+\begin{solution}
+    设$P(A)\ge P(B)$，则：
+    \[ P(AB)-P(A)P(B)\le P(B)-P(B)P(B)=P(B)[1-P(B)]\le \frac1{4} \]
+    另一方面有：
+    \begin{align*}
+        P(A)P(B)-P(AB) & =P(A)[P(AB)+P(\overline{A}B)]-P(AB)              \\
+                       & =P(A)P(\overline{A}B)+P(AB)[P(A)-1]              \\
+                       & \le P(A)P(\overline{A}B) \le P(A)P(\overline{A}) \\
+                       & =P(A)[1-P(A)]\le \frac1{4}
     \end{align*}
 \end{solution}
 
@@ -156,7 +171,7 @@
     \[ P(A \cup B) = P(A) + P(B) - P(AB) \]
     一般形式:
     \begin{align*}
-        P\biggl(\bigcup_{i=1}^n A_i \biggr)= & \sum_{i=1}^n P (A_i) - \sum_{1\le i < j < \le n}P(A_i A_j)+                             \\
+        P\biggl(\bigcup_{i=1}^n A_i \biggr)= & \sum_{i=1}^n P(A_i) - \sum_{1\le i < j < \le n}P(A_i A_j)+                              \\
                                              & \sum_{1 \le i < j < k \le n} P(A_i A_j A_k)+ \dotsb + (-1)^{n-1} P(A_1 A_2 \dotsb A_n). \\
     \end{align*}
     特别地，若事件出现个数相同时概率相等，则可简化为:
@@ -165,7 +180,7 @@
 
 \begin{corollary}
     对任意$n$个事件$A_1,\cdots ,A_n$有
-    \[ P \biggl( \bigcup_{i=1}^n A_i \biggr) \le \sum _{i=1} ^n P (A_i). \]
+    \[ P \biggl( \bigcup_{i=1}^n A_i \biggr) \le \sum_{i=1}^n P(A_i). \]
 \end{corollary}
 
 \begin{example}[配对问题]\label{exam:pairing}
@@ -185,8 +200,8 @@
     \[ P(A_1 \cup A_2 \cup \dotsb \cup A_n) = 1 - \frac1{2!} + \frac1{3!} - \frac1{4!} + \dotsb + (-1)^{n-1} \frac1{n!} \]
 \end{solution}
 
-显然，可列可加性可以推出有限可加性。但是一般而言，由有限可加性不能推出可列可加性。设$A_i \in \mathscr{F}, i=1,2,\cdots $且两两互不相容，则由概率的有限可加性只能推出下式成立：
-\[ P\biggl( \bigcup _{i=1} ^n A_i \biggr)=\sum_{i=1}^n P(A_i) \]
+显然，可列可加性可以推出有限可加性。但是一般而言，由有限可加性不能推出可列可加性。设$A_i \in \mathscr{F}, i=1,2,\cdots$且两两互不相容，则由概率的有限可加性只能推出下式成立：
+\[ P\biggl( \bigcup_{i=1}^n A_i \biggr)=\sum_{i=1}^n P(A_i) \]
 这个等式的左边对任意$n$都不超过$1$，因此右边的正项级数收敛。这样应有
 \[ \lim_{n \to \infty}P\biggl(\bigcup_{i=1}^n A_i \biggr) =\lim_{n \to \infty}\sum_{i=1}^n P(A_i)=\sum_{i=1}^{\infty} P(A_i) \]
 即若希望由有限可加性推出可列可加性，则需要下式成立:
@@ -213,12 +228,12 @@
     \end{itemize}
 \end{theorem}
 \begin{proof}
-    由上述推导可知其充分性。对于其必要性，有限可加也是易知的。设$\{S_n\}$是 $\mathscr{F}$中一个单调不减的事件序列，即
-    \[ \bigcup _{i=1} ^{+\infty} S_i = \lim_{n \to +\infty} S_n \]
+    由上述推导可知其充分性。对于其必要性，有限可加也是易知的。设$\{S_n\}$是$\mathscr{F}$中一个单调不减的事件序列，即
+    \[ \bigcup_{i=1}^{+\infty} S_i = \lim_{n \to +\infty} S_n \]
     若定义$S_0 = \emptyset$，则
     \[ \bigcup_{i=1}^{+\infty} S_i = \bigcup_{i=1}^{+\infty} (S_i - S_{i-1}) \]
     由于$S_{i-1} \subset S_i$，显然诸$(S_i-S_{i-1})$两两不相容，再由可列可加性得
-    \[ P\biggl( \bigcup_{i=1}^{+\infty} S_i \biggr) = \sum_{i=1}^{+\infty} P(S_i - S_{i-1}) = \lim_{n \to +\infty} \sum_{i=1}^n P (S_i - S_{i-1}) \]
+    \[ P\biggl( \bigcup_{i=1}^{+\infty} S_i \biggr) = \sum_{i=1}^{+\infty} P(S_i - S_{i-1}) = \lim_{n \to +\infty} \sum_{i=1}^n P(S_i - S_{i-1}) \]
     由有限可加性得
     \[ \sum_{i=1}^n P(S_i - S_{i-1}) = P \biggl( \bigcup_{i=1}^n (S_i - S_{i-1}) \biggr) = P(S_n) \]
     所以
@@ -240,8 +255,8 @@
     设$\{ B_n \}$是单调不增的事件序列，则$\{ \overline{B_n} \}$为单调不减的事件序列，由概率的下连续性得
     \begin{align*}
         1 - \lim_{n \to +\infty} P(B_n)
-         & = \lim_{n \to +\infty} [1 - P(B_n)] = \lim_{n \to +\infty} P (\overline{B_n})                                         \\
-         & = P \biggl( \bigcup_{n=1}^{+\infty} \overline{B_n} \biggr) = P \biggl( \overline{\bigcap _{n=1} ^{+\infty} B_n} \biggr) \\
+         & = \lim_{n \to +\infty} [1 - P(B_n)] = \lim_{n \to +\infty} P(\overline{B_n})                                          \\
+         & = P \biggl( \bigcup_{n=1}^{+\infty} \overline{B_n} \biggr) = P \biggl( \overline{\bigcap_{n=1}^{+\infty} B_n} \biggr) \\
          & = 1 - P \biggl( \bigcap_{n=1}^{+\infty} B_n \biggr).
     \end{align*}
     由于$\{ B_n \}$单调不增，所以
@@ -254,13 +269,13 @@
 
 古典概型的基本思想:
 \begin{description}
-    \item[有限个样本点] 所涉及的随机现象只有有限个样本点, 譬如为 $n$ 个, 且这些事件是两两互不相容的；
+    \item[有限个样本点] 所涉及的随机现象只有有限个样本点, 譬如为$n$个, 且这些事件是两两互不相容的；
     \item[等可能性] 每个样本点发生的可能性相等
 \end{description}
 
 \begin{definition}[古典概型]
-    若事件 $A$ 含有 $k$ 个样本点, 则事件 $A$ 的概率为
-    \[  P (A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} = \frac{k}{n} \]
+    若事件$A$含有$k$个样本点, 则事件$A$的概率为
+    \[  P(A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} = \frac{k}{n} \]
 \end{definition}
 
 \begin{note}
@@ -277,7 +292,7 @@
     \begin{enumerate}
         \item 当$n$较小时，原式右边中各因子的第二项之间的乘积$\frac{i}{365} \times \frac{j}{365}$都可以忽略，于是有近似公式
               \[ p_n \approx 1 - \frac{1 + 2 + \dotsb + (n - 1)}{365}  = 1 - \frac{n (n - 1)}{730}\]
-        \item 当 $n$ 较大时，因为对小的正数$x$有$\ln (1-x) \approx -x$，所以由原式得
+        \item 当$n$较大时，因为对小的正数$x$有$\ln (1-x) \approx -x$，所以由原式得
               \[ \ln p_n \approx \frac{1 + 2 + \dotsb + (n - 1)}{365} = -\frac{n (n - 1)}{730}\]
     \end{enumerate}
 \end{solution}
@@ -299,7 +314,7 @@
     甲乙两人约定在下午6时到7时之间在某处会面，并约定先到者应等候另一个人\SI{20}{\minute}，过时即可离去。求两人能会面的概率。
 \end{example}
 \begin{solution}
-    以$x$和$y$分别表示甲、乙两人到达约会地点的时间 (以 \si{\minute} 为单位)，在平面上建立 $xOy$ 直角坐标系 (见图\ref{fig:meeting_problem}).
+    以$x$和$y$分别表示甲、乙两人到达约会地点的时间 (以 \si{\minute} 为单位)，在平面上建立$xOy$直角坐标系 (见图\ref{fig:meeting_problem}).
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[thick,>=stealth]
@@ -309,32 +324,32 @@
             (0,0) -- (1,0) -- (3,2) -- (3,3) -- (2,3) -- (0,1) -- cycle;
             \draw (3,0) -- (3,2) (0,3) -- (2,3);
         \end{tikzpicture}
-        \caption{会面问题中的 $\Omega$ 与 $A$.}
+        \caption{会面问题中的$\Omega$与$A$.}
         \label{fig:meeting_problem}
     \end{figure}
-    因为甲、乙都是在 0 至 \SI{60}{\minute} 内等可能地到达，所以由等可能性知这是一个几何概率问题。$(x, y)$ 的所有可能取值是边长为 60 的正方形，其面积为 $S_\Omega = 60^2$。而事件 $A =$“两人能够会面”相当于:
+    因为甲、乙都是在 0 至 \SI{60}{\minute} 内等可能地到达，所以由等可能性知这是一个几何概率问题。$(x, y)$的所有可能取值是边长为 60 的正方形，其面积为$S_\Omega = 60^2$。而事件$A =$“两人能够会面”相当于:
     \[ \abs(x - y) \le 20 \]
-    即图中的阴影部分，其面积为 $S_A = 60^2 - 40^2$，由 \eqref{eq1.2.13} 式知
-    \[ P (A) = \frac{S_A}{S_\Omega} = \frac{60^2 - 40^2}{60^2} = 0.5556 \]
+    即图中的阴影部分，其面积为$S_A = 60^2 - 40^2$，由 \eqref{eq1.2.13} 式知
+    \[ P(A) = \frac{S_A}{S_\Omega} = \frac{60^2 - 40^2}{60^2} = 0.5556 \]
 \end{solution}
 
 \begin{example}[蒲丰投针问题]
-    平面上画有间隔为 $d (d > 0)$ 的等距平行线,
-    向平面任意投掷一枚长为 $l (l<d)$ 的针,
+    平面上画有间隔为$d (d > 0)$的等距平行线,
+    向平面任意投掷一枚长为$l (l<d)$的针,
     求针与任一平行线相交的概率.
 \end{example}
 \begin{solution}
-    以 $x$ 表示针的中点与最近一条平行线的距离,
-    又以 $\varphi$ 表示针与此直线间的交角,
+    以$x$表示针的中点与最近一条平行线的距离,
+    又以$\varphi$表示针与此直线间的交角,
     见图~\ref{fig1.2.4}.
-    易知样本空间 $\Omega$ 满足
+    易知样本空间$\Omega$满足
     \[
         0 \le x \le d/2, \quad 0 \le \varphi \le \pi,
     \]
-    由这两式可以确定 $x - \varphi$ 平面上的一个矩形 $\Omega$,
+    由这两式可以确定$x - \varphi$平面上的一个矩形$\Omega$,
     这就是样本空间,
-    其面积为 $S_\Omega = d\pi/2$.
-    这时为了针与平行线相交 (记为事件 $A$),
+    其面积为$S_\Omega = d\pi/2$.
+    这时为了针与平行线相交 (记为事件$A$),
     其充要条件是
     \[
         x \le \frac{l}{2} \sin \varphi.
@@ -345,24 +360,24 @@
     所以由等可能性知这是一个几何概率问题.
     由此得
     \[
-        P (A) = \frac{S_A}{S_\Omega}
+        P(A) = \frac{S_A}{S_\Omega}
         = \frac{\int_0^\pi \frac{l}{2} \sin \varphi \, \mathrm{d} \varphi}{\frac{d}{2} \pi}
         = \frac{2l}{d\pi}.
     \]
 
-    如果 $l$, $d$ 为已知,
-    则以 $\pi$ 的值代入上式即可计算得 $P(A)$ 之值.
+    如果$l$,$d$为已知,
+    则以$\pi$的值代入上式即可计算得$P(A)$之值.
     反之,
-    如果已知 $P(A)$ 的值,
-    则也可以利用上式去求 $\pi$,
-    而关于 $P(A)$ 的值,
+    如果已知$P(A)$的值,
+    则也可以利用上式去求$\pi$,
+    而关于$P(A)$的值,
     可用从试验中获得的频率去近似它:
-    即投针 $N$ 次,
-    其中针与平行线相交 $n$ 次,
-    则频率 $n/N$ 可作为 $P(A)$ 的估计值,
+    即投针$N$次,
+    其中针与平行线相交$n$次,
+    则频率$n/N$可作为$P(A)$的估计值,
     于是由
     \[
-        \frac{n}{N} \approx P (A) = \frac{2l}{d\pi},
+        \frac{n}{N} \approx P(A) = \frac{2l}{d\pi},
     \]
     可得
     \[
@@ -398,19 +413,19 @@
             (0,0)-- plot[domain=0:pi,samples=100](\x,{1.3*sin(\x r)}) -- (pi,0)--cycle;
             \node at (1.57,1.6){$\frac l2\sin\varphi$};
         \end{tikzpicture}
-        \caption{蒲丰投针问题中的 $\Omega$ 和 $A$}.
+        \caption{蒲丰投针问题中的$\Omega$和$A$}.
         \label{fig1.2.5}
     \end{minipage}
 \end{figure}
 
 \begin{example}
-    在长度为 $a$ 的线段内任取两点将其分为三段，求它们可以构成一个三角形的概率。
+    在长度为$a$的线段内任取两点将其分为三段，求它们可以构成一个三角形的概率。
 \end{example}
 
 \begin{solution}
     由于是将线段任意分成三段,
     所以由等可能性知这是一个几何概率问题.
-    分别用 $x$, $y$ 和 $a - x - y$ 表示线段被分成的三段长度,
+    分别用$x$,$y$和$a - x - y$表示线段被分成的三段长度,
     见图~\ref{fig1.2.6}.
     则显然应该有
     \[
@@ -422,14 +437,14 @@
     \[
         \Omega = \{(x, y): 0 < x < a, 0 < y < a, 0 < x + y < a\}.
     \]
-    $\Omega$ 的面积为
+    $\Omega$的面积为
     \[
-        S _\Omega = \frac{a^2}{2}.
+        S_\Omega = \frac{a^2}{2}.
     \]
 
     又根据构成三角形的条件:
     三角形中任意两边之和大于第三边,
-    得事件 $A$ 所含样本点 $(x,y)$ 必须满足:
+    得事件$A$所含样本点$(x,y)$必须满足:
     \begin{align*}
          & 0 < a - (x + y) < x + y, \\
          & 0 < x < y + (a - x - y), \\
@@ -437,10 +452,10 @@
     \end{align*}
     整理得
     \[ \frac{a}{2} < x + y < a;\quad 0 < x < \frac{a}{2}; \quad 0 < y < \frac{a}{2} \]
-    所以事件 $A$ 可用图~\ref{fig1.2.8} 中的阴影部分表示。事件 $A$ 的面积为
-    \[ S _A = \frac{a^2}{8}. \]
+    所以事件$A$可用图~\ref{fig1.2.8} 中的阴影部分表示。事件$A$的面积为
+    \[ S_A = \frac{a^2}{8}. \]
     由此得
-    \[P (A) = \frac1{4}. \]
+    \[P(A) = \frac1{4}. \]
 \end{solution}
 
 \begin{figure}
@@ -456,7 +471,7 @@
             \draw (0.5,0.2)node{$x$} (1.7,0.2)node{$y$}
             (3.2,0.2)node{$a-x-y$};
         \end{tikzpicture}
-        \caption{长度为 $a$ 的线段分成三段.}
+        \caption{长度为$a$的线段分成三段.}
         \label{fig1.2.6}
     \end{minipage}
     \begin{minipage}[b]{0.3\linewidth}
@@ -509,29 +524,40 @@
 \section{条件概率}
 
 \begin{definition}[条件概率]
-    令$A,B \in \mathscr{F}$, 且$P(B)>0$称
+    设$A,B \in \mathscr{F}$，且$P(B)>0$称
     \[ P(A|B) = \frac{P(A \cap B)}{P(B)}\]
-    为\textbf{基于于$B$的条件概率}(probability conditional on $B$), 这仍然是一个概率测度.
+    为基于于$B$的\textbf{条件概率}(probability conditional on$B$)。
 \end{definition}
 
+\begin{proposition}
+    条件概率仍是一个概率测度，即若设$P(B) > 0$，则
+    \begin{itemize}
+        \item$P(A|B) \ge 0, \quad A \in \mathscr{F}$,
+        \item$P(\Omega|B) = 1$,
+        \item 若$\mathscr{F}$中的$A_1, A_2, \cdots , A_n, \cdots$互不相容，则
+              \[ P \biggl( \bigcup_{n=1}^{+\infty} A_n | B \biggr) = \sum_{n=1}^{+\infty} P(A_n | B) \]
+    \end{itemize}
+\end{proposition}
+\begin{proof}
+    从条件概率的定义很容易得出前两点。因为$A_1, A_2, \cdots , A_n, \cdots$互不相容，所以$A_1B, A_2B, \cdots , A_nB, \cdots$也互不相容，故
+    \begin{align*}
+        P \biggl( \bigcup_{n=1}^{+\infty} A_n | B \biggr)
+         & = \frac{P \Biggl( \biggl( \bigcup_{n=1}^{+\infty} A_n \biggr) B \Biggr)}{P(B)}
+        = \frac{P \biggl( \bigcup_{n=1}^{+\infty} (A_n B) \biggr)}{P(B)}                  \\
+         & = \sum_{n=1}^{+\infty} \frac{P(A_n B)}{P(B)}
+        = \sum_{n=1}^{+\infty} P(A_n | B).
+    \end{align*}
+\end{proof}
+
 \begin{theorem}[乘法法则]
-    令$A,B \in \mathscr{F}$, 且$P(B)>0$, 则
-    \[ P(A \cap B) = P(A|B)P(B) \]
-    泛化后有:
-    \[ P(A_1 \cap A_2 \cap \cdots \cap A_n) = P(A_{1})P(A_2|A_1)P(A_3|A_1\cap A_2) \cdots  \]
+    设$A,B \in \mathscr{F}$，且$P(B)>0$，则
+    \[ P(AB) = P(A|B)P(B) \]
+    泛化后有：
+    \[ P(A_1 A_2 \cdots A_n) = P(A_{1})P(A_2|A_1)P(A_3|A_1 A_2) \cdots P(A_n|A_1 A_2 \cdots A_{n-1}) \]
 \end{theorem}
 
-\begin{example}[罐子模型]\label{exam1.4.4}
-    设罐中有 $b$ 个黑球、$r$ 个红球,
-    每次随机取出一个球,
-    取出后将原球放回,
-    还加进 $c$ 个同色球和 $d$ 个异色球.
-    记 $B_i$ 为“第 $i$ 次取出的是黑球”,
-    $R_j$ 为“第 $j$ 次取出的是红球”.
-
-    若连续从罐中取出三个球,
-    其中有两个红球、一个黑球.
-    则由乘法公式我们可得
+\begin{example}[罐子模型]\label{ex:pot_model}
+    设罐中有$b$个黑球、$r$个红球，每次随机取出一个球，取出后将原球放回，还加进$c$个同色球和$d$个异色球。记$B_i$为“第$i$次取出的是黑球”，$R_j$为“第$j$次取出的是红球”。若连续从罐中取出三个球，其中有两个红球、一个黑球。则由乘法公式我们可得
     \begin{align*}
         P(B_1 R_2 R_3)
          & = P(B_1) P(R_2 | B_1) P(R_3 | B_1 R_2)                       \\
@@ -546,67 +572,23 @@
     以上概率与黑球在第几次被抽取有关.
 \end{example}
 
-罐子模型也称为波利亚 (Polya) 模型,
-这个模型可以有各种变化,
-具体见下:
-
+罐子模型也称为波利亚(Polya)模型，这个模型可以有各种变化，具体见下:
 \begin{enumerate}
-    \item 当 $c=-1$, $d=0$ 时,
-          即为\textbf{不返回抽样}.
-          此时前次抽取结果会影响后次抽取结果.
-          但只要抽取的黑球与红球个数确定,
-          则概率不依赖其抽出球的次序,
-          都是一样的.
-          此例中有
+    \item 当$c=-1$,$d=0$时，即为\textbf{不返回抽样}。此时前次抽取结果会影响后次抽取结果。但只要抽取的黑球与红球个数确定，则概率不依赖其抽出球的次序，都是一样的。此例中有
           \begin{align*}
               P(B_1 R_2 R_3) & = P(R_1 B_2 R_3) = P(R_1 R_2 B_3)        \\
                              & = \frac{br(r-1)}{(b+r) (b+r-1) (b+r-2)}.
           \end{align*}
-          例~\ref{exam1.4.3} 可以归结为此种情况.
-
-    \item 当 $c=0$, $d=0$ 时,
-          即为\textbf{返回抽样}.
-          此时前次抽取结果不会影响后次抽取结果.
-          故上述三个概率相等,
-          且都等于
-          \[
-              P(B_1 R_2 R_3) = P(R_1 B_2 R_3) = P(R_1 R_2 B_3) = \frac{br^2}{(b+r)^3}.
-          \]
-
-    \item 当 $c>0, d=0$ 时,
-          称为\textbf{传染病模型}.
-          此时,
-          每次取出球后会增加下一次取到同色球的概率,
-          或换句话说,
-          每次发现一个传染病患者,
-          以后都会增加再传染的概率.
-          与前面两个一样,
-          以上三个概率都相等,
-          且都等于
+    \item 当$c=0$,$d=0$时，即为\textbf{返回抽样}。此时前次抽取结果不会影响后次抽取结果。故上述三个概率相等，且都等于
+          \[ P(B_1 R_2 R_3) = P(R_1 B_2 R_3) = P(R_1 R_2 B_3) = \frac{br^2}{(b+r)^3} \]
+    \item 当$c>0, d=0$时，称为\textbf{传染病模型}。此时，每次取出球后会增加下一次取到同色球的概率，或换句话说，每次发现一个传染病患者，以后都会增加再传染的概率。与前面两个一样，以上三个概率都相等，且都等于
           \begin{align*}
               P(B_1 R_2 R_3) & = P(R_1 B_2 R_3) = P(R_1 R_2 B_3)       \\
                              & = \frac{br(r+c)}{(b+r)(b+r+c)(b+r+2c)}.
           \end{align*}
-          从以上可以看出:
-          在罐子模型中只要 $d=0$,
-          则以上三个概率都相等.
-          即只要抽取的黑球与红球个数确定,
-          则概率不依赖其抽出球的次序,
-          都是一样的.
-          但当 $d>0$ 时,
-          就不同了.
-
-    \item 当 $c=0, d>0$ 时,
-          称为\textbf{安全模型}.
-          此模型可解释为:
-          每当事故发生了 (红球被取出),
-          安全工作就抓紧一些,
-          下次再发生事故的概率就会减少;
-          而当事故没有发生时 (黑球被取出),
-          安全工作就放松一些,
-          下次再发生事故的概率就会增大.
-          在这种场合,
-          上述三个概率分别为
+          从以上可以看出：在罐子模型中只要$d=0$，则以上三个概率都相等。即只要抽取的黑球与红球个数确定，则概率不依赖其抽出球的次序，都是一样的。但当$d>0$时，就不同了.
+    \item 当$c=0, d>0$时,
+          称为\textbf{安全模型}。此模型可解释为：每当事故发生了 (红球被取出)，安全工作就抓紧一些，下次再发生事故的概率就会减少；而当事故没有发生时 (黑球被取出)，安全工作就放松一些，下次再发生事故的概率就会增大。在这种场合，上述三个概率分别为
           \begin{align*}
                & P(B_1 R_2 R_3) = \frac{b}{b+r} \frac{r+d}{b+r+d} \frac{r+d}{b+r+2d}, \\
                & P(R_1 B_2 R_3) = \frac{r}{b+r} \frac{b+d}{b+r+d} \frac{r+d}{b+r+2d}, \\
@@ -615,107 +597,79 @@
 \end{enumerate}
 
 \begin{theorem}[全概率公式]
-    设 $B_1, B_2, \dotsc, B_n$ 为样本空间 $\Omega$ 的一个分割, 且互不相容, 即$\bigcup _{i=1} ^n B_i = \Omega, B_i B_j= \emptyset for i \neq j $
-    如果 $P(B_i) > 0$, $i=1, 2, \dotsc, n$,
-    则对任一事件 $A$ 有
-    \begin{equation}
-        P(A) = \sum_{i=1}^n P(B_i) P(A | B_i).
-    \end{equation}
+    设可列个事件$B_1, B_2, \cdots, B_n, \cdots $互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则：
+    \[ P(A) = \sum_{i=1}^{\infty} P(B_i) P(A | B_i) ,\quad \forall A \in \mathscr{F}\]
 \end{theorem}
 
 \begin{note}
-    $P(A | B_i)$可视为事件$A$在$B_i$上的平均, $P(B_i)$则为其权重.
+    $P(A | B_i)$可视为事件$A$在$B_i$上的分量，$P(B_i)$则为其权重，加权平均后得到$P(A)$
 \end{note}
 
-\begin{theorem}[Bayes定理]
-    设 $B_1, B_2, \dotsc, B_n$ 为样本空间 $\Omega$ 的一个分割, 且互不相容, 即$\bigcup _{i=1} ^n B_i = \Omega, B_i B_j= \emptyset for i \neq j $
-    如果 $P(A) > 0$, $P(B_i) > 0$, $i = 1,2, \dotsc, n$,
-    则
-    \begin{equation}
-        P (B_i | A) = \frac{P(B_i) P(A|B_i)}{\sum_{j=1}^n P(B_j) P(A|B_j)}
-    \end{equation}
+\begin{proof}
+    因为$A \subseteq \bigcup_{i=1}^{\infty} B_i$，所以
+    \[ A = A (\bigcup_{n=1}{\infty} B_i) = \bigcup_{i=1}{\infty} (A B_i) \]
+    且$AB_1, AB_2, \cdots, AB_n, \cdots $互不相容，所以由可加性得
+    \[ P(A) = P \biggl( \bigcup_{i=1}^{\infty} (AB_i) \biggr) = \sum_{i=1}^{\infty} P (AB_i) \]
+    再将$P(AB_i) = P(B_i) P(A|B_i)$，代人上式即得全概率公式。
+\end{proof}
+
+\begin{corollary}
+    \[ P(A) = P(B) P(A|B) + P(\overline{B}) P(A|\overline{B}) \]
+\end{corollary}
+
+\begin{example}[敏感性问题调查]
+    学生阅读黄色书刊和观看黄色影像会严重影响学生身心健康发展。但这属个人隐私行为。现在要设计一个调查方案，从调查数据中估计出学生中阅读黄色书刊和观看黄色影像的比率$p$.
+\end{example}
+
+敏感性问趣的调查方案，关键要使被调查者愿意作出真实回答又能保守个人秘密。经过多年研究和实践，一些心理学家和统计学家设计了一种调查方案，在这个方案中被调查者只需回答以下两个问题中的一个问题，而且只需回答“是”或“否”。
+\begin{itemize}
+    \item 你的生日是否在7月1日之前？
+    \item 你是否看过黄色书刊或影像？
+\end{itemize}
+
+这个调查方来看似简单，但为了消除被调查者的顾虑，使被调查者确信他这次调查不会泄露个人秘密，在操作上有以下关键点:
+\begin{itemize}
+    \item 被调查者在没有旁人的情况下，独自一人回答问题.
+    \item 被调查者从只有白球和红球的罐子中随机抽一只球，看过颜色后放回。若抽到白球，则回答问题A；若抽到红球，则回答问题B。
+\end{itemize}
+如此的调查方法，主要在于旁人无法知道被调查回答的是问题 A 还是问题 B，由此可以极大地消除被调查者的顾虑。现在的问题是如何分析调查的结果。很显然，我们只对问题B是感兴趣。
+
+首先假设有$n$张答卷($n$ 较大)，其中有$k$张回答“是”。有两个信息我们是预先知道的：
+\begin{itemize}
+    \item 在参加人数较多的情况，任选一人其生日在7月1日之前的概率为0.5.
+    \item 罐中红球的比率$\pi$。
+\end{itemize}
+
+由全概率公式得
+\[ P(\text{是}) = P(\text{白球}) P(\text{是} | \text{白球}) + P(\text{红球}) P(\text{是} | \text{红球}) \]
+将$P(\text{红球}) = \pi, P(\text{白球}) = 1-\pi, P(\text{是} | \text{白球}) = 0.5, P(\text{是} | \text{红球}) = p$代入上式右边，而上式左边用频率$k/n$代替概率$P (\text{是})$，得
+\[ \frac{k}{n} = 0.5 (1 - \pi) + p \cdot \pi \]
+由此得
+\[ p = \frac{k/n - 0.5(1 - \pi)}{\pi} \]
+
+\begin{theorem}[Bayes定理]\label{thm:Bayes_Theorem}
+    设可列个事件$B_1, B_2, \cdots, B_n, \cdots $互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则
+    \[ P(B_i | A) = \frac{P(B_i) P(A|B_i)}{\sum_{j=1}^n P(B_j) P(A|B_j)} \]
 \end{theorem}
 
 \begin{example}
-    某地区居民的肝癌发病率为 \num{0.0004},
-    现用甲胎蛋白法进行普查.
-    医学研究表明,
-    化验结果是存有错误的.
-    已知患有肝癌的人其化验结果 \SI{99}{\percent} 呈阳性 (有病),
-    而没患肝癌的人其化验结果 \SI{99.9}{\percent} 呈阴性 (无病).
-    现某人的检查结果呈阳性,
-    问他真的患肝癌的概率是多少?
+    某地区居民的肝癌发病率为\num{0.0004}，现用甲胎蛋白法进行普查。医学研究表明，化验结果是存有错误的。已知患有肝癌的人其化验结果 \SI{99}{\percent} 呈阳性 (有病)，而没患肝癌的人其化验结果 \SI{99.9}{\percent} 呈阴性 (无病)。现某人的检查结果呈阳性，求其真患肝癌的概率。
 \end{example}
-
 \begin{solution}
-    记 $B$ 为事件“被检查者患有肝癌”,
-    $A$ 为事件“检查结果呈阳性”.
-    由题设知
+    记$B$为事件“被检查者患有肝癌”，$A$为事件“检查结果呈阳性”。由题设知
     \begin{gather*}
         P(B) = 0.0004, \quad P(\overline{B}) = 0.996,\\
         P(A|B) = 0.99, \quad P(A|\overline{B}) = 0.001.
     \end{gather*}
-
-    我们现在的目的是求 $P(B|A)$.
     由贝叶斯公式得
     \begin{align*}
         P(B|A) & = \frac{P(B) P(A|B)}{P(B) P(A|B) + P(\overline{B}) P(A|\overline{B})} \\
                & = \frac{0.0004 \times 0.99}{0.0004 \times 0.99 + 0.9996 \times 0.001} \\
                & = 0.284.
     \end{align*}
-    这表明,
-    在检查结果呈阳性的人中,
-    真患肝癌的人不到 \SI{30}{\percent},
-    这个结果可能会使人吃惊,
-    但仔细分析一下就可以理解了.
-    因为肝癌发病率很低,
-    在 \num{10000} 个人中,
-    约有 4 人,
-    而约有 \num{9996} 个人不惠肝癌.
-    对 \num{10000} 个人用甲胎蛋白法进行检查,
-    按其错检的概率可知,
-    \num{9996} 个不患肝癌者中约有 $9996 \times 0.001 \cong 9.994$ 个呈阳性.
-    另外 4 个真患肝癌者的检查报告中约有 $4 \times 0.99 \cong 3.96 $ 个呈阳性.
-    仅从 \num{13.956} 个呈阳性者中看,
-    真患肝癌的 3.96 人约占 \SI{28.4}{\percent}.
 \end{solution}
 
-\begin{example}
-    伊索寓言“孩子与狼”讲的是一个小孩每天到山上放羊，山里有狼出没.第一天，他在山上喊：“狼来了！狼来了！”，山下的村民闻声便去打狼，可到山上，发现狼没有来；第二天仍是如此；第三天，狼真的来了，可无论小孩怎么喊叫，也没有人来救他，因为前二次他说了谎，人们不再相信他了.
-\end{example}
-
-现在用贝叶斯公式来分析此寓言中村民对这个小孩的可信程度是如何下降的.
-
-首先记事件$A$为“小孩说谎”，记事件$B$为“小孩可信”.不妨设村民过去对这个小孩的印象为
-\begin{equation}\label{eq1.4.7}
-    P(B) = 0.8,\quad P(\bar B) = 0.2.
-\end{equation}
-
-我们现在用贝叶斯公式来求$P(B|A)$，亦即这个小孩说了一次谎后，村民对他可信程度的改变.
-
-在贝叶斯公式中我们要用到概率$P(A|B)$和$P(A|\bar B)$，这两个概率的含义是：前者为“可信”$(B)$的孩子“说谎”$(A)$的可能性，后者为“不可信”$(\bar B)$的孩子“说谎”$(A)$的可能性.在此不妨设
-\[
-    P(A|B) = 0.1,\quad P(A|\bar B) = 0.5.
-\]
-
-第一次村民上山打狼，发现狼没有来，即小孩说了谎$(A)$.村民根据这个信息，对这个小孩的可信程度改变为（用贝叶斯公式）
-\begin{align*}
-    P(B|A) & = \frac{P(B)P(A|B)}{P(B)P(A|B) + P(\bar B)P(A|\bar B) }     \\
-           & = \frac{0.8\times0.1}{0.8\times0.1 + 0.2\times0.5} = 0.444.
-\end{align*}
-
-这表明村民上了一次当后，对这个小孩的可信程度由原来的0.8调整为
-0.444，也就是 \eqref{eq1.4.7} 调整为
-\begin{equation}\label{eq1.4.8}
-    P(B) = 0.444,\quad P(\bar B) = 0.556.
-\end{equation}
-在此基础上，我们再一次用贝叶斯公式来计算$P(B|A)$，亦即这个小孩第二次说谎后，村民对他的可信程度改变为
-\[
-    P(B|A) = \frac{0.444\times0.1}{0.444\times0.1 + 0.556\times0.5} = 0.138.
-\]
-
-这表明村民们经过两次上当，对这个小孩的可信程度已经从0.8下降到了
-0.138，如此低的可信度，村民听到第三次呼叫时怎么再会上山打狼呢?
+条件概率的三公式中：乘法公式是求事件交的概率；全概率公式是求一个复杂事件的概率；而贝叶斯公式是求一个条件概率。在贝叶斯公式中，称 $P(B_i)$为$B_i$的\textbf{先验概率}，称$P(B_i |A)$为$B_i$的\textbf{后验概率}。贝叶斯公式是专门用于计算后验概率的，也就是通过$A$的发生这个新信息，来对$B_i$的概率作出的修正。
 
 \section{独立性}
 
@@ -730,7 +684,7 @@
 \end{definition}
 
 \begin{note}
-    当$P(A)>0$时, 我们有$ P(B|A) = P(B) \iff B \Vbar A$, 由此可得到\underline{$B$独立于$A$}的直观理解
+    当$P(A)>0$时, 我们有$P(B|A) = P(B) \iff B \Vbar A$, 由此可得到\underline{$B$独立于$A$}的直观理解
 \end{note}
 
 \begin{property}
@@ -774,7 +728,7 @@
     \end{align*}
     同理可得
     \begin{align*}
-        P(\,\text{乙获胜}\,) & = P (\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)      \\
+        P(\,\text{乙获胜}\,) & = P(\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)       \\
                              & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
                              & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
                              & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
@@ -908,7 +862,9 @@
     \item （茆1.2.13）把10本书任意地放在书架上，求其中指定的三本书放在一起的概率.
     \item （茆1.2.19）$n$个男孩，$m$个女孩($m \le n + 1$)随机地排成一排，试求任意两个女孩都不相邻的概率.
     \item （茆1.2.20）将3个球随机地放入4个杯子中去，求杯子中球的最大个数分别为1, 2, 3的概率各为多少？
-    \item （茆1.2.22）将 $n$ 个完全相同的球 (这时也称球是不可辨的) 随机地放入 $N$ 个盒子中，试求恰好有 $m$ 个空盒的概率
-    \item （茆1.2.23）在区间 $(0,1)$ 中随机地取两个数，求事件“两数之和小于7/5”的概率.
-    \item
+    \item （茆1.2.22）将$n$个完全相同的球 (这时也称球是不可辨的) 随机地放入$N$个盒子中，试求恰好有$m$个空盒的概率
+    \item （茆1.2.23）在区间$(0,1)$中随机地取两个数，求事件“两数之和小于7/5”的概率.
+    \item （茆1.3.4）从$0, 1, 2, \cdots ,9$十个数字中任意选出三个不同的数字,试求事件“三个数字中含 0 但不含 5”的概率
+    \item （茆1.3.8）从数字$1, 2, \cdots ,9$中可重复地任取$n$次，求$n$次所取数字的乘积能被$10$整除的概率.
+    \item （茆1.3.23）证明:$\lvert P(AB) - P(A)P(B) \rvert \le \frac1{4}$
 \end{problemset}
