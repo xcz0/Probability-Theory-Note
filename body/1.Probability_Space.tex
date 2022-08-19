@@ -478,7 +478,9 @@
 
 可见，上述三个答案是针对三个不同样本空间引起的，它们都是正确的，贝特朗奇论引起人们注意，在定义概率时要事先明确指出样本空间是什么．
 
-\section{条件概率}
+\section{条件概率与独立}
+
+\subsection{条件概率}
 
 \begin{definition}[条件概率]
     设$A,B \in \mathscr{F}$，且$P(B)>0$称
@@ -627,12 +629,12 @@
 
 条件概率的三公式中：乘法公式是求事件交的概率；全概率公式是求一个复杂事件的概率；而贝叶斯公式是求一个条件概率。在贝叶斯公式中，称 $P(B_i)$为$B_i$的\textbf{先验概率}，称$P(B_i |A)$为$B_i$的\textbf{后验概率}。贝叶斯公式是专门用于计算后验概率的，也就是通过$A$的发生这个新信息，来对$B_i$的概率作出的修正。
 
-\section{独立性}
+\subsection{独立性}
 
 \begin{definition}[事件的独立性]
     如果$A,B\in\mathscr{F}$满足
     \[ P(A\cap B) = P(A)P(B), \]
-    则称$A$与$B$\textbf{独立}(independent), 记为$A \Vbar B$.
+    则称$A$与$B$\textbf{独立}(independent), 记为$A \indep B$.
 
     对于事件集$A_1, A_2, \dotsc, A_n$, 若对于其中任意子集$A_{i_1}, A_{i_2}, \dotsc, A_{i_n}$有:
     \[ P(A_{i_1} \cap \cdots  \cap A_{i_n}) =P(A_{i_1})\cdots P(A_{i_n})  \]
@@ -640,7 +642,7 @@
 \end{definition}
 
 \begin{note}
-    当$P(A)>0$时, 我们有$P(B|A) = P(B) \iff B \Vbar A$, 由此可得到\underline{$B$独立于$A$}的直观理解
+    当$P(A)>0$时，$P(B|A) = P(B) \iff B \indep A$, 由此可得到\underline{$B$独立于$A$}的直观理解
 \end{note}
 
 \begin{property}
@@ -658,49 +660,45 @@
         \end{tikzpicture}
     \end{center}
 \end{property}
-
-\begin{definition}[事件域的独立性]
-    若$\mathscr{G} \subset \mathscr{F}$与$\mathscr{H} \subset \mathscr{F}$满足
-    \[ A \Vbar B, \quad \forall A\in\mathscr{G},\ B\in\mathscr{H}, \]
-    则称$\mathscr{G}$与$\mathscr{H}$独立, 记为$\mathscr{G} \Vbar \mathscr{H}$
-\end{definition}
-
-测度论告诉我们一个重要结果: 如果$\mathscr{G}$对交集运算封闭, 那么成立$\mathscr{G}\Vbar\mathscr{H} \implies \sigma(\mathscr{G}) \Vbar \mathscr{H}$
+\begin{proof}
+    由概率的性质知
+    \[ P(A \overline{B}) = P(A) - P(AB) \]
+    又由$A$与$B$的独立性知
+    \[ P(AB) = P(A)P(B) \]
+    所以
+    \[ P(A \overline{B}) = P(A) - P(A)P(B) = P(A) [1 - P(B)] = P(A)P( \overline{B}) \]
+    这表明$A$与$ \overline{B}$独立. 类似可证$\bar A$与$ \overline{B}$独立，$\bar A$ 与$B$独立.
+\end{proof}
 
 \begin{example}
-    有两名选手比赛射击，轮流对同一目标进行射击，甲命中目标的概率为$\alpha$，乙命中目标的概率为$\beta$.甲先射，谁先命中谁得胜.问甲、乙两人获胜的概率各为多少?
+    有两名选手比赛射击，轮流对同一目标进行射击，甲命中目标的概率为$\alpha$，乙命中目标的概率为$\beta$。甲先射，谁先命中谁得胜。问甲、乙两人获胜的概率各为多少？
 \end{example}
 \begin{solution}
-    记事件$A_i$为“第i次射击命中目标”，$i=1,2$，因为甲先射，所以事件“甲获胜”可以表示为
-    \[
-        A_1 \cup \bar A_1\bar A_2 A_3 \cup \bar A_1\bar A_2
-        \bar A_3\bar A_4A_5\cup\cdots,
-    \]
+    记事件$A_i$为“第i次射击命中目标”，因为甲先射，所以事件“甲获胜”可以表示为
+    \[ A_1 \cup \bar A_1\bar A_2 A_3 \cup \bar A_1\bar A_2\bar A_3\bar A_4A_5\cup\cdots \]
     又因为各次射击是独立的，所以得
     \begin{align*}
-        P(\,\text{甲获胜}\,) & = \alpha + (1-\alpha)(1-\beta)\alpha + (1-\alpha)^2(1-\beta)^2\alpha + \cdots \\
-                             & = \alpha\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i                           \\
-                             & = \frac{\alpha}{1-(1-\alpha)(1-\beta)}.
+        P(\text{甲获胜}) & = \alpha + (1-\alpha)(1-\beta)\alpha + (1-\alpha)^2(1-\beta)^2\alpha + \cdots \\
+                         & = \alpha\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i                           \\
+                         & = \frac{\alpha}{1-(1-\alpha)(1-\beta)}.
     \end{align*}
     同理可得
     \begin{align*}
-        P(\,\text{乙获胜}\,) & = P(\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)       \\
-                             & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
-                             & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
-                             & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
+        P(\text{乙获胜}) & = P(\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)       \\
+                         & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
+                         & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
+                         & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
     \end{align*}
 \end{solution}
 
-此题在等比级数求和时，应该有条件：公比$|(1-\alpha)(1-\beta)|M1$. 这一点不难从题目的实际意义中得到. 因为对本题而言，$\alpha,\beta$取值为零或1均是无意义的.
-
 \begin{example}
     系统由多个元件组成，且所有元件都独立地工作.设每个元件正常工作的概率都为$p=0.9$，试求以下系统正常工作的概率.
-    \begin{enumerate}[label=(\arabic*)]
+    \begin{enumerate}
         \item 串联系统$S_1$：\begin{tikzpicture}[baseline=(a.base),thick]
                   \draw (0,0) -- (4,0);
                   \node(a)[minimum width=1cm,minimum height=0.4cm,draw,fill=white] at (1,0){1};
                   \node[minimum width=1cm,minimum height=0.4cm,draw,fill=white] at (3,0){2};
-              \end{tikzpicture}.
+              \end{tikzpicture}
         \item 并联系统$S_2$：\begin{tikzpicture}[baseline=(a.base),thick,
                       every node/.style =
                           { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
@@ -710,7 +708,7 @@
                   (2.5,-0.4) -- (3,-0.4) -- (3,0.4) -- (2.5,0.4);
                   \node at (2,-0.4) {1} ;
                   \node at (2,0.4) {2} ;
-              \end{tikzpicture}.
+              \end{tikzpicture}
         \item 5个元件组成的桥式系统$S_3$：\begin{tikzpicture}[baseline=(a.base),thick,
                       every node/.style =
                           { minimum width=1cm,minimum height=0.4cm,draw,fill=white}]
@@ -722,38 +720,27 @@
                   \node at (3,0) {3};
                   \node at (4,0.6) {2};
                   \node at (4,-0.6) {5};
-              \end{tikzpicture}.
+              \end{tikzpicture}
     \end{enumerate}
 \end{example}
 
 \begin{solution}
     设$S_i=$“第$i$个系统正常工作”，$A_i=$“第$i$个元件正常工作”.
-
     \begin{itemize}[(1)]
         \item 对申联系统而言，“系统正常工作”相当于“所有元件正常工作”，即$S_1=A_1A_2$，所以
-              \[
-                  P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81.
-              \]
-              这也可看出：两个正常工作概率为0.9的元件组成的串联系统，其系统正常工作的概率下降为0.81.
+              \[ P(S_1) = P(A_1A_2) = P(A_1)P(A_2) = p^2 = 0.81 \]
         \item 对并联系统而言，“系统正常工作”相当于“至少一个元件正常工作”，即$S_2=A_1\cup A_2$，所以
-              \begin{align*}
-                  P(S_2) & P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2) \\
-                         & = p + p - p^2 = 0.99.
-              \end{align*}
+              \[ P(S_2) = P(A_1\cup A_2) = P(A_1) + P(A_2) - P(A_1A_2)= p + p - p^2 = 0.99 \]
               或
               \begin{align*}
                   P(S_2) & = 1 - P(\bar S_2) = 1 - P(\bar{A_1\cup A_2}) = 1 - P(\bar A_1\cap \bar A_2) \\
                          & = 1 - P(\bar A_1)P(\bar A_2) = 1 - (1-p)^2 = 0.99.
               \end{align*}
-              这也可看出：两个正常工作概率为0.9的元件组成的并联系统，其系统正常工作的概率提高至0.99.
         \item 在桥式系统中，第3个元件是关键，我们先用全概率公式得
-              \[
-                  P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3).
-              \]
-              因为在“第3个元件正常工作”的条件下，系统成为先并后串系统（见图 \ref{fig1.5.1}）. 所以
+              \[ P(S_3) = P(A_3)P(S_3|A_3) + P(\bar A_3)P(S_3|\bar A_3) \]
+              因为在“第3个元件正常工作”的条件下，系统成为先并后串系统（见图 \ref{fig1.5.1}）。所以
               \begin{align*}
-                  P(S_3|A_3) & = P\big( ( A_1\cup A_4 )
-                  (A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
+                  P(S_3|A_3) & = P\big( ( A_1\cup A_4 )(A_2 \cup A_5) \big) = P(A_1\cup A_4)P(A_2\cup A_5) \\
                              & = [ 1 - (1-p)^2 ]^2 = 0.9801.
               \end{align*}
               又因为在“第3个元件不正常工作”的条件下，系统成为先串后并系统（见图 \ref{fig1.5.2}）.
@@ -777,7 +764,7 @@
                 \node at (4,-0.6) {5};
             \end{tikzpicture}
             \caption{先并后串系统\label{fig1.5.1}}
-        \end{minipage}%
+        \end{minipage}
         \begin{minipage}{0.48\linewidth}
             \centering
             \begin{tikzpicture}[baseline=(a.base),thick,
@@ -795,15 +782,23 @@
         \end{minipage}
     \end{figure}
     所以
-    \[
-        P(S_3|\bar A_3) = P(A_1A_2|\cup A_4A_5) = 1 - (1-p^2)^2 = 0.9639.
-    \]
-    最后我们得
+    \[ P(S_3|\bar A_3) = P(A_1A_2|\cup A_4A_5) = 1 - (1-p^2)^2 = 0.9639 \]
+    最后得
     \begin{align*}
         P(S_3) & = p [ 1-(1-p)^2 ]^2 + (1-p)[ 1-(1-p^2)^2 ]       \\
                & = 0.9\times 0.9801 + 0.1 \times 0.9639 = 0.9785.
     \end{align*}
 \end{solution}
+
+\begin{definition}[事件域的独立性]
+    若$\mathscr{G} \subset \mathscr{F}$与$\mathscr{H} \subset \mathscr{F}$满足
+    \[ A \Vbar B, \quad \forall A\in\mathscr{G},\ B\in\mathscr{H}, \]
+    则称$\mathscr{G}$与$\mathscr{H}$独立, 记为$\mathscr{G} \Vbar \mathscr{H}$
+\end{definition}
+
+测度论告诉我们一个重要结果: 如果$\mathscr{G}$对交集运算封闭, 那么成立$\mathscr{G}\Vbar\mathscr{H} \implies \sigma(\mathscr{G}) \Vbar \mathscr{H}$，其中$\sigma(\mathscr{G})$是$\mathscr{G}$扩张而成的一个合适的最小的$\sigma$代数, 定义为所有包含$\mathscr{G}$的$\sigma$代数的交集。
+
+类似地可以定义$n$个试验$E_1,E_2,\cdots,E_n$的相互独立性：如果$E_1$的任一结果、$E_2$的任一结果$\cdots\cdots E_n$的任一结果都是相互独立的事件，则称\textbf{试验$E_1,E_2,\cdots,E_n$相互独立}. 如果这$n$个独立试验还是相同的，则称其为\textbf{$n$重独立重复试验}. 如果在$n$重独立重复试验中，每次试验的可能结果为两个：$A$或$\bar A$，则称这种试验为\textbf{$n$重伯努利试验}。
 
 \begin{problemset}[错题记录]
     \item （茆1.2.4）从一副52张的扑克牌中任取4张，求下列事件的概率:
@@ -823,4 +818,13 @@
     \item （茆1.3.4）从$0, 1, 2, \cdots ,9$十个数字中任意选出三个不同的数字,试求事件“三个数字中含 0 但不含 5”的概率
     \item （茆1.3.8）从数字$1, 2, \cdots ,9$中可重复地任取$n$次，求$n$次所取数字的乘积能被$10$整除的概率.
     \item （茆1.3.23）证明:$\lvert P(AB) - P(A)P(B) \rvert \le \frac1{4}$
+    \item （茆1.4.6）$n$件产品中有$m$件不合格品，从中任取两件，已知两件中有一件是合格品，求另 一件也是合格品的概率
+    \item （茆1.4.27）口袋中有$a$个白球，$b$个黑球和$n$个红球，现从中一个一个不返回地取球．试证白球比黑球出现得早的概率为$\frac{a}{a+b}$，与$n$无关．
+    \item （茆1.5.20）甲、乙、丙三人进行比赛，规定每局两个人比赛，胜者与第三人比赛，依次循环，直至有一人连胜两次为止，此人即为冠军.而每次比赛双方取胜的概率都是1/2，现假定甲、乙两人先比，试求各人得冠军的概率.
+    \item （茆1.5.21）甲、乙两个赌徒在每一局获胜的概率都是1/2.两人约定谁先赢得一定的局数就获得全部赌本.但赌博在中途被打断了，请问在以下各种情况下，应如何合理分配赌本：
+    \begin{enumerate}
+      \item 甲、乙两个赌徒都各需赢$k$局才能获胜；
+      \item 甲赌徒还需赢2局才能获胜，乙赌徒还需赢3局才能获胜；
+      \item 甲赌徒还需赢$n$局才能获胜，乙赌徒还需赢$m$局才能获胜.
+    \end{enumerate}
 \end{problemset}
