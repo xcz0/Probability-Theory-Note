@@ -201,40 +201,46 @@
 \end{align*}
 
 \begin{definition}[概率质量函数]
-    当且仅当函数$p(x)$满足下述条件时, 被称为\textbf{概率质量函数}(probability mass function, p.m.f.):
+    若定义于至多可数点集$\X$的函数$p(x)$满足下述条件，则称其为\textbf{概率质量函数}(probability mass function, p.m.f.):
     \begin{itemize}
         \item $p(x)\ge 0$
         \item $\sum_{x \in \X}p(x)=1$
     \end{itemize}
 \end{definition}
 
-当$X$是离散型随机变量, 设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 此时$X$的分布由
+若$X$是离散型随机变量时，设$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成，此时$X$的分布由概率质量函数
 \[ p_{X}(x) = \P\{X=x\} = \P(\{\omega\in\Omega:X(\omega)=x\}), \quad x\in\mathcal{X} \]
-唯一刻画. 其与分布函数间的关系为:
+\underline{唯一}刻画。其与分布函数间有如下关系：
 \begin{itemize}
     \item $F(x) = \sum_{t\le x}P(X=t)=\sum_{t\le x}p(t)$
-    \item $p(x)=P(X=x)=F(x)-F(x-)$
+    \item $p(x)=P(X=x)=F(x)-F(x_-)$
 \end{itemize}
+由于$p(x)$取值也为至多可列点集，故亦称其为$X$的\textbf{概率分布列}
 
 \begin{definition}[概率密度函数]
-    当且仅当函数$f(x)$满足下述条件时, 被称为\textbf{概率密度函数}(probability density function, p.d.f.):
+    若定义于实数集$\X$的函数$f(x)$满足下述条件，则称其为\textbf{概率密度函数}(probability density function, p.d.f.):
     \begin{itemize}
         \item $f(x)\ge 0$
         \item $\int_{-\infty}^{\infty}f(x)=1$
     \end{itemize}
 \end{definition}
 
-当$X$是连续型随机变量, 且$F_{X} : \R^{n} \to [0,1]$可微(或者更一般地, \underline{绝对连续}), 此时$X$的分布由
-\[ f_{X} := \frac{\partial^{n} F_{X}}{\partial x_{1} \cdots \partial x_{n}} \]
-唯一刻画. 其与分布函数间的关系为:
+若$X$是连续型随机变量，且其分布函数$F(x)$可微，此时$X$的分布由
+\[ f_{X}(x)\Delta x = P(x<X<x+\Delta x) \]
+刻画。其与分布函数间的关系为：
 \begin{itemize}
     \item $F(x) = \int_{-\infty}^x f(t)dt$
-    \item $f(x)=\frac{d}{dx}F(x)$
+    \item $f(x)=\frac{\mathrm{d}F(x)}{\mathrm{d}x}$
 \end{itemize}
 
-\begin{remark}
-    即使对于$f(x)>0$的$x$, $P(X=x)=x\int_{x}^x f(t)dt=0$, 即连续型随机变量在实轴上任意一点的概率测度为零. 概率密度函数$f(x)$代表的是在此位置上单位长度的概率, 可能是一个很大的值.
-\end{remark}
+离散随机变量的分布函数$F(x)$总是右连续的阶梯函数，而连续随机变量的分布函数$F(x)$一定是整个数轴上的连续函数。因为对任意点$x$的增量$\Delta x$，相应分布函数的增量总有
+\[ F(x+\Delta x)-F(x)=\int_{x}^{x+\Delta x} p(x) \dd  x \longrightarrow 0, \quad(\Delta x \rightarrow 0) \]
+
+离散随机变量$X$在其可能取值的点$x_1, \cdots, x_n, \cdots$上的概率不为$0$。但即使对于$f(x)>0$的$x$，$P(X=x)=x\int_{x}^x f(t)dt=0$，即连续型随机变量在实轴上任意一点的概率测度为零。不可能事件的概率为$0$，但概率为$0$的事件不一定是不可能事件；类似地，必然事件的概率为$1$，但概率为$1$的事件不一定是必然事件。概率密度函数$f(x)$代表的是在此位置上单位长度的概率，可能是一个很大的值。
+
+由于连续随机变量$X$仅取一点的概率恒为$0$，从而在事件$\{ a \le X \le b \}$中减去$X=a$或减去$X=b$，不影响其概率，即
+\[ P(a \leq x \leq b)=P(a<X \leq b)=P(a \leq X<b)=P(a<X<b) \]
+由于在若干点上改变密度函数$f(x)$的值并不影响其积分的值，从而不影响其分布函数$F(x)$的值，即连续分布的密度函数不唯一。
 
 \section{多元随机变量}
 
