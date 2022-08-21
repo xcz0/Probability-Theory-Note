@@ -10,24 +10,24 @@
     \item 次序随机变量
 \end{introduction}
 
-在概率论中,主要关心$X$取值于数值集合$\mathcal{X}$中某个子集$B$的可能性, 即希望得到$\P(\{\omega\in\Omega : X(\omega) \in B\})$. 概率论不关心具体的样本点$\omega\in\Omega$, 将其记为$\{X \in B\} = X^{-1}(B)$. 由于$\P$定义在$\mathscr{F}$上, 故需$X^{-1}(B) \in \mathscr{F}$.
+在概率论中，主要关心$X$取值于数值集合$\mathcal{X}$中某个子集$B$的可能性，即希望得到$\P(\{\omega\in\Omega : X(\omega) \in B\})$。概率论不关心具体的样本点$\omega\in\Omega$，而关注其集合$\{\omega\in\Omega : X(\omega) \in B\}$，将其记为$X^{-1}(B)$。由于$\P$定义在$\mathscr{F}$上，故需$X^{-1}(B) \in \mathscr{F}$。
 
 \begin{definition}[可测性]
-    设所有值得关心的$B\subset \mathcal{X}$组成$\mathscr{F}_{\mathcal{X}}$, 且$\forall B \in \mathscr{F}_{\mathcal{X}}$都满足$\{X\in B\} \in \mathscr{F}$, 则称$X$为$\mathscr{F}/\mathscr{F}_{\mathcal{X}}$\textbf{可测的}. 当$\mathscr{F}_{\mathcal{X}}$不引起混淆时, 简记为关于$\mathscr{F}$\textbf{可测}, 写作$X \in \mathscr{F}$.
+    设所有值得关心的$B\subset \mathcal{X}$组成$\mathscr{F}_{\mathcal{X}}$，且$\forall B \in \mathscr{F}_{\mathcal{X}}$都满足$X^{-1}(B) \in \mathscr{F}$，则称$X$为$\mathscr{F}/\mathscr{F}_{\mathcal{X}}$\textbf{可测的}。当$\mathscr{F}_{\mathcal{X}}$不引起混淆时，简记为关于$\mathscr{F}$\textbf{可测}，写作$X \in \mathscr{F}$。
 \end{definition}
 
 由于原像保持交、并、补等集合运算, 且$\mathscr{F}$是$\sigma$代数, 可将$\mathscr{F}_{\mathcal{X}}$扩张为合适的最小的$\sigma$代数, 即$\sigma(\mathscr{F}_{\mathcal{X}})$, 因此可测映射的定义不妨\underline{只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数}的情况.
 
 \begin{definition}[随机变量]
-    为了表示因随机性而变动的量, 称\underline{可测映射}(measurable mapping)
+    为了表示因随机性而变动的量，称\underline{可测映射}(measurable mapping)
     \[ X : (\Omega,\mathscr{F},\P) \to (\mathcal{X},\mathscr{F}_{\mathcal{X}}), \quad \omega\in\Omega \mapsto X(\omega)\in\mathcal{X} \]
-    为\textbf{随机元}(random element), 也称\textbf{随机变量}(random variable). 其中$\mathscr{F}_{\mathcal{X}}$
+    为\textbf{随机元}(random element)，也称\textbf{随机变量}(random variable)。其中$\mathscr{F}_{\mathcal{X}}$
 \end{definition}
 
-由于只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数的情况, 可将随机变量看作将原概率空间映射到新概率空间的方式. 新样本空间由\underline{Borel点集}构成, 对应的概率测度等于原像的.
+由于只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数的情况，可将随机变量看作将原概率空间映射到新概率空间的方式。新样本空间为$\mathcal{X}$（一般由\underline{Borel点集}构成），新事件域为$\mathscr{F}_{\mathcal{X}}$，概率测度等于对应原像的。
 
 \begin{remark}
-    使用随机变量$X$时, 有两个可能的含义:
+    使用随机变量$X$时，有两个可能的含义：
     \begin{itemize}
         \item $X$的(随机)取值
         \item $X$的分布
@@ -35,71 +35,170 @@
 \end{remark}
 
 \begin{definition}[离散与连续随机变量]
-    当$\mathcal{X}$是 (至多可数的) 离散点集, $\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成, 则称其为\textbf{离散随机变量}(discrete random varible). 当随机变量$\mathcal{X} = \R^{n}$, 考虑$\mathscr{F}_{\mathcal{X}}$为$\left\{\prod_{i=1}^{n}(-\infty,x_{i}] : x_{1},\dots,x_{n}\in\R\right\}$生成的Borel代数(最小的$\sigma$代数), 则称其为\textbf{连续随机变量}(continuous random varible).
+    若$\mathcal{X}$是（至多可数的）离散点集，$\mathscr{F}_{\mathcal{X}}$由$\mathcal{X}$的所有子集组成，则称$X$为\textbf{离散随机变量}(discrete random varible)。若$\mathcal{X} = \R^{n}$，$\mathscr{F}_{\mathcal{X}}$为$\{\prod_{i=1}^{n}(-\infty,x_{i}] : x_{1},\dots,x_{n}\in\R\}$生成的Borel代数(最小的$\sigma$代数)，则称其为\textbf{连续随机变量}(continuous random varible)。
 \end{definition}
 
 \section{随机变量的分布}
 
-\begin{definition}
+\begin{definition}[分布]
     称随机元$X$诱导的\underline{概率测度}
-    \[ \P\{X\in\bullet\},\ \bullet\in\mathscr{F}_{\mathcal{X}} \]
-    为$X$的\textbf{概率分布}(distribution/law)
+    \[ Q(\bullet)=\P\{X\in\bullet\},\ \bullet\in\mathscr{F}_{\mathcal{X}} \]
+    为$X$的\textbf{概率分布}(distribution/law)。
 \end{definition}
 \begin{remark}
-    对于随机变量, 他的取值是随机的, 但他的分布是固定的
+    对于随机变量，其取值是随机的，但其分布是固定的。
 \end{remark}
 
-\begin{definition}[单变量分布函数]
-    一个函数$F : \R \to [0,1]$称为一个单变量分布函数，当其满足以下性质时：
+\begin{definition}[分布函数]
+    若函数$F : \R \to [0,1]$满足以下性质，则称为单变量分布函数：
     \begin{description}
         \item[单调性] $F(x_1)\le F(x_2) , \quad \forall x_1<x_2$
-        \item[右连续性] $\lim_{x \to x_0^+}F(x)=F(x_0)$
         \item[有界性] $\lim_{n \to -\infty}F(x)=0, \quad \lim_{n \to \infty}F(x)=1$
+        \item[右连续性] $\lim_{x \to x_0^+}F(x)=F(x_0)$
     \end{description}
 \end{definition}
 
-\begin{property}
-    $F(x)$最多只有可数个间断点
-\end{property}
+% \begin{property}
+%     $F(x)$最多只有可数个间断点
+% \end{property}
 
 \begin{proposition}
-    对每个分布$Q: \mathscr{B}_1 \to [0,1]$都存在唯一一个分布函数$F_Q : \R \to [0,1]$使得$F_Q(x)=Q[(-\infty,x]], \quad \forall x \in \R$成立。
+    对每个分布$Q$都存在唯一一个分布函数$F_Q$使得$F_Q(x)=Q[(-\infty,x]], \quad \forall x \in \R$成立。
 \end{proposition}
+\begin{proof}
+    \begin{align*}
+        \because \      & \forall x_1>x_2 \in \mathbb{R},\ (-\infty,x_1]=(-\infty,x_2] \cup (x_2,x_1]     \\
+        \therefore \    & \forall x_1>x_2 \in \mathbb{R},\ Q[(-\infty,x_1]]=Q[(-\infty,x_2]]+Q[(x_2,x_1]] \\
+        \Rightarrow  \  & F_{Q}(x_1)=F_{Q}(x_2)+\P\{X\in(x_2,x_1]\}\ge F_{Q}(x_2)
+    \end{align*}
+    即$F_Q$满足单调性。
+
+    由于$F_Q(x)=\P\{X\in(-\infty,x]\}$，所以$ 0\leq F(x)\leq 1 $。由$F(x)$的单调性知，对任意整数$m$和$n$，有
+    \[ \lim_{x \rightarrow-\infty} F(x)=\lim_{m \rightarrow-\infty} F(m),\ \lim_{x \rightarrow+\infty} F(x)=\lim_{n \rightarrow+\infty} F(n) \]
+    又由概率的可列可加性得
+    \begin{align*}
+        1 & = P(-\infty<X<+\infty) = P\left(\bigcup_{i=-\infty}^{+\infty}\{i-1<X \leq i\}\right)                                                \\
+          & = \sum_{i=-\infty}^{+\infty} P(i-1<X \leq i)=\lim_{n \rightarrow+\infty \atop m \rightarrow-\infty} \sum_{i =m}^{n} P(i-1<X \leq i) \\
+          & =\lim_{n \rightarrow+\infty} F(n)-\lim_{m \rightarrow-\infty} F(m)
+    \end{align*}
+    所以：
+    \begin{gather}
+        1 \le \lim_{n \rightarrow+\infty} F(n)=1+\lim_{m \rightarrow-\infty} F(m) \le 1 \\
+        \lim_{n \rightarrow+\infty} F(n)=1 ,\ \lim_{m \rightarrow-\infty} F(m)=0
+    \end{gather}
+    即$F_Q$满足有界性。
+
+    因为$F(x)$是单调有界非降函数，所以其任一点$x_0$的右极限$F(x_0+0)$必存在。右连续性的充要条件为：对任意单调下降的数列$x_1>x_2>\cdots>x_n>\cdots>x_0$，当$x_n \rightarrow x_0(n \rightarrow+\infty)$时，有$\lim _{n \rightarrow+\infty} F(x_n)=F(x_0)$。因为
+    \begin{align*}
+        F(x_1)-F(x_0) & =P(x_0 <X \leq x_1)=P\left(\bigcup_{r=1}^{+\infty}\{x_{i+1}<X \leq x_i\}\right)         \\
+                      & =\sum_{i=1}^{+\infty} P(x_{i+1}<X \leq x_i)=\sum_{i=1}^{+\infty}F(x_i)-F(x_{i+1})       \\
+                      & =\lim _{n \rightarrow \infty}[F(x_1)-F(x_n)]=F(x_1)-\lim _{n \rightarrow \infty} F(x_n)
+    \end{align*}
+    即$F_Q$满足右连续性。
+\end{proof}
+\begin{note}
+    由于$\{ x_1 \le x_0 \} \neq \bigcup_{r=1}^{+\infty}\{x_i < X \leq x_{i+1}\}$，例$(-1,0]\neq \bigcup_{r=1}^{+\infty}(\frac{-1}{i},\frac{-1}{i+1}]=(-1,0)$。若将分布函数定义中右连续性改为左连续性，只需将命题改为$F_Q(x)=Q[(-\infty,x)], \quad \forall x \in \R$即可。
+\end{note}
 
 \begin{proposition}
-    对每个分布函数$F : \R \to [0,1]$都存在唯一一个分布$Q_F: \mathscr{B}_1 \to [0,1]$使得$Q_F[(-\infty,x]]=F(x), \quad \forall x \in \R$成立。
+    对每个分布函数$F$都存在唯一一个分布$Q_F$使得$Q_F[(-\infty,x]]=F(x), \quad \forall x \in \R$成立。
 \end{proposition}
+\begin{proof}
+    参考\href{https://www.zhihu.com/question/23022012/answer/2520636971}{知乎}
+\end{proof}
 
 \begin{theorem}
-    分布函数可以唯一决定概率分布, 即:
+    分布函数可以唯一决定概率分布，即：
     \[ Q_{F_Q}=Q, \quad F_{Q_F}=F \]
-    把随机变量$X$服从分布函数$F(x)$简记作$X \thicksim F(x)$
 \end{theorem}
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|c|cc|}
-        \hline
-                                      & \multicolumn{1}{c|}{离散}                                 & 连续                        \\ \hline
-        \multirow{3}{*}{一元随机变量} & \multicolumn{1}{c|}{概率质量函数(pmf)}                    & 概率密度函数(pdf)           \\ \cline{2-3}
-                                      & \multicolumn{2}{c|}{累积分布函数(cdf)}                                                  \\ \cline{2-3}
-                                      & \multicolumn{2}{c|}{矩母函数/特征函数(mgf/chf)}                                         \\ \hline
-        \multirow{3}{*}{多元随机变量} & \multicolumn{1}{c|}{联合概率质量函数(joint pmf)}          & 联合概率密度函数(joint pdf) \\ \cline{2-3}
-                                      & \multicolumn{2}{c|}{联合累积分布函数(joint cdf)}                                        \\ \cline{2-3}
-                                      & \multicolumn{2}{c|}{联合矩母函数/特征函数(joint mgf/chf)}                               \\ \hline
-    \end{tabular}
-\end{table}
-
-\begin{definition}[累积分布函数]
-    此时$X = (X_{1},\dots,X_{n})^{\top}$的分布由(累积)\textbf{分布函数}(cumulative distribution function, c.d.f.)
-    \[ F_{X}(x_{1},\dots,x_{n}) = \P\{X_{1}\leq x_{1},\dots, X_{n}\leq x_{n}\}, \quad x_{1},\dots,x_{n}\in\R. \]
-    唯一刻画. 把随机变量$X$服从分布函数$F(x)$简记作$X \thicksim F(x)$
+由此，概率分布与分布函数具有等同意义。所以可有以下定义：
+\begin{definition}[随机变量的分布函数]
+    设$X$是一个随机变量，其分布由分布函数：
+    \[ F(x)=P(X \leq x),\ \forall x \in \mathbb{R} \]
+    唯一刻画，称为随机变量$X$的\textbf{（累积）分布函数}(cumulative distribution function, c.d.f.)。把随机变量$X$服从分布函数$F(x)$，简记作$X \thicksim F(x)$。
 \end{definition}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/cdf.png}
+    \subfloat[（累积）分布函数计算]{
+        \begin{tikzpicture}
+            \draw[->] (0,1)--(6,1);
+            \draw[<-] (0,1.5)--(2,1.5);
+            \draw[<-] (0,2)--(3,2);
+            \draw[<-] (0,2.5)--(4,2.5);
+            \draw[densely dotted] (2,1.5)--(2,1);
+            \draw[densely dotted] (3,2)--(3,1);
+            \draw[densely dotted] (4,2.5)--(4,1);
+            \node (R) at(6,0.5) {$\mathbb{R}$};
+            \node (x1) at(2,0.5) {x1};
+            \node (x2) at(3,0.5) {x2};
+            \node (x3) at(4,0.5) {x3};
+            \fill (2,1.5) circle (2pt);
+            \fill (3,2) circle (2pt);
+            \fill (4,2.5) circle (2pt);
+        \end{tikzpicture}
+    }
+    \subfloat[连续随机变量的分布函数]{
+        \begin{tikzpicture}[>=stealth,xscale=1.8,yscale=2]
+            \draw[->](-1.4,0)--(0,0)node[below left]{$O$}--(1.4,0)node[below]{$x$};
+            \draw[->](0,-0.2)--(0,1.4)node[right]{$F(x)$};
+            \draw[thick](-1,0)node[below]{$-1$}--(1,1)--(1.3,1);
+            \draw[dashed,semithick](0,1)node[left]{$1$}--(1,1)--(1,0)node[below]{$1$};
+        \end{tikzpicture}
+    }
+
+    \subfloat[离散随机变量的分布函数]{
+        \begin{tikzpicture}[>=stealth]
+            \draw[->](-2,0)--(0,0)node[below left]{$O$}--(3.5,0)node[below=1pt]{$x$};
+            \draw[->](0,-0.5)--(0,2.5)node[left]{$F(x)$};
+            \draw[thick](-2,0)--(-1,0)(-1,0.5)--(2,0.5)(2,1.5)--(3,1.5)(3,2)--(3.5,2);
+            \fill(-1,0.5)circle(1pt);
+            \fill(2,1.5)circle(1pt);
+            \fill(3,2)circle(1pt);
+            \filldraw[fill=white](-1,0)node[below]{$-1$}circle(1pt);\filldraw[fill=white](2,0.5)circle(1pt);
+            \filldraw[fill=white](3,1.5)circle(1pt);
+            \foreach \x in{1,2,3}\draw(\x,0.07)--(\x,0)node[below]{$\x$};
+            \foreach \x in{1,1.5,2}\draw(0.07,\x)--(0,\x);
+            \node[left]at(0,2){$1$};
+        \end{tikzpicture}
+    }
+    \subfloat[既非离散、又非连续的分布函数]{
+        \begin{tikzpicture}[>=stealth,scale=2]
+            \draw[->](-0.3,0)--(0,0)node[below left]{$O$}--(1.6,0)node[below]{$x$};
+            \draw[->](0,-0.2)--(0,1.4)node[right]{$F(x)$};
+            \draw[thick](0,0.5)node[left]{$0.5$}--(1,1)--(1.5,1)(-0.3,0)--(0,0);
+            \filldraw[fill=white](0,0)circle(0.5pt);
+            \fill(0,0.5)circle(0.5pt);
+            \draw[semithick,dashed](0,1)node[left]{$1$}--(1,1)--(1,0)node[below]{$1$};
+        \end{tikzpicture}
+    }
+    \caption{累积分布函数}
 \end{figure}
+
+% \begin{table}[h]
+%     \centering
+%     \begin{tabular}{|c|cc|}
+%         \hline
+%                                       & \multicolumn{1}{c|}{离散}                                 & 连续                        \\ \hline
+%         \multirow{3}{*}{一元随机变量} & \multicolumn{1}{c|}{概率质量函数(pmf)}                    & 概率密度函数(pdf)           \\ \cline{2-3}
+%                                       & \multicolumn{2}{c|}{累积分布函数(cdf)}                                                  \\ \cline{2-3}
+%                                       & \multicolumn{2}{c|}{矩母函数/特征函数(mgf/chf)}                                         \\ \hline
+%         \multirow{3}{*}{多元随机变量} & \multicolumn{1}{c|}{联合概率质量函数(joint pmf)}          & 联合概率密度函数(joint pdf) \\ \cline{2-3}
+%                                       & \multicolumn{2}{c|}{联合累积分布函数(joint cdf)}                                        \\ \cline{2-3}
+%                                       & \multicolumn{2}{c|}{联合矩母函数/特征函数(joint mgf/chf)}                               \\ \hline
+%     \end{tabular}
+% \end{table}
+
+利用分布函数表示概率
+\begin{align*}
+     & P(a<X \leq b) = F(b)-F(a),        \\
+     & P(X=a) = F(a)-F(a-0),             \\
+     & P(X \geq b) = 1-F(b-0),           \\
+     & P(X>b) = 1-F(b),                  \\
+     & P(a<x<b) = F(b-0)-F(a),           \\
+     & P(a \leq X \leq b) = F(b)-F(a-0), \\
+     & P(a \leq X<b) = F(b-0)-F(a-0).
+\end{align*}
 
 \begin{definition}[概率质量函数]
     当且仅当函数$p(x)$满足下述条件时, 被称为\textbf{概率质量函数}(probability mass function, p.m.f.):
@@ -197,16 +296,16 @@
 
 在离散随机变量场合, 其条件分布函数为 $P(X\leq x|Y=y)$. 但是, 因为连续随机变量取某个值的概率为零, 即 $P(Y=y)=0$, 所以无法用条件概率直接计算 $P(X\leq x|Y=y)$, 一个很自然的想法是: 将 $P(X\leq x|Y=y)$ 看成是 $h\to 0$ 时 $P(X\leq x|y\leq Y\leq y+h)$ 的极限, 即
 \begin{align*}
-    P(X \leq  x | Y=y) & =\lim _{h \to 0} P(X \leq  x | y \leq  Y \leq  y+h)                                                  \\
-                       & =\lim _{h \to 0} \frac{P(X \leq  x, y \leq  Y \leq  y+h)}{P(y \leq  Y \leq  y+h)}                    \\
-                       & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \int_{y}^{y+h} p(u, v) dv du}{\int_{y}^{y+h} p_{Y}(v) dv}  \\
-                       & =\lim _{h \to 0} \frac{\int_{-\infty}^{x} \left\{ \frac{1}{h} \int_{y}^{y+h} p(u, v) dv \right\} du}
+    P(X \leq  x | Y=y) & =\lim_{h \to 0} P(X \leq  x | y \leq  Y \leq  y+h)                                                  \\
+                       & =\lim_{h \to 0} \frac{P(X \leq  x, y \leq  Y \leq  y+h)}{P(y \leq  Y \leq  y+h)}                    \\
+                       & =\lim_{h \to 0} \frac{\int_{-\infty}^{x} \int_{y}^{y+h} p(u, v) dv du}{\int_{y}^{y+h} p_{Y}(v) dv}  \\
+                       & =\lim_{h \to 0} \frac{\int_{-\infty}^{x} \left\{ \frac{1}{h} \int_{y}^{y+h} p(u, v) dv \right\} du}
     {\frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv}.
 \end{align*}
 当 $p_Y(y),p(x,y)$ 在 $y$ 处连续时, 由积分中值定理可得
 \begin{align*}
-     & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv=p_{Y}(y), \\
-     & \lim _{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
+     & \lim_{h \to 0} \frac{1}{h} \int_{y}^{y+h} p_{Y}(v) dv=p_{Y}(y), \\
+     & \lim_{h \to 0} \frac{1}{h} \int_{y}^{y+h} p(u, v) dv=p(u, y).
 \end{align*}
 所以
 \[ P(X \leq x | Y=y)=\int_{-\infty}^{x} \frac{p(u, y)}{p_{Y}(y)} du \]
@@ -332,7 +431,7 @@
 
     \begin{align*}
         F_Z(z) & =P(Z\le z)=P(X+Y\le z)                                               \\
-               & =\iint _{x+y\leqslant z}f(x,y)dxdy                                   \\
+               & =\iint_{x+y\leq z}f(x,y)dxdy                                         \\
                & =\int_{-\infty}^{+\infty}\int_{-\infty}^{z-x}f(x,y)dxdy              \\
                & =\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(x,v-x)dxdv, \quad y= v-x
     \end{align*}
