@@ -11,6 +11,9 @@
 \begin{definition}[离散均匀分布]
     若随机变量只能在$a_1,\cdots ,a_n$中取值，并且对应的概率相同，则称其遵循\textbf{均匀分布}(Uniform distribution)，记为$X \sim U(a_1,\cdots ,a_n)$。
 \end{definition}
+\begin{remark}
+    此即古典概型。
+\end{remark}
 
 离散均匀分布的特征：
 \begin{description}
@@ -25,13 +28,13 @@
     \item[实例] 丢一个均匀的骰子
 \end{description}
 
-\subsection{伯努利分布}
+\subsection{两点分布}
 
-\begin{definition}[Bernouli分布]
-    若随机变量只能取0或1，并且对应的概率分别为$1-p$与$p$，则称其遵循\textbf{Bernouli分布}(Bernouli distribution)（也称0-1分布），记为$X \sim B(p)$。
+\begin{definition}[两点分布]
+    若随机变量只能取0或1，并且对应的概率分别为$1-p$与$p$，则称其遵循\textbf{两点分布}(Bernouli distribution)（也称0-1分布、两点分布分布），记为$X \sim B(1,p)$。
 \end{definition}
 
-Bernouli分布的特征：
+两点分布的特征：
 \begin{description}
     \item[参数] $p \in [0,1]$
     \item[概率质量函数] $p(x)=\begin{cases}
@@ -50,14 +53,9 @@ Bernouli分布的特征：
 
 \subsection{二项分布}
 
-\begin{definition}[二项分布]
-    若进行$n$次独立的Bernouli实验$X_1+\cdots+X_n, X_i \sim B(p)$，则这些随机变量之和$Y=X_1+\cdots+X_n$遵循\textbf{二项分布}(binomial distribution)，记为$Y \sim B(n,p)$。
+\begin{definition}[二项分布]\label{def:binom_dist}
+    若进行$n$次独立的Bernouli实验（定义\ref{def:Bernouli_experiment}）$X_1,\cdots,X_n \overset{\text{i.i.d.}}{\sim} B(1,p)$，则这些随机变量之和$Y=X_1+\cdots+X_n$遵循\textbf{二项分布}(binomial distribution)，记为$Y \sim B(n,p)$。
 \end{definition}
-
-\begin{figure*}[h]
-    \centering
-    \includegraphics{image/binomail_dist.png}
-\end{figure*}
 
 二项分布的特征：
 \begin{description}
@@ -68,41 +66,69 @@ Bernouli分布的特征：
             \end{cases}$
     \item[矩母函数] $M(t)=(p e^t + 1-p)^n$，求解方法有：
         \begin{itemize}
-            \item \underline{独立变量}之和的矩母函数等于各变量矩母函数之积（参见定理\ref{thm:mgf_sum}）
+            \item \underline{独立变量}之和的矩母函数等于各变量矩母函数之积（定理\ref{thm:mgf_sum}）
             \item 定义
         \end{itemize}
     \item[均值] $\mu=np$，求解方法有：
         \begin{itemize}
-            \item 定义（下述凑一法）
+            \item 定义（例\ref{ex:binom_dist_mean}）
             \item 矩母函数在$t=0$的一阶导
             \item 变量之和的均值等于各变量均值之和
         \end{itemize}
     \item[方差] $\sigma^2=np(1-p)$，求解方法有：
         \begin{itemize}
-            \item 定义（下述凑一法）
+            \item 定义（例\ref{ex:binom_dist_var}）
             \item 矩母函数在$t=0$的二阶导，$\operatorname{Var}(X)=E(X^2)-(E(X))^2$
             \item \underline{独立变量}之和的方差等于各变量均值之和
         \end{itemize}
     \item[实例] 丢$n$次硬币，$p$代表某一面出现的概率，出现此面的次数
 \end{description}
 
-\begin{note}
-    求解二项分布的均值时，可通过将其凑成概率质量函数之和（为1）的形式：
-    \begin{align*}
-        E(X) & =\sum_{i=1}^n x \binom{n}{x} p^x (1-p)^{n-x}                 \\
-             & = np \sum_{i=1}^n \binom{n-1}{x-1} p^{x-1} (1-p)^{n-1-(x-1)} \\
-             & =np
-    \end{align*}
-    此称为凑一法(sum to one, STO)。同理，求方差时也可使用：
-    \begin{align*}
-        E(X(X-1))             & =\sum_{i=1}^n x(x-1) \binom{n}{x} p^x (1-p)^{n-x}                   \\
-                              & = n(n-1)p^2 \sum_{i=1}^n \binom{n-2}{x-2} p^{x-2} (1-p)^{n-1-(x-1)} \\
-                              & =n(n-1)p^2                                                          \\
-        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                      \\
-                              & = n(n-1)p^2 + np -n^2 p^2                                           \\
-                              & =np(1-p)
-    \end{align*}
-\end{note}
+\begin{figure}[!ht]
+    \centering
+    \raisebox{0.75cm}{\begin{tikzpicture}[thick]
+            \draw(0,0.3)--(0,3.6);
+            \draw(0.1,1.3)--(0,1.3)node[left]{$0.1$}
+            (0.1,2.3)--(0,2.3)node[left]{$0.2$}
+            (0.1,3.3)--(0,3.3)node[left]{$0.3$};
+        \end{tikzpicture}}
+    \subfloat[$b(10,0,2)$的线条图(右偏)]{
+        \begin{tikzpicture}[thick,xscale=0.5]
+            \draw(0,0)node[below]{$0$}--(0,1.3)(1,0)node[below]{$1$}--(1,2.7)
+            (2,0)node[below]{$2$}--(2,3.3)(3,0)node[below]{$3$}--(3,2.3)
+            (4,0)node[below]{$4$}--(4,1.3)(5,0)node[below]{$5$}--(5,0.3)
+            (6,0)node[below]{$6$}--(6,0.1)(7,0)node[below]{$7$}--(7,0.1);
+            \draw(0,0)--(7.3,0);
+        \end{tikzpicture}
+    }\hfill
+    \subfloat[$b(10,0,5)$的线条图(对称)]{
+        \begin{tikzpicture}[thick,xscale=0.5]
+            \draw(1,0)node[below]{$1$}--(1,0.15)(2,0)node[below]{$2$}--(2,0.6)
+            (3,0)node[below]{$3$}--(3,1.4)(4,0)node[below]{$4$}--(4,2.3)
+            (5,0)node[below]{$5$}--(5,3.3)(6,0)node[below]{$6$}--(6,2.3)
+            (7,0)node[below]{$7$}--(7,1.4)(8,0)node[below]{$8$}--(8,0.7)
+            (9,0)node[below]{$9$}--(9,0.1);
+            \draw(0.7,0)--(9.3,0);
+        \end{tikzpicture}
+    }\hfill
+    \subfloat[$b(10,0,8)$的线条图(左偏)]{
+        \begin{tikzpicture}[thick,xscale=0.5]
+            \draw(4,0)node[below]{$4$}--(4,0.2)(5,0)node[below]{$5$}--(5,0.4)
+            (6,0)node[below]{$6$}--(6,1.3)(7,0)node[below]{$7$}--(7,2.4)
+            (8,0)node[below]{$8$}--(8,3.3)(9,0)node[below]{$9$}--(9,2.9)
+            (10,0)node[below]{$10$}--(10,1.3)(11,0)node[below]{$11$}--(11,0.3);
+            \draw(3.7,0)--(11.3,0);
+            \draw[very thick](8,0)--(8,3.3);
+        \end{tikzpicture}
+    }
+    \caption{二项分布$b(n,p)$的线条图\label{fig2.4.1}}
+\end{figure}
+
+从上图可以看出：
+\begin{itemize}
+    \item 位于均值$np$附近概率较大；
+    \item 随着$p$的增加，分布的峰逐渐右移.
+\end{itemize}
 
 \begin{proposition}
     二项分布之和仍是二项分布。若$X_1+\cdots+X_k$独立且$X_i \sim B(n_i,p)$，则$Y=X_1+\cdots+X_k  \sim B(n_1+\cdots+n_k,p )$
