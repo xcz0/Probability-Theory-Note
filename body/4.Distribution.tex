@@ -134,6 +134,110 @@
     二项分布之和仍是二项分布。若$X_1+\cdots+X_k$独立且$X_i \sim B(n_i,p)$，则$Y=X_1+\cdots+X_k  \sim B(n_1+\cdots+n_k,p )$
 \end{proposition}
 
+\subsection{泊松分布}
+
+\begin{theorem}[Poisson逼近]\label{thm:Poisson_theorem}
+    \[ \lim_{n p_n \to \lambda} \binom{n}{k} p_n^{k} (1-p_n)^{n-k} = \frac{\lambda^{k}}{k !}e^{-\lambda} \]
+\end{theorem}
+\begin{proof}
+    记$np_n=\lambda_n$，记$p_n=\lambda_n/n$，我们可得
+    \begin{align*}
+        \binom {n}{k} p_n^k(1-p_n)^{n-k} & = \frac{n(n-1)\cdots(n-k+1)}{k!}\left( \frac{\lambda_n}n \right)^k \left( 1 - \frac{\lambda_n}n \right)^{n-k} \\
+                                         & = \frac{\lambda_n^k}{k!}\left( 1 - \frac1n \right)\left( 1 - \frac2n \right) \cdots
+        \left( 1 - \frac{k-1}n \right)
+        \left( 1 - \frac{\lambda_n}n \right)^{n-k}.
+    \end{align*}
+    对固定的$k$有
+    \[ \lim_{n\to+\infty}\lambda_n = \lambda,\ \lim_{n\to+\infty}\left( 1 - \frac{\lambda_n}n \right)^{n-k} = e^{-\lambda},\ \lim_{n\to+\infty}\left( 1 - \frac{1}{n} \right) \cdots \left( 1 - \frac{k-1}n \right) = 1 \]
+    从而
+    \[ \lim_{n\to+\infty} \binom{n}{k} p_n^k(1-p_n)^{n-k}  = \frac{\lambda^k}{k!}e^{-\lambda} ,\ \forall k \in \mathbb{N}\]
+\end{proof}
+
+\begin{definition}[Poisson分布]
+    若随机变量$X$的概率分布列满足以下形式：
+    \[ P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda},\ k \in \mathbb{N} \]
+    则称其遵循\textbf{Poisson分布}，记为$X \sim P(\lambda)$.
+\end{definition}
+
+\begin{remark}
+    由定理\ref{thm:Poisson_theorem}可看出，Poisson分布可作为二项分布的近似。$\lambda$的涵义%TODO
+\end{remark}
+
+Poisson分布的特征：
+\begin{description}
+    \item[参数] $\lambda>0$
+    \item[概率质量函数] $p(k)=\begin{cases}
+                \frac{\lambda^{k}}{k !}e^{-\lambda} & x \in \mathbb{N}^n \\
+                0                                   & \text{其他}
+            \end{cases}$
+    \item[矩母函数] $M(t)=e^{\lambda (e^t -1)}$，求解方法有：
+        \begin{itemize}
+            \item 利用公式
+            \item 凑一法
+        \end{itemize}
+    \item[均值] $\mu=\lambda$
+    \item[方差] $\sigma^2=\lambda$
+    \item[实例] 公共汽车站来到的乘客数
+\end{description}
+
+\begin{proposition}
+    Poisson分布之和仍是Poisson分布。若$X_1+\cdots+X_k \overset{\text{i.i.d.}}{\sim} P(\lambda_i)$，则$Y=X_1+\cdots+X_k  \sim P(\lambda_1+\cdots+\lambda_k)$
+\end{proposition}
+
+\begin{proof}
+    \[ M_Y(t)=\prod_i^k M_{X_i}(t)=\exp \{(e^t-1)\sum_{i=1}^k \lambda_i\} \]
+\end{proof}
+
+\begin{lemma}\label{lem:Cauchy_lemma}
+    若$f(x)$是连续函数（或单调函数），且对一切$x,y$（或一切$x,y\ge 0$）成立：
+    \[ f(x)f(y)=f(x+y) \]
+    则$f(x)$为\textbf{指数函数}。
+\end{lemma}
+
+\begin{proof}
+    \begin{align*}
+        \because   & f(1)=[f(\frac{1}{n})]^n                           \\
+        \text{且}  & a=f(1)=[f(\frac{1}{2})]^2\ge 0                    \\
+        \therefore & f(\frac{1}{n})=a^{\frac{1}{n}}                    \\
+        \therefore & f(\frac{m}{n})=[f(\frac{1}{n})]^m=a^{\frac{m}{n}}
+    \end{align*}
+    即此命题对一切有理数成立。又实数具有连续性，故此命题对一切实数成立。
+\end{proof}
+
+\begin{definition}[泊松过程]
+    若某一随机过程满足以下特征，则称其为\textbf{泊松过程}：
+    \begin{description}
+        \item[平稳性] 随机事件$A$在$[t_0, t_0 + t)$中的发生次数只与时间间隔长度$t$有关而与时间起点$t_0$无关。将在长度为$t$的时间区间中发生$K$次事件$A$的概率记为$P_k(t)$。
+        \item[独立增量性] 在$[t_0, t_0 + t)$中发生$K$次事件$A$的概率与时刻$t_0$以前发生的事件独立。
+        \item[普通性] 在充分小的时间间隔中，最多发生一次事件$A$。即，若记$\psi(t)=\sum_{k=2}^{\infty}P_k(t)=1-P_0(t)-P_1(t)$，则有$\lim_{t \to 0}\psi(t)/t=0$
+    \end{description}
+\end{definition}
+
+对$\Delta t>O$，考虑$[O,t+\Delta t)$中发生$K$次事件$A$的概率$P_k(t+\Delta t)$，由独立增量性及全概率公式可得：
+\[ P_k(t+\Delta t)=P_k(t)P_0(\Delta r) + P_{k-1}P_1(\Delta t)+ \cdots +P_0(t)P_k(\Delta t) ,k\ge 0\]
+（对$n\ge 1$ ，假定$P_{-n}(t)=0$）
+
+特别地
+\[ P_0(t+\Delta t)=P_0(t)P_0(\Delta t) \]
+由引理\ref{lem:Cauchy_lemma}知
+\[ P_0(t)=a^{t}, a\ge 0 \]
+若$a=O$，则$P_0(t) \equiv 0$，说明在不管怎么短的时间间隔内事件$A$都发生，因此在有限时间间隔中将发生无穷多个次事件$A$，这种情形不在我们的考虑之列。此外，因$P_0(t)$是概率，故应有$a\ge 1$，而当$a=1$时，$P_0(t) \equiv 1$，表明事件$A$永不发生，也不是我们感兴趣的情形，所以应有 $0<a<1$，从而存在$\lambda>0$，使
+\[ P_0(t)=e^{-\lambda t} \]
+因此当$\Delta t \to 0$时，有
+\begin{align*}
+    P_{0}(\Delta t)                                & =\ee^{-\lambda \Delta t}=1-\lambda \Delta t+o(\Delta t)                  \\
+    P_{1}(\Delta t)                                & =1-P_{0}(\Delta t)-\psi(\Delta t)=\lambda \Delta t+o(\Delta t)           \\
+    \sum_{l=2}^{\infty} P_{k-l}(t) P_{l}(\Delta t) & \leqslant \sum_{l=2}^{\infty} P_{l}(\Delta t)=\psi(\Delta t)=o(\Delta t) \\
+\end{align*}
+所以：
+\[ P_k(t+\Delta t)=P_k(t)(1-\lambda \Delta t) + P_{k-1}\lambda \Delta t+ o(\Delta t) ,k\ge 1\]
+因此：
+\[ P'_k(t)= \frac{P_k(t+\Delta t)-P_k(t)}{\Delta t} = \lambda[P_{k-1}-P_k(t)] \]
+
+由于$P_0(t)=\ee^{-\lambda t}$，故有$P'_1(t)=\lambda[\ee^{-\lambda t}-P_1(t)]$，可解得$P_0(t)=\lambda t \ee^{-\lambda t}$，依次可递推可解得：
+\[ P_k(t)=\frac{(\lambda t)^k}{k!}\ee^{-\lambda t}, k \in \mathbb{N}\]
+正是参数为$\lambda t$的泊松分布。
+
 \subsection{几何分布}
 
 \begin{definition}
@@ -159,43 +263,37 @@
         \end{itemize}
     \item[均值] $\mu=\frac{1}{p}$，求解方法有：
         \begin{itemize}
-            \item $E(X)=\sum_{k=1}^{\infty}P(X\ge k)$
+            \item $E(X)=\sum_{k=1}^{\infty}P(X\ge k)$（定理\ref{prop:mean_of_non-negative_discrete_varible}）
             \item 矩母函数在$t=0$的一阶导
-            \item 定义（下述微分法）
+            \item 定义（例\ref{ex:geometric_dist_mean}）
         \end{itemize}
     \item[方差] $\sigma^2=\frac{1-p}{p^2}$，求解方法有：
         \begin{itemize}
-            \item 定义（下述微分法）
+            \item 定义（例\ref{ex:geometric_dist_var}）
             \item 矩母函数在$t=0$的二阶导，$\operatorname{Var}(X)=E(X^2)-(E(X))^2$
         \end{itemize}
     \item[实例] 买彩票时，中奖所需购买张数。
 \end{description}
 
-\begin{note}
-    微分法求解几何分布均值：
-    \begin{align*}
-        E(X) & =p\sum_{k=1}^{\infty}k q^{k-1}=p\frac{d}{d q}\sum_{k=1}^{\infty} q^{k} \\
-             & =p\frac{d}{d q} \frac{q}{1-q} =\frac{p}{(1-p)^{2}}                     \\
-             & =\frac{1}{p}                                                           \\
-    \end{align*}
-    微分法求解几何分布方差：
-    \begin{align*}
-        E(X(X-1))             & =p\sum_{k=1}^{\infty}k(k-1) q^{k-1}=p\frac{d}{d q}\sum_{k=1}^{\infty} q^{k} \\
-                              & =p\frac{d^2}{d q^2} \frac{q}{1-q} =\frac{2p}{(1-q)^{3}}                     \\
-                              & =\frac{2}{p^2}                                                              \\
-        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                              \\
-                              & = \frac{2}{p^2} + \frac{1}{p} -\frac{1}{p^2} p^2                            \\
-                              & = \frac{1-p}{p^2}
-    \end{align*}
-\end{note}
-
 \begin{proposition}
     离散分布中有且只有几何分布具备无记忆性：
-    \[ P\left\{ X=s+t|X>t \right\} =P\left\{ X=s \right\} ,\quad \forall s>0,t>0\]
+    \[ P\{ X>m+n|X>m \} =P\{ X>n \} ,\quad \forall s>0,t>0\]
 \end{proposition}
-
 \begin{proof}
-    %TODO 李p135
+    \begin{align*}
+        \because   & P(X>n)=\sum_{k=n+1}^{\infty}(1-p)^k p=\frac{p(1-p)^n}{1-(1-p)}=(1-p)^n \\
+        \therefore & P\{ X>m+n|X>m \} =P\{ X>n \}=\frac{(1-p)^{m+n}}{(1-p)^m}               \\
+                   & =(1-p)^n=P\{ X>n \}
+    \end{align*}
+    即几何分布具备无记忆性。
+
+    设$X$是取正整数值的随机变量，满足：在已知$X>k$的条件下，$X=k+1$的概率与$k$无关。令$p=P\{ X=k+1|X>k \}$，并记$q_k=P\{ X>k \}$，以及$P_k=P\{ X=k \}$，那么$P_{k+1}=q_k-q_{k+1}$，且
+    \[ p=\frac{p_{k+1}}{q_k} \]
+    即
+    \[ \frac{q_{k+1}}{q_k}=1-p \]
+    注意到$q_0=1$，那么$q_k=(l-p)^k$，因此
+    \[ p_k=p(l-p)^{k-l},\quad k \in N_+ \]
+    正是几何分布
 \end{proof}
 
 \subsection{负二项分布}
@@ -286,145 +384,28 @@
     多项分布是二项分布的泛化。
 \end{remark}
 
-\subsection{泊松分布}
-
-\begin{theorem}[Poisson逼近]\label{thm:Poisson_theorem}
-    \[ \lim_{n p_n \to \lambda} \binom{n}{k} p_n^{k} (1-p_n)^{n-k} = \frac{\lambda^{k}}{k !}e^{-\lambda} \]
-\end{theorem}
-
-\begin{proof}
-    记$np_n=\lambda_n$，记$p_n=\lambda_n/n$，我们可得
-    \begin{align*}
-        \binom {n}{k} p_n^k(1-p_n)^{n-k} & = \frac{n(n-1)\cdots(n-k+1)}{k!}\left( \frac{\lambda_n}n \right)^k \left( 1 - \frac{\lambda_n}n \right)^{n-k} \\
-                                         & = \frac{\lambda_n^k}{k!}\left( 1 - \frac1n \right)\left( 1 - \frac2n \right) \cdots
-        \left( 1 - \frac{k-1}n \right)
-        \left( 1 - \frac{\lambda_n}n \right)^{n-k}.
-    \end{align*}
-    对固定的$k$有
-    \begin{align*}
-         & \lim_{n\to+\infty}\lambda_n = \lambda ;
-         & \lim_{n\to+\infty}\left( 1 - \frac{\lambda_n}n \right)^{n-k} = e^{-\lambda} ;
-         & \lim_{n\to+\infty}\left( 1 - \frac{1}{n} \right) \cdots \left( 1 - \frac{k-1}n \right) = 1.
-    \end{align*}
-    从而
-    \[
-        \lim_{n\to+\infty} \binom{n}{k} p_n^k(1-p_n)^{n-k}  = \frac{\lambda^k}{k!}e^{-\lambda}
-    \]
-    对任意的$k$（$k=0,1,2,\cdots$）成立
-\end{proof}
-
-\begin{definition}[Poisson分布]
-    若随机变量$X$的概率分布列满足以下形式：
-    \[ P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda},\; k = 0,1,2,\cdots, \]
-    则称其遵循\textbf{Poisson分布}记为$X\sim P(\lambda)$.
-\end{definition}
-
-\begin{remark}
-    由定理\ref{thm:Poisson_theorem}可看出，Poisson分布可作为二项分布的近似。$\lambda$的涵义%TODO
-\end{remark}
-
-Poisson分布的特征：
-\begin{description}
-    \item[参数] $\lambda>0$
-    \item[概率质量函数] $p(k)=\begin{cases}
-                \frac{\lambda^{k}}{k !}e^{-\lambda} & x \in \mathbb{N}^n \\
-                0                                   & \text{其他}
-            \end{cases}$
-    \item[矩母函数] $M(t)=e^{\lambda (e^t -1)}$，求解方法有：
-        \begin{itemize}
-            \item 利用公式
-            \item 凑一法
-        \end{itemize}
-    \item[均值] $\mu=\lambda$
-    \item[方差] $\sigma^2=\lambda$
-    \item[实例] 公共汽车站来到的乘客数
-\end{description}
-
-\begin{proposition}
-    Poisson分布之和仍是Poisson项分布。若$X_1+\cdots+X_k$独立且$X_i \sim P(\lambda_i)$，则$Y=X_1+\cdots+X_k  \sim P(\lambda_1+\cdots+\lambda_k)$
-\end{proposition}
-
-\begin{proof}
-    %TODO 
-\end{proof}
-
-\begin{lemma}\label{lem:Cauchy_lemma}
-    若$f(x)$是连续函数（或单调函数），且对一切$x,y$（或一切$x,y\ge 0$）成立：
-    \[ f(x)f(y)=f(x+y) \]
-    则$f(x)$为\textbf{指数函数}。
-\end{lemma}
-
-\begin{proof}
-    \begin{align*}
-        \because   & f(1)=[f(\frac{1}{n})]^n                           \\
-        \text{且}  & a=f(1)=[f(\frac{1}{2})]^2\ge 0                    \\
-        \therefore & f(\frac{1}{n})=a^{\frac{1}{n}}                    \\
-        \therefore & f(\frac{m}{n})=[f(\frac{1}{n})]^m=a^{\frac{m}{n}}
-    \end{align*}
-    即此命题对一切有理数成立。又实数具有连续性，故此命题对一切实数成立。
-\end{proof}
-
-\begin{definition}[泊松过程]
-    若某一随机过程满足以下特征，则称其为\textbf{泊松过程}：
-    \begin{description}
-        \item[平稳性] 随机事件$A$在$[t_0, t_0 + t)$中的发生次数数只与时间间隔长度$t$有关而与时间起点$t_0$无关。以$P_k(t)$记在长度为$t$的时间区间中发生$K$次事件$A$的概率。
-        \item[独立增量性] 在$[t_0, t_0 + t)$中发生$K$次事件$A$的概率与时刻$t_0$以前发生的事件独立。
-        \item[普通性] 在充分小的时间间隔中，最多发生一次事件$A$。即，若记$\psi(t)=\sum_{k=2}^{\infty}P_k(t)=1-P_0(t)-P_1(t)$，则有$\lim_{t \to 0}\psi(t)/t=0$
-    \end{description}
-\end{definition}
-
-对$\Delta t>O$，考虑$[O,t+\Delta t)$中发生$K$次事件$A$的概率$P_k(t+\Delta t)$，由独立增量性及全概率公式可得：
-\[ P_k(t+\Delta t)=P_k(t)P_0(\Delta r) + P_{k-1}P_1(\Delta t)+ \cdots +P_0(t)P_k(\Delta t) ,k\ge 0\]
-（对$n\ge 1$ ，假定$P_{-n}(t)=0$）
-
-特别地
-\[ P_0(t+\Delta t)=P_0(t)P_0(\Delta t) \]
-由引理\ref{lem:Cauchy_lemma}知
-\[ P_0(t)=a^{t}, a\ge 0 \]
-若$a=O$，则$P_0(t) \equiv 0$，说明在不管怎么短的时间间隔内事件$A$都发生，因此在有限时间间隔中将发生无穷多个次事件$A$，这种情形不在我们的考虑之列。此外，因$P_0(t)$是概率，故应有$a\ge 1$，而当$a=1$时，$P_0(t) \equiv 1$，表明事件$A$永不发生，也不是我们感兴趣的情形，所以应有 $0<a<1$，从而存在$\lambda>0$，使
-\[ P_0(t)=e^{-\lambda t} \]
-因此当$\Delta t \to 0$时，有
-\begin{align*}
-    P_{0}(\Delta t)                                & =\ee^{-\lambda \Delta t}=1-\lambda \Delta t+o(\Delta t)                  \\
-    P_{1}(\Delta t)                                & =1-P_{0}(\Delta t)-\psi(\Delta t)=\lambda \Delta t+o(\Delta t)           \\
-    \sum_{l=2}^{\infty} P_{k-l}(t) P_{l}(\Delta t) & \leqslant \sum_{l=2}^{\infty} P_{l}(\Delta t)=\psi(\Delta t)=o(\Delta t) \\
-\end{align*}
-所以：
-\[ P_k(t+\Delta t)=P_k(t)(1-\lambda \Delta t) + P_{k-1}\lambda \Delta t+ o(\Delta t) ,k\ge 1\]
-因此：
-\[ P'_k(t)= \frac{P_k(t+\Delta t)-P_k(t)}{\Delta t} = \lambda[P_{k-1}-P_k(t)] \]
-
-由于$P_0(t)=\ee^{-\lambda t}$，故有$P'_1(t)=\lambda[\ee^{-\lambda t}-P_1(t)]$，可解得$P_0(t)=\lambda t \ee^{-\lambda t}$，依次可递推可解得：
-\[ P_k(t)=\frac{(\lambda t)^k}{k!}\ee^{-\lambda t}, k \in \mathbb{N}\]
-正是参数为$\lambda t$的泊松分布。
-
 \subsection{超几何分布}
 
 \begin{definition}
-    设有$N$个产品，其中有$M$个不合格品.若从中不放回地随机抽取$n$个，则其中含有的不合格品的个数$X$服从超几何分布，记为$X\sim h(n,N,M)$.
-    \begin{equation}\label{eq2.4.6}
-        P(X = k) = \frac{\binom Mk \binom{N-M}{n-k}} {\binom Nn},\; k = 0,1,\cdots,r,
-    \end{equation}
-    其中
+    设有$N$个产品，其中有$M$个不合格品.若从中不放回地随机抽取$n$个，则其中含有的不合格品的个数$X$服从超几何分布，记为$X \sim h(n,N,M)$
 \end{definition}
 
 超几何分布的特征：
 \begin{description}
-    \item[参数] $r=\min\{M,n\}$，且$M\le N,n\le N,n,N,M$均为正整数.
+    \item[参数] $M,n \le N \quad n,N,M \in N_+$
     \item[概率质量函数] $p(k)=\begin{cases}
-                \frac{\binom Mk \binom{N-M}{n-k}} {\binom Nn}  k = 0,1,\cdots,r \\
-                0 & \text{其他}
+                \frac{\binom Mk \binom{N-M}{n-k}} {\binom Nn}  ,\  & k = 0,1,\cdots,r \\
+                0                                                  & \text{其他}
             \end{cases}$
     \item[矩母函数] 存在，但没有简单的表达
-    \item[均值] $\mu=\frac{rn}{n+m}$
-    \item[方差] $\sigma^2=\frac{rnm(n+m-r)}{(n+m)^2(n+m-1)}$
+    \item[均值] $\mu=n\frac{M}{N}$（利用凑一法，例\ref{ex:binom_dist_mean}）
+    \item[方差] $\sigma^2=\frac{nM(N-M)(N-n)}{N^2(N-1)}$
     \item[实例] 从一个有限总体中进行不放回抽样
 \end{description}
 
 \begin{remark}
-    若$m,n \to \infty$时有$p_{m,n}=\frac{n}{m+n} \to p$，则超几何分布可近似为二项分布。
-    $\frac{\binom {M}{k} \binom{N-M}{n-k}} {\binom {N}{n}}
-        \cong \binom{n}{k}p^k(1-p)^{n-k}$
+    若$\frac{n}{N} \to 0$时，$\frac{M}{N} \to p$，则超几何分布可近似为二项分布。
+    \[ \frac{\binom {M}{k} \binom{N-M}{n-k}} {\binom {N}{n}} \approx \binom{n}{k}p^k(1-p)^{n-k} ,\quad p=\frac{M}{N} \]
 \end{remark}
 
 \section{连续分布}

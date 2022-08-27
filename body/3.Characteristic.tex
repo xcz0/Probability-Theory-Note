@@ -110,6 +110,19 @@
     \end{align*}
 \end{example}
 
+\begin{example}[微分法求解几何分布均值]\label{ex:geometric_dist_mean}
+    \begin{align*}
+        E(X) & =p\sum_{k=1}^{\infty}k q^{k-1}=p\frac{d}{d q}\sum_{k=1}^{\infty} q^{k} \\
+             & =p\frac{d}{d q} \frac{q}{1-q} =\frac{p}{(1-p)^{2}}                     \\
+             & =\frac{1}{p}                                                           \\
+    \end{align*}
+\end{example}
+
+\begin{proposition}\label{prop:mean_of_non-negative_discrete_varible}
+    设$X$为仅取非负整数的离散随机变量，若其数学期望存在，则
+    \[ E(X) = \sum_{k=1}^{+\infty}P(X \ge k) \]
+\end{proposition}
+
 \subsection{方差}
 
 方差为随机变量距其均值的均方偏差，刻画了$X$的变动程度。随机变量的均值与标准差的单位和其本身的相同，方差的为其平方。如果随机变量$X$的数学期望存在, 其方差不一定存在；而当$X$的方差存在时，则$E(X)$必定存在，其原因在于$|x| \le x^2+1$($0 \le x^2-2|x|+1$)总是成立的（若$E(X^2)$收敛，则$E(|X|)$收敛）。
@@ -126,6 +139,17 @@
         \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                      \\
                               & = n(n-1)p^2 + np -n^2 p^2                                           \\
                               & =np(1-p)
+    \end{align*}
+\end{example}
+
+\begin{example}[微分法求解几何分布方差]\label{ex:geometric_dist_var}
+    \begin{align*}
+        E(X(X-1))             & =p\sum_{k=1}^{\infty}k(k-1) q^{k-1}=p\frac{d}{d q}\sum_{k=1}^{\infty} q^{k} \\
+                              & =p\frac{d^2}{d q^2} \frac{q}{1-q} =\frac{2p}{(1-q)^{3}}                     \\
+                              & =\frac{2}{p^2}                                                              \\
+        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                              \\
+                              & = \frac{2}{p^2} + \frac{1}{p} -\frac{1}{p^2} p^2                            \\
+                              & = \frac{1-p}{p^2}
     \end{align*}
 \end{example}
 
@@ -427,8 +451,6 @@
             0,                            & \text{其他}.
         \end{cases} \]
     对$X$独立重复观察4次，$Y$表示观察值大于$\pi/3$的次数，求$Y^2$的数学期望。
-    \item （茆2.2.19作为结论记住，22 题是它的应用，思考一下什么场合下用这个公式解题比较方便）设$X$为仅取非负整数的离散随机变量, 若其数学期望存在, 证明
-    \[ E(X) = \sum_{k=1}^{+\infty}P(X \ge k) \]
     \item （茆2.2.20）设连续随机变量$X$的分布函数为$F(x)$，且数学期望存在，证明
     \[ E(X) = \int_{0}^{+\infty}[1-F(x)] \dd  x-\int_{-\infty}^{0} F(x) \dd  x \]
     \item （茆2.2.21）设$X$是非负连续随机变量，若$E(X^n)$存在，证明：\begin{enumerate}
