@@ -387,7 +387,7 @@ Poisson分布的特征：
 \subsection{超几何分布}
 
 \begin{definition}
-    设有$N$个产品，其中有$M$个不合格品.若从中不放回地随机抽取$n$个，则其中含有的不合格品的个数$X$服从超几何分布，记为$X \sim h(n,N,M)$
+    设有$N$个产品，其中有$M$个不合格品.若从中不放回地随机抽取$n$个，则其中含有的不合格品的个数$X$服从\textbf{超几何分布}(Hypergeometric distribution)，记为$X \sim h(n,N,M)$
 \end{definition}
 
 超几何分布的特征：
@@ -413,7 +413,7 @@ Poisson分布的特征：
 \subsection{均匀分布}
 
 \begin{definition}
-    若随机变量$X$在$[a,b]$中任一区域的概率与其测度成正比，则称$X$服从区间$(a,b)$上的\textbf{均匀分布}(Uniform distribution)，记作$X\sim U(a,b)$。
+    若随机变量$X$在$[a,b]$中任一区域的概率与其测度成正比，则称$X$服从区间$(a,b)$上的\textbf{均匀分布}(Uniform distribution)，记作$X \sim U(a,b)$。
 \end{definition}
 
 \begin{figure}[!ht]
@@ -442,10 +442,7 @@ Poisson分布的特征：
 均匀分布的特征：
 \begin{description}
     \item[参数] $a<b , \quad a,b \in \mathbb{R} $
-    \item[概率质量函数] $p(x)=\begin{cases}
-                \frac1{b-a}, & a < x < b   \\
-                0            & \text{其他}
-            \end{cases}$
+    \item[概率质量函数] $p(x)=\frac1{b-a}\1_{\{ a < x < b \}}(x)$
     \item[分布函数]  $ F(x) = \begin{cases}
                 0,               & x < a ;      \\
                 \frac{x-a}{b-a}, & a \le x < b; \\
@@ -463,16 +460,10 @@ Poisson分布的特征：
 \subsection{指数分布}
 
 \begin{definition}
-    若随机变量X的密度函数（见图 \ref{fig2.5.4}）为
-    \[ p(x) = \begin{cases}
-            \lambda e^{-\lambda x}, & x \ge 0; \\
-            0,                      & x < 0,
-        \end{cases} \]
-    则称$X$服从\textbf{指数分布}，记作$X\sim Exp(\lambda)$，其中参数$\lambda>0$. 指数分布的分布函数为
-    \[ F(x) = \begin{cases}
-            1 - e^{-\lambda x}, & x \ge 0; \\
-            0,                  & x < 0.
-        \end{cases}\]
+    若随机变量X的密度函数（见图\ref{fig:exponential_pdf}）为
+    \[ p(x) = \lambda e^{-\lambda x} \1_{\{ x \ge 0 \}}(x) \]
+    则称$X$服从\textbf{指数分布}（Exponential distribution），记作$X\sim Exp(\lambda)$，其中参数$\lambda>0$。指数分布的分布函数为
+    \[ F(x) = 1 - e^{-\lambda x}\1_{\{ x \ge 0 \}}(x) \]
 \end{definition}
 
 \begin{figure}[!ht]
@@ -492,7 +483,7 @@ Poisson分布的特征：
         \draw[->](b)--(0.85,{e^(-0.85)});
         \draw[->](c)--(2.6,{0.5*e^(-0.5*2.6)});
     \end{tikzpicture}
-    \caption{参数为$\lambda$的指数分布密度函数}\label{fig2.5.4}
+    \caption{参数为$\lambda$的指数分布密度函数}\label{fig:exponential_pdf}
 \end{figure}
 
 指数分布的特征：
@@ -504,61 +495,61 @@ Poisson分布的特征：
 \end{description}
 
 \begin{remark}
-    有其均值可看出，对于等待时间模型，$\frac{1}{\lambda}$代表平均等待时间，即（时间/次）；$\lambda$代表平均发生频率，即（次/时间）。
+    由其均值可看出，对于等待时间模型，$\frac{1}{\lambda}$代表平均等待时间，即（时间/次）；$\lambda$代表平均发生频率，即（次/时间）。
 \end{remark}
 
 \begin{theorem}[指数分布的无记忆性]
-    连续分布中有且只有指数分布具备无记忆性：
+    连续分布中，有且只有指数分布具备无记忆性：
     \[ P(X > s + t| X > s) = P( X > t) ,\quad \forall s>0,t>0\]
 \end{theorem}
-
 \begin{proof}
-    %TODO 李p138
+    由
+    \[ P(X>s+t | X>s) = \frac{P(X>s+t)}{P(X>s)} = \frac{\ee^{-\lambda(s+t)}}{\ee^{-\lambda s}} = \ee^{-\lambda t} =P(X>t) \]
+    可知，指数分布具备无记忆性。
+
+    设$X$为非负随机变量，其分布函数为$F(x)$，记$G(x)=P\{ X\ge x \}$。若其具备无记忆性，则$G(s+t)=G(s)G(t)$。由于$G(x)$是单调函数，有由引理\ref{lem:Cauchy_lemma}得，$G(x)$为指数函数：
+    \[ G(x)=a^x,\ x\ge 0 \]
+    由于$G(x)$是概率，故$0<a<1$，可以写成$a=\ee^{-\lambda},\ \lambda > 0$。因此
+    \[ F(x)=1-G(x)=1-a=\ee^{-\lambda x},\ x\ge 0 \]
+    即$X$服从指数分布。
 \end{proof}
 
 \begin{proposition}
-    如果某设备在任何长为$t$的时间$[0,t]$内发生故障的次数$N9t)$服从参数为$\lambda t$的泊松分布，则相继两次故障之间的时间间隔$T$服从参数为$\lambda$的指数分布.
+    如果某事件在任何长为$t$的时间$[0,t]$内发生的次数$N(t)$服从参数为$\lambda t$的泊松分布，则相继两次事件之间的时间间隔$T$服从参数为$\lambda$的指数分布。
 \end{proposition}
-
 \begin{proof}
     设$N(t)\sim P(\lambda t)$，即
-    \[
-        P\big( N(t) = k \big) = \frac{(\lambda t)^k}{k!} e^{-\lambda t},\quad k=0,1,\cdots.
-    \]
-
-    注意到两次故障之间的时间间隔$T$是非负随机变量，且事件$\{T\ge t\}$说明此设备在$[0,t]$内没有发生故障，即$\{T\ge t\}=\{N(t)=0\}$，由此我们得
-
-    当$t<0$时，有$F_T(t)=P(T\le t)=0$；
-
-    当$t\ge0$时，有
-    \[
-        F_T(t) = P(T\le t) = 1 - P(T>t) = 1 -P\big( N(t)=0 \big) = 1 - e^{-\lambda t},
-    \]
-    所以$T\sim Exp(\lambda)$，相继两次故障之间的时间间隔$T$服从参数为$\lambda$的指数分布.
+    \[ P\{ N(t) = k \} = \frac{(\lambda t)^k}{k!} \ee^{-\lambda t},\quad k=0,1,\cdots \]
+    注意到两次事件发生的时间间隔$T$是非负随机变量；且事件$\{T\ge t\}$说明在$[0,t]$内事件没有故障，即$\{T\ge t\}=\{N(t)=0\}$，由此得
+    \begin{itemize}
+        \item 当$t<0$时，有$F_T(t)=P(T\le t)=0$；
+        \item 当$t\ge0$时，有$F_T(t) = P(T\le t) = 1 - P(T>t) = 1 -P\big( N(t)=0 \big) = 1 - e^{-\lambda t}$
+    \end{itemize}
+    所以$T\sim Exp(\lambda)$，相继两次事件之间的时间间隔$T$服从参数为$\lambda$的指数分布。
 \end{proof}
 
 \subsection{伽马分布}
 
 \begin{definition}
-    若随机变量$X$的密度函数为
-    \[ p(x) = \begin{cases}
-            \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}
-            \ee^{-\lambda x}, & x\ge 0 ; \\
-            0,                & x < 0,
-        \end{cases} \]
-    则称$X$服从\textbf{伽玛分布}，记作$X\sim \Gamma(\alpha,\lambda)$，其中$\alpha>0$为形状参数，$\lambda>0$为尺度参数.
+    称
+    \[ \Gamma(\alpha)=\int_0^{\infty}x^{\alpha-1}\ee^{-x}\mathrm{d}x ,\quad \alpha > 0\]
+    为\textbf{伽马函数}(gamma function)。
 \end{definition}
 
-
-
-图 \ref{fig2.5.5} 给出若于条$\lambda$固定、$\alpha$不同的伽玛密度函数曲线，从图中可以看出：
-
+Gamma函数的特征：
 \begin{itemize}
-    \item $0<\alpha<1$时，$p(x)$是严格下降函数，且在$x=0$处有奇异点；
-    \item $\alpha=1$时，$p(x)$是严格下降函数，且在$x=0$处$p(0)=\lambda$；
-    \item $1<\alpha\le2$，$p(x)$是单峰函数，向上凸、后下凸；
-    \item $2<\alpha$时，$p(x)$是单峰函数，先下凸、中间上凸、后下凸. 且$\alpha$越大，$p(x)$越近似于正态分布.
+    \item $\Gamma(1)=1$
+    \item $\Gamma(\frac{1}{2})=\sqrt{\pi}$
+    \item $\Gamma(\alpha+1)=(\alpha)\Gamma(\alpha)$（分部积分可证）
+    \item $\Gamma(n)=(n-1)!,\quad n \in \mathbb{N}$
+    \item $\Gamma(\frac{\alpha}{2})=\frac{\sqrt{\pi}(\alpha-1)!}{2^{\alpha-1}(\frac{\alpha-1}{2})!}, \quad \alpha=2k+1,k \in \mathbb{N}$
 \end{itemize}
+
+\begin{definition}
+    若随机变量$X$的密度函数为
+    \[ p(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\ee^{-\lambda x}\1_{\{ x \ge 0 \}}(x) \]
+    则称$X$服从\textbf{伽玛分布}，记作$X \sim \Gamma(\alpha,\lambda)$，其中称$\alpha>0$为\underline{形状参数}，$\lambda>0$为\underline{尺度参数}。
+\end{definition}
 
 \begin{figure}[!ht]
     \centering
@@ -568,13 +559,10 @@ Poisson分布的特征：
             \draw[->](0,0)--(0,1.7)node[right]{$p(x)$};
             \draw[thick,domain=0.12:2.6]plot(\x,{e^(-\x)/sqrt(\x)/1.77});
             \draw[thick,domain=0:3]plot(\x,{e^(-\x)});
-            \draw[thick,domain=0:4]plot(\x,{2.5*(\x)*e^(-\x)});
             \node[inner sep=0pt](a)at(2,0.45){$\alpha=1$};
             \node[inner sep=0pt](b)at(1,1.2){$\alpha<1$};
-            \node[inner sep=0pt](c)at(3,0.8){$\alpha>1$};
             \draw[->](a)--(2,{e^(-2)});
             \draw[->](b)--(0.2,{e^(-0.2)/sqrt(0.2)/1.77});
-            \draw[->](c)--(3,{2.5*(3)*e^(-3)});
             \node[below]at(1,0){\phantom{$\frac{\alpha-1}\lambda$}};
         \end{tikzpicture}
     }
@@ -595,8 +583,16 @@ Poisson分布的特征：
             \draw[dashed](2,{1.5*2^2*e^(-1.5)})--(2,0)node[below]{$\frac{\alpha-1}\lambda$};
         \end{tikzpicture}
     }
-    \caption{$\lambda$固定、不同$\alpha$的伽玛密度曲线}\label{fig2.5.5}
+    \caption{$\lambda$固定、不同$\alpha$的伽玛密度曲线}\label{fig:gamma_pdf}
 \end{figure}
+
+从图\ref{fig:gamma_pdf}中可以看出：
+\begin{itemize}
+    \item $0<\alpha<1$时，$p(x)$是严格下降函数，且在$x=0$处有奇异点；
+    \item $\alpha=1$时，$p(x)$是严格下降函数，且在$x=0$处$p(0)=\lambda$；
+    \item $1<\alpha\le2$，$p(x)$是单峰函数，向上凸、后下凸；
+    \item $2<\alpha$时，$p(x)$是单峰函数，先下凸、中间上凸、后下凸. 且$\alpha$越大，$p(x)$越近似于正态分布.
+\end{itemize}
 
 Gamma分布的特征：
 \begin{description}
@@ -605,19 +601,9 @@ Gamma分布的特征：
     \item[方差] $\sigma^2=\frac{\alpha}{\lambda^{2}}$
 \end{description}
 
-Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
-\begin{itemize}
-    \item $\Gamma(1)=1$
-    \item $\Gamma(\frac{1}{2})=\sqrt{\pi}$
-    \item $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$
-    \item $\Gamma(n)=(n-1)!,\quad n \in \mathbb{Z}$
-    \item $\Gamma(\frac{\alpha}{2})=\frac{\sqrt{\pi}(\alpha-1)!}{2^{\alpha-1}(\frac{\alpha-1}{2})!}, \quad \alpha=2k+1,k \in \mathbb{N}$
-\end{itemize}
-
 \begin{proposition}\label{prop:sum_of_Gamma}
-    $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=E(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim E(\lambda)$，则$Y=X_1+\cdots+X_k  \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \operatorname{i.i.d.} \sim \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
+    $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=E(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \overset{\text{i.i.d.}}{\sim} E(\lambda)$，则$Y=X_1+\cdots+X_k \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \overset{\text{i.i.d.}}{\sim} \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
 \end{proposition}
-
 \begin{proof}
     \begin{align*}
         M_Y(t)    & =\prod_{i=1}^k M_{X_i}(t_i)=\prod_{i=1}^k \frac{\lambda}{\lambda-t}=(\frac{\lambda}{\lambda-t})^{k}                                       \\
@@ -628,7 +614,6 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
 \begin{proposition}
     若令随机变量$X \sim \Gamma(\alpha,\lambda)$，则$cX \sim \Gamma(\alpha,\frac{\lambda}{c}), \quad c>0$
 \end{proposition}
-
 \begin{proof}
     \[ M_{c X}(t) = M_X(c t) =(\frac{\lambda}{\lambda-c t})^{\alpha}=(\frac{\frac{\lambda}{c}}{\frac{\lambda}{c}-t})^{\alpha}\]
 \end{proof}
@@ -636,15 +621,12 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
 \begin{proposition}
     若令随机变量$X \sim \Gamma(\alpha,\lambda)$，则$\mu_k=\frac{\Gamma(\alpha+k)}{\lambda^{k}\Gamma(\alpha)}, \quad 0<k$，且则$\mu_{-k}=\frac{\lambda^{k}\Gamma(\alpha-k)}{\Gamma(\alpha)}, \quad 0<k<\alpha$
 \end{proposition}
-
 \begin{proof}
     \begin{align*}
         \mu_k=M_X^{(k)}(0)     & =\frac{1}{\lambda^{k}}\alpha(\alpha+1)\cdots(\alpha+k-1) =\frac{\Gamma(\alpha+k)}{\lambda^{k}\Gamma(\alpha)} \\
         \mu_{-k}=M_X^{(-k)}(0) & =\lambda^{k}\frac{1}{\alpha-1}\cdots\frac{1}{\alpha-k} =\frac{\lambda^{k}\Gamma(\alpha-k)}{\Gamma(\alpha)}
     \end{align*}
 \end{proof}
-
-
 
 \begin{proposition}
     %TODO 指数分布、伽马分布与泊松分布间的联系
@@ -653,7 +635,7 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
 \subsection{贝塔分布}
 
 \begin{definition}
-    称以下函数
+    称
     \[ \beta(a,b) = \int_0^1 x^{a-1}(1-x)^{b-1}\dd x \]
     为\textbf{贝塔函数}，其中参数$a>0,b>0$.
 \end{definition}
@@ -665,7 +647,6 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
         \item $\beta(a,b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}$
     \end{itemize}
 \end{proposition}
-
 \begin{proof}
     在贝塔函数的积分中令$y=1-x$，即得
     \[ \beta(a,b) = \int_1^0(1-y)^{a-1}y^{b-1}(-\dd y) = \int_0^1 (1-y)^{a-1}y^{b-1}\dd y = \beta(b,a) \]
@@ -673,21 +654,16 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
     \[ \Gamma(a) \Gamma(b) = \int_0^{+\infty}\int_0^{+\infty}x^{a-1}y^{b-1}  \ee^{-(x+y)} \dd x \dd y \]
     作变量变换$x=uv,y=u(1-v)$，其雅可比行列式$J=-u$，故
     \begin{align*}
-        \Gamma(a)\Gamma(b) & = \int_0^{+\infty}\int_0^1(uv)^{a-1}[u(1-v)]^{b-1}
-        \ee^{-u}u \dd u \dd v                                                                    \\
-                           & = \int_0^{+\infty}u^{a+b-1}\ee^{-u} \int_0^1v^{a-1}(1-v)^{b-1}\dd v
-        = \Gamma(a+b)                                                                            \\beta(a,b),
+        \Gamma(a)\Gamma(b) & = \int_0^1 \int_0^{\infty} (uv)^{a-1}[u(1-v)]^{b-1}\ee^{-u}u \dd u \dd v \\
+                           & = \int_0^{+\infty}u^{a+b-1}\ee^{-u} \int_0^1v^{a-1}(1-v)^{b-1}\dd v      \\
+                           & = \Gamma(a+b)\beta(a,b)
     \end{align*}
 \end{proof}
 
 \begin{definition}
     若随机变量$X$的密度函数为
-    \[ p(x) = \begin{cases}
-            \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}
-            x^{a-1}(1-x)^{b-1}, & 0 < x < 1;   \\
-            0,                  & \text{其他},
-        \end{cases} \]
-    则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是形状参数.
+    \[ p(x) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}            x^{a-1}(1-x)^{b-1}\1_{\{0< x < 1 \}}(x) \]
+    则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是\underline{形状参数}。
 \end{definition}
 
 \begin{figure}
@@ -752,7 +728,7 @@ Gamma函数$\Gamma(\alpha)=\int_0^{\infty}y^{\alpha-1}\ee^{-y}dy$的特征：
     \item $a>1,b>1$时，$p(x)$是上凸的单峰函数.
     \item $a<10,b\ge1$时，$p(x)$是下凸的单调减函数.
     \item $a\ge1,b<1$时，$p(x)$是下凸的单调增函数.
-    \item $a=1,b=1$时，$p(x)$是常函数，且$Be(1,1)=U(0,1)$.
+    \item $a=1,b=1$时，$p(x)$是常函数，且\underline{$Be(1,1)=U(0,1)$}.
 \end{itemize}
 
 Beta分布的特征：
@@ -760,19 +736,106 @@ Beta分布的特征：
     \item[矩母函数] $M(t)=1+\sum_{k=1}^{\infty}(\prod_{r=0}^{k-1} \frac{a+r}{a+b+r})\frac{t^k}{k!}, \quad t<\lambda$
     \item[均值] $\mu=\frac{a}{a+b}$
     \item[方差] $\sigma^2=\frac{ab}{(a+b+1)(a+b)^{2}}$
+    \item[实例] 不合格品率、机器的维修率、市场的占有率、射击的命中率等各种比率
 \end{description}
-
-\begin{remark}
-    \[ \beta(1,1)=U(0,1) \]
-\end{remark}
 
 \begin{proposition}
     令独立随机变量$X_1 \sim \Gamma(\alpha_1,\lambda),X_2 \sim  \Gamma(\alpha_2,\lambda)$，则$\frac{X_1}{X_1+X_2} \sim \beta(\alpha_1,\alpha_2)$
 \end{proposition}
-
 \begin{proof}
     %TODO 李P182习题38
 \end{proof}
+
+\subsection{柯西分布}
+
+\begin{definition}
+    若随机变量$X$的密度函数为
+    \[ f(x) = \frac{\sigma}{\pi} \frac1{\sigma^2+(x-\mu)^2} ,x \in \mathbb{R} \]
+    则称$X$服从\textbf{柯西分布}(Cauchy distribution)，记作$X\sim C(\mu,\sigma)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
+\end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[柯西分布累积函数]{
+        \begin{tikzpicture}[>=stealth,xscale=1.3,yscale=2,semithick]
+            \draw[->](-2,0)--(0,0)node[below left]{$O$}--(2,0)node[below]{$x$};
+            \draw[->](0,-0.5)--(0,1.3)node[left]{$F(x)$};
+            \draw[dashed](-2,1)--(2,1)(1,0)node[below]{$1$}--(1,0.75)--(0,0.75)node[left]{$F(1)$}
+            (-1,0)node[below]{$-1$}--(-1,0.25)--(0,0.25)node[right]{$F(-1)$};
+            \draw[thick,domain=-2:2,samples=100]plot(\x,{(atan(\x))/180+0.5});
+        \end{tikzpicture}
+    }
+    \subfloat[柯西分布密度函数]{
+        \begin{tikzpicture}
+            \begin{axis}[
+                    axis lines = middle,
+                    xlabel=$x$,
+                    ylabel={$f(x)$}
+                ]
+                \addplot[
+                    domain=-10:10,
+                    samples=100,
+                ]
+                {1/pi/(1+x^2)};
+            \end{axis}
+        \end{tikzpicture}
+    }
+    \caption{柯西分布}
+\end{figure}
+
+柯西分布的特征：
+\begin{description}
+    \item[累积函数] $F(x)=\frac{1}{2}+\frac{1}{\pi} \arctan(\mu +\sigma x)$
+    \item[矩母函数] 除$t=0$外不存在
+    \item[特征函数] $\phi_X(t)=\exp (i \mu t - \sigma |t|)$
+    \item[均值] 不存在
+    \item[方差] 不存在
+\end{description}
+
+\begin{remark}
+    此类因极端值概率密度较高而导致均值、方差不存在的分布称为重尾分布。
+\end{remark}
+
+\begin{figure*}
+    \centering
+    \includegraphics{image/Cauchy_dist.png}
+\end{figure*}
+
+\begin{proposition}
+    $C(0,1)=t_1$
+\end{proposition}
+
+\begin{proposition}
+    若随机变量$X,Y \operatorname{i.i.d.} \sim N(0,1)$，则$\frac{X}{Y} \sim C(0,1)$
+\end{proposition}
+
+\begin{proof}
+    %TODO
+\end{proof}
+
+\begin{proposition}
+    若随机变量$X \sim C(\mu, \sigma)$，则其线性变换$a,b \in \mathbb{R},aX + b \sim C(a \mu + b,|a| \sigma)$。
+\end{proposition}
+
+\begin{proof}
+    \[ \phi_{aX + b}(t)=e^{ibt}\phi_X(a t)=\exp (ibt + ia\mu t-\sigma|a t|) \]
+\end{proof}
+
+\begin{proposition}
+    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim C(\mu_i,\sigma_i)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i)$
+\end{proposition}
+
+\begin{proof}
+    \[ \phi_{X_1+\cdots+ X_n} = \prod_{i=1}^n \phi_{X_i}(t)=\exp (it\sum_{i=1}^k\mu_i - |t|\sum_{i=1}^k \sigma_i) \]
+\end{proof}
+
+\begin{corollary}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_k)/k \sim C(\mu,\sigma)$
+\end{corollary}
+
+\begin{remark}
+    此处的$\sigma$不代表方差，所以不遵守$\operatorname{Var}(\overline{X})=\frac{\sigma^2}{k}$的关系。
+\end{remark}
 
 \section{正态分布及其导出分布}
 
@@ -780,17 +843,20 @@ Beta分布的特征：
 
 \begin{definition}
     若随机变量$X$的密度函数为
-    \begin{equation}\label{eq2.5.1}
-        p(x) = \frac1{\sqrt{2\pi}\sigma} \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},x \in \mathbb{R}
-    \end{equation}
-    则称$X$服从\textbf{正态分布}(Normal distribution)，称$X$为\textbf{正态变量}，记作$X\sim N(\mu,\sigma^2)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
+    \[  p(x) = \frac1{\sqrt{2\pi}\sigma} \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},\ x \in \mathbb{R} \]
+    则称$X$服从\textbf{正态分布}(Normal distribution)，记作$X\sim N(\mu,\sigma^2)$。其中参数$\mu \in \mathbb{R},\sigma>0$。特别地，将$N(0,1)$称为\textbf{标准正态分布}(standard Normal distribution)，其密度函数记为$\varphi(x)$，分布函数记为$\Phi(x)$。
 \end{definition}
 
-正态分布的密度函数$p(x)$的图形如图 \ref{fig2.5.1}(a)所示，是一条钟形曲线，左右关于$\mu$对称，衰减速度由$\sigma$决定，$\mu\pm\sigma$是该曲线的拐点.
+正态分布的密度函数$f(x)$的图形如图\ref{fig2.5.1}(a)所示，是一条钟形曲线，左右关于$\mu$对称，衰减速度由$\sigma$决定，$\mu\pm\sigma$是该曲线的拐点。
+\begin{itemize}
+    \item 如果固定$\sigma$，改变$\mu$的值，则图形沿$x$轴平移，而不改变其形状，即正态密度函数的位置由参数$\mu$所确定，因此亦称$\mu$为\textbf{位置参数}。
+
+    \item 如果固定$\mu$，改变$\sigma$的值，则$\sigma$愈小，曲线呈高而瘦；$\sigma$愈大，曲线呈矮而胖，即正态密度函数的尺度由参数$\sigma$所确定，因此称$\sigma$为\textbf{尺度参数}。
+\end{itemize}
 
 \begin{figure}[!ht]
     \centering
-    \subfloat[密度函数$p(x)$]{
+    \subfloat[密度函数$f(x)$]{
         \begin{tikzpicture}[semithick,yscale=2,>=stealth]
             \draw[->](-2.7,0)--(0,0)node[below=1pt]{$\mu$}--(2.7,0)node[below]{$x$};
             \draw[->](0,0)--(0,1.4)node[right]{$p(x)$};
@@ -827,7 +893,7 @@ Beta分布的特征：
 \end{proof}
 
 \begin{proposition}
-    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim N(\mu_i,\sigma_i^2)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i^2)$
+    若\underline{独立}随机变量$X_1,\cdots ,X_k$满足$ X_i \sim N(\mu_i,\sigma_i^2)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i^2)$
 \end{proposition}
 
 \begin{proof}
@@ -1021,107 +1087,68 @@ t分布的特征：
     \end{align*}
 \end{proof}
 
-\subsection{柯西分布}
-
-\begin{definition}
-    若随机变量$X$的密度函数为
-    \[ f(x) = \frac{\sigma}{\pi} \frac1{\sigma^2+(x-\mu)^2} ,x \in \mathbb{R} \]
-    则称$X$服从\textbf{柯西分布}(Cauchy distribution)，记作$X\sim C(\mu,\sigma)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
-\end{definition}
-
-\begin{figure}[ht]
-    \centering
-    \subfloat[柯西分布累积函数]{
-        \begin{tikzpicture}[>=stealth,xscale=1.3,yscale=2,semithick]
-            \draw[->](-2,0)--(0,0)node[below left]{$O$}--(2,0)node[below]{$x$};
-            \draw[->](0,-0.5)--(0,1.3)node[left]{$F(x)$};
-            \draw[dashed](-2,1)--(2,1)(1,0)node[below]{$1$}--(1,0.75)--(0,0.75)node[left]{$F(1)$}
-            (-1,0)node[below]{$-1$}--(-1,0.25)--(0,0.25)node[right]{$F(-1)$};
-            \draw[thick,domain=-2:2,samples=100]plot(\x,{(atan(\x))/180+0.5});
-        \end{tikzpicture}
-    }
-    \subfloat[柯西分布密度函数]{
-        \begin{tikzpicture}
-            \begin{axis}[
-                    axis lines = middle,
-                    xlabel=$x$,
-                    ylabel={$f(x)$}
-                ]
-                \addplot[
-                    domain=-10:10,
-                    samples=100,
-                ]
-                {1/pi/(1+x^2)};
-            \end{axis}
-        \end{tikzpicture}
-    }
-    \caption{柯西分布}
-\end{figure}
-
-柯西分布的特征：
-\begin{description}
-    \item[累积函数] $F(x)=\frac{1}{2}+\frac{1}{\pi} \arctan(\mu +\sigma x)$
-    \item[矩母函数] 除$t=0$外不存在
-    \item[特征函数] $\phi_X(t)=\exp (i \mu t - \sigma |t|)$
-    \item[均值] 不存在
-    \item[方差] 不存在
-\end{description}
-
-\begin{remark}
-    此类因极端值概率密度较高而导致均值、方差不存在的分布称为重尾分布。
-\end{remark}
-
-\begin{figure*}
-    \centering
-    \includegraphics{image/Cauchy_dist.png}
-\end{figure*}
-
-\begin{proposition}
-    $C(0,1)=t_1$
-\end{proposition}
-
-\begin{proposition}
-    若随机变量$X,Y \operatorname{i.i.d.} \sim N(0,1)$，则$\frac{X}{Y} \sim C(0,1)$
-\end{proposition}
-
-\begin{proof}
-    %TODO
-\end{proof}
-
-\begin{proposition}
-    若随机变量$X \sim C(\mu, \sigma)$，则其线性变换$a,b \in \mathbb{R},aX + b \sim C(a \mu + b,|a| \sigma)$。
-\end{proposition}
-
-\begin{proof}
-    \[ \phi_{aX + b}(t)=e^{ibt}\phi_X(a t)=\exp (ibt + ia\mu t-\sigma|a t|) \]
-\end{proof}
-
-\begin{proposition}
-    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim C(\mu_i,\sigma_i)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i)$
-\end{proposition}
-
-\begin{proof}
-    \[ \phi_{X_1+\cdots+ X_n} = \prod_{i=1}^n \phi_{X_i}(t)=\exp (it\sum_{i=1}^k\mu_i - |t|\sum_{i=1}^k \sigma_i) \]
-\end{proof}
-
-\begin{corollary}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_k)/k \sim C(\mu,\sigma)$
-\end{corollary}
-
-\begin{remark}
-    此处的$\sigma$不代表方差，所以不遵守$\operatorname{Var}(\overline{X})=\frac{\sigma^2}{k}$的关系。
-\end{remark}
-
 \section{各分布间关系}
 
-\begin{figure*}[hp]
-    \centering\includegraphics[width=0.95\textwidth]{image/relationship.png}
-\end{figure*}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node[box] (binom) at(4,4) {$B(n,p)$};
+        \node[box] (binom1) at(8,4) {$B(1,p)$};
+        \node[box] (Poisson) at(0,4) {$P(\lambda)$};
+        \node[box] (Hypergeometric) at(4,8) {$h(n,N,M)$};
+        \node[box] (negativeBi) at(4,0) {$NB(n,p)$};
+        \node[box] (geometric) at(8,0) {$G(p)$};
+        \draw[->] (binom1)--(binom);
+        \node at(6.2,4.3) {$\sum X_i$};
+        \draw[->] (Poisson)--(binom);
+        \node at(2,4.3) {$X|\sum X_i$};
+        \draw[->] (geometric)--(negativeBi);
+        \node at(6.2,0.3) {$\sum X_i$};
+        \draw[->,densely dotted] (3.5,4.4) arc(20:160:1.9);
+        \node at(2,6) {$\lambda=np,n \to \infty$};
+        \draw[->] (4.5,4.4) arc(160:20:1.9);
+        \node at(6.2,6) {$n=1$};
+        \draw[->] (4.8,3.5) arc(45:-225:1);
+        \node at(4,2.4) {$\sum X_i$};
+        \draw[->,densely dotted] (Hypergeometric)--(binom);
+        \node at(4,6.8) {$p=\frac{M}{N},\frac{n}{N} \to 0$};
+        \draw[->,densely dotted] (3.1,0) arc(260:180:3.6);
+        \node at(1.5,1.5) {$\lambda=n(1-p),n \to \infty$};
+        \draw[->] (4,-0.3) arc(-160:-20:2);
+        \node at(6,-1) {$n=1$};
+        \draw[->] (8,-0.42) arc(-150:150:0.8);
+        \node at(8.2,1) {$min(X_i)$};
+    \end{tikzpicture}
+    \caption{离散分布间的关系}
+\end{figure}
 
-\begin{figure}[hp]
+
+\begin{figure}[h]
     \centering\includegraphics[width=0.95\textwidth]{image/Relationships_among_some_of_univariate_probability_distributions.jpg}
     \caption{各分布间的联系}
     \label{fig:relationship_among_univariate_distributions}
 \end{figure}
 
 可参考网站\url{http://www.math.wm.edu/~leemis/chart/UDR/UDR.html}
+
+
+若每隔 At 进行一次试验，则伯努利试验也可以看作一个随时间而变化的过程．在伯努利试验中，到时刻 nat 为止，共进行 n 次试验，这时成功次数服从二项分布．而在泊松过程中，到时刻 t 的来到数则服从泊松分布为等待第一次成功，伯努利试验中的等待时间服从几何分布；而泊松过程中则服从指数分布．它们都有无记忆性．为等待第 r 次成功，伯努利试验中的等待时间服从帕斯卡分布；而泊松过程中则服从埃尔朗分布．
+\begin{table}[]
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        离散时间   & 连续时间 \\
+        \midrule
+        几何分布   & 指数分布 \\
+        负二项分布 & 伽马分布 \\
+        二项分布   & 泊松分布 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\FloatBarrier
+
+\begin{problemset}[错题记录]
+    \item （茆2.4.9）已知某商场一天来的顾客数$X$服从参数为$\lambda$的泊松分布，而每个来到商场的顾客购物的概率为$p$，证明：此商场一天内购物的顾客数服从参数为$\lambda p$的泊松分布.
+    \item （茆2.5.8）统计调查表明，英格兰在1875年至1951年期间，在矿山发生10人或10人以上死亡的两次事故之间的时间$T$（以日计）服从均值为241的指数分布，试求$P(50<T<100)$.
+    \item
+\end{problemset}
