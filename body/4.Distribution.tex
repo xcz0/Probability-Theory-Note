@@ -131,8 +131,11 @@
 \end{itemize}
 
 \begin{proposition}
-    二项分布之和仍是二项分布。若$X_1+\cdots+X_k$独立且$X_i \sim B(n_i,p)$，则$Y=X_1+\cdots+X_k  \sim B(n_1+\cdots+n_k,p )$
+    二项分布之和仍是二项分布。若$X_1+\cdots+X_k$独立且$X_i \sim B(n_i,p)$，则$Y=X_1+\cdots+X_k  \sim B(n_1+\cdots+n_k, p)$
 \end{proposition}
+\begin{proof}
+    \[ M_{X_1+\cdots+X_k}(t)=\prod_{i=1}^k(p e^t + 1-p)^{n_i}=(p e^t + 1-p)^{\sum_{i=1}^kn_i} \]
+\end{proof}
 
 \subsection{泊松分布}
 
@@ -183,7 +186,6 @@ Poisson分布的特征：
 \begin{proposition}
     Poisson分布之和仍是Poisson分布。若$X_1+\cdots+X_k \overset{\text{i.i.d.}}{\sim} P(\lambda_i)$，则$Y=X_1+\cdots+X_k  \sim P(\lambda_1+\cdots+\lambda_k)$
 \end{proposition}
-
 \begin{proof}
     \[ M_Y(t)=\prod_i^k M_{X_i}(t)=\exp \{(e^t-1)\sum_{i=1}^k \lambda_i\} \]
 \end{proof}
@@ -461,9 +463,9 @@ Poisson分布的特征：
 
 \begin{definition}
     若随机变量X的密度函数（见图\ref{fig:exponential_pdf}）为
-    \[ p(x) = \lambda e^{-\lambda x} \1_{\{ x \ge 0 \}}(x) \]
+    \[ p(x) = \lambda e^{-\lambda x} \1(x \ge 0) \]
     则称$X$服从\textbf{指数分布}（Exponential distribution），记作$X\sim Exp(\lambda)$，其中参数$\lambda>0$。指数分布的分布函数为
-    \[ F(x) = 1 - e^{-\lambda x}\1_{\{ x \ge 0 \}}(x) \]
+    \[ F(x) = (1 - e^{-\lambda x})\1(x \ge 0) \]
 \end{definition}
 
 \begin{figure}[!ht]
@@ -526,6 +528,14 @@ Poisson分布的特征：
         \item 当$t\ge0$时，有$F_T(t) = P(T\le t) = 1 - P(T>t) = 1 -P\big( N(t)=0 \big) = 1 - e^{-\lambda t}$
     \end{itemize}
     所以$T\sim Exp(\lambda)$，相继两次事件之间的时间间隔$T$服从参数为$\lambda$的指数分布。
+\end{proof}
+
+\begin{proposition}
+    指数分布的最小统计量仍是指数分布：
+    \[ X_{(1)} \sim P(n \lambda) ,\quad X_1,\cdots ,X_n \overset{\text{i.i.d.}}{\sim} P(\lambda) \]
+\end{proposition}
+\begin{proof}
+    \[ f_{X_{(1)}}(y)=n[1-F_X(y)]^{n-1}f_X(y)=n \ee^{-(n-1)\lambda} \lambda \ee^{-\lambda} =n \lambda \ee^{-n\lambda} \]
 \end{proof}
 
 \subsection{伽马分布}
@@ -843,39 +853,15 @@ Beta分布的特征：
 
 \begin{definition}
     若随机变量$X$的密度函数为
-    \[  p(x) = \frac1{\sqrt{2\pi}\sigma} \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},\ x \in \mathbb{R} \]
+    \[ p(x) = \frac1{\sqrt{2\pi}\sigma} \ee^{-\frac{(x-\mu)^2}{2\sigma^2}},\ x \in \mathbb{R} \]
     则称$X$服从\textbf{正态分布}(Normal distribution)，记作$X\sim N(\mu,\sigma^2)$。其中参数$\mu \in \mathbb{R},\sigma>0$。特别地，将$N(0,1)$称为\textbf{标准正态分布}(standard Normal distribution)，其密度函数记为$\varphi(x)$，分布函数记为$\Phi(x)$。
 \end{definition}
 
-正态分布的密度函数$f(x)$的图形如图\ref{fig2.5.1}(a)所示，是一条钟形曲线，左右关于$\mu$对称，衰减速度由$\sigma$决定，$\mu\pm\sigma$是该曲线的拐点。
+正态分布的密度函数$f(x)$的图形是一条钟形曲线，左右关于$\mu$对称，衰减速度由$\sigma$决定，$\mu\pm\sigma$是该曲线的拐点。
 \begin{itemize}
     \item 如果固定$\sigma$，改变$\mu$的值，则图形沿$x$轴平移，而不改变其形状，即正态密度函数的位置由参数$\mu$所确定，因此亦称$\mu$为\textbf{位置参数}。
-
     \item 如果固定$\mu$，改变$\sigma$的值，则$\sigma$愈小，曲线呈高而瘦；$\sigma$愈大，曲线呈矮而胖，即正态密度函数的尺度由参数$\sigma$所确定，因此称$\sigma$为\textbf{尺度参数}。
 \end{itemize}
-
-\begin{figure}[!ht]
-    \centering
-    \subfloat[密度函数$f(x)$]{
-        \begin{tikzpicture}[semithick,yscale=2,>=stealth]
-            \draw[->](-2.7,0)--(0,0)node[below=1pt]{$\mu$}--(2.7,0)node[below]{$x$};
-            \draw[->](0,0)--(0,1.4)node[right]{$p(x)$};
-            \draw[samples=100,domain=-2.5:2.5,thick]plot(\x,{e^(-(\x)^2)+0.04});
-            \draw[dashed](-0.8,{e^(-0.64)+0.04})--(-0.8,0)node[below]{$\mu-\sigma$}
-            (0.8,{e^(-0.64)+0.04})--(0.8,0)node[below]{$\mu+\sigma$};
-            \draw(0.8,{e^(-0.64)+0.04})--(-0.8,{e^(-0.64)+0.04});
-        \end{tikzpicture}
-    }\hspace{1.5cm}
-    \subfloat[分布函数$F(x)$]{
-        \begin{tikzpicture}[semithick,yscale=2,>=stealth]
-            \draw[->](-2.7,0)--(0,0)node[below=1pt]{$\mu$}--(2.7,0)node[below]{$x$};
-            \draw[->](0,0)--(0,1.4)node[right]{$F(x)$};
-            \draw[samples=100,domain=-2.5:2.5,thick]plot(\x,{(atan(\x))/135+0.55});
-            \draw[dashed](-2.5,1.1)--(2.5,1.1);
-        \end{tikzpicture}
-    }
-    \caption{正态分布}\label{fig2.5.1}
-\end{figure}
 
 正态分布的特征：
 \begin{description}
@@ -957,16 +943,23 @@ Beta分布的特征：
 \end{figure}
 
 \begin{proposition}
-    若 $X\sim N(0,1)$，则$X^2\sim Ga(1/2,1/2),Y \sim Ga(n/2,1/2)=\chi^2(n)$
+    若 $X\sim N(0,1)$，则$X^2\sim Ga(1/2,1/2)$
 \end{proposition}
-
 \begin{proof}
-    %TODO \ref{prop:sum_of_Gamma}
+    \begin{align*}
+        f_{X^2}(y)&=\frac1{2\sqrt{y}}[f_X(\sqrt{y})+f_X(-\sqrt{y})]\\
+                &=2\frac1{2\sqrt{y}}\frac1{\sqrt{2\pi}} \ee^{-\frac{y}{2}}\\
+                &=(\frac{1}{2})^{\frac{1}{2}-1} / \Gamma(\frac{1}{2}) y^{\frac{1}{2}-1} \ee^{-\frac{1}{2}y}
+    \end{align*}
 \end{proof}
+
 
 \begin{corollary}
     若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim \chi^2_{n_i}$，则$Y=X_1+\cdots+X_k  \sim \chi^2_{n_1+\cdots +n_k}$。
 \end{corollary}
+\begin{proof}
+    %TODO \ref{prop:sum_of_Gamma}
+\end{proof}
 
 \subsection{F分布}
 
@@ -1008,7 +1001,7 @@ F分布的特征：
 \end{proposition}
 
 \begin{proof}
-    首先我们导出$Z=\frac{X_1}{X_2}$的密度函数,若记$p_1(x)$和$p_2(x)$分别为$\chi^2(m)$和$\chi^2(n)$的密度函数,根据独立随机变量商的分布的密度函数公式\ref{equ:quotient_of_variable}。$Z$的密度函数为
+    首先我们导出$Z=\frac{X_1}{X_2}$的密度函数,若记$p_1(x)$和$p_2(x)$分别为$\chi^2(m)$和$\chi^2(n)$的密度函数,根据独立随机变量商的分布的密度函数公式\ref{ex:quotient_of_variable}。$Z$的密度函数为
     \begin{align*}
         p_Z(z) & =\int_0^{=\infty}x_2p_1(zx_2)p_2(x_2)\dd x_2                                                                                                                                       \\
                & =\frac{z^{\frac{m}{2}-1}}{\Gamma \left( \frac{m}{2} \right) \Gamma \left( \frac{n}{2} \right) 2^{\frac{m+n}{2}}}\int_0^{+\infty}x_2^{\frac{m+n}2-1}\ee^{-\frac{x_2}2(1+z)}\dd x_2.
@@ -1086,6 +1079,26 @@ t分布的特征：
                & =\frac{\Gamma \left( \frac{n+1}{2} \right)}{\sqrt{n\pi}\Gamma \left( \frac{n}{2} \right)}\left( 1+\frac{y^2}{n} \right) ^{-\frac{n+1}{2}},\quad -\infty<y<+\infty.
     \end{align*}
 \end{proof}
+
+\subsection{多元正态分布}
+
+\begin{definition}
+    若$n$维随机向量$\mathbf{X}=(X_1,X_2,\ldots,X_n)'$的联合密度函数为：
+    \[ f(\mathbf{x})=f(x_1,\ldots,x_n)=\frac1{(2\pi)^{\frac{n}{2}} |\Sigma|^{\frac1{2}} }\exp\left\{ -\frac1{2}(\mathbf{x}-\mathbf{\mu})'\Sigma^{-1}(\mathbf{x}-\mathbf{\mu}) \right\} \]
+    其中$\Sigma$为对称非负定矩阵，则称$\mathbf{X}$满足$n$元正态分布，记为 $\mathbf{X}\sim N(\mathbf{\mu},\Sigma)$
+\end{definition}
+
+当$n=2$时，若取数学期望向量和协方差矩阵分别为
+	\begin{equation*}
+		\mathbf{a}=\begin{pmatrix}
+			\mu_1 \\
+			\mu_2
+		\end{pmatrix},\quad \Sigma=\begin{pmatrix}
+			\sigma_1^2           & \sigma_1\sigma_2\rho \\
+			\sigma_1\sigma_2\rho & \sigma_2^2
+		\end{pmatrix}
+	\end{equation*}
+代入，则可得到二元正态密度函数。
 
 \section{各分布间关系}
 

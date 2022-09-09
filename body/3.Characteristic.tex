@@ -13,7 +13,7 @@
 \end{definition}
 
 \begin{remark}
-    当$F_X(x)$在$x_0$初连续可导时，$\mathrm{d} F_X(x_0)=f_X(x_0)\d x$；当$x_0$为其间断点时时，$\d F_X(x_0)=p_{X}(x_0)\delta(x_0)\d x$。
+    当$F_X(x)$在$x_0$初连续可导时，$\mathrm{d} F_X(x_0)=f_X(x_0)\d x$；当$x_0$为其间断点时时，$\d F_X(x_0)=p_X(x_0)\delta(x_0)\d x$。
 \end{remark}
 
 %期望算子$\E$是一个线性泛函, 仅适用于\underline{可积}的随机变量.
@@ -60,7 +60,7 @@
     由归纳可得：
     \[ f(t_1x_1+ \cdots +t_nx_n) \le t_1f(x_1)+ \cdots +t_nf(x_n) ,\quad \forall t_1,\cdots ,t_n \ge 0 ,\ t_1+ \cdots +t_n=1 \]
     拓展到连续函数：
-    \[ f(\int_{X}g(x)x \d x) \le \int_{X}g(x)f(x) \d x ,\quad \forall g(x) \ge 0 ,\ \int_{X}g(x) \d x=1 \]
+    \[ f(\int_Xg(x)x \d x) \le \int_Xg(x)f(x) \d x ,\quad \forall g(x) \ge 0 ,\ \int_Xg(x) \d x=1 \]
 \end{proof}
 
 \begin{figure}[h]
@@ -72,9 +72,9 @@
 
 \begin{definition}
     \begin{enumerate}
-        \item 当$g(x)=x$时，$\E[g(x)]=\E[X]$称作$X$的\textbf{均值}(mean)，记为$\mu_{X}$
-        \item 当$g(x)=(x-\mu_{X})^{2}$时，$\E[g(x)]=\E[(X-\E[X])^{2}]$称作$X$的\textbf{方差}(variance)，记为$\sigma^2_{X}$。其平方根称作$X$的\textbf{标准差}(standard deviation)，记为$\sigma_{X}$
-        \item 当$g(x,y)=(x-\mu_{X})(y-\mu_{Y})$时，$\E[g(X,Y)]=\E[(X-\E[X])(Y-\E[Y])]$称作$X$与$Y$的\textbf{协方差}(covariance)，记为$\Cov(X,Y)$或$\sigma_{XY}$
+        \item 当$g(x)=x$时，$\E[g(x)]=\E[X]$称作$X$的\textbf{均值}(mean)，记为$\mu_X$
+        \item 当$g(x)=(x-\mu_X)^{2}$时，$\E[g(x)]=\E[(X-\E[X])^{2}]$称作$X$的\textbf{方差}(variance)，记为$\sigma^2_X$。其平方根称作$X$的\textbf{标准差}(standard deviation)，记为$\sigma_X$
+        \item 当$g(x,y)=(x-\mu_X)(y-\mu_Y)$时，$\E[g(X,Y)]=\E[(X-\E[X])(Y-\E[Y])]$称作$X$与$Y$的\textbf{协方差}(covariance)，记为$\Cov(X,Y)$或$\sigma_{XY}$
     \end{enumerate}
 \end{definition}
 
@@ -161,9 +161,18 @@
     \[ \operatorname{Var}(a+\sum_{i=1}^n b_i X_i)=\sum_{i=1}^n b_i^2 \operatorname{Var}(X_i)+\mathbf{b}^{\mathrm{T}} \Sigma \mathbf{b}\]
     其中$\Sigma$为协方差矩阵,$\Sigma_{i,j}=\operatorname{Cov}(X_i,X_j)$
 \end{proposition}
+\begin{proof}
+    由方差的定义知
+    \begin{align*}
+        \Var(X \pm Y) & =E\{(X \pm Y)-E(X \pm Y)\}^2                      \\
+                      & =E\{(X-E(X)) \pm(Y-E(Y))\}^2                      \\
+                      & =E\{(X-E(X))^2+(Y-E(Y))^2 \pm 2(X-E(X))(Y-E(Y))\} \\
+                      & =\Var(X)+\Var(Y) \pm 2 \Cov(X, Y)
+    \end{align*}
+\end{proof}
 
 \begin{corollary}
-    若$X_1,\cdots ,X_n$相互独立, 则:
+    若$X_1,\cdots ,X_n$相互不相关，则：
     \[ \operatorname{Var}(\sum_{i=1}^n X_i)=\sum_{i=1}^n\operatorname{Var}( X_i) \]
 \end{corollary}
 
@@ -178,13 +187,14 @@
         \P(|x-\mu|>t) & = \int_R 1 \cdot  \d F(x) \le \int_R \frac{(x-\mu)^2}{t^{2}}\d F(x)                   \\
                       & \le \int_{-\infty}^{\infty}\frac{(x-\mu)^2}{t^{2}}\d F(x)  = \frac{\sigma^{2}}{t^{2}}
     \end{align*}
+    再由协方差的运算性质（命题\ref{prop:cov_property}），通过数学归纳法可推出泛化的结果。
 \end{proof}
 
 \begin{remark}
     若令$t=k\sigma$, 则$\P(| X-\mu | >k\sigma)\le \frac1{k^{2}}$, 即标准差可代表随机变量偏离均值的概率单位距离.
 \end{remark}
 
-\begin{corollary}
+\begin{corollary}\label{cor:var_almost_equal}
     \[ \operatorname{Var}(X)=0 \Leftrightarrow P(X=\mu)=1 \]
 \end{corollary}
 
@@ -196,111 +206,286 @@
 
 \subsection{协方差}
 
-协方差代表了$X$与$Y$之间的联合变化倾向, 或者说他们间的相关程度, 但其间\underline{未必有}因果关系.
+协方差代表了$X$与$Y$之间的联合变化倾向，或者说他们间的相关程度，但其间\underline{未必有}因果关系。
+\begin{itemize}
+    \item 若$\operatorname{Cov} (X,Y) >0$，则称两变量\textbf{正相关}；
+    \item 若$\operatorname{Cov} (X,Y) < 0$，则称两者\textbf{负相关}；
+    \item 若$\operatorname{Cov} (X,Y) = 0$，则称两者\textbf{不相关}。
+\end{itemize}
 
-\begin{theorem}
+\begin{remark}
+    不相关是指$X$与$Y$之间没有线性关系，但$X$与$Y$之间可能有其他的函数关系，譬如平方关系、对数关系等。
+\end{remark}
+
+\begin{proposition}
     \[ \operatorname{Cov} (X,Y)=\E[(X-\mu_X)(Y-\mu_Y)]=\E(XY)-\mu_Y \mu_Y \]
-\end{theorem}
+\end{proposition}
+
+\begin{proposition}
+    独立是不相关的\textbf{充分条件}，但不是必要条件。
+\end{proposition}
+\begin{example}\label{exam:3.4.6}
+    设随机变量$X \sim N(0,\sigma^2)$，令$Y=X^2$，则$X$与$Y$不独立。此时$X$与$Y$的协方差为
+    \[ \Cov(X, Y)=\Cov(X, X^2)=E(X\cdot X^2)-E(X)E(X^2) \]
+    由于正态分布$N(0,\sigma^2)$的奇数阶原点矩均为零，即$E(X)=E(X^3)=0$，故上式也等于零。
+
+    例子表明：“独立”必导致“不相关”；而“不相关”不一定导致“独立”。因为独立性是用分布定义的，而不相关只是用矩定义的。
+\end{example}
+
+\begin{proposition}\label{prop:cov_property}
+    协方差的运算性质：
+    \begin{itemize}
+        \item 协方差$\Cov(X,Y)$的计算与$X,Y$的次序无关
+              \[ \Cov(X,Y)=\Cov(Y,X) \]
+        \item 任意随机变量$X$与常数$a$的协方差为零
+              \[ \Cov(X,a)=0 \]
+        \item 对任意常数$a,b$,有
+              \[ \Cov(a X, b Y)=a b \Cov(X, Y) \]
+        \item 设$X,Y,Z$是任意三个随机变量, 则
+              \[ \Cov(X+Y, Z)=\Cov(X, Z)+\Cov(Y, Z) \]
+    \end{itemize}
+\end{proposition}
+
+\begin{corollary}
+    线性变换后的协方差：
+    \begin{gather*}
+        \operatorname{Cov}(a+ b X,c +d Y)  = b d \Cov(X,Y)\\
+        \operatorname{Cov}(a+\sum_{i=1}^n b_i X_i,c+\sum_{j=1}^m d_j Y_j) = \sum_{i=1}^n\sum_{j=1}^m b_i d_j \operatorname{Cov}(X_i,Y_i) = \mathbf{b}^{\mathrm{T}}\Sigma \mathbf{d}
+    \end{gather*}
+\end{corollary}
+
+\begin{definition}[协方差矩阵]
+    对于$n$维随机向量$\mathbf{X}=(X_1,X_2,\ldots,X_n)'$，将
+    \begin{align*}
+         & E[ (\mathbf{X}-E(\mathbf{X})) (\mathbf{X}-E(\mathbf{X}))' ] \\
+         & =\begin{pmatrix}
+                \Var(X_1)     & \Cov(X_1,X_2) & \cdots & \Cov(X_1,X_n) \\
+                \Cov(X_2,X_1) & \Var(X_2)     & \cdots & \Cov(X_2,X_n) \\
+                \vdots        & \vdots        &        & \vdots        \\
+                \Cov(X_n,X_1) & \Cov(X_n,X_2) & \cdots & \Var(X_n)
+            \end{pmatrix}
+    \end{align*}
+    称为该随机向量的\textbf{方差—协方差阵}，简称\textbf{协方差阵}，记为$\Sigma=\Cov(\mathbf{X})$。
+\end{definition}
 
 \begin{theorem}
-    \[ \operatorname{Cov}(a+\sum_{i=1}^n b_i X_i,c+\sum_{j=1}^m d_j Y_j) = \sum_{i=1}^n\sum_{j=1}^m b_i d_j \operatorname{Cov}(X_i,Y_i) = \mathbf{b}^{\mathrm{T}}\Sigma \mathbf{d}\]
+    $n$维随机向量的协方差阵$\Cov(\mathbf{X})=( \Cov(X_i,X_j) )_{n\times n}$是一个对称的非负定矩阵。
 \end{theorem}
-
-\begin{theorem}
-    独立是不相关的\textbf{充分条件}, 但不是必要条件
-\end{theorem}
-
-\begin{theorem}
-    $-1\le \rho_{XY} \le 1$, 当且仅当$X$与$Y$间为线性关系时取等号
-\end{theorem}
-
 \begin{proof}
-    %TODO
+    因为$\Cov(X_i,X_j)=\Cov(X_j,X_i)$，所以对称性是显然的。下证非负定性。因为对任意$n$维实向量$\mathbf{c}=(c_1,\cdots ,c_n)'$，有
+    \begin{align*}
+        \mathbf{c}'\Cov(\mathbf{X})\mathbf{c} & = \sum_{i=1}^n\sum_{j=1}^n c_i c_j \Cov(X_i,X_j)                                                                           \\
+                                              & = \sum_{i=1}^n\sum_{j=1}^n E\{ [c_i (X_i-E(X_i))] [c_j(X_j-E(X_j))] \}                                                     \\
+                                              & = E\left\{\sum_{i=1}^n \sum_{j=1}^n [c_i\left(X_i-E\left(X_i\right)\right)][c_j\left(X_j-E\left(X_j\right)\right)]\right\} \\
+                                              & = E\left\{\left[\sum_{i=1}^n c_i(X_i-E(X_i))\right]\left[\sum_{j=1}^n  c_j(X_j-E(X_j))\right]\right\}                      \\
+                                              & = E\left[\sum_{i=1}^n  c_i(X_i-E(X_i))\right]^2 \ge 0
+    \end{align*}
+    所以矩阵$\Cov(\mathbf{X})$是非负定的。
 \end{proof}
 
-\begin{theorem}
-    平移与缩放随机变量都不影响其协方差, 即:
-    \[ \left| \operatorname{Cov}(a+ b X,c +d Y) \right| = \left| Cor(X,Y) \right|  \]
-\end{theorem}
+\subsection{相关系数}
+
+\begin{definition}
+    设$(X,Y)$是一个二维随机变量, 且$\Var(X)>0,\Var(Y)>0$。则称
+    \[ \Corr(X,Y)=\frac{\sigma_{XY}}{\sigma_X\sigma_Y} \]
+    为$X$与$Y$的（线性）\textbf{相关系数}(correlation coefficient)，可简记为$\rho_{XY}$。
+\end{definition}
+
+
+相关系数是相应标准化变量的协方差。若记$X$与$Y$的数学期望分别为$\mu_X,\mu_Y$，其标准化变量为：
+\[ X^*=\frac{X-\mu_X}{\sigma_X},\quad Y^*=\frac{Y-\mu_Y}{\sigma_Y} \]
+则有
+\[ \Cov(X^*, Y^*)=\Cov\left(\frac{X-\mu_X}{\sigma_X}, \frac{Y-\mu_Y}{\sigma_Y}\right)=\frac{\Cov(X, Y)}{\sigma_X\sigma_Y}=\Corr(X, Y) \]
+
+\begin{proposition}
+    平移与缩放随机变量都不影响其相关系数的绝对值，但其是否变号取决于缩放系数的正负，即:
+    \[ \operatorname{Corr}(a+ b X,c +d Y)  = \operatorname{Corr}(X,Y) \operatorname{sign}(b d) \]
+\end{proposition}
+
+\begin{example}\label{exam:3.4.9}
+    二维正态分布$N(\mu_{1}, \mu_{2}, \sigma_{1}^{2}, \sigma_{2}^{2}, \rho)$的相关系数是$\rho$。
+\end{example}
+\begin{solution}
+    由上述可知，平移与缩放变量不影响两者间相关系数，故不妨将变量标准化：
+    \[ X^*=\frac{X-\mu_X}{\sigma_X},\quad Y^*=\frac{Y-\mu_Y}{\sigma_Y} \]
+    则其密度函数变为：
+    \[ f_{X^*,Y^*}(x,y) = \sigma_X \sigma_Y f_{X,Y}(\sigma_X x+\mu_X,\sigma_Y y+\mu_Y) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \exp \left( - \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right)\]
+    \[ E(X^* Y^*) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}x y \exp \left( - \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right) \d x \d y\]
+    做变换：
+    \[ \begin{cases}
+            u = \frac{x- \rho y}{\sqrt{1-\rho^2}} \\
+            v = y
+        \end{cases} \implies \begin{cases}
+            x = \sqrt{1-\rho^2}u + \rho v \\
+            y =  v
+        \end{cases} \implies \dd x\dd y= \sqrt{1-\rho^2}\dd u\dd v \]
+    由此得
+    \[ \Cov(X,Y)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}(uv\sqrt{1-\rho^2}+\rho v^2)\exp\left\{ -\frac{u^2+v^2}{2} \right\}\dd u\dd v \]
+    上式右端积分可以分为两个积分, 其中
+    \begin{align*}
+         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} uv\exp\left( -\frac{u^2+v^2}{2} \right)\dd u\dd v=0,     \\
+         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} v^2\exp\left( -\frac{u^2+v^2}{2} \right)\dd u\dd v=2\pi.
+    \end{align*}
+    从而
+    \begin{align*}
+        \Cov(X^*,Y^*) & =E(X^* Y^*)=\frac{1}{2\pi}\cdot \rho\cdot 2\pi=\rho \\
+        \Corr(X,Y)    & =\Corr(X^*,Y^*)=\frac{\Cov(X,Y)}{1 \cdot 1}=\rho
+    \end{align*}
+\end{solution}
+
+\begin{lemma}[施瓦茨不等式]
+    对任意二维随机变量$(X,Y)$, 若$X$与$Y$的方差都存在, 且记$\sigma_{X}^2=\Var(X),\sigma_{Y}^2=\Var(Y)$, 则有
+    \[ [\Cov(X,Y)]^2\leq \sigma_{X}^2\sigma_{Y}^2 \]
+\end{lemma}
+\begin{proof}
+    不妨设$\sigma_{X}^2>0$, 因为当$\sigma_{X}^2=0$时, 则$X$几乎处处为常数, 因而其与$Y$的协方差亦为零, 从而上式两端皆为零, 结论成立. 在$\sigma_{X}^2>0$成立下, 考虑$t$的如下二次函数:
+    \[ g(t)=E[t(X-E(X))+(Y-E(Y))]^2=t^2 \sigma_{X}^2+2t\cdot \Cov(X,Y)+\sigma_{Y}^2 \]
+    由于上述的二次三项式非负, 平方项系数$\sigma_{X}^2$为正, 所以其判别式小于或等于零, 即
+    \[ [2\Cov(X,Y)]^2-4\sigma_{X}^2\sigma_{Y}^2\leq0 \]
+    移项后即得施瓦茨不等式.
+\end{proof}
+
+\begin{proposition}
+    $-1 \le \rho_{XY} \le 1$。取等号的充要条件是$X$与$Y$间几乎处处有线性关系，即存在$a(\ne0)$与$b$，使得：
+    \[ P(Y=aX+b)=1 \]
+    上式换成$X=cY+d$也一样
+\end{proposition}
+\begin{proof}
+    \textbf{充分性}：若$Y=aX+b$，则有
+    \[ \Var(Y)=a^2\Var(X),\Cov(X,Y)=a\Cov(X,X)=a\Var(X) \]
+    代入相关系数的定义中得
+    \[ \Corr(X,Y)=\frac{\Cov(X,Y)}{\sigma_{X}\sigma_{Y}}=\frac{a\Var(X)}{|a|\Var(X)}=\begin{cases}
+            1,  & a>0; \\
+            -1, & a<0.
+        \end{cases} \]
+    \textbf{必要性}：因为
+    \[ \Var\left( \frac{X}{\sigma_{X}}\pm\frac{Y}{\sigma_{Y}} \right)=2[1\pm\Corr(X,Y)] \]
+    所以当$\Corr(X,Y)=1$时，有
+    \[ \Var\left( \frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}} \right)=0 \]
+    由此得（推论\ref{cor:var_almost_equal}）
+    \begin{align*}
+         & P\left( \frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}}=c \right)=1  \\
+         & P\left( Y=\frac{\sigma_{Y}}{\sigma_{X}}X-c\sigma_{Y} \right)=1
+    \end{align*}
+    即当$\Corr(X,Y)=1$时,$Y$与$X$几乎处处线性正相关.
+
+    当$\Corr(X,Y)=-1$时, 由同理得
+    \[ P\left( Y=-\frac{\sigma_{Y}}{\sigma_{X}}X+c\sigma_{Y} \right)=1 \]
+    即当$\Corr(X,Y)=-1$时,$Y$与$X$几乎处处线性负相关.
+\end{proof}
 
 \section{条件期望}
 
 \begin{definition}
     若$h(Y)$在给定$X=x$下的条件分布(定义\ref{def:cond_dist})的数学期望存在，则定义其为\textbf{条件期望}如下:
     \[ E(h(Y)|X=x) =\begin{cases}
-            \sum_{y} h(y) p_{Y|X}(y|x),                    & \text{离散情况} \\
+            \sum_y h(y) p_{Y|X}(y|x),                      & \text{离散情况} \\
             \int_{-\infty}^{+\infty} h(y) f_{Y|X}(y|x) d y & \text{连续情况}
         \end{cases}\]
 \end{definition}
-
 \begin{remark}
     条件期望$\E_{Y|X}(Y|x)$是关于给定变量$x$的函数，不随对应变量$Y$本身变动，但其单位与对应变量$Y$相同，可看作一条在$(X,Y)$平面的曲线。
 \end{remark}
 
-\begin{theorem}
+\begin{proposition}
     若随机变量$X,Y$独立，则:
-    \[ \E_{Y|x}(Y|x)=\E_{Y}(Y) \]
-\end{theorem}
-
+    \[ \E_{Y|x}(Y|x)=\E_Y(Y) \]
+\end{proposition}
 \begin{proof}
-    由\ref{thm:indep_cmf}可知，若随机变量$X,Y$独立，则
+    由定理\ref{thm:indep_cmf}可知，若随机变量$X,Y$独立，则
     \begin{align*}
-        p_{Y|X}(y|x) & =p_{Y}(y) \\
-        f_{Y|X}(y|x) & =f_{Y}(y)
+        p_{Y|X}(y|x) & =p_Y(y) \\
+        f_{Y|X}(y|x) & =f_Y(y)
     \end{align*}
-    所以$\E_{Y|x}(Y|x)=\E_{Y}(Y)$
+    所以$\E_{Y|x}(Y|x)=\E_Y(Y)$
 \end{proof}
-
 由直观感受亦可知：若$X,Y$独立，则$X$不通过任何与$Y$相关的信息，其条件期望亦当与原期望相同。
 
-\begin{note}
-    令$g(x)=\E(h(Y)|X=x)$，则$g(X)$是随机变量$X$的变换，也是随机变量，记为$\E(h(Y)|X)$
-\end{note}
+若令$g(x)=\E(h(Y)|X=x)$，则$g(X)$是随机变量$X$的变换，也是随机变量，记为$\E(h(Y)|X)$。
 
 \begin{theorem}[重期望公式]
-    \[ \E_X[\E_{Y|X}(h(Y)|X)] = \E_{Y}[h(Y)] \]
+    \[ \E_Y[h(Y)] = \E_X[\E_{Y|X}(h(Y)|X)] \]
 \end{theorem}
-
 \begin{proof}
-    %TODO
+    设二维连续随机变量$(X,Y)$的联合密度函数为$f(x,y)$。利用$f(x,y)=f_{y|x}(y|x)f_X(x)$，可得：
+    \begin{align*}
+        \E_Y[h(Y)] & = \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} h(y) f(x, y) \dd x \dd y=
+        \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} h(y) f_{y|x}(y|x)f_X(x) \dd x \dd y                   \\
+                   & = \int_{-\infty}^{+\infty}\left\{\int_{-\infty}^{+\infty} h(y) f_{y|x}(y|x) \dd y \right\}
+        f_X(x) \dd x.                                                                                           \\
+                   & =\int_{-\infty}^{+\infty} \E_{Y|X}(h(Y)|x) f_X(x) \dd x                                    \\
+                   & =\int_{-\infty}^{+\infty} g(x) f_X(x) \dd x                                                \\
+                   & =\E_X[g(X)]=\E_X[\E_{Y|X}(h(Y)|X)]
+    \end{align*}
+    离散场合可类似证明.
 \end{proof}
 
-\begin{theorem}
-    联合期望公式：
-    \[ E_{X,Y}=E_X E_{Y|X} = E_Y E_{X|Y} \]
-    泛化情况：
+\begin{proposition}[随机个随机变量和的数学期望]
+    设$X_1,X_2,\ldots,$为一列独立同分布的随机变量，随机变量$N$只取正整数值，且$N$与$\{X_n\}$独立，则：
+    \[ E\left(\sum_{i=1}^N X_i\right)=\mu_X E(N) \]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        E\left(\sum_{i=1}^N X_i\right) & =E\left[E\left(\sum_{i=1}^{N} X_{i} | N\right)\right]             \\
+                                       & =\sum_{n=1}^{+\infty} E\left(\sum_{i=1}^N X_i | N=n\right) P(N=n) \\
+                                       & =\sum_{n=1}^{+\infty} E\left(\sum_{i=1}^n X_i\right) P(N=n)       \\
+                                       & =\sum_{n=1}^{+\infty} n \mu_X P(N=n)                              \\
+                                       & =\mu_X \sum_{n=1}^{+\infty} n P(N=n)                              \\
+                                       & =E(X_i) E(N)
+    \end{align*}
+\end{proof}
+\begin{example}
+    设一天内到达某商场的顾客数$N$是仅取非负整数值的随机变量，且$E(N)=35000$。又设进入此商场的第$i$个顾客的购物金额为$X_i$，可以认为$X_i$是独立同分布的随机变量，且$E(X_i)=82$ (元)。假设$N$与$X_i$ 相互独立是合理的，则此商场一天的平均营业额为：
+    \[ E\left(\sum_{i=0}^N X_{i}\right)=E(X_i) E(N)=82 \times 35000=287 (\text{万元}) \]
+\end{example}
+
+\begin{proposition}[联合期望公式]
     \[ E_{X,Y}[h(X,Y)]=E_X E_{Y|X}[h(X,Y)|X] = E_Y E_{X|Y}[h(X,Y)|Y] \]
-\end{theorem}
+\end{proposition}
 
 \begin{theorem}[重方差公式]\label{thm:var_dec}
     随机变量$Y$的方差可作如下分解：
     \[ \operatorname{Var}_Y(Y)=\operatorname{Var}_X[E_{Y|X}(Y|X)] + E_X[\operatorname{Var}_{Y|X}(Y|X)] \]
 \end{theorem}
+\begin{proof}
+    \begin{align*}
+        E_X[\operatorname{Var}_{Y|X}(Y|X)]                                      & = E_X[E_{Y|X}(Y^2|X)-E^2_{Y|X}(Y|X)]        \\
+                                                                                & = E_Y(Y^2) - E_X[E^2_{Y|X}(Y|X)]            \\
+        \operatorname{Var}_X[E_{Y|X}(Y|X)]                                      & = E_X[E^2_{Y|X}(Y|X)] - E^2_X[E_{Y|X}(Y|X)] \\
+                                                                                & = E_X[E^2_{Y|X}(Y|X)] - E^2_Y[Y]            \\
+        E_X[\operatorname{Var}_{Y|X}(Y|X)] + \operatorname{Var}_X[E_{Y|X}(Y|X)] & = E_Y(Y^2) - E^2_Y(Y)                       \\
+                                                                                & = \operatorname{Var}_Y(Y)
+    \end{align*}
+\end{proof}
 
-\begin{figure*}
-    \centering
-    \includegraphics{image/var_dec.png}
-\end{figure*}
+% \begin{figure}[htbp]
+%     \centering
+%     \subfigure[方差分解]{
+%         \includegraphics[width=0.8\textwidth]{image/var_dec.png}
+%         \label{label_for_cross_ref_1}
+%     }
+%     \quad    %用 \quad 来换行
+%     \subfigure[$E_{Y|X}(Y|X)$为常数]{
+%     	\includegraphics[width=0.4\textwidth]{image/var_dec2.png}
+%         \label{label_for_cross_ref_3}
+%     }
+%     \subfigure[$\operatorname{Var}_{Y|X}(Y|X)=0$]{
+% 	\includegraphics[width=0.4\textwidth]{image/var_dec3.png}
+%         \label{label_for_cross_ref_4}
+%     }
+%     \caption{This is a Demo of $2\times 2$}
+%     \label{fig.1}
+% \end{figure}
 
 \begin{corollary}
     \[ \operatorname{Var}_Y(Y) \ge E_X[\operatorname{Var}_{Y|X}(Y|X)] \]
     当且仅当$E_{Y|X}(Y|X)=E_Y(Y)$时取等号
 \end{corollary}
 
-\begin{figure*}
-    \centering
-    \includegraphics{image/var_dec2.png}
-\end{figure*}
-
 \begin{corollary}
     \[ \operatorname{Var}_Y(Y) \ge \operatorname{Var}_X[E_{Y|X}(Y|X)] \]
     当且仅当$\operatorname{Var}_{Y|X}(Y|X)=0$，即$\E_{Y|X}(Y|X)=Y$时取等号
 \end{corollary}
-
-\begin{figure*}
-    \centering
-    \includegraphics{image/var_dec3.png}
-\end{figure*}
 
 \section{矩母函数与特征函数}
 
@@ -309,18 +494,30 @@
 \begin{definition}
     对于随机变量$X$, 定义其$k$阶\textbf{矩}(moment)为$E(X^k)$, 记为$\mu_k$; 定义其$k$阶\textbf{中心矩}(central moment)为$E((X-\mu_X)^k)$, 记为$\upsilon_k$;
 \end{definition}
-
+由于$|X|^{k-1}\le |X|^k+1$，故$k$阶矩存在时，$k-1$阶矩也存在，从而低于$k$的各阶矩都存在.
 易知矩与中心矩间存在以下关系:
 \begin{align*}
-    \upsilon_k & =\sum_{i=0}^k \binom{k}{i} \mu_i (-\mu_X)^{n-i}     \\
-    \mu_k      & =\sum_{i=0}^k \binom{k}{i} \upsilon_i (\mu_X)^{n-i}
+    \upsilon_k & =\sum_{i=0}^k \binom{k}{i} \mu_i (-\mu_1)^{k-i}     \\
+    \mu_k      & =\sum_{i=0}^k \binom{k}{i} \upsilon_i (\mu_1)^{n-i}
 \end{align*}
 
-特别的有:
-\begin{align*}
-    E(X)                  & =\mu_1                                                         \\
-    \operatorname{Var}(X) & =\upsilon_2=\mu_1^2-2\mu_1 \cdot \mu_1 + \mu_2 = \mu_2-\mu_1^2
-\end{align*}
+\begin{example}
+    设随机变量$X\sim N(0,\sigma^2)$，则
+    \begin{align*}
+        \mu_k & = E(X^k) = \frac1{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty} x^k\ee^{-\frac{x^2}{2\sigma^2}} \dd x \\
+              & = \frac{\sigma^k}{\sqrt{2\pi}} u^k\ee^{-\frac{u^2}2}\dd u.
+    \end{align*}
+    在$k$为奇数时，上述被积函数是奇函数，故
+    \[ \mu_k = 0, k=1,3,5,\cdots \]
+    在$k$为偶数时，上述被积函数是偶函数，再利用变换$z=u^2/2$，可得
+    \begin{align*}
+        \mu_k & = \sqrt{\frac2\pi}\sigma^k2^{(k-1)/2} \int_0^{+\infty}z^{(k-1)/2}\ee^{-z} \dd z = \sqrt{\frac2\pi}sigma^k2^{(k-1)/2} \Gamma\left(  \frac{k+1}2 \right) \\
+              & = \sigma^k(k-1)(k-3)\cdots1.\quad k=2,4,6,\cdots.
+    \end{align*}
+    故$N(0,\sigma^2)$分布的前四阶原点矩为
+    \[ \mu_1 = 0,\quad \mu_2 = \sigma^2,\quad \mu_3 = 0,\quad \mu_4 = 3\sigma^4 \]
+    又因为$E(X)=0$，所以有原点矩等于中心矩，即$\mu_k=\nu_k,k=1,2,\cdots$.
+\end{example}
 
 \subsection{矩母函数}
 
@@ -418,8 +615,8 @@
 \begin{theorem}
     特征函数可通过以下逆变换得到分布：
     \begin{description}
-        \item[离散]$p_{X}(x)=\lim _{T \rightarrow \infty} \int_{-T}^{T} e^{-i t x} \phi_{X}(t) d t$
-        \item[连续]$f_X(x)=\frac1{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \phi_{X}(t) d t$
+        \item[离散]$p_X(x)=\lim _{T \rightarrow \infty} \int_{-T}^{T} e^{-i t x} \phi_X(t) d t$
+        \item[连续]$f_X(x)=\frac1{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \phi_X(t) d t$
     \end{description}
 \end{theorem}
 
@@ -437,11 +634,161 @@
 
 \section{其他特征}
 
-\subsection{相关系数}
+\subsection{变异系数}
 
-\begin{definition}
-    定义$X$与$Y$的\textbf{相关系数}(correlation coefficient)为:$\sigma_{XY}/(\sigma_{X}\sigma_{Y})$, 记为$\Cor(X,Y)$或$\rho_{XY}$. 若$\rho_{XY}=0$, 则称$X$与$Y$不相关
+\begin{definition}[变异系数]
+    设随机变量$X$的二阶矩存在，则称比值
+    \[ C_v(X) = \frac{\sqrt{\Var(X)}}{E(X)} = \frac{\sigma(X)}{E(X)} \]
+    为$X$的\textbf{变异系数}
 \end{definition}
+
+因为变异系数是以其数学期望为单位去度量随机变量取值波动程度的特征数，标准差的量纲与数学期望的量纲是一致的，所以变异系数是一个无量纲的量。
+
+\subsection{分位数}
+
+\begin{definition}[分位数]
+    设连续随机变量$X$的分布函数为$F(x)$，密度函数为$p(x)$. 对任意$p\in(0,1)$，称满足条件
+    \[ F(x_p) = \int_{-\infty}^{x_p}p(x)\dd x = p \]
+    的$x_p$为此分布的\textbf{$p$分位数}，又称\textbf{下侧$p$分位数}.
+
+    称满足条件
+    \[ 1 - F(x_p') = \int_{x_p'}^{+\infty} p(x)\ dd x = p \]
+    的$x_p'$为此分布的\textbf{上侧$p$分位数}
+\end{definition}
+
+分位数$x_p$是把密度函数下的而积分为两块，左侧面积恰好为$p$（见图 \ref{fig2.7.1}(a)）。上侧分位数$x_p'$也是把密度函数下的面积分为两块，但右侧面积恰好为$p$（见图 \ref{fig2.7.1}(b)）.
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[（下侧）分位数]{
+        \begin{tikzpicture}[thick]
+            \draw[-Stealth] (0,0) -- (5,0) node [below] {$x$};
+            \fill[pattern = north west lines] (0,0) .. controls (0.5,0.6) .. (1,2.2) -- (1,0) -- cycle;
+            \draw (0,0).. controls (0.5,0.6) .. (1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to (2.2,2) [bend right = 30] to (4.9,0.1);
+            \draw [densely dashed] (1,0) node[below]{$x_p$} -- (1,2.2);
+
+            \node[inner sep=0pt, circle ,fill = white] at (0.7,0.4){$p$};
+            \draw[-Stealth] (4,1.5) node[above] {$p(x)$} -- ++ (-135:1.1);
+        \end{tikzpicture}
+    }\qquad
+    \subfloat[上侧分位数]{
+        \begin{tikzpicture}[thick]
+            \draw[-Stealth] (0,0) -- (5,0) node [below] {$x$};
+            \fill[pattern = north east lines] (2.2,2) [bend right = 30] to (4.9,0.1) -- (4.9,0) -- (2.2,0) node[below]{$x_p'$} -- cycle;
+            \draw (0,0).. controls (0.5,0.6) .. (1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to (2.2,2) [bend right = 30] to (4.9,0.1);
+            \draw [densely dashed] (2.2,0) -- (2.2,2);
+            \node[inner sep=0pt, circle ,fill = white] at (3,0.4){$p$};
+            \draw[-Stealth] (4,1.5) node[above] {$p(x)$} -- ++ (-135:1.1);
+        \end{tikzpicture}
+    }
+    \caption{分位数与上侧分位数的区别\label{fig2.7.1}}
+\end{figure}
+
+分位数与上侧分位数是可以相互转换的，其转换公式如下.
+\begin{equation}
+    x_p' = x_{1-p};\quad x_p = x_{1-p}'.
+\end{equation}
+
+\begin{definition}[中位数]
+    设连续随机变量$X$的分布函数为$F(x)$，密度函数为$p(x)$.称$p=0.5$时的$p$分位数$x_{0.5}$为此分布的\textbf{中位数}，即$x_{0.5}$满足
+    \[ F_(x_{0.5}) = \int_{-\infty}^{0.5} p(x) \dd x = 0.5 \]
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}
+        \draw [-Stealth] (-0.5,0) -- (0,0)node[below left] {$O$} -- (4.5,0) node[below]{$x$};
+        \draw [-Stealth] (0,-0.5) -- (0,1.2) node [left]{0.5} -- (0,3) node[left]{$F(x)$};
+        \draw [densely dashed] (0,2.4) -- ++ (3.8,0)
+        (1.5,0)node[below]{$x_{0.5}$} -- (1.5,1.2)
+        -- (0,1.2);
+
+        \draw [thick] (-0.5,0.1) [bend right=30] to (1.5,1.2) [bend left=30] to (3.6,2.3);
+    \end{tikzpicture} \quad
+    \begin{tikzpicture}
+        \draw [-Stealth] (-0.5,0) -- (0,0)node[below left] {$O$} -- (4.5,0) node[below]{$x$};
+        \draw [-Stealth] (0,-0.5) --  (0,3) node[left]{$p(x)$};
+        \draw [thick] (-0.5,0) [bend right = 20] to (0,0.7) [bend left = 10] to (0.6,2.1)[bend left=30] to (1.1,2.3) [bend left = 30] to (1.8,1.8)[bend right = 35] to (4,0.2);
+        \fill [pattern = north east lines] (-0.5,0) [bend right = 20] to (0,0.7) [bend left = 10] to (0.6,2.1)[bend left=30] to (1.1,2.3) -- (1.1,0) node [below]{$x_{0.5}$} -- cycle;
+        \fill [pattern = north west lines]  (1.1,2.3) [bend left = 30] to (1.8,1.8)[bend right = 35] to (4,0.2) -- (4.3,0) -- (1.1,0) -- cycle;
+        \draw (0.6,0.6) node[fill=white,circle,inner sep=0pt] {0.5} (1.8,0.6)node[fill=white,circle,inner sep=0pt]{0.5};
+        \draw [-Stealth] (3,1.7)node[above]{$p(x)$} -- ++ (-135:1);
+    \end{tikzpicture}
+    \caption{连续随机变量的中位数\label{fig2.7.2}}
+\end{figure}
+
+\subsection{偏度系数与峰度系数}
+
+\begin{definition}[偏度系数]
+    设随机变量$X$的三阶矩存在，则称比值
+    \[ \beta_1 = \frac{E[X-E(X)]^3}{[E(X-E(X))^2]^{3/2}} = \frac{\nu_3}{(\nu_2)^{3/2}} \]
+    为$X$的分布的\textbf{偏度系数}，简称\textbf{偏度}.
+\end{definition}
+
+偏度系数可以描述分布的形状特征，其取值的正负反映的是
+
+\begin{itemize}
+    \item 当$\beta_1>0$时，分布为正偏或右偏
+    \item 当$\beta_1=0$时，分布关于其均值$E(X)$对称
+    \item 当$\beta_1<0$时，分布为负偏或左偏
+\end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[]{
+        \begin{tikzpicture}
+            \draw [-Stealth] (0,0) node[below left]{$O$} -- (2,0) node [below]{$\beta_1>0$} -- (4,0) node[below]{$x$};
+            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
+            \draw [thick] (0,0) [bend left = 10] to (0.8,2.6) [bend left = 42] to (1.4,2.8)
+            [bend left = 23] to (1.51,2.65) [bend right = 15] to (2.8,0.5) [bend right =13] to (3.5,0.1);
+        \end{tikzpicture}
+    }\;
+    \subfloat[]{
+        \begin{tikzpicture}
+            \draw [-Stealth] (-0.4,0) node[below left]{$O$} -- (4,0) node[below]{$x$};
+            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
+            \draw[thick] (-0.3,0.1) [bend right = 25] to (1.2,2.4) [bend left = 15] to (1.5,3.1)
+            [bend left=55] to (1.7,3.1) [bend left =10] to (1.9,2.2) [bend right=30] to (3.5,0.1);
+
+            \draw [thick,densely dashed] (1.6,3.15) -- (1.6,0) node[below] {$\beta_1=0$};
+        \end{tikzpicture}
+    }\;
+    \subfloat[]{
+        \begin{tikzpicture}
+            \draw [-Stealth] (0,0) node[below left]{$O$} -- (2,0) node [below]{$\beta_1<0$} -- (4,0) node[below]{$x$};
+            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
+            \draw [thick] (0.2,0.1) [bend right=25] to (2.4,2.6) [bend left=19] to (2.6,2.9) [bend left=30] to (2.8,2.9) [bend left=20] to (2.9,2.7)
+            [bend right=10] to (3.6,0.2) [bend right=25] to (3.8,0.01) ;
+        \end{tikzpicture}
+    }
+    \caption{三种不同偏度的分布}
+\end{figure}
+
+譬如，正态分布$N(\mu,\sigma^2)$是关于其均值$E(X)=\mu$是对称的，所以正态分布的偏度$\beta_1=0$.
+
+\begin{definition}[峰度系数]
+    设随机变量$X$的四阶矩存在，则称比值
+    \[ \beta_2 = \frac{E[X-E(X)]^4}{[E(X-E(X))^2]^2} - 3 = \frac{\nu_4}{(\nu_2)^2} -3 \]
+    为X的分布的\textbf{峰度系数}，简称\textbf{峰度}.
+\end{definition}
+
+峰度系数也是用于描述分布的形状特征，但峰度系数与偏度系数的差别是：偏度系数刻画的是分布的对称性，而峰度系数刻画的是分布的蜂峭性.
+
+峰度系数把正态分布的峰峭性作为标准，因为正态分布$N(\mu,\sigma^2)$的四阶中心矩为$\nu_4=3\sigma^4$，所以其峰度系数为
+\[ \beta_2 = \frac{\nu_4}{(\nu_2)^2} - 3 = \frac{3\sigma^4}{\sigma^4} - 3 = 0 \]
+这说明：任一正态分布的峰度$\beta_2=0$.
+
+可见，这里谈论的“峰度”不是指密度函数的峰值高低，那么“蜂度”的含义到底是什么呢?或者换句话说，我们应该如何刻画密度函数的峰峭性呢?我们知道从图形上看密度函数曲线下的面积等于1，若随机变量取值较集中，则其密度函数的峰值必高无疑，所以密度函数峰值的高低含有随机变量取值的集中程度.为了消除这个因素，我们不妨考察“标准化”后的分布的峰峭性，即用
+\[ X^\ast = \frac{X - E(X)} {\sqrt{\Var(X)}} \]
+的四阶原点矩$E[(X^\ast)^4]$考察密度函数的峰值，再考虑到任一标准正态分布的四阶原点矩等于3，所以就有了以上峰度系数的定义.
+
+综上所述，一个分布的峰度系数$\beta_2$反映了以下情况：
+\begin{itemize}
+    \item 当$\beta_2<0$时，则标准化后的分布形状比标准正态分布更平坦，称为\textbf{低峰度}.
+    \item 当$\beta_2=0$时，则标准化后的分布形状与标准正态分布相当.
+    \item 当$\beta_2>0$时，则标准化后的分布形状比标准正态分布更尖峭，称为\textbf{高峰度}.
+\end{itemize}
+
 
 \begin{problemset}[错题记录]
     \item （茆2.2.7）对一批产品进行检查，如查到第$a$件全为合格品，就认为这批产品合格；若在前$a$件中发现不合格品即停止检查，且认为这批产品不合格。设产品的数量很大，可认为每次查到不合格品的概率都是$p$。问每批产品平均要查多少件？
@@ -454,15 +801,63 @@
     \item （茆2.2.20）设连续随机变量$X$的分布函数为$F(x)$，且数学期望存在，证明
     \[ E(X) = \int_{0}^{+\infty}[1-F(x)] \dd  x-\int_{-\infty}^{0} F(x) \dd  x \]
     \item （茆2.2.21）设$X$是非负连续随机变量，若$E(X^n)$存在，证明：\begin{enumerate}
-        \item $E(X)=\int_0^{\infty}P(X>x) \mathrm{d}x$
-        \item $E(X^n)=\int_0^{\infty}n x^{n-1}P(X>x) \mathrm{d}x$
+        \item$E(X)=\int_0^{\infty}P(X>x) \mathrm{d}x$
+        \item$E(X^n)=\int_0^{\infty}n x^{n-1}P(X>x) \mathrm{d}x$
     \end{enumerate}
     \item （茆2.2.22）甲、乙两人进行象棋比赛，每局甲胜的概率为$p$，乙胜的概率为$q=1-p$。比赛进行到有一人连胜两局为止，求平均比赛局数。
-    \item 设随机变量$X$的分布函数为
+    \item （茆2.2.23）设随机变量$X$的分布函数为
     \[ F(x)=\begin{cases}
             0,                                  & x<-1         \\
             \frac{1}{2}+\frac{1}{\pi}\arcsin x, & -1\le x\le 1 \\
             1,                                  & x\ge 1
         \end{cases} \]
     试求$E(X)$。
+    \item （茆3.4.2）求掷$n$ 颗骰子出现点数之和的数学期望与方差.
+    \item （茆3.4.4）设在区间$(0,1)$ 上随机地取$n$ 个点, 求相距最远的两点间的距离的数学期望.
+    \item （茆3.4.10）设随机变量$X$ 与$Y$ 独立同分布，且$E(X)=\mu, \Var(X)=\sigma^2$，试求$E(X-Y)$。
+    \item （茆3.4.13）系统由$n$ 个部件组成. 记$X_i$ 为第$i$ 个部件能持续工作的时间, 如果$X_1,\ldots,X_n$ 独立同分布, 且$X_i\sim Exp(\lambda)$，如果至少有一个部件在工作, 系统就工作求系统持续工作的平均时间。
+    \item （茆3.4.17）一商店经销某种商品, 每周进货量$X$ 与顾客对该种商品的需求量$Y$ 是相互独立的随机变量, 且都跟从区间$(10,20)$ 上的均匀分布. 商店每售出一单位商品可得利润$1000$ 元; 若需求量超过了进货量, 则可从其他商店调剂供应, 这时每单位商品获利润为$500$ 元. 试求此商店经销该种商品每局的平均利润.
+    \item （茆3.4.21）掷一颗骰子两次，求其点数之和与点数之差的协方差。
+    \item （茆3.4.26）设随机变量$X$ 和$Y$ 的数学期望分别为$-2$ 和$2$ , 方差分别为$1$ 和$4$ , 而它们的相关系数为$-0.5$ . 试根据车比晓夫不等式, 估计$P(|X+Y|\geqslant 6)$ 的上限.
+    \item （茆3.4.29）已知随机变量$X$ 与$Y$ 的相关系数为$\rho$ , 求$X_1=aX+b$ 与$Y_1=cY+d$ 的相关系数, 其中$a,b,c,d$ 均为常数.
+    \item （茆3.4.32）设二维随机变量$(X,Y)$ 服从二维正态分布$N(0,0,1,1,\rho)$ ,
+    \begin{enumerate}
+        \item 求$E[ \max(X,Y) ]$ ;
+        \item 求$X-Y$ 与$XY$ 的协方差及相关系数.
+    \end{enumerate}
+    \item （茆3.4.34）设二维随机变量$(X,Y)$ 的联合密度函数为
+    \begin{equation*}
+        f(x,y)=\begin{cases}
+            \frac{6}{7}\left( x^2+\frac{xy}{2} \right), & 0<x<1,0<y<2; \\
+            0,                                          & \text{其他}.
+        \end{cases}
+    \end{equation*}
+    求$X$ 与$Y$ 的协方差及相关系数.
+    \item （茆3.4.36）设二维随机变量$(X,Y)$ 的联合密度函数如下, 试求$(X,Y)$ 的协方差矩阵.\begin{equation*}
+        f(x,y)=\begin{cases}
+            \frac{x+y}{8}, & 0<x<2,0<y<2  \\
+            0,             & \text{其他}.
+        \end{cases}
+    \end{equation*}
+    \item （茆3.4.38）设随机向量$(X_1,X_2,X_3)$ 满足条件
+    \begin{align*}
+         & aX_1+bX_2+cX_3=0,                       \\
+         & E(X_1)=E(X_2)=E(X_3)=d,                 \\
+         & \Var(X_1)=\Var(X_2)=\Var(X_3)=\sigma^2.
+    \end{align*}
+    其中$a, b, c, d, \sigma^{2}$ 均为常数, 求相关系数$\rho_{12},\rho_{23},\rho_{31}$ .
+    \item （茆3.4.39）设随机向量$X$ 与$Y$ 都只能取两个值, 试证:$X$ 与$Y$ 的独立性与不相关性是等价的.
+    \item （茆3.4.42）设随机向量$(X_1,X_2,X_3)$ 的相关系数为$\rho_{12},\rho_{23},\rho_{31}$ , 证明
+    \begin{equation*}
+        \rho_{12}^{2}+\rho_{23}^{2}+p_{31}^{2} \leqslant 1+2 \rho_{12} \rho_{23} \rho_{31}.
+    \end{equation*}
+    \item （茆3.4.46）设二维随机向量$(X,Y)$ 服从二维正态分布, 且
+    \begin{equation*}
+        E(X)=E(Y)=0, \quad E(X Y)<0.
+    \end{equation*}
+    证明: 对任意正常数$a,b$ 有
+    \begin{equation*}
+        P(X \geqslant a, Y \geqslant b) \leqslant P(X \geqslant a) P(Y \geqslant b).
+    \end{equation*}
+    \item （茆3.4.47-52）
 \end{problemset}
