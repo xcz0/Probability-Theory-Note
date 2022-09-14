@@ -9,31 +9,26 @@
 \end{introduction}
 \section{收敛}
 
-\begin{definition}
-    若随机变量序列$\left\{ X_n: \Omega \to \mathbb{R} \right\}$与随机变量$X:\Omega \to \mathbb{R}$间存在以下关系：
-    \[ \P\left\{ \omega \in \Omega: \lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \epsilon \right\} =1, \forall \epsilon > 0\]
-    则称$X_{n}$\textbf{几乎必然收敛}(converges almost surely)于$X$, 记为$X_{n} \xrightarrow{\as} X$。
-\end{definition}
+\subsection{几乎必然收敛}
 
+\begin{definition}[几乎必然收敛]
+    若随机变量序列$\{ X_n: \Omega \to \mathbb{R} \}$与随机变量$X:\Omega \to \mathbb{R}$间存在以下关系：
+    \[ \P\{ \omega \in \Omega: \lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \e \} =1,\quad \forall \e > 0\]
+    则称$X_n$\textbf{几乎必然收敛}(converges almost surely)于$X$, 记为$X_n \xrightarrow{\as} X$。
+\end{definition}
 \begin{remark}
-    类似于微积分中逐点收敛的条件。考察满足条件$\lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \epsilon$的样本点，这些样本点组成事件的概率为1。
+    类似于微积分中逐点收敛的条件。考察满足条件$\lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \e$的样本点，这些样本点组成事件的概率为1。
 \end{remark}
 
-% 若
-%     \[ \P\{\lim\limits_{n\to\infty}X_{n} \neq X_{\infty}\} = 0
-%         \iff \P\{\abs{X_{n}-X_{\infty}}>\e ~~\mathrm{i.o.}\} = 0, \ \forall \e>0 \]
-%     \[ \hspace{2.33em} {\color{gray}(\text{利用概率$\P$的连续性})} ~\iff \lim_{N\to\infty}\P(\cup_{n=N}^{\infty}\{\abs{X_{n}-X_{\infty}}>\e\}) = 0, \ \forall \e>0 \]
-% 注意$\{A_{n} ~~\mathrm{i.o.}\} = \{\sum_{n=1}^{\infty}\1_{A_{n}} = \infty\} = \bigcap_{N=1}^{\infty}\bigcup_{n=N}^{\infty} A_{n}$表示$A_{n}$发生\emph{无穷多次}(infinitely often). \vspace{0.2ex}
+\subsection{依概率收敛}
 
-
-\begin{definition}
-    若随机变量序列$\left\{ X_n: \Omega \to \mathbb{R} \right\}$与随机变量$X:\Omega \to \mathbb{R}$间存在以下关系：
-    \[ \lim_{n\to\infty}\P\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\} = 1, \ \forall \e>0. \]
-    则称$X_{n}$\textbf{依概率收敛}(converges in probability)于$X$, 记为$X_{n} \xrightarrow{\P} X$。
+\begin{definition}[依概率收敛]
+    若随机变量序列$\{ X_n: \Omega \to \mathbb{R} \}$与随机变量$X:\Omega \to \mathbb{R}$间存在以下关系：
+    \[ \lim_{n\to\infty}\P\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\} = 1, \quad \forall \e>0. \]
+    则称$X_n$\textbf{依概率收敛}(converges in probability)于$X$, 记为$X_n \xrightarrow{\P} X$。
 \end{definition}
-
 \begin{remark}
-    即对于$Z_i$，事件$A_i=\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\}$，$P(A_i)$将逐渐变为1。
+    即对于事件$A_i=\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\}$，其概率将逐渐变为$1$。
 \end{remark}
 
 \begin{figure*}[h]
@@ -41,73 +36,256 @@
     \includegraphics[width=0.9\textwidth]{image/converge1.png}
 \end{figure*}
 
-\begin{remark}
-    对于几乎必然收敛的情况，每个样本点上的序列随机变量都在逐渐趋近收敛变量；而对于依概率收敛的情况，由于对某个样本点的概率为0（例如连续随机变量），可能某一次样本点的序列随机变量接近收敛变量，下一次又离开收敛变量，只有保证总体概率趋近1即可。
-\end{remark}
-
-易见$X_{n} \xrightarrow{\as} X_{\infty} \implies X_{n} \xrightarrow{\P} X_{\infty}$, 但是反之不成立, 例如概率空间$((0,1],\mathscr{B}_{(0,1]},\mathrm{Uniform}((0,1]))$上的\emph{打字机序列}
-\[ \xi_{n} = \1_{(n/2^{k}-1,(n+1)/2^{k}-1]}, \quad 2^{k} \le n < 2^{k+1} \]
-适合$\P\{\abs{\xi_{n}}>\e\} \le 1/2^{k} \to 0$, 而$\varlimsup \xi_{n} \equiv 1$且$\varliminf \xi_{n} \equiv 0$, 所以$\lim \xi_{n}(\omega)$对$\forall \omega \in (0,1]$都不存在.
+对于几乎必然收敛的情况，每个样本点上的序列随机变量都在逐渐趋近收敛变量；而对于依概率收敛的情况，由于对某个样本点的概率为0（例如连续随机变量），可能某一次样本点的序列随机变量接近收敛变量，下一次又远离收敛变量，只要保证总体概率趋近$1$即可。
 
 \begin{proposition}
     依概率收敛是几乎必然收敛的\underline{必要条件}，但\underline{不是充分条件}。
 \end{proposition}
 
-\begin{example}
-    依概率收敛而不几乎必然收敛的实例：
-    设样本空间为$\Omega = (0,1]$，概率均匀分布在样本空间上，即$P([a,b])=b-a,0<a<b<1$。接下来对于$k \in \mathbb{N}_+$，将区间$(0,1]$分为$2^{k}$个等长的子区间，并分别记为$I_{k,j}=(\frac{j-1}{2^k},\frac{j}{2^k}]$。
+\begin{example}[依概率收敛而不几乎必然收敛]
+    设样本空间为$\Omega =(0,1]$，概率均匀分布在样本空间上，即$P([a,b])=b-a,0<a<b<1$。接下来对于$k \in \mathbb{N}_+$，将区间$(0,1]$分为$2^{k}$个等长的子区间，并分别记为$I_{k,j}=(\frac{j-1}{2^k},\frac{j}{2^k}]$。
 
-    按以下方式定义随机变量序列$\left\{ X_n: \Omega \to \mathbb{R} \right\}$：
+    按以下方式定义随机变量序列$\{ X_n: \Omega \to \mathbb{R} \}$：
     \[ X_n(\omega)=\begin{cases}
             1, \omega \in I_{k,j}    \\
             0, \omega \notin I_{k,j} \\
         \end{cases} ,\quad n = 2^k+j-2\]
     同时定义随机变量$X: \Omega \to \mathbb{R}$为$X(\omega)=0,\forall \omega \in \Omega$
 
-    由于对任意$0<\epsilon<1$ 
-    \[ \P\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\}=1-\frac{1}{2^K} \to 1  \]
-    所以$X_{n} \xrightarrow{\P} X$。
-    然而对于任意$\omega \in \Omega$，无论k为何数，此次分割中，总有一个区间包含此样本点。即有无数个$X_i(\omega) = 1$。所以
-    \[ \P\left\{ \omega \in \Omega: \lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \epsilon \right\} =\P\{\emptyset \}=0 \]
-    所以$X_{n}$不几乎必然收敛到$X$。
+    由于
+    \[ \P\{\omega \in \Omega: \abs{X_n(\omega) - X(\omega)}<\e\}=1-\frac{1}{2^k} \to 1 ,\quad \forall 0<\epsilon<1 \]
+    所以$X_n \xrightarrow{\P} X$。
+    然而对于任意$\omega \in \Omega$，无论$k$为何数，此次分割中，总有一个区间包含此样本点。即有无数个$X_i(\omega) = 1$。所以
+    \[ \P\{ \omega \in \Omega: \lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \epsilon \} =\P\{\emptyset \}=0 \]
+    所以$X_n$不几乎必然收敛到$X$。
 \end{example}
 
-\begin{definition}
-    设随机变量 $ X, X_1,  X_2, \dotsc $  的分布函数分别为 $ F (x), F_1 (x), F_2 (x), \dotsc $。若对 $ F (x) $ 的任一\underline{连续点} $x$, 都有
-    \[ \lim_{n \to +\infty} F_n (x) = F (x) \]
-    则称 $ \{ F_n (x) \} $ \textbf{弱收敛}于 $ F (x) $, 记作    $F_n (x) \xrightarrow{W}{\to} F (x)$；也称 $ \{ X_n \} $ 按\textbf{分布收敛}于$X$，记作$X_n \xrightarrow{d}{\to} X$
+\begin{lemma}\label{lem:sum_product_CP}
+    若$X_n \xrightarrow{\P} X, Y_n \xrightarrow{\P} Y$，则：
+    \begin{enumerate}
+        \item $X_n \pm Y_n \xrightarrow{\P} X \pm Y$
+        \item $X_n Y_n \xrightarrow{\P} XY$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item 因为
+              \[ \{ \left\vert X_n+Y_n-X-Y \right\vert \ge \e \} \subset \{ \left\vert X_n-X \right\vert \ge \frac{\e}{2} \} \cup \{ \left\vert Y_n-Y \right\vert \ge \frac{\e}{2} \} \]
+              所以
+              \[ 0 \le P\{ \left\vert X_n+Y_n-X-Y \right\vert \ge \e \} \le P\{ \left\vert X_n-X \right\vert \ge \frac{\e}{2} \} + P\{ \left\vert Y_n-Y \right\vert \ge \frac{\e}{2} \} \]
+              对上式取极限，并由夹逼定理得：
+              \[ P\{ \left\vert X_n+Y_n-X-Y \right\vert \ge \e \}=0 \]
+              由$Y_n \xrightarrow{\P} Y$易得$-Y_n \xrightarrow{\P} -Y$，所以又有$X_n - Y_n \xrightarrow{\P} X - Y$。
+        \item 由于$2ab=(a+b)^2-a^2+b^2$，结合上一结论可知：$X_n Y_n \xrightarrow{\P} XY$的充分条件是$X_n \xrightarrow{\P} X \implies X_n^2 \xrightarrow{\P} X^2$。
+              任取$\e >0$，有
+              \begin{align*}
+                  P\{|X_n^2-X^2| \ge \e \}= & P\{|X_n-X||X_n+X| \ge \e \}                         \\
+                  =                         & P(\{|X_n-X||X_n+X| \ge \e \} \cap\{|X_n+X| \le M\}) \\
+                                            & + P(\{|X_n-X||X_n+X| \ge \e \} \cap \{|X_n+X|>M\})  \\
+                  \le                       & P\{|X_n-X| \ge \e / M\}+P\{|X_n+X|>M\}
+              \end{align*}
+              而
+              \begin{align*}
+                  P\{|X_n+X|>M\} \le & P\{|X_n-X|+|2X|>M\}                           \\
+                  =                  & P(\{|X_n-X|+|2X|>M\} \cap\{|X_n-X|<1\})       \\
+                                     & + P(\{|X_n-X|+|2X|>M\} \cap\{|X_n-X| \ge 1\}) \\
+                  \le                & P\{|2 X|>M-1\}+P\{|X_n-X| \ge 1\}
+              \end{align*}
+              将$M$取足够大，使得对于任取的$\delta >0$，有$P\{ |X| > (M-1) / 2 \}< \delta$成立。并且由于$X_n \xrightarrow{\P} X$，所以
+              \[ \exists N, \forall n>N \st P\{|X_n-X| \ge \e / M\},P\{|X_n-X| \ge 1\} < \delta \]
+              综上
+              \begin{align*}
+                  P\{|X_n^2-X^2| \ge \e \} & \le P\{|X_n-X| \ge \e / M\}+P\{|X_n+X|>M\}                      \\
+                                           & \le P\{|X_n-X| \ge \e / M\} + P\{|2 X|>M-1\}+P\{|X_n-X| \ge 1\} \\
+                                           & < 3\delta
+              \end{align*}
+              即$X_n^2 \xrightarrow{\P} X^2$，所以$X_n Y_n \xrightarrow{\P} XY$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    若$X_n \xrightarrow{\P} X$，$g(x)$是$\mathbb{R}$上的连续函数，则$g(X_n) \xrightarrow{\P} g(X)$
+\end{theorem}
+\begin{proof}
+    若$g_m(x)$是$m$次多项式函数，即$g_m(x)=\sum_{i=0}^m a_ix^i$，则由引理\ref{lem:sum_product_CP}知有
+    \[ g_m(X_n) \xrightarrow{\P} g_m(X) \]
+    因为$g(x)$是连续函数，所以可以用多项式函数去逼近$g(x)$，并且在任意有限区间上还是一致的，即对于任意$M,\e >0$，当$m$足够大的时候，存在$g_m(x)$，满足
+    \[ \abs{g(x)-g_m(x)} < \e ,\ \abs x \le M \]
+
+    接下来以$\abs X ,\abs{X_n} \le M$为界，将目标拆为两部分：
+    \begin{align*}
+            & P\{|g(X_n)-g(X)| \ge \e \}                                                                              \\
+        =   & P(\{|g(X_n)-g(X)| \ge \e \}\cap \{\abs X ,\abs{X_n} \le M \})                                           \\
+            & +P(\{|g(X_n)-g(X)| \ge \e \}\cap \{\{\abs X \le M\} \cup \{\abs{X_n} \le M\} \})                        \\
+        \le & P(\{|g(X_n)-g(X)| \ge \e \}\cap \{\abs X ,\abs{X_n} \le M \}) + P\{\abs X \le M\}+ P\{\abs{X_n} \le M\}
+    \end{align*}
+    对于后半部分有：
+    \[ \forall \delta >0 , \exists M >0 \st P\{\abs X \le M\},P\{\abs{X_n} \le M\}< \delta \]
+    对于第一项，将$\{|g(X_n)-g(X)| \ge \e \}$拆分为三部分：
+    \[ \{|g(X_n)-g(X)| \ge \e \} \subset \{|g(X_n)-g_m(X_n)| \ge \e / 3 \} \cup \{|g_m(X_n)-g_m(X)| \ge \e / 3 \} \cup \{|g_m(X)-g(X)| \ge \e / 3 \} \]
+    又因为多项式函数逼近的一致性，稍加替换可得：
+    \begin{align*}
+        \left\{|g(X_n)-g_m(X_n)| \ge \e / 3 \right\}\cap\{|X| \le M\} \cap\left\{|X_n| \le M \right\} = & \emptyset \\
+        \left\{|g_m(X)-g(X)| \ge \e / 3 \right\}\cap\{|X| \le M\} \cap\left\{|X_n| \le M \right\} =     & \emptyset
+    \end{align*}
+    所以
+    \begin{align*}
+            & P(\{|g(X_n)-g(X)| \ge \e \}\cap \{\abs X ,\abs{X_n} \le M \})                                     \\
+        \le & P(\left\{|g_m(X_n)-g_m(X)| \ge \e / 3\right\} \cap\{|X| \le M\} \cap\left\{|X_n| \le M+1\right\}) \\
+        \le & P\left\{|g_m(X_n)-g_m(X)| \ge \e / 3\right\}<\delta
+    \end{align*}
+    综上
+    \[ P\{|g(X_n)-g(X)| \ge \e \} < 4 \delta\]
+    即$g(X_n) \xrightarrow{\P} g(X)$
+\end{proof}
+
+\begin{note}
+    相关证明技巧总结：对于事件$\{ |X+Y| > a+b \}$，有$\{ |X+Y| > a+b \} \subset \{ |X|>a \} \cup \{ |Y|>b \}$，从而有
+    \[ P\{ |X+Y| > a+b \} \le P\{ |X|>a \} + P\{ |Y|>b \} \]
+\end{note}
+
+\subsection{依分布收敛}
+
+\begin{definition}[依分布收敛]
+    设随机变量$X, X_1, X_2, \dotsc$的分布函数分别为$F(x), F_1(x), F_2(x), \dotsc$。若对$F(x)$的任一\underline{连续点}$x$，都有
+    \[ \lim_{n \to +\infty} F_n(x) = F(x) \]
+    则称$\{ F_n(x) \}$\textbf{弱收敛}于$F(x)$, 记作$F_n(x) \xrightarrow{W} F(x)$；也称$\{ X_n \}$\textbf{按分布收敛}于$X$，记作$X_n \xrightarrow{d} X$
 \end{definition}
+\begin{remark}
+    对于非连续点，其收敛值可能使得收敛函数不满足分布函数特征（见下例），需要定义这些非连续点上的值，使其满足分布函数特征。
+\end{remark}
+
+\begin{example}
+    设$\{ X_n \}$服从退化分布：
+    \[ P \biggl( X_n = \frac1{n} \biggr) = 1, \quad n \in N_+\]
+    其分布函数分别为：
+    \[ F_n( x ) = \begin{cases}
+            0, & x < 1/n,    \\
+            1, & x \geq 1/n.
+        \end{cases} \]
+    因为$F_n(x)$是在点$x=1$处有跳跃，所以当$n \to +\infty$时，跳跃点位置趋于0。于是我们很自然地认为$\{ F_n(x) \}$应该收敛于点$x=0$处的退化分布，即
+    \[ F(x) = \begin{cases}
+            0, & x < 0,    \\
+            1, & x \geq 0.
+        \end{cases} \]
+    但是，对任意的$n$，有$F_n(0) = 0$, 而$F(0) = 1$, 所以
+    \[ \lim_{n \to +\infty} F_n(0) = 0 \neq 1 = F(0) \]
+\end{example}
 
 \begin{proposition}
     依分布收敛是依概率收敛的\underline{必要条件}，但\underline{不是充分条件}。但若依概率收敛到一个\underline{常数随机变量}，则也可推出依分布收敛。
 \end{proposition}
-
-\begin{theorem}[连续映射定理]
-    设$g: \mathbb{R}^k \mapsto \mathbb{R}$为\underline{连续}函数，则随机向量序列通过次映射后收敛情况与原先相同：
+\begin{remark}
+    直观来看，$X_n$依概率收敛到$X$，意味着$n$很大时，二者的距离大概率很近。那么随着$n$越来越大，$X_n$的行为自然会越来越像。对于某一区间$B$，样本点集$X^{-1}(B)=\{\omega\in\Omega : X(\omega) \in B\}$将与点集$X^{-1}_n(B)$越来越接近，其两随机变量出现在此区间的概率也将逐渐相等，这就是依分布收敛描述的东西。
+\end{remark}
+\begin{proof}
+    \textbf{必要性}：设随机变量$X, X_1,  X_2, \dotsc$的分布函数分别为$F(x), F_1(x), F_2(x), \dotsc$。
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{image/CP_to_CF1.jpg}
+            \caption{$X_n>X$}
+            \label{fig:CP_to_CF1}
+        \end{subfigure}
+        \begin{subfigure}[]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{image/CP_to_CF2.jpg}
+            \caption{$X_n<X$}
+            \label{fig:CP_to_CF2}
+        \end{subfigure}
+        %\caption{}
+        \label{fig:CP_to_CF}
+    \end{figure}
+    如上图\ref{fig:CP_to_CF1}，直观来看$P\{ X_n\le t \} \approx F(t-\e)$。而严格来看有：
     \begin{align*}
-        X_n^{(i)} \xrightarrow{\as} X^{(i)} &\Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{\as} g(X^{(1)},\cdots X^{(k)})\\
-        X_n^{(i)} \xrightarrow{\P} X^{(i)} &\Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{\P} g(X^{(1)},\cdots X^{(k)})\\
-        (X_n^{(i)}) \xrightarrow{d} (X^{(i)}) &\Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{d} g(X^{(1)},\cdots X^{(k)})\\
+        F_n(t) & = P(X_n\le t)                                     \\
+               & \ge P(X_n\le t,X\le t-\e)                         \\
+               & =P(X\le t-\e) - P(X_n > t,X\le t-\e)              \\
+               & \ge F(t-\e) - P(\left\vert X_n-X \right\vert >\e)
+    \end{align*}
+    数列$\{ F_n(t) \}$的极限未必存在，但可对两边取下极限得
+    \[ F(t-\e) \leq \varliminf_{n \to +\infty} F_n(t) \]
+
+    同理，如上图\ref{fig:CP_to_CF2}，根据“对称性”，交换$X_n$与$X$的位置有：
+    \[ F(t+\e) \ge F_n(t) - P(\left\vert X_n-X \right\vert >\e)\]
+    对两边取下极限得
+    \[ \varlimsup_{n \to +\infty} F_n(t) \leq  F(t+\e) \]
+
+    综上有：
+    \[ F(t-\e) \leq \varliminf_{n \to +\infty} F_n(t) \le \varlimsup_{n \to +\infty} F_n(t) \leq  F(t+\e) \]
+    再令$\e \to 0+$得
+    \[ F(t-0) \leq \varliminf_{n \to +\infty} F_n(t) \le \varlimsup_{n \to +\infty} F_n(t) \leq  F(t+0) \]
+    所以当$t$为$F(x)$上的连续点时，$F(t-0)=F(t+0)$。根据夹逼定理，此时$\{ F_n(t) \}$的极限存在且
+    \[ \lim_{n \to +\infty} F_n(x) = F(x) \]
+
+    \textbf{充分性}（常数随机变量）：设$X=c$,$c$为常数，其分布函数退化为：
+    \[ F(x) = \begin{cases}
+            0, & x < c,    \\
+            1, & x \geq c.
+        \end{cases} \]
+    所以对任意的$\e > 0$, 有
+    \begin{align*}
+        P\{ \left\vert X_n-X \right\vert \ge \e \} & = P\{ X_n \geq c + \e \} + P\{ X_n \le  c - \e \}           \\
+                                                   & \leq P\{ X_n > c + \frac{\e}{2} \} + P\{ X_n \le  c - \e \} \\
+                                                   & = 1 - F_n( c + \e / 2 ) + F_n( c - \e ).
+    \end{align*}
+    由于$x = c + \e / 2$和$x = c - \e$均为$F(x)$的连续点，且$F_n(x) \stackrel{W}{\to} F(x)$，所以当$n \to +\infty$时，有
+    \[ F_n( c + \e / 2 ) \to F( c + \e / 2 ) = 1, \quad F_n( c - \e) \to F( c - \e ) = 0 \]
+    由此得
+    \[ P\{ \left\vert X_n-X \right\vert \ge \e \} \to 0 \]
+\end{proof}
+
+\begin{example}[依分布收敛而不依概率收敛]
+    设$X$的分布列为
+    \[ P( X = -1 ) = \frac1{2}, \quad P( X = 1) = \frac1{2} \]
+    令$X_n = -X$, 则$X_n$与$X$同分布。即$X_n$与$X$有相同的分布函数。故$X_n \stackrel{L}{\to} X$。
+
+    但对任意$0 < \e < 2$，有
+    \[ P\{ \left\vert X_n-X \right\vert \ge \e \} = P( 2 \left\vert X \right\vert \geq \e ) = 1 \nrightarrow 0 \]
+    即$X_n$不是依概率收敛于$X$。
+\end{example}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[box] (1) at(0,0) {几乎必然收敛};
+        \node[box] (2) at(4,0) {依概率收敛};
+        \node[box] (3) at(8,0) {按分布收敛};
+        \draw[-to] (1)--(2);
+        \draw[-to] (2)--(3);
+        \draw[->,densely dotted] (8,0.45) arc(0:180:2);
+        \node at(6,1.5) {常数随机变量};
+    \end{tikzpicture}
+    \caption{三种收敛的关系}
+    \label{fig:relationship_among_converges}
+\end{figure}
+
+\begin{theorem}[连续映射定理]\label{thm:continuous_mapping}
+    设$g: \mathbb{R}^k \mapsto \mathbb{R}$为区间$B$上的\underline{连续}函数，并且$P(X \in B)=1$，则随机向量序列通过次映射后收敛情况与原先相同，即：
+    \begin{align*}
+        X_n^{(i)} \xrightarrow{\as} X^{(i)}  & \Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{\as} g(X^{(1)},\cdots X^{(k)}) \\
+        X_n^{(i)} \xrightarrow{\P} X^{(i)}   & \Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{\P} g(X^{(1)},\cdots X^{(k)})  \\
+        (X_n^{(i)}) \xrightarrow{d}(X^{(i)}) & \Rightarrow g(X_n^{(1)},\cdots X_n^{(k)}) \xrightarrow{d} g(X^{(1)},\cdots X^{(k)})   \\
     \end{align*}
 \end{theorem}
-\begin{remark}
-    随机向量依分布收敛是指\underline{联合}分布函数收敛。
-\end{remark}
+\begin{proof}
+    证明见书\cite[Asymptotic Statistics]{vaart_1998}定理2.3。
+\end{proof}
 
-\begin{theorem}[Slutsky定理]\label{thm:Slutsky}
+\begin{corollary}[Slutsky定理]\label{thm:Slutsky}
     若$X_n \xrightarrow{d} X, Y_n \xrightarrow{P} a$，其中$a$是常数，则：
     \begin{itemize}
-        \item $Y_n X_n \xrightarrow{d} a X$
-        \item $Y_n + X_n \xrightarrow{d} a + X$
-        \item $\frac{X_n}{Y_n}  \xrightarrow{d} \frac{X}{a}$，若对所有的$n$都有$P(Y_n\neq 0)=1$，并且$a\neq 0$
+        \item$Y_n X_n \xrightarrow{d} a X$
+        \item$Y_n + X_n \xrightarrow{d} a + X$
+        \item$\frac{X_n}{Y_n}  \xrightarrow{d} \frac{X}{a}$，若对所有的$n$都有$P(Y_n\neq 0)=1$，并且$a\neq 0$
     \end{itemize}
-\end{theorem}
-
+\end{corollary}
 \begin{proof}
-    由条件可知，$(X_n,Y_n) \xrightarrow{d} (X,a)$，且$g_1(X_n,Y_n)=X_n Y_n, g_2(X_n,Y_n)=X_n+Y_n, g_3(X_n,Y_n)=\frac{X_n}{Y_n}$都是连续函数（$g_3$在定理中的限制下），所以仍然保持依分布收敛。
+    由条件可知，$(X_n,Y_n) \xrightarrow{d}(X,a)$，且$g_1(X_n,Y_n)=X_n Y_n, g_2(X_n,Y_n)=X_n+Y_n, g_3(X_n,Y_n)=\frac{X_n}{Y_n}$都是连续函数（$g_3$在定理中的限制下），所以仍然保持依分布收敛。
 \end{proof}
 \begin{remark}
-    当$Y_n \xrightarrow{P} a$才能得出$(X_n,Y_n) \xrightarrow{d} (X,a)$；若$Y_n$依分布收敛到其他随机变量，则未必成立。
+    当$Y_n \xrightarrow{P} a$才能得出$(X_n,Y_n) \xrightarrow{d}(X,a)$；若$Y_n$依分布收敛到其他随机变量，则未必成立。
 \end{remark}
 
 \begin{theorem}[theta方法的极限定理]
@@ -116,35 +294,37 @@
     那么对于连续函数$g$，若$g'(\theta)\neq 0$存在，则
     \[ \frac{\sqrt{n}(g(X_n)-g(\theta))}{\sigma|g'(\theta)|} \xrightarrow{d} N(0,1) \]
 \end{theorem}
-
 \begin{proof}
     %TODO
 \end{proof}
 
 \begin{theorem}[连续性定理]\label{thm:continuity}
-    设$F_n(x)$是一个累计函数序列，并且分别对应矩母函数$M_n(t)$；$F(x)$是一个累计函数，并且对应矩母函数$M(t)$。那么，
+    设$F_n(x)$是一个累计函数序列，并且分别对应矩母函数$M_n(t)$；$F(x)$是一个累计函数，并且对应矩母函数$M(t)$。那么，$F(x)$的所有连续点上$F_n(x) \xrightarrow{M} F(x)$的充要条件是：
     \[ \forall t \in U(0,\delta) ,s.t. \lim_{n \to \infty}M_n(t) = M(t)\]
-    是在$F(x)$的所有连续点上$F_n(x) \xrightarrow{M} F(x)$的充要条件。
+    其中$U(0,\delta)$代表某一包含零点的开区间。
+    
+    若矩母函数不存在，可替换成特征函数
+    \[ \forall t \in \mathbb{R} ,\st \lim_{n \to \infty}\varphi_n(t) = \varphi(t)\]
 \end{theorem}
 \begin{remark}
-    若矩母函数不存在，替换成特征函数，定理也成立。但是，不能替换成密度函数或质量函数
+    不能替换成密度函数或质量函数
 \end{remark}
 
 \begin{example}
-    离散情况：\\
+    \textbf{离散情况}：
     设均匀随机变量$X_n \sim U(-\frac{1}{2},\frac{1}{2})$，那么$X_n \xrightarrow{d} 0$。然而$P_n(x) \to 0, \forall x \in \mathbb{R}$（不满足质量函数定义），并且$\lim_{n \to \infty}F_n(0)=\frac{1}{2}$（不满足累积函数定义）
 
-    连续情况：\\
-    设累积函数为$F_n(x)=x-\frac{\sin (2n\pi x)}{2n\pi}, 0<x<1$，那么$F_n \xrightarrow{d} U(0,1)$。然而$f_n(x)$无极限
+    \textbf{连续情况}：
+    设累积函数为$F_n(x)=x-\frac{\sin(2n\pi x)}{2n\pi}, 0<x<1$，那么$F_n \xrightarrow{d} U(0,1)$。然而$f_n(x)$无极限
 \end{example}
 
 \begin{example}[泊松分布收敛于正态分布]
     令$X_n \sim P(\lambda_n)$，并且$\lim_{n \to \infty}\lambda_n =\infty$。将变量标准化：
     \[ Z_n=\frac{X_n-\lambda_n}{\sqrt{\lambda_n}} \]
     那么
-    \[M_{Z_n}(t)=\ee^{-t\sqrt{\lambda_n}}M_{X_n}(t)(\frac{t}{\sqrt{\lambda_n}})=\exp (-t\sqrt{\lambda_n}+\lambda_n(e^{\frac{t}{\sqrt{\lambda_n}}-1}))\]
+    \[M_{Z_n}(t)=\ee^{-t\sqrt{\lambda_n}}M_{X_n}(t)(\frac{t}{\sqrt{\lambda_n}})=\exp(-t\sqrt{\lambda_n}+\lambda_n(e^{\frac{t}{\sqrt{\lambda_n}}-1}))\]
     由于
-    \[ \lim_{n \to \infty}\ln (M_{Z_n}(t))=\lim_{\lambda_n \to \infty}-t\sqrt{\lambda_n}+\lambda_n(e^{\frac{t}{\sqrt{\lambda_n}}-1})=\frac{t^2}{2} \]
+    \[ \lim_{n \to \infty}\ln(M_{Z_n}(t))=\lim_{\lambda_n \to \infty}-t\sqrt{\lambda_n}+\lambda_n(e^{\frac{t}{\sqrt{\lambda_n}}-1})=\frac{t^2}{2} \]
     所以$Z_n \xrightarrow{d} N(0,1)$，即若$\lambda$很大，可通过$N(\lambda,\lambda)$估计$P(\lambda)$
 \end{example}
 
@@ -172,12 +352,12 @@
 \end{theorem}
 
 \begin{example}[蒙特卡洛积分]
-    为计算积分$I(f)=\int_0^1 f(x)\mathrm{d}x$，生成随机数$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim U(0,1)$，并且计算$\hat{I}(f)=\overline{Y_n}, Y_i=f(X_n) $。由于$X_1,\cdots ,X_n \operatorname{i.i.d.}$，所以$Y_1,\cdots ,Y_n \operatorname{i.i.d.}$；并且$E(Y_i)=E(f(X_i))=\int_0^1 f(x)\cdot 1\mathrm{d}x=I(f)$，所以$\hat{I}(f)\xrightarrow{\P} E(Y_i)=I(f)$
+    为计算积分$I(f)=\int_0^1 f(x)\mathrm{d}x$，生成随机数$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim U(0,1)$，并且计算$\hat{I}(f)=\overline{Y_n}, Y_i=f(X_n)$。由于$X_1,\cdots ,X_n \operatorname{i.i.d.}$，所以$Y_1,\cdots ,Y_n \operatorname{i.i.d.}$；并且$E(Y_i)=E(f(X_i))=\int_0^1 f(x)\cdot 1\mathrm{d}x=I(f)$，所以$\hat{I}(f)\xrightarrow{\P} E(Y_i)=I(f)$
 \end{example}
 
 \begin{example}[样本方差]\label{ex:sample_var}
     设随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.}$，并且均值和方差分别为$\mu,\sigma$。令：
-    \[ S_n^2=\frac{1}{n}\sum_{i=1}^n(X_i-\overline{X_n}) = (\frac{1}{n}\sum_{i=1}^nX_i^2)-\overline{X_n}^2 +\]
+    \[ S_n^2=\frac{1}{n}\sum_{i=1}^n(X_i-\overline{X_n}) =(\frac{1}{n}\sum_{i=1}^nX_i^2)-\overline{X_n}^2 +\]
     由于$g(x)=x^2$是连续函数，所以$\overline{X_n}^2 \xrightarrow{\P} \mu^2$。由于$X_1^2,\cdots X_n^2 \operatorname{i.i.d.}$，且$E(X_i^2)=\sigma^2+\mu^2$，所以$\overline{X_n^2} \xrightarrow{\P} \mu^2+\sigma^2$。因此：
     \[ S_n^2 \xrightarrow{\P}\mu^2+\sigma^2-\mu^2= \sigma^2 \]
 \end{example}
@@ -206,10 +386,10 @@
 \begin{proof}
     令$W_i=\frac{X_i-\mu}{\sigma}$，则$E(W_i)=0,\operatorname{Var}(W_i)=1$。再令$Z_n=\frac{T_n-n \mu}{\sigma\sqrt{n}}=\frac{1}{\sqrt{n}}\sum_{i=1}^n W_i$。则
     \begin{align*}
-        M_{Z_n}(t) &= \left[ M_{W}(\frac{t}{\sqrt{n}}) \right]^n \\
-        &= \left[ M_{W}(0)+M_{W}'(0)\frac{t}{\sqrt{n}}+\frac{M_{W}''(0)}{2}(\frac{t}{\sqrt{n}})^2 +o(\frac{1}{n}) \right]^n \\
-        &= \left[ 1 + \frac{t^2}{2n}+ o(\frac{1}{n}) \right]^n\\
-        & \to e^{\frac{t^2}{2}}
+        M_{Z_n}(t) & = \left[ M_{W}(\frac{t}{\sqrt{n}}) \right]^n                                                                       \\
+                   & = \left[ M_{W}(0)+M_{W}'(0)\frac{t}{\sqrt{n}}+\frac{M_{W}''(0)}{2}(\frac{t}{\sqrt{n}})^2 +o(\frac{1}{n}) \right]^n \\
+                   & = \left[ 1 + \frac{t^2}{2n}+ o(\frac{1}{n}) \right]^n                                                              \\
+                   & \to e^{\frac{t^2}{2}}
     \end{align*}
     根据定理\ref{thm:continuity}，$Z_n \xrightarrow{d} N(0,1)$。
 \end{proof}
@@ -220,7 +400,7 @@
 \begin{example}[二项分布近似为正态分布]
     若随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim B(1,p)$, 则$T_n \sim B(n,p)$. 其中$E(T_n)=nE_(X_i)=np, \operatorname{Var}(T_n)=n\operatorname{Var}(X_i)=np(1-p)$. 根据中央极限定理有:
     \[ \frac{T_n - np}{\sqrt{np(1-p)}} \xrightarrow{d} N(0,1) \]
-    即当n很大时, $B(n,p)$可用$N(np,np(1-p))$近似.
+    即当n很大时,$B(n,p)$可用$N(np,np(1-p))$近似.
 \end{example}
 \begin{remark}
     其他与二项分布一样, 可以通过独立同分布的随机变量相加得到的分布,也可在一定条件下近似为正态分布. 例如Gamma分布(可通过指数分布相加得到), 泊松分布(泊松分布相加), 负二项分布(几何分布相加), 参见图\ref{fig:relationship_among_univariate_distributions}
@@ -235,5 +415,10 @@
     即可以通过分布$N(0,\frac{S_n^2}{n})$估计测量误差$\overline{X_n}-\mu$
 \end{example}
 \begin{remark}
-    由定理\ref{thm:normal_sample_mean_variance}可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$. 但由例\ref{ex:t_disc_to_normal}可知, $n\to \infty$时, $t$分布收敛于正态分布, 所以不冲突.
+    由定理\ref{thm:normal_sample_mean_variance}可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$. 但由例\ref{ex:t_disc_to_normal}可知,$n\to \infty$时,$t$分布收敛于正态分布, 所以不冲突.
 \end{remark}
+
+
+\begin{problemset}[错题记录]
+    \item （茆4.1.2）
+\end{problemset}

@@ -7,7 +7,7 @@
 \section{期望}
 
 \begin{definition}[期望]
-    对于实值随机向量$X : (\Omega,\mathscr{F},\P) \to (\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$，若
+    对于实值随机向量$X :(\Omega,\mathscr{F},\P) \to(\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$，若
     \[ \E[g(X)] = \int_{\R} g(x) \mathrm{d} F_X(x) \]
     存在，则称其为$g(X)$的\textbf{期望}(expectation)。
 \end{definition}
@@ -90,22 +90,22 @@
     \begin{table}[htbp]
         \centering
         \begin{tabular}{c|cc}
-            $x$ & $1 / k$   & $1+1 / k$   \\\midrule
-            $P$ & $(1-p)^k$ & $1-(1-p)^k$ \\
+           $x$&$1 / k$  &$1+1 / k$  \\\midrule
+           $P$&$(1-p)^k$&$1-(1-p)^k$\\
         \end{tabular}
     \end{table}
     所以每人平均验血次数为
     \[ E(X)=\frac1{k}(1-p)^k+(1+\frac1{k})[1-(1-p)^k]=1-(1-p)^k+\frac1{k} \]
     由此可知，只要选择$k$使
-    \[ 1-(1-p)^k+\frac1{k}<1,\ \text{即} ,\ (1-p)^k>\frac1{k} \]
+    \[ 1-(1-p)^k+\frac1{k}<1,\ \text{即},\ (1-p)^k>\frac1{k} \]
     就可减少验血次数，而且还可适当选择$k$使其达到最小。
 \end{solution}
 
 \begin{example}[凑一法求解二项分布的均值]\label{ex:binom_dist_mean}
     求解二项分布（定义\ref{def:binom_dist}）的均值时，可通过将其凑成概率质量函数之和（为1）的形式，称此为\textbf{凑一法}(sum to one, STO)：
     \begin{align*}
-        E(X) & =\sum_{i=1}^n x \binom{n}{x} p^x (1-p)^{n-x}                 \\
-             & = np \sum_{i=1}^n \binom{n-1}{x-1} p^{x-1} (1-p)^{n-1-(x-1)} \\
+        E(X) & =\sum_{i=1}^n x \binom{n}{x} p^x(1-p)^{n-x}                 \\
+             & = np \sum_{i=1}^n \binom{n-1}{x-1} p^{x-1}(1-p)^{n-1-(x-1)} \\
              & =np
     \end{align*}
 \end{example}
@@ -133,11 +133,11 @@
 
 \begin{example}[凑一法求解二项分布的方差]\label{ex:binom_dist_var}
     \begin{align*}
-        E(X(X-1))             & =\sum_{i=1}^n x(x-1) \binom{n}{x} p^x (1-p)^{n-x}                   \\
-                              & = n(n-1)p^2 \sum_{i=1}^n \binom{n-2}{x-2} p^{x-2} (1-p)^{n-1-(x-1)} \\
-                              & =n(n-1)p^2                                                          \\
-        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                      \\
-                              & = n(n-1)p^2 + np -n^2 p^2                                           \\
+        E(X(X-1))             & =\sum_{i=1}^n x(x-1) \binom{n}{x} p^x(1-p)^{n-x}                   \\
+                              & = n(n-1)p^2 \sum_{i=1}^n \binom{n-2}{x-2} p^{x-2}(1-p)^{n-1-(x-1)} \\
+                              & =n(n-1)p^2                                                         \\
+        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) -(E(X))^2                                      \\
+                              & = n(n-1)p^2 + np -n^2 p^2                                          \\
                               & =np(1-p)
     \end{align*}
 \end{example}
@@ -147,7 +147,7 @@
         E(X(X-1))             & =p\sum_{k=1}^{\infty}k(k-1) q^{k-1}=p\frac{d}{d q}\sum_{k=1}^{\infty} q^{k} \\
                               & =p\frac{d^2}{d q^2} \frac{q}{1-q} =\frac{2p}{(1-q)^{3}}                     \\
                               & =\frac{2}{p^2}                                                              \\
-        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) - (E(X))^2                                              \\
+        \operatorname{Var}(X) & =  E(X(X-1)) + E(X) -(E(X))^2                                               \\
                               & = \frac{2}{p^2} + \frac{1}{p} -\frac{1}{p^2} p^2                            \\
                               & = \frac{1-p}{p^2}
     \end{align*}
@@ -173,7 +173,7 @@
 
 \begin{corollary}
     若$X_1,\cdots ,X_n$相互不相关，则：
-    \[ \operatorname{Var}(\sum_{i=1}^n X_i)=\sum_{i=1}^n\operatorname{Var}( X_i) \]
+    \[ \operatorname{Var}(\sum_{i=1}^n X_i)=\sum_{i=1}^n\operatorname{Var}(X_i) \]
 \end{corollary}
 
 \begin{theorem}[Chebyshev不等式]
@@ -208,9 +208,9 @@
 
 协方差代表了$X$与$Y$之间的联合变化倾向，或者说他们间的相关程度，但其间\underline{未必有}因果关系。
 \begin{itemize}
-    \item 若$\operatorname{Cov} (X,Y) >0$，则称两变量\textbf{正相关}；
-    \item 若$\operatorname{Cov} (X,Y) < 0$，则称两者\textbf{负相关}；
-    \item 若$\operatorname{Cov} (X,Y) = 0$，则称两者\textbf{不相关}。
+    \item 若$\operatorname{Cov}(X,Y) >0$，则称两变量\textbf{正相关}；
+    \item 若$\operatorname{Cov}(X,Y) < 0$，则称两者\textbf{负相关}；
+    \item 若$\operatorname{Cov}(X,Y) = 0$，则称两者\textbf{不相关}。
 \end{itemize}
 
 \begin{remark}
@@ -218,7 +218,7 @@
 \end{remark}
 
 \begin{proposition}
-    \[ \operatorname{Cov} (X,Y)=\E[(X-\mu_X)(Y-\mu_Y)]=\E(XY)-\mu_Y \mu_Y \]
+    \[ \operatorname{Cov}(X,Y)=\E[(X-\mu_X)(Y-\mu_Y)]=\E(XY)-\mu_Y \mu_Y \]
 \end{proposition}
 
 \begin{proposition}
@@ -257,7 +257,7 @@
 \begin{definition}[协方差矩阵]
     对于$n$维随机向量$\mathbf{X}=(X_1,X_2,\ldots,X_n)'$，将
     \begin{align*}
-         & E[ (\mathbf{X}-E(\mathbf{X})) (\mathbf{X}-E(\mathbf{X}))' ] \\
+         & E[(\mathbf{X}-E(\mathbf{X}))(\mathbf{X}-E(\mathbf{X}))' ] \\
          & =\begin{pmatrix}
                 \Var(X_1)     & \Cov(X_1,X_2) & \cdots & \Cov(X_1,X_n) \\
                 \Cov(X_2,X_1) & \Var(X_2)     & \cdots & \Cov(X_2,X_n) \\
@@ -269,13 +269,13 @@
 \end{definition}
 
 \begin{theorem}
-    $n$维随机向量的协方差阵$\Cov(\mathbf{X})=( \Cov(X_i,X_j) )_{n\times n}$是一个对称的非负定矩阵。
+   $n$维随机向量的协方差阵$\Cov(\mathbf{X})=(\Cov(X_i,X_j))_{n\times n}$是一个对称的非负定矩阵。
 \end{theorem}
 \begin{proof}
     因为$\Cov(X_i,X_j)=\Cov(X_j,X_i)$，所以对称性是显然的。下证非负定性。因为对任意$n$维实向量$\mathbf{c}=(c_1,\cdots ,c_n)'$，有
     \begin{align*}
         \mathbf{c}'\Cov(\mathbf{X})\mathbf{c} & = \sum_{i=1}^n\sum_{j=1}^n c_i c_j \Cov(X_i,X_j)                                                                           \\
-                                              & = \sum_{i=1}^n\sum_{j=1}^n E\{ [c_i (X_i-E(X_i))] [c_j(X_j-E(X_j))] \}                                                     \\
+                                              & = \sum_{i=1}^n\sum_{j=1}^n E\{ [c_i(X_i-E(X_i))] [c_j(X_j-E(X_j))] \}                                                      \\
                                               & = E\left\{\sum_{i=1}^n \sum_{j=1}^n [c_i\left(X_i-E\left(X_i\right)\right)][c_j\left(X_j-E\left(X_j\right)\right)]\right\} \\
                                               & = E\left\{\left[\sum_{i=1}^n c_i(X_i-E(X_i))\right]\left[\sum_{j=1}^n  c_j(X_j-E(X_j))\right]\right\}                      \\
                                               & = E\left[\sum_{i=1}^n  c_i(X_i-E(X_i))\right]^2 \ge 0
@@ -309,8 +309,8 @@
     由上述可知，平移与缩放变量不影响两者间相关系数，故不妨将变量标准化：
     \[ X^*=\frac{X-\mu_X}{\sigma_X},\quad Y^*=\frac{Y-\mu_Y}{\sigma_Y} \]
     则其密度函数变为：
-    \[ f_{X^*,Y^*}(x,y) = \sigma_X \sigma_Y f_{X,Y}(\sigma_X x+\mu_X,\sigma_Y y+\mu_Y) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \exp \left( - \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right)\]
-    \[ E(X^* Y^*) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}x y \exp \left( - \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right) \d x \d y\]
+    \[ f_{X^*,Y^*}(x,y) = \sigma_X \sigma_Y f_{X,Y}(\sigma_X x+\mu_X,\sigma_Y y+\mu_Y) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \exp \left(- \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right)\]
+    \[ E(X^* Y^*) = \frac{1}{2 \pi \sqrt{1-\rho^2}} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}x y \exp \left(- \frac{x^2 - 2 \rho x y +y^2}{2(1-\rho^2)} \right) \d x \d y\]
     做变换：
     \[ \begin{cases}
             u = \frac{x- \rho y}{\sqrt{1-\rho^2}} \\
@@ -323,8 +323,8 @@
     \[ \Cov(X,Y)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}(uv\sqrt{1-\rho^2}+\rho v^2)\exp\left\{ -\frac{u^2+v^2}{2} \right\}\dd u\dd v \]
     上式右端积分可以分为两个积分, 其中
     \begin{align*}
-         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} uv\exp\left( -\frac{u^2+v^2}{2} \right)\dd u\dd v=0,     \\
-         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} v^2\exp\left( -\frac{u^2+v^2}{2} \right)\dd u\dd v=2\pi.
+         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} uv\exp\left(-\frac{u^2+v^2}{2} \right)\dd u\dd v=0,     \\
+         & \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} v^2\exp\left(-\frac{u^2+v^2}{2} \right)\dd u\dd v=2\pi.
     \end{align*}
     从而
     \begin{align*}
@@ -346,7 +346,7 @@
 \end{proof}
 
 \begin{proposition}
-    $-1 \le \rho_{XY} \le 1$。取等号的充要条件是$X$与$Y$间几乎处处有线性关系，即存在$a(\ne0)$与$b$，使得：
+   $-1 \le \rho_{XY} \le 1$。取等号的充要条件是$X$与$Y$间几乎处处有线性关系，即存在$a(\ne0)$与$b$，使得：
     \[ P(Y=aX+b)=1 \]
     上式换成$X=cY+d$也一样
 \end{proposition}
@@ -359,18 +359,18 @@
             -1, & a<0.
         \end{cases} \]
     \textbf{必要性}：因为
-    \[ \Var\left( \frac{X}{\sigma_{X}}\pm\frac{Y}{\sigma_{Y}} \right)=2[1\pm\Corr(X,Y)] \]
+    \[ \Var\left(\frac{X}{\sigma_{X}}\pm\frac{Y}{\sigma_{Y}} \right)=2[1\pm\Corr(X,Y)] \]
     所以当$\Corr(X,Y)=1$时，有
-    \[ \Var\left( \frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}} \right)=0 \]
+    \[ \Var\left(\frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}} \right)=0 \]
     由此得（推论\ref{cor:var_almost_equal}）
     \begin{align*}
-         & P\left( \frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}}=c \right)=1  \\
-         & P\left( Y=\frac{\sigma_{Y}}{\sigma_{X}}X-c\sigma_{Y} \right)=1
+         & P\left(\frac{X}{\sigma_{X}}-\frac{Y}{\sigma_{Y}}=c \right)=1  \\
+         & P\left(Y=\frac{\sigma_{Y}}{\sigma_{X}}X-c\sigma_{Y} \right)=1
     \end{align*}
     即当$\Corr(X,Y)=1$时,$Y$与$X$几乎处处线性正相关.
 
     当$\Corr(X,Y)=-1$时, 由同理得
-    \[ P\left( Y=-\frac{\sigma_{Y}}{\sigma_{X}}X+c\sigma_{Y} \right)=1 \]
+    \[ P\left(Y=-\frac{\sigma_{Y}}{\sigma_{X}}X+c\sigma_{Y} \right)=1 \]
     即当$\Corr(X,Y)=-1$时,$Y$与$X$几乎处处线性负相关.
 \end{proof}
 
@@ -435,8 +435,8 @@
     \end{align*}
 \end{proof}
 \begin{example}
-    设一天内到达某商场的顾客数$N$是仅取非负整数值的随机变量，且$E(N)=35000$。又设进入此商场的第$i$个顾客的购物金额为$X_i$，可以认为$X_i$是独立同分布的随机变量，且$E(X_i)=82$ (元)。假设$N$与$X_i$ 相互独立是合理的，则此商场一天的平均营业额为：
-    \[ E\left(\sum_{i=0}^N X_{i}\right)=E(X_i) E(N)=82 \times 35000=287 (\text{万元}) \]
+    设一天内到达某商场的顾客数$N$是仅取非负整数值的随机变量，且$E(N)=35000$。又设进入此商场的第$i$个顾客的购物金额为$X_i$，可以认为$X_i$是独立同分布的随机变量，且$E(X_i)=82$(元)。假设$N$与$X_i$相互独立是合理的，则此商场一天的平均营业额为：
+    \[ E\left(\sum_{i=0}^N X_{i}\right)=E(X_i) E(N)=82 \times 35000=287(\text{万元}) \]
 \end{example}
 
 \begin{proposition}[联合期望公式]
@@ -473,7 +473,7 @@
 % 	\includegraphics[width=0.4\textwidth]{image/var_dec3.png}
 %         \label{label_for_cross_ref_4}
 %     }
-%     \caption{This is a Demo of $2\times 2$}
+%     \caption{This is a Demo of$2\times 2$}
 %     \label{fig.1}
 % \end{figure}
 
@@ -492,26 +492,29 @@
 \subsection{矩}
 
 \begin{definition}
-    对于随机变量$X$, 定义其$k$阶\textbf{矩}(moment)为$E(X^k)$, 记为$\mu_k$; 定义其$k$阶\textbf{中心矩}(central moment)为$E((X-\mu_X)^k)$, 记为$\upsilon_k$;
+    对于随机变量$X$，定义其$k$阶\textbf{矩}(moment)为$E(X^k)$，记为$\mu_k$；定义其$k$阶\textbf{中心矩}(central moment)为$E((X-\mu_X)^k)$，记为$\upsilon_k$。
 \end{definition}
 由于$|X|^{k-1}\le |X|^k+1$，故$k$阶矩存在时，$k-1$阶矩也存在，从而低于$k$的各阶矩都存在.
 易知矩与中心矩间存在以下关系:
 \begin{align*}
-    \upsilon_k & =\sum_{i=0}^k \binom{k}{i} \mu_i (-\mu_1)^{k-i}     \\
-    \mu_k      & =\sum_{i=0}^k \binom{k}{i} \upsilon_i (\mu_1)^{n-i}
+    \upsilon_k & =\sum_{i=0}^k \binom{k}{i} \mu_i(-\mu_X)^{k-i}      \\
+    \mu_k      & =\sum_{i=0}^k \binom{k}{i} \upsilon_i(\mu_X)^{n-i}j
 \end{align*}
+\begin{note}
+    对于$\mu_k$做变换$E(X-\mu_X+\mu_X)^k$
+\end{note}
 
 \begin{example}
     设随机变量$X\sim N(0,\sigma^2)$，则
     \begin{align*}
         \mu_k & = E(X^k) = \frac1{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty} x^k\ee^{-\frac{x^2}{2\sigma^2}} \dd x \\
-              & = \frac{\sigma^k}{\sqrt{2\pi}} u^k\ee^{-\frac{u^2}2}\dd u.
+              & = \frac{\sigma^k}{\sqrt{2\pi}} \int_{-\infty}^{+\infty}u^k\ee^{-\frac{u^2}2}\dd u.
     \end{align*}
     在$k$为奇数时，上述被积函数是奇函数，故
     \[ \mu_k = 0, k=1,3,5,\cdots \]
     在$k$为偶数时，上述被积函数是偶函数，再利用变换$z=u^2/2$，可得
     \begin{align*}
-        \mu_k & = \sqrt{\frac2\pi}\sigma^k2^{(k-1)/2} \int_0^{+\infty}z^{(k-1)/2}\ee^{-z} \dd z = \sqrt{\frac2\pi}sigma^k2^{(k-1)/2} \Gamma\left(  \frac{k+1}2 \right) \\
+        \mu_k & = \sqrt{\frac2\pi}\sigma^k2^{(k-1)/2} \int_0^{+\infty}z^{(k-1)/2}\ee^{-z} \dd z = \sqrt{\frac2\pi}sigma^k2^{(k-1)/2} \Gamma\left( \frac{k+1}2 \right) \\
               & = \sigma^k(k-1)(k-3)\cdots1.\quad k=2,4,6,\cdots.
     \end{align*}
     故$N(0,\sigma^2)$分布的前四阶原点矩为
@@ -526,9 +529,8 @@
     \[ M_X(t) = \E(e^{tX}) \]
     则称其为\textbf{矩母函数}(moment generating function, mgf)。
 \end{definition}
-
 \begin{remark}
-    此表达式等价于对概率质量函数或密度函数作Laplace变换, 当$t$取某些特定值时, 可能不存在. (若$t=0$则永远存在)
+    此表达式等价于对概率质量函数或密度函数作Laplace变换, 当$t$取某些特定值时, 可能不存在.(若$t=0$则永远存在)
 \end{remark}
 
 \begin{theorem}
@@ -539,7 +541,6 @@
     若当$t$属于一个包含零点的开区间时, 矩母函数一直存在, 则:
     \[ M_X^{(k)}(0) = E(X^k) \]
 \end{theorem}
-
 \begin{remark}
     借此可方便地计算各阶矩, 故称为矩母函数. 反过来, 若已知各阶矩, 通过Tayler展开$M_X(t)=\sum_{k=0}^{\infty}\frac{M_X^{(k)}(0)}{k!}t^k$可还原矩母函数, 进而得出概率分布.
 \end{remark}
@@ -593,32 +594,116 @@
 
 \begin{definition}
     对于随机变量$X$, 定义其\textbf{特征函数}(characat function, chf)为：
-    \[ \phi_X(t) = \E(e^{itX}) = \E(\cos (tX)) + i\E(\sin (tX))\]
+    \[ \varphi_X(t) = \E(e^{itX}) = \E(\cos(tX)) + i\E(\sin(tX))\]
 
     对于随机变量$X_1,\cdots, X_n$, 定义其\textbf{联合特征函数}(joint characat function, joint chf)为：
-    \[ \phi_{X_1\cdots X_n}(t_1,\cdots ,t_n) = \E(e^{i (t_1 X_1+\cdots + t_n X_n)}) \]
+    \[ \varphi_{X_1\cdots X_n}(t_1,\cdots ,t_n) = \E(e^{i(t_1 X_1+\cdots + t_n X_n)}) \]
 \end{definition}
-
 \begin{remark}
     此表达式等价于对概率质量函数或密度函数作Fourier变换
 \end{remark}
 
-\begin{proposition}
-    随机变量的特征函数总是存在
+\begin{proposition}[特征函数的性质]
+    \begin{enumerate}
+        \item$\lvert \varphi(t) \rvert \leq \varphi(0) = 1$，即随机变量的特征函数总是存在。
+        \item 且若矩母函数存在，则其与特征函数之间满足关系：$\varphi_X(t) = M_X(it)$
+              \item$\varphi(-t) = \overline{\varphi(t)}$
+        \item 若$Y = aX + b$, 其中$a,b$是常数, 则
+              \begin{equation}\label{eq:chf_linear}
+                  \varphi_Y(t) = \ee^{ibt} \varphi_X(at).
+              \end{equation}
+        \item 独立随机变量和的特征函数为特征函数的积,
+              即设$X$与$Y$相互独立, 则
+              \begin{equation}\label{eq:chf_sum}
+                  \varphi_{X+Y}(t) = \varphi_X(t) \cdot \varphi_Y(t).
+              \end{equation}
+        \item 若$E(x^l)$存在,
+              则$X$的特征函数$\varphi(t)$可$l$次求导,
+              且对$1 \leq k \leq l$, 有
+              \begin{equation}\label{eq:chf_derivative}
+                  \varphi^{(k)}(0) = i^k E(X^k).
+              \end{equation}
+    \end{enumerate}
 \end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item
+              \begin{align*}
+                  |\varphi(t)| & = \left\lvert \int_{-\infty}^{+\infty} \ee^{itx} p(x) \dd x \right\rvert
+                  \leq \int_{-\infty}^{+\infty} \left\lvert \ee^{itx} \right\rvert p(x) \dd x             \\
+                               & = \int_{-\infty}^{+\infty} p(x) \dd x
+                  = \varphi(0)
+                  = 1.
+              \end{align*}
+        \item
+              \[ \varphi(-t) = \int_{-\infty}^{+\infty} \ee^{-itx} p(x) \dd x
+                  = \overline{\int_{-\infty}^{+\infty} \ee^{itx} p(x) \dd x}
+                  = \overline{\varphi(t)} \]
+        \item
+              \[ \varphi_Y(t) = E(\ee^{it(aX + b)})
+                  = \ee^{ibt} E(\ee^{iatX}) = \ee^{ibt} \varphi(at) \]
+        \item 因为$X$与$Y$相互独立, 所以$\ee^{itX}$与$\ee^{itY}$也是独立的, 从而有
+              \[ E \left(\ee^{it(X + Y)} \right) = E \left(\ee^{itX} \ee^{itY} \right) = \varphi_X(t) \cdot \varphi_Y(t) \]
+        \item 因为$E \left(X^l \right)$存在，即
+              \[ \int_{-\infty}^{+\infty} \lvert x \rvert^l p(x) \dd x < +\infty \]
+              于是含参变量$t$的广义积分$\int_{-\infty}^{+\infty} \ee^{itx} p(x) \dd x$可以对$t$求导$l$次, 于是对$0 \leq k \leq l$, 有
+              \[ \varphi ^{(k)}(t) = \int_{-\infty}^{+\infty} i^k x^k \ee^{itx} p(x) \dd x = i^k E \left(X^k \ee^{itX} \right) \]
+              令$t = 0$即得
+              \[ \varphi^{(k)}(0) = i^k E \left(X^k \right) \]
+    \end{enumerate}
+\end{proof}
 
-\begin{proposition}
-    若矩母函数存在，则其与特征函数之间满足关系：
-    \[ \phi_X(t) = M_X(it) \]
-\end{proposition}
+\begin{example}[柯西分布的特征函数]\label{ex:Cauchy_dist_chf}
+    对于柯西分布特征函数的求解，不妨先设$\mu=0$，则$f(x) = \frac{\sigma}{\pi} \frac1{\sigma^2+x^2}$，则其特征函数为：
+    \[ \varphi(t)=\frac{a}{\pi}\int_{-\infty}^{+\infty} \frac{\ee^{itx}}{x^2+\sigma^2} \d x = \frac{2a}{\pi}\int_{0}^{+\infty} \frac{\cos t x}{x^2+\sigma^2} \d x \]
+    因为当$t>0$时，
+    \[ \int_{0}^{+\infty} \frac{\cos t x}{x^2+\sigma^2} \d x = \frac{\pi}{a} \ee^{-at} \]
+    所以当$t>0$时，$\varphi(t)=\ee^{-\sigma t}$。当$t<0$时，$\varphi(t)=\overline{\varphi(-t)}=\ee^{\sigma t}$。即$\varphi(t)=\ee^{-\sigma |t|}$。
+
+    对于一般情况，则$Cau(\mu,\sigma)=Cau(0,\sigma)-\mu$
+    \[ \varphi(t)=\exp (i\mu t) \exp(-\sigma |t|)=\exp (i\mu t-\sigma |t|) \]
+\end{example}
+
+\begin{theorem}[逆转公式]
+    设$F (x)$和$\varphi (t)$分别为随机变量$X$的分布函数和特征函数, 则对$F (x)$的任意两个连续点$x_1 < x_2$, 有
+    \begin{equation}\label{eq:4.1.11}
+        F (x_2) - F (x_1) = \lim_{T \to \infty} \frac{1}{2\pi} \int_{-T}^T \frac{\ee^{-itx_1}  - \ee^{-itx_2}}{it} \varphi (t) \dd t.
+    \end{equation}
+\end{theorem}
+
+\begin{theorem}[唯一性定理]
+    随机变量的分布函数由其特征函数唯一决定.
+\end{theorem}
+\begin{proof}
+    对$F (x)$的每一个连续点$x$, 当$y$沿着$F (x)$的连续点趋于$-\infty$时, 由逆转公式得
+    \[ F (x) = \lim_{y \to -\infty} \lim_{T \to +\infty} \frac{1}{2\pi} \int_{-T}^T \frac{\ee^{-ity} - \ee^{-itx}}{it} \varphi (t) \dd t \]
+    而分布函数由其连续点上的值惟一决定（非连续点的情况可由右连续的性质推出），故结论成立.
+\end{proof}
 
 \begin{theorem}
-    特征函数可通过以下逆变换得到分布：
-    \begin{description}
-        \item[离散]$p_X(x)=\lim _{T \rightarrow \infty} \int_{-T}^{T} e^{-i t x} \phi_X(t) d t$
-        \item[连续]$f_X(x)=\frac1{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \phi_X(t) d t$
-    \end{description}
+    特征函数可通过以下逆变换得到分布：\\
+    \textbf{离散情况}：
+    \[ p_X(x)=\lim _{T \rightarrow \infty} \int_{-T}^{T} e^{-i t x} \varphi_X(t) \d t \]
+    \textbf{连续情况}：
+    \[ f_X(x)=\frac1{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \varphi_X(t) \d t \]
 \end{theorem}
+\begin{remark}
+    此即傅里叶逆变换。
+\end{remark}
+\begin{proof}
+    记$X$的分布函数为$F (x)$, 由逆转公式知
+    \begin{align*}
+        p (x) & = \lim_{\Delta x \to 0} \frac{F (x + \Delta x) - F (x)}{\Delta x}                                                                                  \\
+              & = \lim_{\Delta x \to 0} \frac{1}{2\pi} \int_{-\infty}^{+\infty} \frac{\ee^{-itx} - \ee^{-it (x + \Delta x)}}{it \cdot \Delta x} \varphi (t) \dd t.
+    \end{align*}
+    再次利用不等式$\lvert \ee^{ia} - 1 \rvert \leq \lvert a \rvert$, 就有
+    \[ \left\lvert \frac{\ee^{-itx} - \ee^{-it (x + \Delta x)}}{it \cdot \Delta x} \right\rvert \leq 1 \]
+    又因为$\int_{-\infty}^{+\infty} \lvert \varphi (t) \rvert < +\infty$, 所以可以交换极限号和积分号, 即
+    \begin{align*}
+        p (x) & = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \lim_{\Delta x \to 0} \frac{\ee^{-itx} - \ee^{-it (x + \Delta x)}}{it \cdot \Delta x} \varphi (t) \dd t \\
+              & = \frac{1}{2\pi} \int_{-\infty}^{+\infty} \ee^{-itx} \varphi (t) \dd t.
+    \end{align*}
+\end{proof}
 
 \section{估计与预测}
 
@@ -662,23 +747,23 @@
     \centering
     \subfloat[（下侧）分位数]{
         \begin{tikzpicture}[thick]
-            \draw[-Stealth] (0,0) -- (5,0) node [below] {$x$};
-            \fill[pattern = north west lines] (0,0) .. controls (0.5,0.6) .. (1,2.2) -- (1,0) -- cycle;
-            \draw (0,0).. controls (0.5,0.6) .. (1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to (2.2,2) [bend right = 30] to (4.9,0.1);
-            \draw [densely dashed] (1,0) node[below]{$x_p$} -- (1,2.2);
+            \draw[-Stealth](0,0) --(5,0) node [below] {$x$};
+            \fill[pattern = north west lines](0,0) .. controls(0.5,0.6) ..(1,2.2) --(1,0) -- cycle;
+            \draw(0,0).. controls(0.5,0.6) ..(1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to(2.2,2) [bend right = 30] to(4.9,0.1);
+            \draw [densely dashed](1,0) node[below]{$x_p$} --(1,2.2);
 
-            \node[inner sep=0pt, circle ,fill = white] at (0.7,0.4){$p$};
-            \draw[-Stealth] (4,1.5) node[above] {$p(x)$} -- ++ (-135:1.1);
+            \node[inner sep=0pt, circle ,fill = white] at(0.7,0.4){$p$};
+            \draw[-Stealth](4,1.5) node[above] {$p(x)$} -- ++(-135:1.1);
         \end{tikzpicture}
     }\qquad
     \subfloat[上侧分位数]{
         \begin{tikzpicture}[thick]
-            \draw[-Stealth] (0,0) -- (5,0) node [below] {$x$};
-            \fill[pattern = north east lines] (2.2,2) [bend right = 30] to (4.9,0.1) -- (4.9,0) -- (2.2,0) node[below]{$x_p'$} -- cycle;
-            \draw (0,0).. controls (0.5,0.6) .. (1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to (2.2,2) [bend right = 30] to (4.9,0.1);
-            \draw [densely dashed] (2.2,0) -- (2.2,2);
-            \node[inner sep=0pt, circle ,fill = white] at (3,0.4){$p$};
-            \draw[-Stealth] (4,1.5) node[above] {$p(x)$} -- ++ (-135:1.1);
+            \draw[-Stealth](0,0) --(5,0) node [below] {$x$};
+            \fill[pattern = north east lines](2.2,2) [bend right = 30] to(4.9,0.1) --(4.9,0) --(2.2,0) node[below]{$x_p'$} -- cycle;
+            \draw(0,0).. controls(0.5,0.6) ..(1,2.2) [bend left = 38] to(1.5,2.6) [bend left = 30] to(2.2,2) [bend right = 30] to(4.9,0.1);
+            \draw [densely dashed](2.2,0) --(2.2,2);
+            \node[inner sep=0pt, circle ,fill = white] at(3,0.4){$p$};
+            \draw[-Stealth](4,1.5) node[above] {$p(x)$} -- ++(-135:1.1);
         \end{tikzpicture}
     }
     \caption{分位数与上侧分位数的区别\label{fig2.7.1}}
@@ -697,22 +782,22 @@
 \begin{figure}[!ht]
     \centering
     \begin{tikzpicture}
-        \draw [-Stealth] (-0.5,0) -- (0,0)node[below left] {$O$} -- (4.5,0) node[below]{$x$};
-        \draw [-Stealth] (0,-0.5) -- (0,1.2) node [left]{0.5} -- (0,3) node[left]{$F(x)$};
-        \draw [densely dashed] (0,2.4) -- ++ (3.8,0)
-        (1.5,0)node[below]{$x_{0.5}$} -- (1.5,1.2)
-        -- (0,1.2);
+        \draw [-Stealth](-0.5,0) --(0,0)node[below left] {$O$} --(4.5,0) node[below]{$x$};
+        \draw [-Stealth](0,-0.5) --(0,1.2) node [left]{0.5} --(0,3) node[left]{$F(x)$};
+        \draw [densely dashed](0,2.4) -- ++(3.8,0)
+        (1.5,0)node[below]{$x_{0.5}$} --(1.5,1.2)
+        --(0,1.2);
 
-        \draw [thick] (-0.5,0.1) [bend right=30] to (1.5,1.2) [bend left=30] to (3.6,2.3);
+        \draw [thick](-0.5,0.1) [bend right=30] to(1.5,1.2) [bend left=30] to(3.6,2.3);
     \end{tikzpicture} \quad
     \begin{tikzpicture}
-        \draw [-Stealth] (-0.5,0) -- (0,0)node[below left] {$O$} -- (4.5,0) node[below]{$x$};
-        \draw [-Stealth] (0,-0.5) --  (0,3) node[left]{$p(x)$};
-        \draw [thick] (-0.5,0) [bend right = 20] to (0,0.7) [bend left = 10] to (0.6,2.1)[bend left=30] to (1.1,2.3) [bend left = 30] to (1.8,1.8)[bend right = 35] to (4,0.2);
-        \fill [pattern = north east lines] (-0.5,0) [bend right = 20] to (0,0.7) [bend left = 10] to (0.6,2.1)[bend left=30] to (1.1,2.3) -- (1.1,0) node [below]{$x_{0.5}$} -- cycle;
-        \fill [pattern = north west lines]  (1.1,2.3) [bend left = 30] to (1.8,1.8)[bend right = 35] to (4,0.2) -- (4.3,0) -- (1.1,0) -- cycle;
-        \draw (0.6,0.6) node[fill=white,circle,inner sep=0pt] {0.5} (1.8,0.6)node[fill=white,circle,inner sep=0pt]{0.5};
-        \draw [-Stealth] (3,1.7)node[above]{$p(x)$} -- ++ (-135:1);
+        \draw [-Stealth](-0.5,0) --(0,0)node[below left] {$O$} --(4.5,0) node[below]{$x$};
+        \draw [-Stealth](0,-0.5) -- (0,3) node[left]{$p(x)$};
+        \draw [thick](-0.5,0) [bend right = 20] to(0,0.7) [bend left = 10] to(0.6,2.1)[bend left=30] to(1.1,2.3) [bend left = 30] to(1.8,1.8)[bend right = 35] to(4,0.2);
+        \fill [pattern = north east lines](-0.5,0) [bend right = 20] to(0,0.7) [bend left = 10] to(0.6,2.1)[bend left=30] to(1.1,2.3) --(1.1,0) node [below]{$x_{0.5}$} -- cycle;
+        \fill [pattern = north west lines] (1.1,2.3) [bend left = 30] to(1.8,1.8)[bend right = 35] to(4,0.2) --(4.3,0) --(1.1,0) -- cycle;
+        \draw(0.6,0.6) node[fill=white,circle,inner sep=0pt] {0.5}(1.8,0.6)node[fill=white,circle,inner sep=0pt]{0.5};
+        \draw [-Stealth](3,1.7)node[above]{$p(x)$} -- ++(-135:1);
     \end{tikzpicture}
     \caption{连续随机变量的中位数\label{fig2.7.2}}
 \end{figure}
@@ -737,28 +822,28 @@
     \centering
     \subfloat[]{
         \begin{tikzpicture}
-            \draw [-Stealth] (0,0) node[below left]{$O$} -- (2,0) node [below]{$\beta_1>0$} -- (4,0) node[below]{$x$};
-            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
-            \draw [thick] (0,0) [bend left = 10] to (0.8,2.6) [bend left = 42] to (1.4,2.8)
-            [bend left = 23] to (1.51,2.65) [bend right = 15] to (2.8,0.5) [bend right =13] to (3.5,0.1);
+            \draw [-Stealth](0,0) node[below left]{$O$} --(2,0) node [below]{$\beta_1>0$} --(4,0) node[below]{$x$};
+            \draw [-Stealth](0,0) --(0,4) node [right]{$p(x)$};
+            \draw [thick](0,0) [bend left = 10] to(0.8,2.6) [bend left = 42] to(1.4,2.8)
+            [bend left = 23] to(1.51,2.65) [bend right = 15] to(2.8,0.5) [bend right =13] to(3.5,0.1);
         \end{tikzpicture}
     }\;
     \subfloat[]{
         \begin{tikzpicture}
-            \draw [-Stealth] (-0.4,0) node[below left]{$O$} -- (4,0) node[below]{$x$};
-            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
-            \draw[thick] (-0.3,0.1) [bend right = 25] to (1.2,2.4) [bend left = 15] to (1.5,3.1)
-            [bend left=55] to (1.7,3.1) [bend left =10] to (1.9,2.2) [bend right=30] to (3.5,0.1);
+            \draw [-Stealth](-0.4,0) node[below left]{$O$} --(4,0) node[below]{$x$};
+            \draw [-Stealth](0,0) --(0,4) node [right]{$p(x)$};
+            \draw[thick](-0.3,0.1) [bend right = 25] to(1.2,2.4) [bend left = 15] to(1.5,3.1)
+            [bend left=55] to(1.7,3.1) [bend left =10] to(1.9,2.2) [bend right=30] to(3.5,0.1);
 
-            \draw [thick,densely dashed] (1.6,3.15) -- (1.6,0) node[below] {$\beta_1=0$};
+            \draw [thick,densely dashed](1.6,3.15) --(1.6,0) node[below] {$\beta_1=0$};
         \end{tikzpicture}
     }\;
     \subfloat[]{
         \begin{tikzpicture}
-            \draw [-Stealth] (0,0) node[below left]{$O$} -- (2,0) node [below]{$\beta_1<0$} -- (4,0) node[below]{$x$};
-            \draw [-Stealth] (0,0) -- (0,4) node [right]{$p(x)$};
-            \draw [thick] (0.2,0.1) [bend right=25] to (2.4,2.6) [bend left=19] to (2.6,2.9) [bend left=30] to (2.8,2.9) [bend left=20] to (2.9,2.7)
-            [bend right=10] to (3.6,0.2) [bend right=25] to (3.8,0.01) ;
+            \draw [-Stealth](0,0) node[below left]{$O$} --(2,0) node [below]{$\beta_1<0$} --(4,0) node[below]{$x$};
+            \draw [-Stealth](0,0) --(0,4) node [right]{$p(x)$};
+            \draw [thick](0.2,0.1) [bend right=25] to(2.4,2.6) [bend left=19] to(2.6,2.9) [bend left=30] to(2.8,2.9) [bend left=20] to(2.9,2.7)
+            [bend right=10] to(3.6,0.2) [bend right=25] to(3.8,0.01) ;
         \end{tikzpicture}
     }
     \caption{三种不同偏度的分布}
@@ -812,52 +897,51 @@
             1,                                  & x\ge 1
         \end{cases} \]
     试求$E(X)$。
-    \item （茆3.4.2）求掷$n$ 颗骰子出现点数之和的数学期望与方差.
-    \item （茆3.4.4）设在区间$(0,1)$ 上随机地取$n$ 个点, 求相距最远的两点间的距离的数学期望.
-    \item （茆3.4.10）设随机变量$X$ 与$Y$ 独立同分布，且$E(X)=\mu, \Var(X)=\sigma^2$，试求$E(X-Y)$。
-    \item （茆3.4.13）系统由$n$ 个部件组成. 记$X_i$ 为第$i$ 个部件能持续工作的时间, 如果$X_1,\ldots,X_n$ 独立同分布, 且$X_i\sim Exp(\lambda)$，如果至少有一个部件在工作, 系统就工作求系统持续工作的平均时间。
-    \item （茆3.4.17）一商店经销某种商品, 每周进货量$X$ 与顾客对该种商品的需求量$Y$ 是相互独立的随机变量, 且都跟从区间$(10,20)$ 上的均匀分布. 商店每售出一单位商品可得利润$1000$ 元; 若需求量超过了进货量, 则可从其他商店调剂供应, 这时每单位商品获利润为$500$ 元. 试求此商店经销该种商品每局的平均利润.
+    \item （茆3.4.2）求掷$n$颗骰子出现点数之和的数学期望与方差.
+    \item （茆3.4.4）设在区间$(0,1)$上随机地取$n$个点, 求相距最远的两点间的距离的数学期望.
+    \item （茆3.4.10）设随机变量$X$与$Y$独立同分布，且$E(X)=\mu, \Var(X)=\sigma^2$，试求$E(X-Y)$。
+    \item （茆3.4.13）系统由$n$个部件组成. 记$X_i$为第$i$个部件能持续工作的时间, 如果$X_1,\ldots,X_n$独立同分布, 且$X_i\sim Exp(\lambda)$，如果至少有一个部件在工作, 系统就工作求系统持续工作的平均时间。
+    \item （茆3.4.17）一商店经销某种商品, 每周进货量$X$与顾客对该种商品的需求量$Y$是相互独立的随机变量, 且都跟从区间$(10,20)$上的均匀分布. 商店每售出一单位商品可得利润$1000$元; 若需求量超过了进货量, 则可从其他商店调剂供应, 这时每单位商品获利润为$500$元. 试求此商店经销该种商品每局的平均利润.
     \item （茆3.4.21）掷一颗骰子两次，求其点数之和与点数之差的协方差。
-    \item （茆3.4.26）设随机变量$X$ 和$Y$ 的数学期望分别为$-2$ 和$2$ , 方差分别为$1$ 和$4$ , 而它们的相关系数为$-0.5$ . 试根据车比晓夫不等式, 估计$P(|X+Y|\geqslant 6)$ 的上限.
-    \item （茆3.4.29）已知随机变量$X$ 与$Y$ 的相关系数为$\rho$ , 求$X_1=aX+b$ 与$Y_1=cY+d$ 的相关系数, 其中$a,b,c,d$ 均为常数.
-    \item （茆3.4.32）设二维随机变量$(X,Y)$ 服从二维正态分布$N(0,0,1,1,\rho)$ ,
+    \item （茆3.4.26）设随机变量$X$和$Y$的数学期望分别为$-2$和$2$，方差分别为$1$和$4$，而它们的相关系数为$-0.5$。试根据车比晓夫不等式，估计$P(|X+Y|\ge 6)$的上限。
+    \item （茆3.4.29）已知随机变量$X$与$Y$的相关系数为$\rho$，求$X_1=aX+b$与$Y_1=cY+d$的相关系数，其中$a,b,c,d$均为常数。
+    \item （茆3.4.32）设二维随机变量$(X,Y) \sim N(0,0,1,1,\rho)$
     \begin{enumerate}
-        \item 求$E[ \max(X,Y) ]$ ;
-        \item 求$X-Y$ 与$XY$ 的协方差及相关系数.
+        \item 求$E[\max(X,Y)]$
+        \item 求$X-Y$与$XY$的协方差及相关系数
     \end{enumerate}
-    \item （茆3.4.34）设二维随机变量$(X,Y)$ 的联合密度函数为
-    \begin{equation*}
-        f(x,y)=\begin{cases}
-            \frac{6}{7}\left( x^2+\frac{xy}{2} \right), & 0<x<1,0<y<2; \\
-            0,                                          & \text{其他}.
-        \end{cases}
-    \end{equation*}
-    求$X$ 与$Y$ 的协方差及相关系数.
-    \item （茆3.4.36）设二维随机变量$(X,Y)$ 的联合密度函数如下, 试求$(X,Y)$ 的协方差矩阵.\begin{equation*}
-        f(x,y)=\begin{cases}
+    \item （茆3.4.34）设二维随机变量$(X,Y)$的联合密度函数为
+    \[ f(x,y)=\begin{cases}
+            \frac{6}{7}\left(x^2+\frac{xy}{2} \right), & 0<x<1,0<y<2; \\
+            0,                                         & \text{其他}.
+        \end{cases} \]
+    求$X$与$Y$的协方差及相关系数.
+    \item （茆3.4.36）设二维随机变量$(X,Y)$的联合密度函数如下，试求$(X,Y)$的协方差矩阵。
+    \[ f(x,y)=\begin{cases}
             \frac{x+y}{8}, & 0<x<2,0<y<2  \\
             0,             & \text{其他}.
-        \end{cases}
-    \end{equation*}
-    \item （茆3.4.38）设随机向量$(X_1,X_2,X_3)$ 满足条件
+        \end{cases} \]
+    \item （茆3.4.38）设随机向量$(X_1,X_2,X_3)$满足条件
     \begin{align*}
          & aX_1+bX_2+cX_3=0,                       \\
          & E(X_1)=E(X_2)=E(X_3)=d,                 \\
          & \Var(X_1)=\Var(X_2)=\Var(X_3)=\sigma^2.
     \end{align*}
-    其中$a, b, c, d, \sigma^{2}$ 均为常数, 求相关系数$\rho_{12},\rho_{23},\rho_{31}$ .
-    \item （茆3.4.39）设随机向量$X$ 与$Y$ 都只能取两个值, 试证:$X$ 与$Y$ 的独立性与不相关性是等价的.
-    \item （茆3.4.42）设随机向量$(X_1,X_2,X_3)$ 的相关系数为$\rho_{12},\rho_{23},\rho_{31}$ , 证明
-    \begin{equation*}
-        \rho_{12}^{2}+\rho_{23}^{2}+p_{31}^{2} \leqslant 1+2 \rho_{12} \rho_{23} \rho_{31}.
-    \end{equation*}
-    \item （茆3.4.46）设二维随机向量$(X,Y)$ 服从二维正态分布, 且
-    \begin{equation*}
-        E(X)=E(Y)=0, \quad E(X Y)<0.
-    \end{equation*}
-    证明: 对任意正常数$a,b$ 有
-    \begin{equation*}
-        P(X \geqslant a, Y \geqslant b) \leqslant P(X \geqslant a) P(Y \geqslant b).
-    \end{equation*}
+    其中$a, b, c, d, \sigma^{2}$均为常数，求相关系数$\rho_{12},\rho_{23},\rho_{31}$.
+    \item （茆3.4.39）设随机向量$X$与$Y$都只能取两个值，试证：$X$与$Y$的独立性与不相关性是等价的。
+    \item （茆3.4.42）设随机向量$(X_1,X_2,X_3)$的相关系数为$\rho_{12},\rho_{23},\rho_{31}$，证明
+    \[ \rho_{12}^{2}+\rho_{23}^{2}+p_{31}^{2} \le 1+2 \rho_{12} \rho_{23} \rho_{31} \]
+    \item （茆3.4.46）设二维随机向量$(X,Y)$服从二维正态分布，且
+    \[ E(X)=E(Y)=0, \quad E(X Y)<0. \]
+    证明: 对任意正常数$a,b$有
+    \[ P(X \ge a, Y \ge b) \le P(X \ge a) P(Y \ge b) \]
     \item （茆3.4.47-52）
+    \item （茆3.5.4）设随机变量$X$与$Y$独立同分布，试在以下情况下求$P(X=k|X+Y=m)$
+    \begin{itemize}
+        \item X与Y都服从参数为p的几何分布
+        \item X与Y都服从参数为(n,p)的二项分布．
+    \end{itemize}
+    \item （茆3.5.9）设随机变量$X$服从$(1,2)$上的均匀分布，在$X=x$的条件下，随机变量$Y$的条件分布是参数为$x$的指数分布，证明：$XY$服从参数为$1$的指数分布。
+    \item （茆4.2.5）设$X \sim N ( \mu, \sigma^2 )$，试用特征函数的方法求$X$的3阶及4阶中心矩。
+    \item （茆4.2.12）设连续随机变量$X$的密度函数为$p(x)$，试证：$p (x)$关于原点对称的充要条件是它的特征函数是实的偶函数。
 \end{problemset}

@@ -761,7 +761,7 @@ Beta分布的特征：
 \begin{definition}
     若随机变量$X$的密度函数为
     \[ f(x) = \frac{\sigma}{\pi} \frac1{\sigma^2+(x-\mu)^2} ,x \in \mathbb{R} \]
-    则称$X$服从\textbf{柯西分布}(Cauchy distribution)，记作$X\sim C(\mu,\sigma)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
+    则称$X$服从\textbf{柯西分布}(Cauchy distribution)，记作$X\sim Cau(\mu,\sigma)$。其中参数$\mu \in \mathbb{R},\sigma>0$。
 \end{definition}
 
 \begin{figure}[ht]
@@ -797,14 +797,15 @@ Beta分布的特征：
 \begin{description}
     \item[累积函数] $F(x)=\frac{1}{2}+\frac{1}{\pi} \arctan(\mu +\sigma x)$
     \item[矩母函数] 除$t=0$外不存在
-    \item[特征函数] $\phi_X(t)=\exp (i \mu t - \sigma |t|)$
+    \item[特征函数] $\phi_X(t)=\exp (i \mu t - \sigma |t|)$（见例\ref{ex:Cauchy_dist_chf}）
     \item[均值] 不存在
     \item[方差] 不存在
 \end{description}
-
 \begin{remark}
     此类因极端值概率密度较高而导致均值、方差不存在的分布称为重尾分布。
 \end{remark}
+
+
 
 \begin{figure*}
     \centering
