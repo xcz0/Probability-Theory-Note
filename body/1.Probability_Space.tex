@@ -12,14 +12,14 @@
 \subsection{随机事件}
 
 \begin{definition}[样本空间]
-    随机试验可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$。样本的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。若样本点有至多可数个，则称为\textbf{离散样本空间}，若不可数，则称为\textbf{连续样本空间}。
+    \textbf{随机试验}(trial)可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$；样本的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。
 \end{definition}
 
 \begin{definition}[事件的古典定义]
-    样本点$\omega$的集合称为（随机）\textbf{事件}(event)。
+    样本点$\omega$的某种集合称为（随机）\textbf{事件}(event)。
 \end{definition}
 
-随机现象被抽象为集合。事件间的包含、相等、互不相容关系，对应成集合间的包含、相等、不相交；逻辑运算（且、或、非等）对应成集合论运算（交、并、补等）。
+随机现象被抽象为集合。事件间的包含、等价、互不相容关系，对应成集合间的包含、相等、不相交；逻辑运算（且、或、非等）对应成集合论运算（交、并、补等）。
 
 \begin{example}
     设$A$、$B$、$C$是某个随机现象的三个事件, 则
@@ -56,6 +56,7 @@
                   \overline{A \cap B} = \overline{A} \cup \overline{B}.\label{eq:DeMorgan_law_set2}
               \end{gather}
     \end{itemize}
+    以上各式皆可推广到可数个集合的情况。
 \end{property}
 
 
@@ -151,20 +152,20 @@
     \end{align*}
 \end{solution}
 
-\begin{example}
+\begin{proposition}[]\label{prop:inequality_event}
     \[ \lvert P(AB) - P(A)P(B) \rvert \le \frac1{4} \]
-\end{example}
-\begin{solution}
+\end{proposition}
+\begin{proof}
     设$P(A)\ge P(B)$，则：
     \[ P(AB)-P(A)P(B)\le P(B)-P(B)P(B)=P(B)[1-P(B)]\le \frac1{4} \]
     另一方面有：
     \begin{align*}
         P(A)P(B)-P(AB) & =P(A)[P(AB)+P(\overline{A}B)]-P(AB)              \\
-                       & =P(A)P(\overline{A}B)+P(AB)[P(A)-1]              \\
+                       & =P(A)P(\overline{A}B)-P(AB)[1-P(A)]              \\
                        & \le P(A)P(\overline{A}B) \le P(A)P(\overline{A}) \\
                        & =P(A)[1-P(A)]\le \frac1{4}
     \end{align*}
-\end{solution}
+\end{proof}
 
 \begin{proposition}[加法公式]\label{pro:addition_law}
     基础形式:
@@ -274,12 +275,12 @@
 \end{description}
 
 \begin{definition}[古典概型]
-    若事件$A$含有$k$个样本点, 则事件$A$的概率为
-    \[  P(A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} = \frac{k}{n} \]
+    若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。若定义于其上的概率为：
+    \[  P(A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} \]
+    则称此概率空间为\textbf{古典概型}。
 \end{definition}
-
 \begin{note}
-    古典概型的大部分问题都能形象化地用摸球模型来描述。以后我们经常研究摸球模型，意义即在于此。
+    古典概型的大部分问题都能形象化地用摸球模型来描述，以后经常研究摸球模型的意义即在于此。
 \end{note}
 
 \begin{example}[生日问题]
@@ -833,4 +834,9 @@
       \item 甲赌徒还需赢2局才能获胜，乙赌徒还需赢3局才能获胜；
       \item 甲赌徒还需赢$n$局才能获胜，乙赌徒还需赢$m$局才能获胜.
     \end{enumerate}
+    \item （李1.23）任意从数列$1,2,\cdots,N$中有放回地取出$n$个数并按大小排列成：$x_1\le x_2\le \cdots \le x_n$，试求$x_m=M$的概率。
+    \item （李1.38）（赠券收集）食品厂把印有水浒108 将之一的画卡作为赠券装人某种儿童食品袋中，每袋一卡，试求购买$n$袋这种食品而能收齐全套画卡的概率。
+    \item （李1.40）有$w$个白球与$b$个黑球任你放人两个袋子中，让你的朋友随机抽一袋并从中摸出一只球，你将如何做以使你的朋友摸得黑球的概率最大。
+    \item （李1.42）父，母，子三人举行比赛，每局总有一人胜一人负（没有和局），每局的优胜者就与未参加此局的人再进行比赛，如果某人首先胜了两局，则他就是整个比赛的优胜者，由父决定第一局由哪两人参加，其中儿子实力最强，所以父为了使自己得胜的概率达到最大，就决定第一局由他与妻子先比赛，试证父的决策为最优策略（任何一对选手中一人胜对方的概率在整个比赛中是不变的）．
+    \item 
 \end{problemset}

@@ -4,7 +4,6 @@
     \item 重方差公式
     \item 切比雪夫不等式
 \end{introduction}
-\section{期望}
 
 \begin{definition}[期望]
     对于实值随机向量$X :(\Omega,\mathscr{F},\P) \to(\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$，若
@@ -23,22 +22,6 @@
     \[ \E(a+\sum_{i=1}^n b_i g(X_i))=a+\sum_{i=1}^n b_i \E(g(X_i)) \]
 \end{proposition}
 
-\begin{theorem}[Markov不等式]
-    设$g(x)$为随机变量$X$取值的集合上的非负不减函数，且$E(g(X))$存在，则
-    \[ P(X>\e) \leq \frac{E(g(X))}{g(\e)} ,\quad \forall \e > 0\]
-\end{theorem}
-\begin{proof}
-    \begin{align*}
-        P(X>\e) & =\int_{\e}^{+\infty}p(x) \d x \leq \int_{\e}^{+\infty}\frac{g(X)}{g(\e)}p(x) \d x \\
-                & \leq \int_{-\infty}^{+\infty}\frac{g(X)}{g(\e)}p(x) \d x = \frac{E(g(X))}{g(\e)}
-    \end{align*}
-\end{proof}
-
-\begin{corollary}
-    若$g(X) \ge 0$，则
-    \[ \E[g(X)] = 0 \Leftrightarrow  \P\{g(X)=0\} = 1 \Leftrightarrow g(X) \overset{\as}{=} 0 \]
-\end{corollary}
-
 \begin{proposition}[独立变量的期望]
     若$X,Y$\underline{独立}，则
     \begin{gather*}
@@ -50,23 +33,6 @@
 \begin{remark}
     由于$\E(X/Y)= \E(X)\E(\frac1{Y})$, 而$\E(\frac1{Y}) \neq \frac1{\E(Y)}$, 所以$\E(X/Y)\neq \E(X)/\E(Y)$
 \end{remark}
-
-\begin{theorem}[Jensen不等式]
-    若$g$为\underline{下凸(convex)函数}，则$g[\E(X)] \le \E[g(X)]$；若$g$为\underline{上凸(concave)函数}，则$\E[g(X)] \le  g[\E(X)]$。
-\end{theorem}
-\begin{proof}
-    若$f$为凸函数，则
-    \[ f(t_1x_1+t_2x_2) \le t_1f(x_1)+t_2f(x_2) ,\quad \forall t_1,t_2 \ge 0 ,\ t_1+t_2=1 \]
-    由归纳可得：
-    \[ f(t_1x_1+ \cdots +t_nx_n) \le t_1f(x_1)+ \cdots +t_nf(x_n) ,\quad \forall t_1,\cdots ,t_n \ge 0 ,\ t_1+ \cdots +t_n=1 \]
-    拓展到连续函数：
-    \[ f(\int_Xg(x)x \d x) \le \int_Xg(x)f(x) \d x ,\quad \forall g(x) \ge 0 ,\ \int_Xg(x) \d x=1 \]
-\end{proof}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics{image/trans_mean.png}
-\end{figure}
 
 \section{均值与方差}
 
@@ -90,8 +56,8 @@
     \begin{table}[htbp]
         \centering
         \begin{tabular}{c|cc}
-           $x$&$1 / k$  &$1+1 / k$  \\\midrule
-           $P$&$(1-p)^k$&$1-(1-p)^k$\\
+            $x$ & $1 / k$   & $1+1 / k$   \\\midrule
+            $P$ & $(1-p)^k$ & $1-(1-p)^k$ \\
         \end{tabular}
     \end{table}
     所以每人平均验血次数为
@@ -269,7 +235,7 @@
 \end{definition}
 
 \begin{theorem}
-   $n$维随机向量的协方差阵$\Cov(\mathbf{X})=(\Cov(X_i,X_j))_{n\times n}$是一个对称的非负定矩阵。
+    $n$维随机向量的协方差阵$\Cov(\mathbf{X})=(\Cov(X_i,X_j))_{n\times n}$是一个对称的非负定矩阵。
 \end{theorem}
 \begin{proof}
     因为$\Cov(X_i,X_j)=\Cov(X_j,X_i)$，所以对称性是显然的。下证非负定性。因为对任意$n$维实向量$\mathbf{c}=(c_1,\cdots ,c_n)'$，有
@@ -346,7 +312,7 @@
 \end{proof}
 
 \begin{proposition}
-   $-1 \le \rho_{XY} \le 1$。取等号的充要条件是$X$与$Y$间几乎处处有线性关系，即存在$a(\ne0)$与$b$，使得：
+    $-1 \le \rho_{XY} \le 1$。取等号的充要条件是$X$与$Y$间几乎处处有线性关系，即存在$a(\ne0)$与$b$，使得：
     \[ P(Y=aX+b)=1 \]
     上式换成$X=cY+d$也一样
 \end{proposition}
@@ -373,6 +339,148 @@
     \[ P\left(Y=-\frac{\sigma_{Y}}{\sigma_{X}}X+c\sigma_{Y} \right)=1 \]
     即当$\Corr(X,Y)=-1$时,$Y$与$X$几乎处处线性负相关.
 \end{proof}
+
+\section{不等式}
+
+\subsection{Chebyshev-Markov型不等式}
+
+\begin{theorem}[Markov不等式]\label{thm:Markov_inequality}
+    设$g(x)$为随机变量$X$取值的集合上的非负不减函数，且$E(g(X))$存在，则
+    \[ P(X>\e) \leq \frac{E(g(X))}{g(\e)} ,\quad \forall \e > 0\]
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        P(X>\e) & =\int_{\e}^{+\infty} \d F(x) \leq \int_{\e}^{+\infty}\frac{g(X)}{g(\e)}\d F(x) \\
+                & \leq \int_{-\infty}^{+\infty}\frac{g(X)}{g(\e)}\d F(x) = \frac{E(g(X))}{g(\e)}
+    \end{align*}
+\end{proof}
+
+\begin{corollary}
+    若$g(X) \ge 0$，则
+    \[ \E[g(X)] = 0 \Leftrightarrow  \P\{g(X)=0\} = 1 \Leftrightarrow g(X) \overset{\as}{=} 0 \]
+\end{corollary}
+
+\begin{proposition}[Chebyshev不等式]
+    \[ P\{ \left\vert X-E(X) \right\vert \ge x \} \le \frac{\operatorname{Var}(X)}{x^2}\]
+\end{proposition}
+\begin{proof}
+    令Markov不等式（定理\ref{thm:Markov_inequality}）中的$g(x)=x^2$则可得：
+    \[ P\{ \left\vert X-E(X) \right\vert \ge x \} = P\{ [X-E(X)]^2 \ge x^2 \} \le \frac{E[X-E(X)]^2}{x^2}=\frac{\operatorname{Var}(X)}{x^2} \]
+\end{proof}
+
+\begin{proposition}[Markov不等式]
+    \[ P\{ \left\vert X \right\vert \ge x \} \le \frac{E(|X|^r)}{x^r} ,\quad \forall r>0,x>0\]
+\end{proposition}
+\begin{proof}
+    令Markov不等式（定理\ref{thm:Markov_inequality}）中的$g(x)=x^r$则可得：
+    \[ P\{ \left\vert X \right\vert \ge x \} = P\{ |X|^r \ge x^r \} \le \frac{E(|X|^r)}{x^r} \]
+\end{proof}
+
+\begin{proposition}[Chebyshev不等式的推广]\label{prop:Chebyshev_inequality_extend}
+    \[ P\{ X-E(X) \ge x \} \le \frac{\sigma^2+a^2}{(x+a)^2} ,\quad \forall x,a\]
+\end{proposition}
+\begin{proof}
+    令Markov不等式（定理\ref{thm:Markov_inequality}）中的$g(x)=x$则可得：
+    \begin{align*}
+        P\{ X-E(X) \ge x \} & =P\{ X-E(X)+a \ge x+a \}                                         \\
+                            & \le  P\{ [X-E(X)+a]^2 \ge (x+a)^2 \}                             \\
+                            & \le \frac{E[X-E(X)+a]^2}{(x+a)^2} = \frac{\sigma^2+a^2}{(x+a)^2}
+    \end{align*}
+\end{proof}
+
+\begin{example}[单边Chebyshev不等式]
+    设随机变量X的均值为$\mu$，方差为$\sigma^2$，则对于任意$x>0$有：
+    \[ P\{ X-\mu\ge x \}\le \frac{\sigma^2}{x^2+\sigma^2} \]
+\end{example}
+\begin{solution}
+    令Chebyshev不等式的推广形式（命题\ref{prop:Chebyshev_inequality_extend}）中的$a=\frac{\sigma^2}{x}$，则
+    \[ \frac{\sigma^2+a^2}{(x+a)^2}=\frac{\sigma^2+\frac{\sigma^4}{x^2}}{x^2+2\sigma^2+\frac{\sigma^4}{x^2}}=\frac{\sigma^2}{x^2+\sigma^2} \]
+\end{solution}
+
+\begin{proposition}[Chebyshev不等式的离散情形]
+    设离散随机变量$X$的取值范围为正自然数，且$P\{ X-k \}$非增，则
+    \[ P\{ X=k \} < \frac{2}{k^2}E(X) \]
+\end{proposition}
+\begin{proof}
+    \begin{align*}
+        E(X) & =\sum_{i=1}^{\infty}i P\{ X=i \} \ge \sum_{i=1}^{k}i P\{ X=i \}                      \\
+             & \ge \sum_{i=1}^{k}i P\{ X=k \} = P\{ X=k \} \frac{k(k+1)}{2} \\
+             & \ge \frac{k^2}{2}P\{ X=k \}
+    \end{align*}
+\end{proof}
+
+\subsection{Cauchy-Schwarz不等式}
+
+\begin{proposition}[Cauchy-Schwarz不等式]
+    \[ E(|XY|) \le [E(X^2)]^{\frac{1}{2}} [E(Y^2)]^{\frac{1}{2}} \]
+\end{proposition}
+\begin{proof}
+    令$g(t)=E[|X|+t|Y|]^2$，易知其恒大于$0$。又
+    \[ g(t)=E[X^2]+2tE(|XY|)+ t^2E[Y^2] \]
+    则其判别式
+    \[ \Delta = 4E^2(|XY|)-4[E(X^2)] [E(Y^2)] \le 0 \]
+\end{proof}
+
+\begin{proposition}[Holder不等式]
+    若$p,q$满足$p,q>1,\ \frac{1}{p}+\frac{1}{q}=1 $，则
+    \[ E(|XY|) \le [E(X^p)]^{\frac{1}{p}} [E(Y^q)]^{\frac{1}{q}} \]
+\end{proposition}
+
+\subsection{Jensen不等式}
+
+\begin{theorem}[Jensen不等式]
+    若$g:R \to R$为\underline{下凸(convex)函数}，则$g[\E(X)] \le \E[g(X)]$；若$g$为\underline{上凸(concave)函数}，则$\E[g(X)] \le g[\E(X)]$。
+\end{theorem}
+\begin{proof}
+    若$g$为下凸函数，则
+    \[ g(x)\ge g(x_0)+g'(x-x_0) \]
+    令$x_0=E(X)$，得
+    \[ g(x)\ge g(E(X))+g'(x-E(X)) \]
+    再对两边取期望，得
+    \[ E(g(X))\ge g(E(X))+E[g'(X-E(X))]=g(E(X)) \]
+\end{proof}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{image/trans_mean.png}
+    \caption{设随机变量$X$遵循两点分布，取值为$\{ a,b \}$，此为其变换后各值}
+\end{figure}
+
+\begin{lemma}
+    \[ (E|X|^r)^{\frac{1}{r}} \le (E|X|^s)^{\frac{1}{s}} ,\quad \forall 0<r \le s \]
+\end{lemma}
+\begin{proof}
+    令$g(x)=x^{\frac{s}{r}}$且$Y=|X|^r$得
+    \[ E^{\frac{s}{r}}(Y) \le E(Y^{\frac{s}{r}}) \]
+    即
+    \[ E^{\frac{s}{r}}(|X|^r) \le E(|X|^s) \]
+\end{proof}
+
+\subsection{最小一乘法}
+
+\begin{proposition}
+    设随机变量$X$的\underline{均值}为$\mu$，则对任意常数$c$，有
+    \[ E(X-\mu)^2 \le E(X-c)^2 \]
+\end{proposition}
+\begin{proof}
+    将$E(X-c)^2=E(X-\mu+\mu-c)^2$展开即可
+\end{proof}
+
+\begin{proposition}
+    设随机变量$X$的\textbf{中位数}为$m$，则对任意常数$c$，有
+    \[ E|X-m| \le E|X-c| \]
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    若$x_1,\cdots ,x_n $是总体$X$的一组样本，其中$x_{med}$为样本中位数，$\overline{x}$是样本均值。则对任意常数$c$有：
+    \begin{itemize}
+        \item $\sum_{i=1}^n(x_i-\overline{x})^2 \le \sum_{i=1}^n(x_i-c)^2$
+        \item $\sum_{i=1}^n|x_i-x_{med}| \le \sum_{i=1}^n|x_i-c|$
+    \end{itemize}
+\end{proposition}
 
 \section{条件期望}
 
@@ -715,8 +823,6 @@
 
 \subsection{费尔希信息量}
 
-
-
 \section{其他特征}
 
 \subsection{变异系数}
@@ -944,4 +1050,5 @@
     \item （茆3.5.9）设随机变量$X$服从$(1,2)$上的均匀分布，在$X=x$的条件下，随机变量$Y$的条件分布是参数为$x$的指数分布，证明：$XY$服从参数为$1$的指数分布。
     \item （茆4.2.5）设$X \sim N ( \mu, \sigma^2 )$，试用特征函数的方法求$X$的3阶及4阶中心矩。
     \item （茆4.2.12）设连续随机变量$X$的密度函数为$p(x)$，试证：$p (x)$关于原点对称的充要条件是它的特征函数是实的偶函数。
+    \item （李5.13）
 \end{problemset}
