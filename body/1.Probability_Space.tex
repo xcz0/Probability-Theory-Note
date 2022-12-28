@@ -1,10 +1,8 @@
 \chapter{概率基础}\label{chap:probability_space}
 
 \begin{introduction}[考试重点]
-    \item 概率空间的定义
     \item 古典概型与几何概型
     \item 条件概率与独立
-    \item 伯努利试验
 \end{introduction}
 
 \section{概率空间}
@@ -275,7 +273,7 @@
 \end{description}
 
 \begin{definition}[古典概型]
-    若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。若定义于其上的概率为：
+    若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。若定义事件域为其全体子集，且概率为：
     \[  P(A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} \]
     则称此概率空间为\textbf{古典概型}。
 \end{definition}
@@ -310,6 +308,9 @@
     若将“在区域$\Omega$中随机地取一点，而该点落在区域$g$中”记为事件$A_g$，则其概率定义为
     \[ \P(A_g) = \frac{S_g}{S_\Omega}\]
 \end{definition}
+\begin{remark}
+    可用均匀分布（定义\ref{def:Uniform_distribution}）准确描述
+\end{remark}
 
 \begin{example}[会商问题]
     甲乙两人约定在下午6时到7时之间在某处会面，并约定先到者应等候另一个人\SI{20}{\minute}，过时即可离去。求两人能会面的概率。
@@ -636,12 +637,7 @@
     如果$A,B\in\mathscr{F}$满足
     \[ P(A\cap B) = P(A)P(B), \]
     则称$A$与$B$\textbf{独立}(independent), 记为$A \indep B$.
-
-    对于事件集$A_1, A_2, \dotsc, A_n$, 若对于其中任意子集$A_{i_1}, A_{i_2}, \dotsc, A_{i_n}$有:
-    \[ P(A_{i_1} \cap \cdots  \cap A_{i_n}) =P(A_{i_1})\cdots P(A_{i_n})  \]
-    则称此事件集\textbf{相互独立}(mutually independent)
 \end{definition}
-
 \begin{note}
     当$P(A)>0$时，$P(B|A) = P(B) \iff B \indep A$, 由此可得到\underline{$B$独立于$A$}的直观理解
 \end{note}
@@ -791,6 +787,19 @@
     \end{align*}
 \end{solution}
 
+\begin{definition}[相互独立]
+    对于事件集$A_1, A_2, \dotsc, A_n$, 若对于其中任意子集$A_{i_1}, A_{i_2}, \dotsc, A_{i_n}$有:
+    \[ P(A_{i_1} \cap \cdots  \cap A_{i_n}) =P(A_{i_1})\cdots P(A_{i_n})  \]
+    则称此事件集\textbf{相互独立}(mutually independent)
+\end{definition}
+\begin{remark}
+    各事件两两独立不能推出所有事件相互独立。
+\end{remark}
+
+\begin{example}[伯恩斯坦反例]
+    一个均匀的正四面体，其第一面染成红色，第二面染成白色，第三面染成黑色，而第四面同时染上红，白，黑三种颜色．现在以 $A,B,C$ 分别记投一次四面体出现红，白，黑颜色朝下的事件，则由于在四面体中有两面有红色，因此$P(A)=\frac{1}{2}$。同理$P(B)=P(C)=\frac{1}{2}$，同时易得$P(AB) = P(BC)= P(AC) =\frac{1}{4}$。所以 $A,B,C$ 两两独立，但是$P(ABC)=\frac{1}{4}\neq P(A)P(B)P(C)$，从而 $A,B,C$ 不相互独立。
+\end{example}
+
 \begin{definition}[事件域的独立性]
     若$\mathscr{G} \subset \mathscr{F}$与$\mathscr{H} \subset \mathscr{F}$满足
     \[ A \Vbar B, \quad \forall A\in\mathscr{G},\ B\in\mathscr{H}, \]
@@ -802,10 +811,8 @@
 类似地可以定义$n$个试验$E_1,E_2,\cdots,E_n$的相互独立性：如果$E_1$的任一结果、$E_2$的任一结果$\cdots\cdots E_n$的任一结果都是相互独立的事件，则称\textbf{试验$E_1,E_2,\cdots,E_n$相互独立}。
 
 \begin{definition}[Bernouli试验]\label{def:Bernouli_experiment}
-    如果$n$个独立试验是相同的，则称其为$n$重\textbf{独立重复试验}。如果在$n$重独立重复试验中，每次试验的可能结果为两个：$A$或$\bar A$，则称这种试验为$n$重\textbf{Bernouli试验}。
+    如果$n$个独立试验是相同的，则称其为$n$重\textbf{独立重复试验}。如果在$n$重独立重复试验中，每次试验的可能结果为两个：$A$或$\bar A$，且每次实验事件$A$发生的概率不变，则称这种试验为$n$重\textbf{Bernouli试验}。
 \end{definition}
-
-
 
 \begin{problemset}[错题记录]
     \item （茆1.2.4）从一副52张的扑克牌中任取4张，求下列事件的概率:
@@ -838,5 +845,4 @@
     \item （李1.38）（赠券收集）食品厂把印有水浒108 将之一的画卡作为赠券装人某种儿童食品袋中，每袋一卡，试求购买$n$袋这种食品而能收齐全套画卡的概率。
     \item （李1.40）有$w$个白球与$b$个黑球任你放人两个袋子中，让你的朋友随机抽一袋并从中摸出一只球，你将如何做以使你的朋友摸得黑球的概率最大。
     \item （李1.42）父，母，子三人举行比赛，每局总有一人胜一人负（没有和局），每局的优胜者就与未参加此局的人再进行比赛，如果某人首先胜了两局，则他就是整个比赛的优胜者，由父决定第一局由哪两人参加，其中儿子实力最强，所以父为了使自己得胜的概率达到最大，就决定第一局由他与妻子先比赛，试证父的决策为最优策略（任何一对选手中一人胜对方的概率在整个比赛中是不变的）．
-    \item 
 \end{problemset}
