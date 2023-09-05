@@ -10,11 +10,15 @@
 \subsection{随机事件}
 
 \begin{definition}[样本空间]
-    \textbf{随机试验}(trial)可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$；样本的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。
+    \textbf{随机试验}(trial)可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$；样本点的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。
+\end{definition}
+
+\begin{definition}[离散样本空间]
+    若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。
 \end{definition}
 
 \begin{definition}[事件的古典定义]
-    样本点$\omega$的某种集合称为（随机）\textbf{事件}(event)。
+    若干样本点$\omega$构成的集合（即$\Omega$的某个子集）称为（随机）\textbf{事件}(event)。
 \end{definition}
 
 随机现象被抽象为集合。事件间的包含、等价、互不相容关系，对应成集合间的包含、相等、不相交；逻辑运算（且、或、非等）对应成集合论运算（交、并、补等）。
@@ -61,8 +65,8 @@
 \begin{remark}
     并与补是集合中最基本的运算：
     \begin{itemize}
-        \item 交的运算可通过并与对立来实现 （对偶律）.
-        \item 差的运算可通过对立与交来实现 （$A - B = A\overline{B}$）.
+        \item 交的运算可通过并与补来实现 （对偶律$AB = (A^{\complement} + B^{\complement})^{\complement}$）.
+        \item 差的运算可通过补与交来实现 （$A - B = A\overline{B}$）
     \end{itemize}
 \end{remark}
 
@@ -100,6 +104,10 @@
     由于$\Sigma$的一切子集构成的集类包含$\mathscr{G}$, 所以$\mathfrak{m}$存在. 再取$\Sigma$上满足此条件的$\sigma$域之交作为$\mathfrak{m}(\mathscr{G})$即可.
 \end{proof}
 
+\begin{example}
+    设 $A_1, A_2, \cdots, A_n$是$\Omega$的完备事件组，$\mathcal{F}$是包含所有 $A_i$的最小事件域。则可将$A_1, A_2, \cdots, A_n$看作$\Omega$的所有元素，$\mathcal{F}$则为$\Omega$的所有子集构成，有$2^n$个元素。
+\end{example}
+
 特别地, 实数集$\R$的子集族$\{(-\infty,x] : x\in\R\}$生成的$\sigma$代数$\mathscr{B}_{\R}$称为$\R$上的\emph{Borel代数}.
 
 \begin{definition}[Borel集]
@@ -113,7 +121,8 @@
     [x, y] & =  [x, y)+\{y\}                                      \\
     (x, y] & =  [x, y)+\{y\}-\{x\}
 \end{align*}
-因此$\mathscr{B}_1$包含一切开区间, 闭区间, 单个实数, 可列个实数, 以及他们经可列次逆, 并, 交, 差运算的集合.
+因此$\mathscr{B}_1$包含一切开区间，闭区间，单个实数，可列个实数，以及他们经可列次逆，并，交，差运算的集合。
+
 
 \begin{definition}[概率空间]
     设$\Omega$为一个样本空间，$\mathscr{F}$为定义于其上的一个事件域。定义在\underline{事件域}(非样本空间)上的集合函数$P : \mathscr{F} \to \mathbb{R}$称为\textbf{概率}的条件是:
@@ -126,16 +135,48 @@
     并称$(\Omega,\mathscr{F},\P)$为一个\textbf{概率空间}(probability space)
 \end{definition}
 
+\begin{example}[Bernouli概率空间]
+    虽然样本空间可以有许多结果，但只把它们分成两类: 成功或者失败。成功的概率为 $p$，失败的概率就是$1 - p$。在数学上，这意味着任意样本空间 $\Omega$，它的某个子集 $A$ 是成功的事件，它的补集 $A^{\complement}$ 是失败，这样定义了概率空间
+    \[ (\Omega, \{\emptyset, A, A^{\complement}, \Omega\},\P) \]
+    其中
+    \[ P(\emptyset) = 0,\ P(A)= p,\ P(A^{\complement})= 1 - p,\ P(\Omega)=1 \]
+    称这个概率空间为\textbf{Bernouli概率空间}
+\end{example}
+
+\begin{example}[离散概率空间]
+    把样本空间的结果分类为$\{ \Omega_n \}$。事件域为$\sigma(\{ \Omega_n \})$。用和为$1$的非负数列$\{ p_n \}$定义 
+    \[ \P(\Omega_n)=p_n \]
+    称这个概率空间$(\Omega, \sigma(\{ \Omega_n \}),\P)$为\textbf{离散概率空间}
+\end{example}
+
+有些随机实验可以通过概率空间描述，有些则不能。例如，从自然数集中等可能地取一个数。若此概率为一常数，则由可列可加性得$P(\Omega)=\infty$；若为零，则$P(\Omega)=0$。故此实验不可通过概率空间描述。
+
+可用概率空间描述的实验称为\textbf{可实现/模拟}的。
+
 \subsection{概率的性质}
 
-\begin{property}
-    概率的性质:
-    \begin{itemize}
-        \item$P(\emptyset)=0$;
-        \item$P(A^{\complement})=1-P(A)$;
-        \item 若$A \subseteq B$则$P(A)\le P(B)$;
-    \end{itemize}
-\end{property}
+概率是建立在$\sigma$域上的一种特殊的测度，故也满足对对应的测度性质。
+
+\begin{proposition}[概率的加减性质]
+    设$(\Omega,\mathscr{F},\P)$是概率空间，则其具有以下性质：
+    \begin{description}
+        \item[空集的概率]$\P(\emptyset)=0$;
+        \item[有限可加性] 若$A,B \in \mathscr{F},\ A \cap B = \emptyset$，则$\P(A \cup B) = \P(A) + \P(B)$
+        \item[可减性] 若$A,B \in \mathscr{F},\ A \subseteq B$，则$\P(B - A) = \P(B) - \P(A)$，因此$\P(A) \le \P(B)$
+        \item[补集的概率]$\P(A^{\complement})=1-\P(A)$
+        \item[次可列可加性] 若$A_n \in \mathscr{F}$，则$\P(\bigcup_{n=1}^{\infty}A_{n}) \le  \sum_{n=1}^{\infty}\P(A_{n})$
+    \end{description}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item 由于$\Omega=\Omega \cup \emptyset \cup \emptyset \cdots$，再由可列可加性得$\P(\Omega)=\P(\Omega)+\P(\emptyset)+\cdots + \P(\emptyset)+\cdots$，故$\P(\emptyset)=0$。
+        \item 由于$A \cup B=A \cup B \cup \emptyset \cup \emptyset \cdots$，再由可列可加性得$\P(A \cup B)=\P(A)+\P(B)+ \P(\emptyset) +\cdots + \P(\emptyset)+\cdots$，故$\P(A \cup B) = \P(A) + \P(B)$。
+        \item 由于$(B-A) \cap A=\emptyset$且$(B-A) \cup A=B$，由有限可加性得$\P(B)= \P(B - A) + \P(A)$
+        \item$\P(\Omega-A)=\P(\Omega)-\P(A)=1-\P(A)$
+        \item 令$B_i=A_i-\bigcup_{n=1}^{i-1}A_{n}, i=1,2,\cdots$，则
+             $$\P(\bigcup_{n=1}^{\infty}A_{n})=\P(\bigcup_{n=1}^{\infty}B_{n}) = \sum_{n=1}^{\infty}\P(B_{n})\le  \sum_{n=1}^{\infty}\P(A_{n})$$
+    \end{enumerate}
+\end{proof}
 
 \begin{example}
     口袋中有编号为$1, 2, \cdots, n$的$n$个球，从中有放回地任取$m$次，求取出的$m$个球的最大号码为$k$的概率。
@@ -150,11 +191,12 @@
     \end{align*}
 \end{solution}
 
-\begin{proposition}[]\label{prop:inequality_event}
-    \[ \lvert P(AB) - P(A)P(B) \rvert \le \frac1{4} \]
-\end{proposition}
-\begin{proof}
-    设$P(A)\ge P(B)$，则：
+\begin{example}[]\label{ex:inequality_event}
+    证明
+    \[ \abs{P(AB) - P(A)P(B)} \le \frac1{4} \]
+\end{example}
+\begin{solution}
+    不妨设$P(A)\ge P(B)$，则：
     \[ P(AB)-P(A)P(B)\le P(B)-P(B)P(B)=P(B)[1-P(B)]\le \frac1{4} \]
     另一方面有：
     \begin{align*}
@@ -163,6 +205,13 @@
                        & \le P(A)P(\overline{A}B) \le P(A)P(\overline{A}) \\
                        & =P(A)[1-P(A)]\le \frac1{4}
     \end{align*}
+\end{solution}
+
+\begin{corollary}
+    \[ \sum_{i=1}^n \P(A_i) \le \P(\bigcap_{i=1}^{n}A_i) + (n-1) \]
+\end{corollary}
+\begin{proof}
+    \[ 1-\P(\bigcap_{i=1}^{n}A_i) = \P(\bigcup_{i=1}^{n}A_i^{\complement}) \le \sum_{i=1}^n \P(A_i^{\complement}) = n - \sum_{i=1}^n \P(A_i) \]
 \end{proof}
 
 \begin{proposition}[加法公式]\label{pro:addition_law}
@@ -176,28 +225,10 @@
     特别地，若事件出现个数相同时概率相等，则可简化为:
     \[ P\biggl( \bigcup_{i=1}^n A_i \biggr)=n P_{1} - \binom{n}{2} P_{2} + \binom{n}{3} P_{3}- \cdots+(-1)^{n-1} P_{n} \]
 \end{proposition}
-
-\begin{corollary}
-    对任意$n$个事件$A_1,\cdots ,A_n$有
-    \[ P \biggl( \bigcup_{i=1}^n A_i \biggr) \le \sum_{i=1}^n P(A_i). \]
-\end{corollary}
-
-\begin{example}[配对问题]\label{exam:pairing}
-    在一个有$n$个人参加的晚会上，每个人带了一件礼物，且假定各人带的礼物都不相同。晚会期间各人从放在一起的$n$件礼物中随机抽取一件，问至少有一个人自己抽到自己礼物的概率是多少？
-\end{example}
-
-\begin{solution}
-    以$A_i$记事件“第$i$个人自己抽到自己的礼物”，则所求概率为$P(A_1 \cup A_2 \cup \dotsb \cup A_n)$。因为
-    \begin{align*}
-         & P(A_1) = P(A_2) = \dotsb = P(A_n) =\frac1{n}                                              \\
-         & P(A_1 A_2) = P(A_1 A_3) = \dotsb = P(A_{n-1} A_n) = \frac1{n (n-1)}                       \\
-         & P(A_1 A_2 A_3) = P(A_1 A_2 A_4) = \dotsb = P(A_{n-2} A_{n-1} A_n) = \frac1{n (n-1) (n-2)} \\
-         & \ldots                                                                                    \\
-         & P(A_1 A_2 \dotsb A_n) = \frac1{n!}
-    \end{align*}
-    再由概率的加法公式\ref{pro:addition_law}得
-    \[ P(A_1 \cup A_2 \cup \dotsb \cup A_n) = 1 - \frac1{2!} + \frac1{3!} - \frac1{4!} + \dotsb + (-1)^{n-1} \frac1{n!} \]
-\end{solution}
+\begin{proof}
+    数学归纳法
+    TODO
+\end{proof}
 
 显然，可列可加性可以推出有限可加性。但是一般而言，由有限可加性不能推出可列可加性。设$A_i \in \mathscr{F}, i=1,2,\cdots$且两两互不相容，则由概率的有限可加性只能推出下式成立：
 \[ P\biggl( \bigcup_{i=1}^n A_i \biggr)=\sum_{i=1}^n P(A_i) \]
@@ -212,55 +243,70 @@
 \[ S_n=\sum_{i=1}^n A_i \]
 则$S_n \in \mathscr{F}$而且$S_n \subseteq S_{n+1}$, 即$\{ S_n \}$是$\mathscr{F}$中一个单调不减的集序列，这时将上式改写改写为：
 \[ P(\lim_{n \to \infty}S_n)=\lim_{n \to \infty}P(S_n) \]
+此即集合函数的\textbf{下连续性}。
 
-\begin{definition}[下连续]
-    对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不减}的集序列$\{ S_n \}$均满足:
-    \[ \lim_{n \to \infty}P(S_n) =P(\lim_{n \to \infty} S_n) \]
-    则称它是\textbf{下连续}的.
-\end{definition}
-
-\begin{theorem}
+\begin{theorem}[可列可加的充要条件]
     若$P$是$\mathscr{F}$上满足$P(\Omega)=1$的非负集合函数，则它具有可列可加性的充要条件为:
     \begin{itemize}
         \item 它是有限可加的；
-        \item 它是下连续的．
+        \item 它是下连续的。
     \end{itemize}
 \end{theorem}
 \begin{proof}
-    由上述推导可知其充分性。对于其必要性，有限可加也是易知的。设$\{S_n\}$是$\mathscr{F}$中一个单调不减的事件序列，即
-    \[ \bigcup_{i=1}^{+\infty} S_i = \lim_{n \to +\infty} S_n \]
-    若定义$S_0 = \emptyset$，则
-    \[ \bigcup_{i=1}^{+\infty} S_i = \bigcup_{i=1}^{+\infty} (S_i - S_{i-1}) \]
-    由于$S_{i-1} \subset S_i$，显然诸$(S_i-S_{i-1})$两两不相容，再由可列可加性得
-    \[ P\biggl( \bigcup_{i=1}^{+\infty} S_i \biggr) = \sum_{i=1}^{+\infty} P(S_i - S_{i-1}) = \lim_{n \to +\infty} \sum_{i=1}^n P(S_i - S_{i-1}) \]
-    由有限可加性得
-    \[ \sum_{i=1}^n P(S_i - S_{i-1}) = P \biggl( \bigcup_{i=1}^n (S_i - S_{i-1}) \biggr) = P(S_n) \]
-    所以
-    \[ P(\lim_{n \to +\infty} S_n) = \lim_{n \to +\infty} P(S_n) \]
-    这就证得了$P$的下连续性.
+    由上述推导可知其充分性。下述命题证其必要性。
 \end{proof}
 
-同理定义上连续
-\begin{definition}[上连续]
-    对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不增}的集序列$\{ B_n \}$均满足:
-    \[ \lim_{n \to \infty}P(B_n) =P(\lim_{n \to \infty} B_n) \]
-    则称它是\textbf{上连续}的.
-\end{definition}
-
-\begin{theorem}
-    概率是上连续的
-\end{theorem}
+\begin{proposition}[概率的连续性质]
+    设$(\Omega,\mathscr{F},\P)$是概率空间，则其具有以下性质：
+    \begin{description}
+        \item[下连续性] 若$A_n \in \mathscr{F}$且\underline{递增}，则$\P(\bigcup_{n=1}^{\infty}A_{n}) =  \lim_{n\to \infty}\P(A_{n})$
+        \item[上连续性] 若$A_n \in \mathscr{F}$且\underline{递减}，则$\P(\bigcap_{n=1}^{\infty}A_{n}) =  \lim_{n\to \infty}\P(A_{n})$
+    \end{description}
+\end{proposition}
 \begin{proof}
-    设$\{ B_n \}$是单调不增的事件序列，则$\{ \overline{B_n} \}$为单调不减的事件序列，由概率的下连续性得
+
+    \textbf{下连续性}： 令$B_i=A_i-\bigcup_{n=1}^{i-1}A_{n}, i=1,2,\cdots$，由于$A_n \in \mathscr{F}$递增，所以$\bigcup_{n=1}^{i-1}A_{n}=A_{i-1}$，即$\P(B_i)=\P(A_i)-\P(A_{i-1})$。则
+    \[ \P(\bigcup_{i=1}^n A_i)=\P(\bigcup_{i=1}^n B_i) = \sum_{i=1}^n [\P(A_i)-\P(A_{i-1})]=\P(A_n) \]
+    两边取极限即得下连续性。
+
+    \textbf{上连续性}： 设$\{ B_n \}$是单调不增的事件序列，则$\{ B_n^{\complement} \}$为单调不减的事件序列，由概率的下连续性得
     \begin{align*}
         1 - \lim_{n \to +\infty} P(B_n)
-         & = \lim_{n \to +\infty} [1 - P(B_n)] = \lim_{n \to +\infty} P(\overline{B_n})                                          \\
-         & = P \biggl( \bigcup_{n=1}^{+\infty} \overline{B_n} \biggr) = P \biggl( \overline{\bigcap_{n=1}^{+\infty} B_n} \biggr) \\
+         & = \lim_{n \to +\infty} [1 - P(B_n)] = \lim_{n \to +\infty} P(B_n^{\complement})                                          \\
+         & = P \biggl( \bigcup_{n=1}^{+\infty} B_n^{\complement} \biggr) = P \biggl( \overline{\bigcap_{n=1}^{+\infty} B_n} \biggr) \\
          & = 1 - P \biggl( \bigcap_{n=1}^{+\infty} B_n \biggr).
     \end{align*}
-    由于$\{ B_n \}$单调不增，所以
+    即
     \[ \lim_{n \to +\infty} P(B_n) = P \biggl( \bigcap_{n=1}^{+\infty} B_n \biggr) = P \biggl(\lim_{n \to +\infty} B_n \biggr) \]
 \end{proof}
+
+% \begin{definition}[下连续]
+%     对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不减}的集序列$\{ S_n \}$均满足:
+%     \[ \lim_{n \to \infty}P(S_n) =P(\lim_{n \to \infty} S_n) \]
+%     则称它是\textbf{下连续}的.
+% \end{definition}
+
+
+% \begin{proof}
+%     由上述推导可知其充分性。对于其必要性，有限可加也是易知的。设$\{S_n\}$是$\mathscr{F}$中一个单调不减的事件序列，即
+%     \[ \bigcup_{i=1}^{+\infty} S_i = \lim_{n \to +\infty} S_n \]
+%     若定义$S_0 = \emptyset$，则
+%     \[ \bigcup_{i=1}^{+\infty} S_i = \bigcup_{i=1}^{+\infty} (S_i - S_{i-1}) \]
+%     由于$S_{i-1} \subset S_i$，显然诸$(S_i-S_{i-1})$两两不相容，再由可列可加性得
+%     \[ P\biggl( \bigcup_{i=1}^{+\infty} S_i \biggr) = \sum_{i=1}^{+\infty} P(S_i - S_{i-1}) = \lim_{n \to +\infty} \sum_{i=1}^n P(S_i - S_{i-1}) \]
+%     由有限可加性得
+%     \[ \sum_{i=1}^n P(S_i - S_{i-1}) = P \biggl( \bigcup_{i=1}^n (S_i - S_{i-1}) \biggr) = P(S_n) \]
+%     所以
+%     \[ P(\lim_{n \to +\infty} S_n) = \lim_{n \to +\infty} P(S_n) \]
+%     这就证得了$P$的下连续性.
+% \end{proof}
+
+% 同理定义上连续
+% \begin{definition}[上连续]
+%     对于$\mathscr{F}$上的集合函数$P$，若它对$\mathscr{F}$中\underline{任一单调不增}的集序列$\{ B_n \}$均满足:
+%     \[ \lim_{n \to \infty}P(B_n) =P(\lim_{n \to \infty} B_n) \]
+%     则称它是\textbf{上连续}的.
+% \end{definition}
 
 \section{古典概型与几何概型}
 
@@ -273,16 +319,16 @@
 \end{description}
 
 \begin{definition}[古典概型]
-    若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。若定义事件域为其全体子集，且概率为：
-    \[  P(A) = \frac{\text{事件 } A \text{ 所含样本点的个数}}{\Omega \text{ 中所有样本点的个数}} \]
-    则称此概率空间为\textbf{古典概型}。
+    若样本空间$\Omega$\underline{有限}，事件域$\mathscr{F}$为其全体子集，且任意$\omega \in \Omega$的概率为：
+    \[ \P(\{ \omega \} ) = \frac1{\abs{\Omega}} \]
+    则称此概率空间$(\Omega,\mathscr{F},\P)$为\textbf{古典概型}。
 \end{definition}
 \begin{note}
     古典概型的大部分问题都能形象化地用摸球模型来描述，以后经常研究摸球模型的意义即在于此。
 \end{note}
 
 \begin{example}[生日问题]
-    $n$个人的生日全不相同的概率$p_n$是多少？
+   $n$个人的生日全不相同的概率$p_n$是多少？
 \end{example}
 \begin{solution}
     把$n$个人看成是$n$个球，将一年365天看成是$N=365$个盒子，则“$n$个人的生日全不相同”就相当于“恰好有$n (n \le N)$个盒子各有一球”，所以$n$个人的生日全不相同的概率为：
@@ -296,6 +342,54 @@
     \end{enumerate}
 \end{solution}
 
+\begin{example}[Bose-Einstein 统计与 Maxwell-Boltzmann 统计]
+    还是放球问题，换个说法，$r$个粒子随机占据空间中的$n$个位置。若假设每个粒子等可能地占据一个位置，即样本空间为
+    \[ \Omega= \{(n_1, \cdots ,n_r):1 \le n_i \le n ,\ 1 \le i \le r\} \]
+    其中$n_i$表示第$i$个球在第$n_i$个盒子里，并且其中的$n^r$个元素是等可能的。这种观点或者假设在统计物理中称为 Maxwell-Boltzmann 统计。
+
+    另一种假设是Bose-Einstein 统计，不考虑粒子的区别，只考虑位置及其中粒子个数的区别，即样本空间为
+    \[ \Omega'= \{(r_1, \cdots ,r_n): r_i\ge 0 ,\ \sum_{i=1}^n r_i = r\} \]
+    其中$r_i$表示第$i$个盒子里有$r_i$个，其中的元素是是重复排列，有$\binom{n+t-1}{r}$个，是等可能的。
+\end{example}
+
+处理古典概型问题要注意其对概率空间的假设。有时候，一些无序的抓球问题也可当成有序的抓球问题解决，因为在
+TODO
+
+\begin{example}[配对问题]\label{exam:pairing}
+    设$n$个人随机地取自己存放的帽子，求恰有$k$个人拿到自己帽子的概率$p_k(n)$。
+\end{example}
+\begin{solution}
+    如果用$X$表示拿到自己帽子的人数，那么简单地$P_k(n) = P(X = k)$。以$A_i$表示第$i$个人取自己存放的帽子，那么$\bigcup_{i=1}^n A_i$表示至少一个人取到自己的帽子。因为
+    \begin{align*}
+        P_1 = P(A_i)                & = \frac1{n}             \\
+        P_2 = P(A_i A_j)            & = \frac1{n (n-1)}       \\
+        P_3 = P(A_i A_j A_k)        & = \frac1{n (n-1) (n-2)} \\
+                                    & \ldots                  \\
+        P_n = P(A_1 A_2 \dotsb A_n) & = \frac1{n!}
+    \end{align*}
+    再由概率的加法公式\ref{pro:addition_law}得
+    \begin{align*}
+        P_0(n) & = 1 - P(\bigcup_{i=1}^n A_i)                             \\
+               & = 1 - [n P_1 - \binom{n}{2} P_2 + \cdots+(-1)^{n-1} P_n] \\
+               & = 1-(1 - \frac1{2!} + \dotsb + (-1)^{n-1} \frac1{n!})    \\
+               & = \frac1{2!} + \dotsb + (-1)^n \frac1{n!}
+    \end{align*}
+    恰有$k$个人拿到自己帽子这件事情分两步：选$k$个人都取得自己帽子，有$\binom{n}{k}$种取法；其他$n-k$人没有人取得自己的帽子，其概率为$P_0(n-k)$，样本空间数为$(n-k)!$，故总共有$(n-k)!\cdot P_0(n-k)$种取法。因此
+    \[ P_k(n)=\frac{\binom{n}{k} \cdot (n-k)!\cdot P_0(n-k)}{n!}=\frac{P_0(n-k)}{k!} \]
+\end{solution}
+
+\begin{example}[Banach]
+    某数学家有两盒火柴，每盒有$n$根。每次用火柴时任取一盒从中取一根火柴，求他取出一盒火柴后发现已经用完而另一盒中还有$r$根的概率。实际上，问题相当于掷硬币一直到正面或反面出现$n+1$次时，另一面只出现$n-r$次的概率。记这个事件为$A$，那么$A_0，A_1，\cdots ，A_n$，是样本空间的划分。共掷了$2n-r+1$次硬币，如果最后一次是正面，另外$2n-r$次中有$n$次正面，$n-r$次反面。概率为
+    \[ \P(A_r)=\frac1{2^{2n-r}}\binom{2n-r}{n-r} \]
+    由此可得恒等式：
+    \[ \sum_{k=0}^n \binom{n+k}{k} \frac1{2^{n+k}} = \sum_{r=0}^n \P(A_r) = 1 \]
+
+    此模型可推广为若事件$A$出现的概率为$p$，事件$A^{\complement}$的概率为$q=1-p$，事件$A$或$A^{\complement}$出现$n+1$次时，不出现$n-r$次的概率
+    \[ \P(A_r)=p^n q^{n-r} \binom{2n-r}{n-r} \]
+    可得恒等式：
+    \[\sum_{k=0}^n \binom{n+k}{k} p^{n} q^{k} = \sum_{r=0}^n \P(A_r) = 1 \]
+\end{example}
+
 \subsection{几何概型}
 
 几何概型的基本思想:
@@ -305,8 +399,9 @@
 \end{description}
 
 \begin{definition}[几何概型]
-    若将“在区域$\Omega$中随机地取一点，而该点落在区域$g$中”记为事件$A_g$，则其概率定义为
-    \[ \P(A_g) = \frac{S_g}{S_\Omega}\]
+    设$\Omega$是$n$维 Euclid 空间的一个有界非空区域 (或有限正测度的 Borel 集)，$\mathcal{B}(\Omega)$是$\Omega$的 Borel 子集全体，它是一个$\sigma$域， 定义 
+    \[ \P(A) = \frac{|A|}{|\Omega|} ,\ A \in \mathcal{B}(\Omega) \]
+    其中$|\cdot |$表示 Lebesgue 测度。那么$(\Omega，\mathcal{B}(\Omega)，\P)$是一个概率空间， 称为$\Omega$上的几何概率空间， 它描述了$\Omega$上的\textbf{几何概率模型}。
 \end{definition}
 \begin{remark}
     可用均匀分布（定义\ref{def:Uniform_distribution}）准确描述
@@ -400,7 +495,7 @@
     \[ 0 < x < a; \quad 0 < y < a; \quad 0 < a - (x + y) < a \]
     第三个式子等价于：$0 < x + y < a$。所以样本空间为(见图\ref{fig1.2.7})
     \[ \Omega = \{(x, y): 0 < x < a, 0 < y < a, 0 < x + y < a\} \]
-    $\Omega$的面积为
+   $\Omega$的面积为
     \[ S_\Omega = \frac{a^2}{2} \]
 
     又根据构成三角形的条件：三角形中任意两边之和大于第三边，得事件$A$所含样本点$(x,y)$必须满足:
@@ -487,7 +582,7 @@
 \begin{definition}[条件概率]
     设$A,B \in \mathscr{F}$，且$P(B)>0$称
     \[ P(A|B) = \frac{P(A \cap B)}{P(B)}\]
-    为基于于$B$的\textbf{条件概率}(probability conditional on$B$)。
+    为基于于$B$的\textbf{条件概率}(probability conditional on $B$)。
 \end{definition}
 
 \begin{proposition}
@@ -557,18 +652,18 @@
 \end{enumerate}
 
 \begin{theorem}[全概率公式]
-    设可列个事件$B_1, B_2, \cdots, B_n, \cdots $互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则：
+    设可列个事件$B_1, B_2, \cdots, B_n, \cdots$互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则：
     \[ P(A) = \sum_{i=1}^{\infty} P(B_i) P(A | B_i) ,\quad \forall A \in \mathscr{F}\]
 \end{theorem}
 
 \begin{note}
-    $P(A | B_i)$可视为事件$A$在$B_i$上的分量，$P(B_i)$则为其权重，加权平均后得到$P(A)$
+   $P(A | B_i)$可视为事件$A$在$B_i$上的分量，$P(B_i)$则为其权重，加权平均后得到$P(A)$
 \end{note}
 
 \begin{proof}
     因为$A \subseteq \bigcup_{i=1}^{\infty} B_i$，所以
     \[ A = A (\bigcup_{n=1}{\infty} B_i) = \bigcup_{i=1}{\infty} (A B_i) \]
-    且$AB_1, AB_2, \cdots, AB_n, \cdots $互不相容，所以由可加性得
+    且$AB_1, AB_2, \cdots, AB_n, \cdots$互不相容，所以由可加性得
     \[ P(A) = P \biggl( \bigcup_{i=1}^{\infty} (AB_i) \biggr) = \sum_{i=1}^{\infty} P (AB_i) \]
     再将$P(AB_i) = P(B_i) P(A|B_i)$，代人上式即得全概率公式。
 \end{proof}
@@ -594,7 +689,7 @@
 \end{itemize}
 如此的调查方法，主要在于旁人无法知道被调查回答的是问题 A 还是问题 B，由此可以极大地消除被调查者的顾虑。现在的问题是如何分析调查的结果。很显然，我们只对问题B是感兴趣。
 
-首先假设有$n$张答卷($n$ 较大)，其中有$k$张回答“是”。有两个信息我们是预先知道的：
+首先假设有$n$张答卷($n$较大)，其中有$k$张回答“是”。有两个信息我们是预先知道的：
 \begin{itemize}
     \item 在参加人数较多的情况，任选一人其生日在7月1日之前的概率为0.5.
     \item 罐中红球的比率$\pi$。
@@ -608,7 +703,7 @@
 \[ p = \frac{k/n - 0.5(1 - \pi)}{\pi} \]
 
 \begin{theorem}[Bayes定理]\label{thm:Bayes_Theorem}
-    设可列个事件$B_1, B_2, \cdots, B_n, \cdots $互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则
+    设可列个事件$B_1, B_2, \cdots, B_n, \cdots$互不相容，且包含事件$A$。即$A \subseteq \bigcup_{i=1}^{\infty} B_i,\quad  B_i B_j= \emptyset, \forall i \neq j$，则
     \[ P(B_i | A) = \frac{P(B_i) P(A|B_i)}{\sum_{j=1}^n P(B_j) P(A|B_j)} \]
 \end{theorem}
 
@@ -629,7 +724,7 @@
     \end{align*}
 \end{solution}
 
-条件概率的三公式中：乘法公式是求事件交的概率；全概率公式是求一个复杂事件的概率；而贝叶斯公式是求一个条件概率。在贝叶斯公式中，称 $P(B_i)$为$B_i$的\textbf{先验概率}，称$P(B_i |A)$为$B_i$的\textbf{后验概率}。贝叶斯公式是专门用于计算后验概率的，也就是通过$A$的发生这个新信息，来对$B_i$的概率作出的修正。
+条件概率的三公式中：乘法公式是求事件交的概率；全概率公式是求一个复杂事件的概率；而贝叶斯公式是求一个条件概率。在贝叶斯公式中，称$P(B_i)$为$B_i$的\textbf{先验概率}，称$P(B_i |A)$为$B_i$的\textbf{后验概率}。贝叶斯公式是专门用于计算后验概率的，也就是通过$A$的发生这个新信息，来对$B_i$的概率作出的修正。
 
 \subsection{独立性}
 
@@ -664,7 +759,7 @@
     \[ P(AB) = P(A)P(B) \]
     所以
     \[ P(A \overline{B}) = P(A) - P(A)P(B) = P(A) [1 - P(B)] = P(A)P( \overline{B}) \]
-    这表明$A$与$ \overline{B}$独立. 类似可证$\bar A$与$ \overline{B}$独立，$\bar A$ 与$B$独立.
+    这表明$A$与$\overline{B}$独立. 类似可证$\bar A$与$\overline{B}$独立，$\bar A$与$B$独立.
 \end{proof}
 
 \begin{example}
@@ -676,15 +771,15 @@
     又因为各次射击是独立的，所以得
     \begin{align*}
         P(\text{甲获胜}) & = \alpha + (1-\alpha)(1-\beta)\alpha + (1-\alpha)^2(1-\beta)^2\alpha + \cdots \\
-                         & = \alpha\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i                           \\
-                         & = \frac{\alpha}{1-(1-\alpha)(1-\beta)}.
+                      & = \alpha\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i                           \\
+                      & = \frac{\alpha}{1-(1-\alpha)(1-\beta)}.
     \end{align*}
     同理可得
     \begin{align*}
         P(\text{乙获胜}) & = P(\bar A_1A_2\cup \bar A_1\bar A_2\bar A_3A_4\cup\cdot)       \\
-                         & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
-                         & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
-                         & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
+                      & = (1-\alpha)\beta + (1-\alpha)(1-\beta)(1-\alpha)\beta + \cdots \\
+                      & \beta (1-\alpha)\sum_{i=0}^{+\infty}(1-\alpha)^i(1-\beta)^i     \\
+                      & = \frac{\beta(1-\alpha)}{1-(1-\alpha)(1-\beta)}.
     \end{align*}
 \end{solution}
 
@@ -797,7 +892,7 @@
 \end{remark}
 
 \begin{example}[伯恩斯坦反例]
-    一个均匀的正四面体，其第一面染成红色，第二面染成白色，第三面染成黑色，而第四面同时染上红，白，黑三种颜色．现在以 $A,B,C$ 分别记投一次四面体出现红，白，黑颜色朝下的事件，则由于在四面体中有两面有红色，因此$P(A)=\frac{1}{2}$。同理$P(B)=P(C)=\frac{1}{2}$，同时易得$P(AB) = P(BC)= P(AC) =\frac{1}{4}$。所以 $A,B,C$ 两两独立，但是$P(ABC)=\frac{1}{4}\neq P(A)P(B)P(C)$，从而 $A,B,C$ 不相互独立。
+    一个均匀的正四面体，其第一面染成红色，第二面染成白色，第三面染成黑色，而第四面同时染上红，白，黑三种颜色．现在以$A,B,C$分别记投一次四面体出现红，白，黑颜色朝下的事件，则由于在四面体中有两面有红色，因此$P(A)=\frac{1}{2}$。同理$P(B)=P(C)=\frac{1}{2}$，同时易得$P(AB) = P(BC)= P(AC) =\frac{1}{4}$。所以$A,B,C$两两独立，但是$P(ABC)=\frac{1}{4}\neq P(A)P(B)P(C)$，从而$A,B,C$不相互独立。
 \end{example}
 
 \begin{definition}[事件域的独立性]
@@ -837,9 +932,9 @@
     \item （茆1.5.20）甲、乙、丙三人进行比赛，规定每局两个人比赛，胜者与第三人比赛，依次循环，直至有一人连胜两次为止，此人即为冠军.而每次比赛双方取胜的概率都是1/2，现假定甲、乙两人先比，试求各人得冠军的概率.
     \item （茆1.5.21）甲、乙两个赌徒在每一局获胜的概率都是1/2.两人约定谁先赢得一定的局数就获得全部赌本.但赌博在中途被打断了，请问在以下各种情况下，应如何合理分配赌本：
     \begin{enumerate}
-      \item 甲、乙两个赌徒都各需赢$k$局才能获胜；
-      \item 甲赌徒还需赢2局才能获胜，乙赌徒还需赢3局才能获胜；
-      \item 甲赌徒还需赢$n$局才能获胜，乙赌徒还需赢$m$局才能获胜.
+        \item 甲、乙两个赌徒都各需赢$k$局才能获胜；
+        \item 甲赌徒还需赢2局才能获胜，乙赌徒还需赢3局才能获胜；
+        \item 甲赌徒还需赢$n$局才能获胜，乙赌徒还需赢$m$局才能获胜.
     \end{enumerate}
     \item （李1.23）任意从数列$1,2,\cdots,N$中有放回地取出$n$个数并按大小排列成：$x_1\le x_2\le \cdots \le x_n$，试求$x_m=M$的概率。
     \item （李1.38）（赠券收集）食品厂把印有水浒108 将之一的画卡作为赠券装人某种儿童食品袋中，每袋一卡，试求购买$n$袋这种食品而能收齐全套画卡的概率。

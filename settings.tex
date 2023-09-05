@@ -6,9 +6,10 @@
 	\mathrel{\overset{#2}{\scalebox{#1}[1]{$\sim$}}}
 }
 \newcommand{\iidsim}{\widesim[2.33]{\mathrm{i.i.d.}}}	% independent and identically distributed
+\newcommand{\iid}{\, \mathrm{i.i.d.}}
 \newcommand{\indep}{\Vbar}		% independent
 \newcommand{\X}{\mathcal{X}}		% 
-\newcommand{\1}{\mathbbm{1}}				% indicator
+\newcommand{\1}[1]{\mathbbm{1}_{#1}}				% indicator
 \renewcommand{\P}{\mathbb{P}}				% probability
 \newcommand{\as}{\mathrm{a.s.}}				% almost surely
 \newcommand{\E}{\mathbb{E}}					% expectation
@@ -31,7 +32,7 @@
 \newcommand{\pd}{\partial}					% partial differential
 \newcommand{\p}[3][]{\frac{\pd^{#1}#2}{\pd{#3}^{#1}}}	% partial derivative
 \newcommand{\e}{\varepsilon}
-\newcommand{\st}{,\quad \mathrm{s.t.}\ }			% subject to, so that
+\newcommand{\st}{\, \mathrm{s.t.}\, }			% subject to, so that
 \newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
 \newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
 \newcommand{\N}{\mathcal{N}}				% normal, not natural numbers XD
@@ -40,6 +41,9 @@
 \newcommand{\textop}[1]{\relax\ifmmode\mathop{\text{#1}}\else\text{#1}\fi}
 \newcommand{\TT}{^{\mathrm T}}
 \newcommand{\U}{\mathrm{U}}
+
+\newcommand{\Uniform}{\mathrm{Uniform}}
+
 
 \renewcommand\arraystretch{2}
 

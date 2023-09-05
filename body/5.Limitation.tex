@@ -17,8 +17,25 @@
     则称$X_n$\textbf{几乎必然收敛}(converges almost surely)于$X$, 记为$X_n \xrightarrow{\as} X$。
 \end{definition}
 \begin{remark}
-    类似于微积分中逐点收敛的条件。考察满足条件$\lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \e$的样本点，这些样本点组成事件的概率为1。
+    类似于微积分中逐点收敛的条件。考察满足条件$\lim_{n \to \infty}\abs{ X_n(\omega) - X(\omega)} < \e$的样本点，这些样本点组成事件（可简记为$\{ \lim_{n \to \infty} X_n=X \}$）的概率为$1$。
 \end{remark}
+
+\begin{proposition}
+    几乎必然收敛的极限几乎处处相等。即若$X_n \xrightarrow{\as} X$且$X_n \xrightarrow{\as} X'$，则 
+    \[ \P(X=X')=1 \]
+\end{proposition}
+\begin{proof}
+    若对于$\omega \in \Omega$，满足$\lim_{n \to \infty} X_n(\omega)=X(\omega)$与$\lim_{n \to \infty} X_n(\omega)=X'(\omega)$，则有 $X(\omega)=X'(\omega)$。记
+    \begin{align*}
+        A &= \{ \omega \in \Omega: \lim_{n \to \infty} X_n(\omega)=X(\omega) \}, \\
+        B &= \{ \omega \in \Omega: \lim_{n \to \infty} X_n(\omega)=X'(\omega) \}
+    \end{align*}
+    则
+    \[ A \cap B \in \{ X=X' \} \]
+    故
+    \[ \P(X=X') \ge \P(A \cap B) = \P(A) + \P(B) - \P(A \cup B) \ge 1 \]
+    所以 $\P(X=X')=1$
+\end{proof}
 
 \subsection{依概率收敛}
 
@@ -37,6 +54,16 @@
 \end{figure*}
 
 对于几乎必然收敛的情况，每个样本点上的序列随机变量都在逐渐趋近收敛变量；而对于依概率收敛的情况，由于对某个样本点的概率为0（例如连续随机变量），可能某一次样本点的序列随机变量接近收敛变量，下一次又远离收敛变量，只要保证总体概率趋近$1$即可。
+
+\begin{theorem}[Borel-Cantelli定理]
+    在概率空间 $(\Omega,\mathcal{F},\P)$中，设 $\{ A_n \in \mathcal{F} \}$，
+    \begin{itemize}
+        \item 若 $\sum_{n=1}^{\infty} \P(A_n) < \infty$, 则
+        \[ \P(\limsup_{n \to \infty}A_n) = 0\]
+        \item 若$\{ A_n \}$是独立事件列，且 $\sum_{n=1}^{\infty} \P(A_n) = \infty$, 则
+        \[ \P(\limsup_{n \to \infty}A_n) = 1\]
+    \end{itemize}
+\end{theorem}
 
 \begin{proposition}
     依概率收敛是几乎必然收敛的\underline{必要条件}，但\underline{不是充分条件}。
@@ -330,8 +357,6 @@
 
 \section{大数定理}\label{sec:large_number}
 
-\subsubsection{大数定理}
-
 大数定律讨论的是在什么条件下，随机变量序列的算术平均依概率收敛到其均值
 的算术平均。
 
@@ -400,8 +425,8 @@
 \end{example}
 
 \begin{example}[样本方差]\label{ex:sample_var}
-    设随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.}$，并且均值和方差分别为$\mu,\sigma$。令：
-    \[ S_n^2=\frac1n\sum_{i=1}^n(X_i-\overline{X_n}) =(\frac1n\sum_{i=1}^nX_i^2)-\overline{X_n}^2 \]
+    设随机变量$X_1,\cdots ,X_n \iid$，并且均值和方差分别为$\mu,\sigma$。令：
+    \[ S_n^2=\frac1n\sum_{i=1}^n(X_i-\overline{X_n})^2 =(\frac1n\sum_{i=1}^nX_i^2)-\overline{X_n}^2 \]
     由于$g(x)=x^2$是连续函数，所以$\overline{X_n}^2 \xrightarrow{\P} \mu^2$。由于$X_1^2,\cdots X_n^2 \operatorname{i.i.d.}$，且$E(X_i^2)=\sigma^2+\mu^2$，所以$\overline{X_n^2} \xrightarrow{\P} \mu^2+\sigma^2$。因此：
     \[ S_n^2 \xrightarrow{\P}\mu^2+\sigma^2-\mu^2= \sigma^2 \]
 \end{example}
@@ -415,8 +440,6 @@
     若$X_n \sim F_{m,n}$，则$mX_n \xrightarrow{d} \chi^2_m$。
     令$U \sim \chi^2_m,V_1,\cdots ,V_n \sim \chi^2_1$相互独立，则$\frac{U/m}{(V_1+\cdots+V_n)/n} \sim F_{m,n}$。由于$E(V_i)=1$，所以$\overline{V_n} \xrightarrow{\P} 1$，所以$mF_{m,n}=\frac{U}{\overline{V_n}} \xrightarrow{d} \chi^2_m$（Slutsky定理\ref{cor:Slutsky}）。
 \end{example}
-
-\subsubsection{强大数定理}
 
 大数定律讨论的是在什么条件下，随机变量序列的算术平均几乎必然收敛到其均值的算术平均。
 
@@ -548,9 +571,8 @@
     其中$\mu_i$与$S_n$如前所述.
 \end{theorem}
 
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-\begin{table}[]
+\begin{table}[h]
+    \centering
     \begin{tabular}{@{}cccc@{}}
         \toprule
                    & 大数定律                                                           & 强大数定律   & 中心极限定理     \\ \midrule

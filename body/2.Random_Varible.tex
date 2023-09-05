@@ -489,6 +489,7 @@
 
 在统计学中，常需要转化原始数据以获取其中信息，由此引出了研究随机变量的函数的需要。
 
+%TODO: 待补 李书p158
 \begin{theorem}[随机变量的函数的分布]
     设$Y=g(X)$是随机向量$X=(X_1,X_2,\cdots ,X_n)$的函数，则$Y$的分布由$X$的分布通过下式决定：
     \[ \P\{Y \in B\} = \P\{X \in A\}, \quad A=\{ \omega |g(X(\omega))\in B\} \]
@@ -510,8 +511,30 @@
     泛化情况：若随机向量$\{X\}_n$各分量独立，则其变换$\{Y\}_n=g(\{X\}_n)$各分量也独立。
 \end{theorem}
 \begin{proof}
-    %TODO: 待补
+    %TODO: 待补 李书p174
 \end{proof}
+
+\begin{example}[不独立变量的函数独立]
+    设随机变量$X,Y$的联合概率质量函数为
+    \[ p(x,y)=\frac{1+xy}{4} \cdot \1{\abs{x},\abs{y}<1} \]
+    则其边缘分布分别为
+    \[ p_X(x)=\frac{1}{2} \cdot \1{\abs{x}<1},\quad p_Y(y)=\frac{1}{2} \cdot \1{\abs{y}<1} \]
+    即$X,Y$不独立。
+
+    考虑其变换$U=X^2,V=Y^2$，则其分布函数为
+    \begin{align*}
+        F_{U,V}(u,v) & =\P(X^2\le u,V^2\le v)=\P(-\sqrt{u}\le X\le \sqrt{u},-\sqrt{v}\le Y\le \sqrt{v})                                 \\
+                     & =\P(-\sqrt{u}< X\le \sqrt{u},-\sqrt{v}< Y\le \sqrt{v})                                                           \\
+                     & =F_{X,Y}(\sqrt{u},\sqrt{v})-F_{X,Y}(-\sqrt{u},\sqrt{v})-F_{X,Y}(\sqrt{u},-\sqrt{v})+F_{X,Y}(-\sqrt{u},-\sqrt{v}) \\
+    \end{align*}
+    其概率密度函数为
+    \begin{align*}
+        p_{U,V}(u,v) & =\frac{\partial^2}{\partial u \partial v}F_{U,V}(u,v)                                                                                         \\
+                     & =\frac{1}{4\sqrt{u}\sqrt{v}}[p_{X,Y}(\sqrt{u},\sqrt{v})+p_{X,Y}(-\sqrt{u},\sqrt{v})+p_{X,Y}(\sqrt{u},-\sqrt{v})+p_{X,Y}(-\sqrt{u},-\sqrt{v})] \\
+                     & =\frac{1}{4\sqrt{u}\sqrt{v}}                                                                                                                  \\
+    \end{align*}
+    即$U,V$不独立。
+\end{example}
 
 \subsection{分布函数法}
 
@@ -597,7 +620,7 @@
 
 \begin{theorem}[单变量函数的概率函数变换]
     设连续随机变量$X$的概率密度函数为$f_X(x)$，若随机变量$Y=g(X)$，其中$g$为可微函数，且\underline{严格单调}，则当$y=g(x)$有定义时，其概率密度函数为：
-    \[ f_Y(y)=f_X(g^{-1}(y))\left| \frac{dg^{-1}(y)}{dy} \right| \1_{(a,b)}(x) \]
+    \[ f_Y(y)=f_X(g^{-1}(y))\left| \frac{dg^{-1}(y)}{dy} \right| \1{(a,b)}(x) \]
     其中$a=\min\{g(-\infty),g(+\infty)\},b=\max\{g(-\infty),(+\infty)\}$。
 
     若$g$为分段单调函数，则计算单调\underline{分段}的以上结果，再进行相加。
@@ -616,7 +639,7 @@
               \end{align*}
     \end{itemize}
     由此得$Y$的密度函数为
-    \[ f_Y(y)=f_X(g^{-1}(y))\left| \frac{dg^{-1}(y)}{dy} \right| \1_{(a,b)}(x) \]
+    \[ f_Y(y)=f_X(g^{-1}(y))\left| \frac{dg^{-1}(y)}{dy} \right| \1{(a,b)}(x) \]
 
     同理可证当$g(x)$是严格单调减函数时，结论也成立。但此时$h'(y)<0$，须加绝对值符号，这时$a=g(+\infty),b=g(-\infty)$。
 \end{proof}
@@ -649,6 +672,18 @@
         f_{Z}(z)      & = \int_{-\infty}^{\infty} f_{X,Y}(\frac{z}{v},v)\left| \frac{1}{v} \right| \d v
     \end{align*}
 \end{solution}
+
+\begin{table}
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        $Z=$      & $X+Y$                                 & $X-Y$                                 & $XY$                                                                      & $X/Y$                                 \\
+        \midrule
+        $f_Z(z)=$ & $\int_{-\infty}^{\infty}f(t,z-t)\d t$ & $\int_{-\infty}^{\infty}f(t,t-z)\d t$ & $\int_{-\infty}^{\infty} f(\frac{z}{t},t)\left| \frac{1}{t} \right| \d t$ & $\int_{-\infty}^{\infty}|t|f(zt,t)dt$ \\
+        \bottomrule
+    \end{tabular}
+    \caption[short]{加减乘除的概率密度函数变换}
+\end{table}
 
 \begin{proposition}
     若随机向量$\mathbf{X}=(X_1,\cdots ,X_n)$各分类相互独立, 则其各分量的函数$\mathbf{Y}=(g_1(X_1),\cdots ,g_n(X_n))$也相互独立
@@ -717,7 +752,7 @@
     \[ f_{ij}(y,z)=\frac{n!}{(i-1)!(j-i-1)!(n-j)!}[F(y)]^{i-1}[F(z)-F(y)]^{j-i-1} [1-F(z)]^{n-j}f(y)f(z),\ y \le z \]
 \end{proposition}
 \begin{proof}
-    对正$\Delta y,\Delta z$以及$y<z$,事件``$x_{(i)}\in(y,y+\Delta y],x_{(j)}\in(z,z+\Delta z] $''可以表示为``容量为$n$的样本$x_1,\dotsc,x_n$中有$i-1$个观测值小于等于$y$,一个落入区间$(y,y+\Delta y],j-i-1$个落入区间$(y+\Delta y,z] $,一个落入区间$(z,z+\Delta z] $,而余下$n-j$个大于$z+\Delta z$''(见图~\ref{fig:5.3.6} ).
+    对正$\Delta y,\Delta z$以及$y<z$,事件$x_{(i)}\in(y,y+\Delta y],x_{(j)}\in(z,z+\Delta z] $''可以表示为容量为$n$的样本$x_1,\dotsc,x_n$中有$i-1$个观测值小于等于$y$,一个落入区间$(y,y+\Delta y],j-i-1$个落入区间$(y+\Delta y,z] $,一个落入区间$(z,z+\Delta z] $,而余下$n-j$个大于$z+\Delta z$''(见图~\ref{fig:5.3.6} ).
     \begin{figure}[!ht]
         \centering
         \begin{tikzpicture}[semithick]
@@ -742,8 +777,11 @@
     若$X_1,X_2,\dotsc,X_n$独立同分布, 求$R=X_{(n)}-X_{(1)}$的分布
 \end{example}
 \begin{solution}
-    \[ f_{X_{(1)}X_{(n)}}(s,t)=n(n-1)f(s)f(t)[F(t)-F(s)]^{n-2}\mathbb{I}(s\le t) \]
-    \[ f_R(r)=\mathbb{I}(r>0)\int_{-\infty}^{\infty}f_{X_{(1)}X_{(n)}}(s,s+r)ds \]
+    \begin{align*}
+        f_{X_{(1)}X_{(n)}}(s,t) &=n(n-1)f(s)f(t)[F(t)-F(s)]^{n-2}\1{s\le t} \\
+        f_R(r) &=\1{r>0} \int_{-\infty}^{\infty}f_{X_{(1)}X_{(n)}}(s,s+r)ds \\
+        &=\1{r>0} n(n-1)\int_{-\infty}^{\infty}f(x)f(x+r)[F(x+r)-F(x)]^{n-2}dx
+    \end{align*}
 \end{solution}
 
 \begin{problemset}[错题记录]
@@ -751,7 +789,7 @@
     \item （茆3.1.1）100件产品中有50件一等品，30件二等品，20件三等品。从中抽取 5 件，以$X$、$Y$分别表示取出的 5 件中一等品、二等品的件数，在以下情况下求$(X,Y)$的联合分布列：(1)不放回抽取；（2）有放回抽取。
     \item （茆3.1.7）设二维随机变量$(X,Y)$的联合密度函数为
     \[ p(x, y)=\begin{cases}
-            4 x y, & 0<x<1,0<y<1,  \\
+            4 x y, & 0<x<1,0<y<1, \\
             0,     & \text{其他} .
         \end{cases}	\]
     试求
@@ -762,7 +800,7 @@
     \item （茆3.1.12）设二维随机变量$(X,Y)$的联合密度函数为
     \[
         p(x,y)=\begin{cases}
-            x^2+\frac{xy}{3}, & 0<x<1,0<y<2;  \\
+            x^2+\frac{xy}{3}, & 0<x<1,0<y<2; \\
             0,                & \text{其他} .
         \end{cases}
     \]

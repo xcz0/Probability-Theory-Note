@@ -433,7 +433,7 @@ Poisson分布的特征：
 均匀分布的特征：
 \begin{description}
     \item[参数] $a<b , \quad a,b \in \mathbb{R} $
-    \item[概率质量函数] $p(x)=\frac1{b-a}\1_{\{ a < x < b \}}(x)$
+    \item[概率质量函数] $p(x)=\frac1{b-a}\1{\{ a < x < b \}}(x)$
     \item[分布函数]  $ F(x) = \begin{cases}
                 0,               & x < a ;      \\
                 \frac{x-a}{b-a}, & a \le x < b; \\
@@ -546,7 +546,7 @@ Gamma函数的特征：
 
 \begin{definition}[伽玛分布]
     若随机变量$X$的密度函数为
-    \[ p(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\ee^{-\lambda x}\1_{\{ x \ge 0 \}}(x) \]
+    \[ p(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}\ee^{-\lambda x}\1{\{ x \ge 0 \}}(x) \]
     则称$X$服从\textbf{伽玛分布}，记作$X \sim \Gamma(\alpha,\lambda)$，其中称$\alpha>0$为\underline{形状参数}，$\lambda>0$为\underline{尺度参数}。
 \end{definition}
 
@@ -661,7 +661,7 @@ Gamma分布的特征：
 
 \begin{definition}
     若随机变量$X$的密度函数为
-    \[ p(x) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}            x^{a-1}(1-x)^{b-1}\1_{\{0< x < 1 \}}(x) \]
+    \[ p(x) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}            x^{a-1}(1-x)^{b-1}\1{\{0< x < 1 \}}(x) \]
     则称$X$服从\textbf{贝塔分布}，记作$X\sim Be(a,b)$，其中$a>0,b>0$都是\underline{形状参数}。
 \end{definition}
 
@@ -744,6 +744,10 @@ Beta分布的特征：
 \begin{proof}
     %TODO 李P182习题38
 \end{proof}
+
+\begin{proposition}
+    若 $X_1,X_2,\cdots,X_n \iidsim \Uniform(0,1)$，则$X_{(i)} \sim \beta(i,n-i+1) $
+\end{proposition}
 
 \subsection{柯西分布}
 

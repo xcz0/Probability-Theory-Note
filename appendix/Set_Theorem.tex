@@ -51,8 +51,17 @@
         \varliminf_{n \to \infty}A_n =\lim_{n \to \infty} B_n = \bigcup_{n=1}^{\infty} B_n= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{+\infty}A_k \\
         \varlimsup_{n \to \infty}A_n =\lim_{n \to \infty} B'_n = \bigcap_{n=1}^{\infty} B'_n= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{+\infty}A_k
     \end{align*}
-    分别称其为$\{ A_n \}$的\textbf{上极限}与\textbf{下极限}
+    分别称其为$\{ A_n \}$的\textbf{下极限}与\textbf{上极限}
 \end{definition}
+
+\begin{proposition}
+    对于任意给定的一个集合序列$\{ A_n \}$，有
+    \begin{align*}
+        \varlimsup_{n \to \infty}A_n =& \{ \omega \in \Omega : \exists k_n \st \omega \in A_{k_n}, n>1 \}  \\
+        \varliminf_{n \to \infty}A_n =& \{ \omega \in \Omega : \exists N>0 \st \omega \in A_n, n>N \}
+    \end{align*}
+    其中 $k_n$是一个自然数子列。
+\end{proposition}
 
 显然，记号$x \in \varlimsup_{n \to \infty}A_n $意味元素$x$属于序列$\{ A_n \}$中的无穷多个集合，而记号$x \in \varliminf_{n \to \infty}A_n $，则表明除去$\{ A_n \}$中的有限个集合外，元素$x$属于该序列的其余集合．于是我们有
 \[ \varliminf_{n \to \infty}A_n \subseteq  \varlimsup_{n \to \infty}A_n \]
@@ -70,3 +79,6 @@
     \[\left\{ x:g(x) \in B_1 \right\} \in \mathcal{B}_1 \]
     其中$\mathcal{B}_1$为$\R$上Borel $\sigma$域，则称$g(x)$是一元博雷尔函数, 也称为一元\textbf{可测函数}
 \end{definition}
+
+
+

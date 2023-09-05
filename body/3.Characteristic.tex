@@ -17,6 +17,14 @@
 
 %期望算子$\E$是一个线性泛函, 仅适用于\underline{可积}的随机变量.
 
+\begin{theorem}
+    对于实值随机向量$X :(\Omega,\mathscr{F},\P) \to(\R,\mathscr{B}_{\R})$和(可测)函数$g : \Rn \to \R$，设 $Y=g(X)$，则有
+    \[ \E[g(X)] = \E[Y] \]
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
 \begin{proposition}[期望的线性性质]
     由积分的线性性质可得：均值为随机变量的线性映射，即
     \[ \E(a+\sum_{i=1}^n b_i g(X_i))=a+\sum_{i=1}^n b_i \E(g(X_i)) \]
@@ -124,7 +132,7 @@
 \end{proposition}
 
 \begin{proposition}
-    \[ \operatorname{Var}(a+\sum_{i=1}^n b_i X_i)=\sum_{i=1}^n b_i^2 \operatorname{Var}(X_i)+\mathbf{b}^{\mathrm{T}} \Sigma \mathbf{b}\]
+    \[ \operatorname{Var}(a+\sum_{i=1}^n b_i X_i)=\mathbf{b}^{\mathrm{T}} \Sigma \mathbf{b}\]
     其中$\Sigma$为协方差矩阵,$\Sigma_{i,j}=\operatorname{Cov}(X_i,X_j)$
 \end{proposition}
 \begin{proof}
@@ -170,6 +178,8 @@
     \item \textbf{标准化}(standardization)$X \mapsto \dfrac{X-\E{X}}{\sqrt{\Var(X)}}$.
 \end{itemize}
 
+\section{协方差与相关系数}
+
 \subsection{协方差}
 
 协方差代表了$X$与$Y$之间的联合变化倾向，或者说他们间的相关程度，但其间\underline{未必有}因果关系。
@@ -194,9 +204,16 @@
     设随机变量$X \sim N(0,\sigma^2)$，令$Y=X^2$，则$X$与$Y$不独立。此时$X$与$Y$的协方差为
     \[ \Cov(X, Y)=\Cov(X, X^2)=E(X\cdot X^2)-E(X)E(X^2) \]
     由于正态分布$N(0,\sigma^2)$的奇数阶原点矩均为零，即$E(X)=E(X^3)=0$，故上式也等于零。
-
-    例子表明：“独立”必导致“不相关”；而“不相关”不一定导致“独立”。因为独立性是用分布定义的，而不相关只是用矩定义的。
 \end{example}
+
+“独立”必导致“不相关”；而“不相关”不一定导致“独立”。因为独立性是用分布定义的，而不相关只是用矩定义的。
+
+\begin{proposition}
+    若 $X, Y$皆为二值随机变量，则不相关性与独立性等价。
+\end{proposition}
+\begin{proof}
+    设
+\end{proof}
 
 \begin{proposition}\label{prop:cov_property}
     协方差的运算性质：
@@ -471,7 +488,14 @@
     \[ E|X-m| \le E|X-c| \]
 \end{proposition}
 \begin{proof}
-    
+    设 $g(m)=E\abs{X-m}$，则
+    \begin{align*}
+        E\abs{X-m} &= \int^m_{-\infty}(m-x)\d F(x) + \int_m^{\infty}(x-m)\d F(x) \\
+        &= (m-x)F(x)|^m_{-\infty} + \int^m_{-\infty} F(x) \d x + \int_m^{\infty}x\d F(x) - m(1-F(x)) \\
+        g'(m) &= F(m) - mF'(m) -1 +F(m)+mF'(m) \\
+        &=2F(m)-1
+    \end{align*}
+    所以，当 $m=F^{-1}(\frac{1}{2})$时，$g(m)$最小，即$m$是$X$的中位数。
 \end{proof}
 
 \begin{proposition}
@@ -629,6 +653,26 @@
     \[ \mu_1 = 0,\quad \mu_2 = \sigma^2,\quad \mu_3 = 0,\quad \mu_4 = 3\sigma^4 \]
     又因为$E(X)=0$，所以有原点矩等于中心矩，即$\mu_k=\nu_k,k=1,2,\cdots$.
 \end{example}
+
+\begin{proposition}[矩存在的必要条件]
+    若 $EX^k(k>0)$存在，则有
+    \[ \lim_{x \to \infty}x^k[1-F(x)]=0, \quad \lim_{x \to -\infty}\abs{x}^kF(x)=0 \]
+\end{proposition}
+\begin{proof}
+    若 $EX^k(k>0)$存在，则
+    \[ E\abs{X}^k = \lim_{n \to \infty} \int_{-\infty}^{n}\abs{X}^k \d F(x) < +\infty \]
+    所以
+    \[ \lim_{n \to \infty}\left[ E\abs{X}^k - \int_{-\infty}^{n}\abs{X}^k \d F(x) \right]  = \lim_{n \to \infty} \int_{n}^{+\infty}\abs{X}^k \d F(x) = 0\]
+    又由于
+    \[ 0 \le n^k[1-F(n)] \le \int_{n}^{+\infty}\abs{X}^k \d F(x) ,\quad n>0 \]
+    两边取$n \to \infty$，则可得出$\lim_{x \to \infty}x^k[1-F(x)]=0$
+
+    同理有
+    \[ \lim_{n \to -\infty} \int_{-\infty}^{n}\abs{X}^k \d F(x) = 0 \]
+    及
+    \[ 0 \le \abs{n}^kF(n) \le \int_{-\infty}^{n}\abs{X}^k \d F(x) ,\quad n<0 \]
+    两边取$n \to -\infty$，则可得出$\lim_{x \to -\infty}\abs{x}^kF(x)=0$
+\end{proof}
 
 \subsection{矩母函数}
 
