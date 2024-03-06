@@ -13,7 +13,7 @@
     \textbf{随机试验}(trial)可能出现的\underline{基本}结果称为\textbf{样本点}(sample point)，记为$\omega$；样本点的全体构成\textbf{样本空间}(sample space)，记为$\Omega=\{ \omega \}$。
 \end{definition}
 
-\begin{definition}[离散样本空间]
+\begin{definition}[离散样本空间]\label{def:discrete_sample_space}
     若样本空间中包含至多可数个样本点，则称其为\textbf{离散样本空间}。
 \end{definition}
 
@@ -140,13 +140,17 @@
     \[ (\Omega, \{\emptyset, A, A^{\complement}, \Omega\},\P) \]
     其中
     \[ P(\emptyset) = 0,\ P(A)= p,\ P(A^{\complement})= 1 - p,\ P(\Omega)=1 \]
-    称这个概率空间为\textbf{Bernouli概率空间}
+    称这个概率空间为\textbf{Bernouli概率空间}。
+
+    若 $p=1$ ，即 $\P(A)=1$ ，则称 $A$ 为\textbf{几乎必然事件}。
 \end{example}
 
 \begin{example}[离散概率空间]
-    把样本空间的结果分类为$\{ \Omega_n \}$。事件域为$\sigma(\{ \Omega_n \})$。用和为$1$的非负数列$\{ p_n \}$定义 
-    \[ \P(\Omega_n)=p_n \]
-    称这个概率空间$(\Omega, \sigma(\{ \Omega_n \}),\P)$为\textbf{离散概率空间}
+    设$\{ \Omega \}$是离散样本空间（定义\ref{def:discrete_sample_space}）。事件域取其全体子集$\mathcal{F}=\sigma(\{ \Omega \})$。给每个样本点 $\omega \in \Omega$ 赋予一个非负实数 $p(\omega)$。保证
+    \[ \sum_{\omega \in \Omega} p(\omega)=1 \]
+    并且对任意事件 $A \in \mathcal{F}$ 定义
+    \[ \P(A)=\sum_{\omega \in A} p(\omega) \]
+    则称这个概率空间$(\Omega, \sigma(\{ \Omega_n \}),\P)$为\textbf{离散概率空间}。
 \end{example}
 
 有些随机实验可以通过概率空间描述，有些则不能。例如，从自然数集中等可能地取一个数。若此概率为一常数，则由可列可加性得$P(\Omega)=\infty$；若为零，则$P(\Omega)=0$。故此实验不可通过概率空间描述。

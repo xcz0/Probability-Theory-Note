@@ -1,0 +1,123 @@
+\chapter{测度论基础}
+
+简而言之，测度论可以理解为在抽象空间建立类似于实变函数中测度、积分和导数那样的分析系统。
+
+\section{可测空间和可测映射}
+
+\subsection{集合及其运算}
+
+考虑一个任意非空集合$X$，称之为\textbf{空间}。$X$的子集以$A.B,C,\cdots $等记之，称之为这个空间的\textbf{集合}。空集记为$\emptyset$。$X$的成员称为\textbf{元素}。元素$x$属于集合$A$，记作$x \in A$；反之，元素$x$不属于集合$A$，则用记号$x \notin A$来表示。
+
+\begin{definition}[集合的运算]
+    给定集合$A$和$B$，集合
+    \begin{description}
+        \item[余] $A^{\complement} := \{ x \in X | x \notin A \}$
+        \item[并] $A \cup B := \{ x | (x \in A)\vee(x \in B) \}$
+        \item[交] $A \cap B := \{ x | (x \in A)\wedge(x \in B) \}$
+        \item[差] $A \setminus B := \{ x | (x \in A)\wedge(x \notin B) \}$
+        \item[对称差] $A \bigtriangleup B := (A \setminus B)\cup (B \setminus A)$
+    \end{description}
+\end{definition}
+
+\begin{definition}[集合的极限]
+    设$\{ A_n \}$是一个集合序列,
+    \begin{enumerate}
+        \item 若
+              \[ \forall n \in N_+ ,\quad A_{n+1} \subseteq A_n \]
+              则称$\{ A_n \}$为\textbf{非降}的，记为$A_n\uparrow$, 并称
+              \[ \lim_{n \to \infty}A_n := \bigcup_{n=1}^{+\infty}A_n \]
+              为它的\textbf{极限}.
+        \item 若
+              \[ \forall n \in N_+ ,\quad A_{n} \subseteq A_{n+1} \]
+              则称$\{ A_n \}$为\textbf{非增}的，记为$A_n\downarrow$, 并称
+              \[ \lim_{n \to \infty}A_n := \bigcap_{n=1}^{+\infty}A_n \]
+              为它的\textbf{极限}.
+    \end{enumerate}
+    非降或非增的集合序列统称为\textbf{单调序列}．因此，\underline{单调集合序列总有极限}.
+\end{definition}
+
+\begin{definition}[上极限与下极限]
+    对于任意给定的一个集合序列$\{ A_n \}$, 集合序列$\{B_n= \bigcap_{k=n}^{+\infty}A_k \}$与$\{B'_n=  \bigcup_{k=n}^{+\infty}A_k \}$分别是非降和非增的，因而分别有极限:
+    \begin{align*}
+        \varliminf_{n \to \infty}A_n =\lim_{n \to \infty} B_n = \bigcup_{n=1}^{\infty} B_n= \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{+\infty}A_k \\
+        \varlimsup_{n \to \infty}A_n =\lim_{n \to \infty} B'_n = \bigcap_{n=1}^{\infty} B'_n= \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{+\infty}A_k
+    \end{align*}
+    分别称其为$\{ A_n \}$的\textbf{下极限}与\textbf{上极限}
+\end{definition}
+
+\begin{proposition}
+    对于任意给定的一个集合序列$\{ A_n \}$，有
+    \begin{align*}
+        \varlimsup_{n \to \infty}A_n =& \{ \omega \in \Omega : \exists k_n \st \omega \in A_{k_n}, n>1 \}  \\
+        \varliminf_{n \to \infty}A_n =& \{ \omega \in \Omega : \exists N>0 \st \omega \in A_n, n>N \}
+    \end{align*}
+    其中 $k_n$是一个自然数子列。
+\end{proposition}
+
+显然，记号$x \in \varlimsup_{n \to \infty}A_n $意味元素$x$属于序列$\{ A_n \}$中的无穷多个集合，而记号$x \in \varliminf_{n \to \infty}A_n $，则表明除去$\{ A_n \}$中的有限个集合外，元素$x$属于该序列的其余集合．于是我们有
+\[ \varliminf_{n \to \infty}A_n \subseteq  \varlimsup_{n \to \infty}A_n \]
+
+\begin{definition}
+    如果$\varliminf_{n \to \infty}A_n = \varlimsup_{n \to \infty}A_n$, 则认为$\{ A_n \}$的极限存在, 并且将
+    \[ \lim_{n \to \infty}A_n := \varliminf_{n \to \infty}A_n = \varlimsup_{n \to \infty}A_n \]
+    称为它的\textbf{极限}.
+\end{definition}
+
+\subsection{集合系}
+
+\begin{definition}[可测函数]
+    设$y =g(x)$是$\R$到$\R$上的一个映照，若对于一切$\R$中的Borel点集$B_1$均有
+    \[\left\{ x:g(x) \in B_1 \right\} \in \mathcal{B}_1 \]
+    其中$\mathcal{B}_1$为$\R$上Borel $\sigma$域，则称$g(x)$是一元博雷尔函数, 也称为一元\textbf{可测函数}
+\end{definition}
+
+\subsection{可测函数}
+
+\begin{definition}[逆象]\label{def:inverseimage}
+    设 $f$ 是由集合 $X$ 到集合 $Y$ 的一个映射，记为 $f: X \to Y$
+    $B$ 是 $Y$ 的一个子集，则称
+    \[ f^{-1}(B):= \{ x \in X|f(x) \in B \} \]
+    是 $B$ 在 $f$ 下的\textbf{逆象}。
+\end{definition}
+
+\begin{theorem}
+    设 $f: X \to Y$ 是映射，那么
+    \begin{itemize}
+        \item $f^{-1}(\emptyset)=\emptyset,\ f^{-1}(Y)=X$
+        \item 若 $B\subseteq Y $ 则 $f^{-1}(B^{\complement})=(f^{-1}(B))^{\complement}$
+        \item 若 $\{ B_i,i \in I \}$ 是 $Y$ 的一个子集族，则
+        \begin{align*}
+        f^{-1} \biggl( \bigcap_{i \in I}B_i \biggr)=\bigcap_{i \in I}f^{-1}(B_i) \\
+        f^{-1} \biggl( \bigcup_{i \in I}B_i \biggr)=\bigcup_{i \in I}f^{-1}(B_i)
+        \end{align*}
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}\label{def:indicator_function}
+    空间$X$上定义的实函数
+    \[ I_{A}(x)=\begin{cases}
+            1, \quad x \in A \\
+            0, \quad x \notin A
+        \end{cases} \]
+    称为$A$的\textbf{指示函数}。
+\end{definition}
+
+\begin{proposition}
+    若 $B\subseteq Y $ 则
+    \[ \1{f^{-1}(B)}=\1{B} \circ f \]
+\end{proposition}
+
+\begin{definition}[可测函数]
+    
+\end{definition}
+
+% \begin{definition}[随机变量]
+%     设 $(\Omega,\mathcal{F},\P)$ 是概率空间，若函数 $X : \Omega \to \R$ 对于任意 $x \in \R$ 都有
+%     \[ \{ X \le x \} := \{ \omega \in \Omega|X(\omega) \le x \} \in \mathcal{F} \]
+%     则称 $X$ 是一个\textbf{随机变量}。
+% \end{definition}
+
+\begin{definition}[可测性]
+    设所有值得关心的$B\subset \mathcal{X}$组成$\mathscr{F}_{\mathcal{X}}$，且$\forall B \in \mathscr{F}_{\mathcal{X}}$都满足$X^{-1}(B) \in \mathscr{F}$，则称$X$为$\mathscr{F}/\mathscr{F}_{\mathcal{X}}$\textbf{可测的}。当$\mathscr{F}_{\mathcal{X}}$不引起混淆时，简记为关于$\mathscr{F}$\textbf{可测}，写作$X \in \mathscr{F}$。
+\end{definition}
+

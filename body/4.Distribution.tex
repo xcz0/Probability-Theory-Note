@@ -453,7 +453,7 @@ Poisson分布的特征：
 \begin{definition}
     若随机变量X的密度函数（见图\ref{fig:exponential_pdf}）为
     \[ p(x) = \lambda e^{-\lambda x} \1(x \ge 0) \]
-    则称$X$服从\textbf{指数分布}（Exponential distribution），记作$X\sim Exp(\lambda)$，其中参数$\lambda>0$。指数分布的分布函数为
+    则称$X$服从\textbf{指数分布}（Exponential distribution），记作$X\sim \Exp(\lambda)$，其中参数$\lambda>0$。指数分布的分布函数为
     \[ F(x) = (1 - e^{-\lambda x})\1(x \ge 0) \]
 \end{definition}
 
@@ -601,7 +601,7 @@ Gamma分布的特征：
 \end{description}
 
 \begin{proposition}\label{prop:sum_of_Gamma}
-    $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=E(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \overset{\text{i.i.d.}}{\sim} E(\lambda)$，则$Y=X_1+\cdots+X_k \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \overset{\text{i.i.d.}}{\sim} \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
+    $\Gamma$分布是指数分布的泛化，即$\Gamma(1,\lambda)=\Exp(\lambda)$。进一步有：若随机变量$X_1,\cdots ,X_k, \overset{\text{i.i.d.}}{\sim} E(\lambda)$，则$Y=X_1+\cdots+X_k \sim \Gamma(k,\lambda)$。更进一步有：若随机变量$X_1',\cdots ,X_k', \overset{\text{i.i.d.}}{\sim} \Gamma(\alpha_i,\lambda)$，则$Y'=X_1'+\cdots+X_k'  \sim \Gamma(\alpha_1+\cdots +\alpha_k,\lambda)$。
 \end{proposition}
 \begin{proof}
     \begin{align*}
@@ -610,7 +610,7 @@ Gamma分布的特征：
     \end{align*}
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{prop:times_of_Gamma}
     若令随机变量$X \sim \Gamma(\alpha,\lambda)$，则$cX \sim \Gamma(\alpha,\frac{\lambda}{c}), \quad c>0$
 \end{proposition}
 \begin{proof}
@@ -824,7 +824,7 @@ Beta分布的特征：
 \end{proof}
 
 \begin{proposition}
-    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim C(\mu_i,\sigma_i)$，则其和$Y=X_1+\cdots +X_k \sim N(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i)$
+    若独立随机变量$X_1,\cdots ,X_k$满足$ X_i \sim C(\mu_i,\sigma_i)$，则其和$Y=X_1+\cdots +X_k \sim C(\sum_{i=1}^k\mu_i,\sum_{i=1}^k\sigma_i)$
 \end{proposition}
 
 \begin{proof}
@@ -879,21 +879,27 @@ Beta分布的特征：
 \end{proof}
 
 \begin{corollary}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_k)/k \sim N(\mu,\frac{\sigma^2}{k})$
+    若随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim N(\mu,\sigma^2)$，则其平均$\overline{X}=(X_1+\cdots +X_n)/n \sim N(\mu,\frac{\sigma^2}{n})$，即$\sqrt{n}(\overline{X_n}-\mu)/\sigma \sim N(0,1)$
 \end{corollary}
 
-\begin{theorem}\label{thm:normal_sample_mean_variance}
-    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d} \sim N(\mu,\sigma^2)$，并且定义其样本均值为$\overline{X_n}=\frac{1}{n}\sum_{i=1}^n X_i$，其样本方差为$S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\overline{X_n})^2$，则有以下关系：
+\begin{theorem}[fisher引理]\label{thm:fisher_lemma}
+    若随机变量$X_1,\cdots ,X_k \operatorname{i.i.d} \sim N(\mu,\sigma^2)$，并且定义其样本均值为$\overline{X}_n=\frac{1}{n}\sum_{i=1}^n X_i$，其样本方差为$S_n^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\overline{X}_n)^2$，则有以下关系：
     \begin{enumerate}
-        \item $\overline{X_n} \sim N(\mu,\frac{\sigma^2}{n})$，即$\sqrt{n}(\overline{X_n}-\mu)/\sigma \sim N(0,1)$
-        \item 随机变量$\overline{X_n}$与随机向量$(X_1-\overline{X_n},\cdots ,X_n-\overline{X_n})$独立
-        \item $\overline{X_n},S_n^2$独立
-        \item $\frac{(n-1)S_n^2}{\sigma} \sim \chi_n$
-        \item $\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$
+        \item 随机变量$\overline{X}_n$与随机向量$(X_1-\overline{X}_n,\cdots ,X_n-\overline{X}_n)$独立
+        \item $\overline{X}_n,S_n^2$独立
+        \item $\frac{(n-1)S_n^2}{\sigma} \sim \chi_n^2$
+        \item $\frac{\sqrt{n}(\overline{X}_n-\mu)}{S_n} \sim t_{n-1}$
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    %TODO
+    由于
+    \begin{align*}
+        \Cov(\bar{X},X_k-\bar{X})&=\Cov(\frac1{n}\sum_{i=1}^n X_i,X_k-\frac1{n}\sum_{j=1}^n X_j)\\
+        &=\frac1{n} \Var(X_k)-\frac1{n^2} \sum_{i=1}^n \Var(X_i)\\
+        &=0
+    \end{align*}
+    故 $\overline{X}_n$与随机向量$(X_1-\overline{X}_n,\cdots ,X_n-\overline{X}_n)$不相关。然而它们都是正态分布，不相关与独立等价。
+    TODO
 \end{proof}
 
 \subsection{卡方分布}
@@ -905,17 +911,14 @@ Beta分布的特征：
 卡方分布的特征：
 \begin{description}
     \item[参数] $n \in \mathbb{N}_+$
-    \item[概率密度函数] $p(x)=\begin{cases}
-                \frac{(1/2)^{\frac n2}}{\Gamma(n/2)}y^{\frac n2-1}\ee^{-\frac y2} & y>0         \\
-                0                                                                 & \text{其他}
-            \end{cases}$
+    \item[概率密度函数] $p(x)= \frac{(1/2)^{\frac n2}}{\Gamma(n/2)}x^{\frac n2-1}\ee^{-\frac x2} \1{y>0} $
     \item[矩母函数] $M(t)=(\frac{1}{1-2t})^{\frac{n}{2}}$
     \item[均值] $\mu=n$
     \item[方差] $\sigma^2=2n$
     \item[实例]
 \end{description}
 
-该密度函数的图像是一个只取非负值的偏态分布,见图~\ref{fig:5.4.1}。
+该密度函数的图像是一个只取非负值的偏态分布,见图~\ref{fig:chi_square_pdf}。
 \begin{figure}[!ht]
     \centering
     \begin{tikzpicture}[>=stealth,semithick,xscale=0.45,yscale=30,samples=500]
@@ -931,11 +934,12 @@ Beta分布的特征：
         \draw(5.62,0.12)--(12,0.12)node[right=-2pt]{$n=6$};
         \draw(11.8,0.07)--(16,0.07)node[right=-2pt]{$n=10$};
     \end{tikzpicture}
-    \caption{$\chi^2(n)$分布的密度函数}\label{fig:5.4.1}
+    \caption{$\chi^2(n)$分布的密度函数}\label{fig:chi_square_pdf}
 \end{figure}
 
-\begin{proposition}
-    若 $X\sim N(0,1)$，则$X^2\sim Ga(1/2,1/2)$
+TODO
+\begin{proposition}[卡方分布与gamma分布的联系]\label{prop:chi_square_gamma}
+    若 $X \sim \chi^2(n)$，则$\chi^2(n) \sim \Gamma(n/2,1/2)$
 \end{proposition}
 \begin{proof}
     \begin{align*}
@@ -950,12 +954,19 @@ Beta分布的特征：
     若随机变量$X_1,\cdots ,X_k, \operatorname{i.i.d.} \sim \chi^2_{n_i}$，则$Y=X_1+\cdots+X_k  \sim \chi^2_{n_1+\cdots +n_k}$。
 \end{corollary}
 \begin{proof}
-    %TODO \ref{prop:sum_of_Gamma}
+    由命题\ref{prop:sum_of_Gamma}，即Gamma分布的可加性易得
+\end{proof}
+
+\begin{corollary}
+    若随机变量 $X \sim \Exp(1)$，则 $2X \sim \chi^2(2)$
+\end{corollary}
+\begin{proof}
+    由命题\ref{prop:sum_of_Gamma}，即Gamma分布的可加性易得；与命题\ref{prop:times_of_Gamma}Gamma分布的数乘性易得。
 \end{proof}
 
 \subsection{F分布}
 
-\begin{definition}{}{}
+\begin{definition}[F分布]
     设独立随机变量$X_1\sim\chi^2(m),X_2\sim\chi^2(n)$，则称$F=\frac{X_1/m}{X_2/n}$的分布是自由度为$m$与$n$的\textbf{F分布}，记为$F\sim F(m,n)$,其中$m$称为\underline{分子自由度}，$n$称为\underline{分母自由度}。
 \end{definition}
 
@@ -1018,7 +1029,7 @@ F分布的特征：
 
 \subsection{t分布}
 
-\begin{definition}
+\begin{definition}[t分布]
     设随机变量$Z \sim N(0,1)$与$U \sim\chi^2_n$独立，则称$t=\frac{Z}{\sqrt{U/n}}$的分布为自由度为$n$的\textbf{t分布},记为$t \sim t_n$.
 \end{definition}
 
@@ -1074,7 +1085,7 @@ t分布的特征：
 
 \subsection{多元正态分布}
 
-\begin{definition}
+\begin{definition}[多元正态分布]
     若$n$维随机向量$\mathbf{X}=(X_1,X_2,\ldots,X_n)'$的联合密度函数为：
     \[ f(\mathbf{x})=f(x_1,\ldots,x_n)=\frac1{(2\pi)^{\frac{n}{2}} |\Sigma|^{\frac1{2}} }\exp\left\{ -\frac1{2}(\mathbf{x}-\mathbf{\mu})'\Sigma^{-1}(\mathbf{x}-\mathbf{\mu}) \right\} \]
     其中$\Sigma$为对称非负定矩阵，则称$\mathbf{X}$满足$n$元正态分布，记为 $\mathbf{X}\sim N(\mathbf{\mu},\Sigma)$

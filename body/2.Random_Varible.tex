@@ -10,21 +10,25 @@
     \item 次序随机变量
 \end{introduction}
 
+\section{随机变量的定义}
+
 在概率论中，主要关心$X$取值于数值集合$\mathcal{X}$中某个子集$B$的可能性，即希望得到$\P(\{\omega\in\Omega : X(\omega) \in B\})$。概率论不关心具体的样本点$\omega\in\Omega$，而关注其集合$\{\omega\in\Omega : X(\omega) \in B\}$，将其记为$X^{-1}(B)$。由于$\P$定义在$\mathscr{F}$上，故需$X^{-1}(B) \in \mathscr{F}$。
 
-\begin{definition}[可测性]
-    设所有值得关心的$B\subset \mathcal{X}$组成$\mathscr{F}_{\mathcal{X}}$，且$\forall B \in \mathscr{F}_{\mathcal{X}}$都满足$X^{-1}(B) \in \mathscr{F}$，则称$X$为$\mathscr{F}/\mathscr{F}_{\mathcal{X}}$\textbf{可测的}。当$\mathscr{F}_{\mathcal{X}}$不引起混淆时，简记为关于$\mathscr{F}$\textbf{可测}，写作$X \in \mathscr{F}$。
-\end{definition}
+简单而言，随机变量是样本空间上的一个可测函数。
 
 由于原像保持交、并、补等集合运算, 且$\mathscr{F}$是$\sigma$代数, 可将$\mathscr{F}_{\mathcal{X}}$扩张为合适的最小的$\sigma$代数, 即$\sigma(\mathscr{F}_{\mathcal{X}})$, 因此可测映射的定义不妨\underline{只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数}的情况.
 
 \begin{definition}[随机变量]
-    为了表示因随机性而变动的量，称\underline{可测映射}(measurable mapping)
-    \[ X : (\Omega,\mathscr{F},\P) \to (\mathcal{X},\mathscr{F}_{\mathcal{X}}), \quad \omega\in\Omega \mapsto X(\omega)\in\mathcal{X} \]
-    为\textbf{随机元}(random element)，也称\textbf{随机变量}(random variable)。其中$\mathscr{F}_{\mathcal{X}}$
+    若函数 $X : \Omega \to \R$ 是从样本空间$(\Omega,\mathcal{F})$到可测空间$(\R,\mathcal{B}_{\R})$\underline{可测函数}(measurable function)，即满足
+    \[ \forall A \in \mathcal{\R} \Rightarrow  X^{-1}(A)\in \mathcal{F} \]
+    则称其为\textbf{随机变量}(random variable)。
+
+    若 $\mathcal{G}$ 是 $\mathcal{F}$ 的一个子 $\sigma$ 域，且 $X$ 从$(\Omega,\mathcal{G})$到$(\R,\mathcal{B}_{\R})$ 仍然可测，则称 $X$ 是关于\textbf{$\mathcal{G}$ 可测}的随机变量。
 \end{definition}
 
-由于只考虑$\mathscr{F}_{\mathcal{X}}$是$\sigma$代数的情况，可将随机变量看作将原概率空间映射到新概率空间的方式。新样本空间为$\mathcal{X}$（一般由\underline{Borel点集}构成），新事件域为$\mathscr{F}_{\mathcal{X}}$，概率测度等于对应原像的。
+可将随机变量看作将原概率空间映射到新概率空间的方式。新样本空间为$\mathcal{X}$（一般由\underline{Borel点集}构成），新事件域为$\mathscr{F}_{\mathcal{X}}$，概率测度等于对应原像的。
+
+由可测函数的性质可知，$X$ 是随机变量的充要条件为：对于任意 $x \in \R$ 都有 $\{ X \le x \} \in \mathcal{F}$ ，或$\{ X < x \} \in \mathcal{F}$，或$\{ X > x \} \in \mathcal{F}$，或$\{ X \ge x \} \in \mathcal{F}$ ，四者等价。
 
 \begin{remark}
     使用随机变量$X$时，有两个可能的含义：

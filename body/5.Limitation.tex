@@ -488,11 +488,11 @@
     即可以通过分布$N(0,\frac{S_n^2}{n})$估计测量误差$\overline{X_n}-\mu$
 \end{example}
 \begin{remark}
-    由定理\ref{thm:normal_sample_mean_variance}可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$. 但由例\ref{ex:t_disc_to_normal}可知,$n\to \infty$时,$t$分布收敛于正态分布, 所以不冲突.
+    由定理\ref{thm:fisher_lemma}可知$\frac{\sqrt{n}(\overline{X_n}-\mu)}{S_n} \sim t_{n-1}$. 但由例\ref{ex:t_disc_to_normal}可知,$n\to \infty$时,$t$分布收敛于正态分布, 所以不冲突.
 \end{remark}
 
 \begin{corollary}[棣莫弗－拉普拉斯(de Moivre-Laplace)中心极限定理]
-    若随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim B(1,p)$, 则$T_n \sim B(n,p)$. 其中$E(T_n)=nE_(X_i)=np, \operatorname{Var}(T_n)=n\operatorname{Var}(X_i)=np(1-p)$。根据中央极限定理有：
+    若随机变量$X_1,\cdots ,X_n \operatorname{i.i.d.} \sim B(1,p)$, 则$T_n \sim B(n,p)$. 其中$E(T_n)=np, \operatorname{Var}(T_n)=np(1-p)$。根据中央极限定理有：
     \[ \frac{T_n - np}{\sqrt{np(1-p)}} \xrightarrow{d} N(0,1) \]
     即当n很大时，$B(n,p)$可用$N(np,np(1-p))$近似。
 \end{corollary}
